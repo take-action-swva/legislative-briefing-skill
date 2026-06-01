@@ -226,7 +226,7 @@ Contact: griffith.house.gov/contact
 how legislation reaches the House floor — a high-leverage position for a
 member not in leadership. Energy and Commerce Health subcommittee covers
 FDA, public health, and drug policy. Represents Southwest Virginia including
-Appalachian and coal country communities. Long-serving; first elected 2010.
+Appalachian and coal country communities. Long-serving; first elected 2010. Former Virginia state legislator
 
 ---
 
