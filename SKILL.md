@@ -308,7 +308,7 @@ applicable, but include them whenever relevant content exists.
 ```
 # [Bill Name or EO Title]
 ## Briefing for {{state}} Indivisible Group Leaders
-## Date: [DATE] — Verify currency before distributing
+## Date: [DATE] — Verify this information is still current before distributing
 
 ---
 
