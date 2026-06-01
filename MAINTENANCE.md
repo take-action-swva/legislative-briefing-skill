@@ -105,5 +105,5 @@ independent of the skill version.
 
 ## Contact
 
-Virginia Indivisible statewide network legislative intelligence team.
+Virginia Indivisible Steering Committee legislative tracking team.
 See CONTRIBUTING.md for contribution instructions.
