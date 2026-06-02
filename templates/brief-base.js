@@ -135,6 +135,11 @@ function body(children, opts = {}) {
   });
 }
 
+// ── Helper: bold subheading paragraph (keeps with following content) ─────────
+function subheading(children) {
+  return body(children, { keepNext: true });
+}
+
 // ── Helper: bullet item ──────────────────────────────────────────────────────
 function bullet(children) {
   return new Paragraph({
@@ -336,7 +341,7 @@ async function buildBrief(config) {
 module.exports = {
   buildBrief,
   // Export helpers for Claude to use when building section content:
-  run, bold, link, body, bullet, numbered, spacer, rule, h1, h2,
+  run, bold, link, body, subheading, bullet, numbered, spacer, rule, h1, h2,
   section, subsection,
   C, FONT, BODY_SIZE
 };
