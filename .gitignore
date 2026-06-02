@@ -2,3 +2,4 @@ node_modules/
 *.docx
 *.bak
 .claude/
+.DS_Store
