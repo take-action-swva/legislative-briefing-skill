@@ -24,7 +24,7 @@
  *       stateImpact: [ ...paragraphs ],
  *       whoToContact: [ ...paragraphs ],
  *       recommendedActions: [ ...paragraphs ],
- *       accuracyNotes: [ ...paragraphs ],
+ *       notes: [ ...paragraphs ],
  *       // optional:
  *       committeeLeverage: [ ...paragraphs ],
  *       watchList: [ ...paragraphs ],
@@ -303,7 +303,7 @@ async function buildBrief(config) {
     ...section(s.stateImpactHeading || 'State-Specific Impact', s.stateImpact, isActiveThreat),
     ...section('Who to Contact', s.whoToContact),
     ...section('Recommended Actions — Right Now', s.recommendedActions, isActiveThreat),
-    ...section('Accuracy Notes', s.accuracyNotes),
+    ...section('Notes', s.notes),
 
     rule(C.NAVY),
     body([

@@ -54,7 +54,7 @@ lessons_learned:
       explanation came from legislativeprocedure.com (nonpartisan procedural
       expert). Add this source to research rotation for any bill where
       reconciliation is being discussed as a pathway. Flag reconciliation
-      pathway claims in Accuracy Notes unless verified via a procedural primary
+      pathway claims in Notes unless verified via a procedural primary
       source.
   - date: "2026-06-01"
     note: >
@@ -273,7 +273,7 @@ on the exact article.
   Most data publishers (Vera, TRAC, Census) publish companion articles that
   contain citable versions of dashboard findings.
 - When the only source is a root domain or dashboard with no static page,
-  flag it in Accuracy Notes so the human reviewer can verify before distribution.
+  flag it in Notes so the human reviewer can verify before distribution.
 
 ### Document structure
 
@@ -325,7 +325,7 @@ because of who requested the briefing.]
 ### Recommended Actions — Right Now
 [Numbered, ranked by urgency. Specific about what to do and where to go.]
 
-### Accuracy Notes
+### Notes
 [Flag any claims that could not be fully verified. Note the date of last
 status check. Flag if briefing is more than one week old.]
 ```
@@ -378,10 +378,10 @@ catches the most common AI failure modes before they reach group leaders.
 - [ ] Status confirmed from congress.gov or dailypress.senate.gov — not only from news
 - [ ] State-specific data used where available — not only national statistics
 - [ ] All `{{state}}` House members covered evenhandedly — no district given extra weight
-- [ ] Reconciliation pathway claims (if any) flagged in Accuracy Notes unless confirmed via a procedural primary source
+- [ ] Reconciliation pathway claims (if any) flagged in Notes unless confirmed via a procedural primary source
 - [ ] Recommended Actions has at least one action doable right now, not just "watch and wait"
-- [ ] Accuracy Notes section present and flags all unverified claims
-- [ ] Date of last status check stated in Accuracy Notes
+- [ ] Notes section present and flags all unverified claims
+- [ ] Date of last status check stated in Notes
 
 ---
 
@@ -407,7 +407,7 @@ error does not just look bad — it can misdirect real people doing real work.
    for impact analysis and context. Use congress.gov, senate.gov, and
    federalregister.gov for facts about status and text.
 
-5. **Flag what you could not verify.** Put uncertain claims in Accuracy Notes
+5. **Flag what you could not verify.** Put uncertain claims in Notes
    with a note that they need human verification before distribution.
 
 6. **Recheck before distribution.** Run a final status check on congress.gov
@@ -433,7 +433,7 @@ error does not just look bad — it can misdirect real people doing real work.
 - **Citing a root domain instead of the specific page** — `[vera.org]` is not
   a verifiable citation. Always link to the article, report, or press release
   containing the exact claim. For interactive dashboards with no permalink,
-  find the companion static article and link to that; flag in Accuracy Notes
+  find the companion static article and link to that; flag in Notes
   if no static page exists.
 - **Using Word footnotes** — not tappable in Google Docs. Use inline
   hyperlink citations instead.

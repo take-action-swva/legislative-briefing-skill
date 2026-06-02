@@ -38,7 +38,7 @@ present when applicable. A missing required section is a red flag.
 - [ ] [State]-Specific Impact present
 - [ ] Who to Contact present
 - [ ] Recommended Actions — Right Now present and numbered
-- [ ] Accuracy Notes present
+- [ ] Notes present
 
 **Optional (include when applicable):**
 - [ ] Committee Leverage present if any state member sits on the relevant committee
@@ -84,13 +84,13 @@ briefing should not be distributed.**
 - [ ] State-specific data used where available *(not only national statistics)*
 - [ ] Advocacy org sources *(Brennan Center, Campaign Legal Center, Democracy
   Docket, etc.)* are used for context/analysis, not for stating legislative status
-- [ ] Reconciliation pathway claims (if present) flagged in Accuracy Notes
+- [ ] Reconciliation pathway claims (if present) flagged in Notes
   unless confirmed via a procedural primary source such as a CRS report or
   legislativeprocedure.com analysis
 
-### Accuracy Notes Section
+### Notes Section
 
-- [ ] Any unverified claims are flagged in Accuracy Notes
+- [ ] Any unverified claims are flagged in Notes
 - [ ] Date of last status check is stated
 - [ ] Briefing flagged as potentially outdated if more than one week old
 
