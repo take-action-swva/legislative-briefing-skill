@@ -308,7 +308,7 @@ async function buildBrief(config) {
     rule(C.NAVY),
     body([
       run(
-        'Prepared by the Virginia Indivisible statewide steering committee legislation tracking team. ' +
+        'Prepared by the Virginia Indivisible steering committee legislation team. ' +
         'Questions or corrections: contact your regional group coordinator. ' +
         'This briefing is for internal use by group leaders; verify status before distributing publicly. ' +
         'Sources are all publicly available and linked inline.',
