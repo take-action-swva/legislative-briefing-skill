@@ -172,6 +172,7 @@ function h1(text, isThreat = false) {
   const color = isThreat ? C.RED : C.NAVY;
   return new Paragraph({
     heading: HeadingLevel.HEADING_1,
+    keepNext: true,
     spacing: { before: 280, after: 120 },
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color, space: 4 } },
     children: [new TextRun({ text, bold: true, color, font: FONT, size: H1_SIZE })]
@@ -182,6 +183,7 @@ function h2(text, isThreat = false) {
   const color = isThreat ? C.RED : C.NAVY;
   return new Paragraph({
     heading: HeadingLevel.HEADING_2,
+    keepNext: true,
     spacing: { before: 200, after: 80 },
     children: [new TextRun({ text, bold: true, color, font: FONT, size: H2_SIZE })]
   });
