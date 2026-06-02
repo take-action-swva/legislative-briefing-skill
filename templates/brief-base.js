@@ -273,7 +273,7 @@ async function buildBrief(config) {
     issueArea,
     statusDate,
     isActiveThreat = false,
-    orgHeader = 'Virginia Indivisible Network  |  Federal Legislation Tracking Brief',
+    orgHeader = 'Virginia Indivisible Steering Committee  |  Federal Legislation Tracking Brief',
     sections: s
   } = config;
 
@@ -308,7 +308,7 @@ async function buildBrief(config) {
     rule(C.NAVY),
     body([
       run(
-        'Prepared by the Virginia Indivisible statewide network legislation tracking team. ' +
+        'Prepared by the Virginia Indivisible statewide steering committee legislation tracking team. ' +
         'Questions or corrections: contact your regional group coordinator. ' +
         'This briefing is for internal use by group leaders; verify status before distributing publicly. ' +
         'Sources are all publicly available and linked inline.',
