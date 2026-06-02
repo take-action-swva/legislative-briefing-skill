@@ -46,6 +46,7 @@ scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
   fetch-state-members.sh     congress.gov API → draft state-context file.
   fetch-donors.sh            FEC API → donor context markdown (industry tables filled manually from opensecrets.org website).
+  build-zip.sh               Rebuild advocacy-legislation-brief-claude-upload.zip from current skill files.
   README.md                  Script setup and usage (human-facing).
 templates/
   brief-base.js              Docx scaffolding: colors, fonts, helpers, header/footer.
