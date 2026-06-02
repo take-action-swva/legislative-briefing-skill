@@ -205,7 +205,7 @@ function buildFooter(statusDate) {
       border: { top: { style: BorderStyle.SINGLE, size: 4, color: 'CCCCCC', space: 4 } },
       children: [
         run(
-          `Status checked: ${statusDate} — Verify before distributing. Bill status changes rapidly.`,
+          `Status checked: ${statusDate} — Verify the status of all bills before distributing. A bill's status can change rapidly.`,
           { color: C.GRAY, size: 18, italics: true }
         )
       ]
