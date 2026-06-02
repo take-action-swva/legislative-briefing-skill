@@ -51,6 +51,9 @@ on memory or prior briefings.
 
 ## Citation Format for Virginia-Specific Sources
 
+For universal sources (congress.gov, federalregister.gov, etc.) see
+`sources-national.md`. Virginia additions:
+
 | Source | Link text to use |
 |--------|-----------------|
 | warner.senate.gov | `[warner.senate.gov]` |

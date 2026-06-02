@@ -262,7 +262,7 @@ function subsection(heading, paragraphs, isThreat = false) {
  * @param {string} config.issueArea      - e.g. "Voting Rights & Election Administration"
  * @param {string} config.statusDate     - e.g. "June 1, 2026"
  * @param {boolean} [config.isActiveThreat=false] - Red headings for threat sections
- * @param {string} [config.orgHeader]    - Header line (defaults to generic)
+ * @param {string} [config.orgHeader]    - Header line (defaults to Virginia; override for other states)
  * @param {object} config.sections       - Section content (arrays of Paragraphs)
  * @returns {Promise<Buffer>}
  */

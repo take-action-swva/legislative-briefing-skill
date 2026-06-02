@@ -97,15 +97,15 @@ top_employers() {
 }
 
 # Output a complete member section.
-# Args: display_title  search_name  office(H|S)  opensecrets_search_hint
+# Args: display_title  search_name  office(H|S)  member_search_hint
 member_section() {
-  local title="$1" name="$2" office="$3" os_hint="$4"
+  local title="$1" name="$2" office="$3" search_hint="$4"
 
   log "Processing ${title}..."
 
   echo ""
   echo "### ${title}"
-  echo "*opensecrets.org/members-of-congress/ — search: ${os_hint}*"
+  echo "*opensecrets.org/members-of-congress/ — search: ${search_hint}*"
   echo ""
 
   local cand_id

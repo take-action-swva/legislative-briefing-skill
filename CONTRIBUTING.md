@@ -79,12 +79,14 @@ Shared files: `SKILL.md`, `CONTRIBUTING.md`, `MAINTENANCE.md`,
 For shared file changes:
 1. Open an issue first describing the change and why
 2. Submit a PR referencing the issue
-3. Include a changelog entry in the SKILL.md front matter
+3. Add a row to the Version History table in CLAUDE.md and bump `version:` in SKILL.md front matter
 
 ### For lessons learned
 Add a new entry to the `lessons_learned` block in SKILL.md front matter.
 Tag state-specific entries with `[StateName]` at the start of the note.
-Append to the top of the list (most recent first).
+Append to the bottom of the list. Retire a lesson once it is fully codified
+as a rule or pitfall in the SKILL.md body — it no longer needs to be in
+lessons_learned.
 
 ### For source updates
 Update the relevant `sources-[statecode].md` file with the new information,
@@ -112,6 +114,66 @@ verification date and flag any assignments you could not confirm.
 
 Review the output carefully before committing — committee assignments in
 particular should be traced to official sources.
+
+---
+
+---
+
+## Adapting to Another State
+
+The skill body — workflow, template, accuracy rules, pitfalls — is fully
+generic. No changes to SKILL.md are needed. To deploy for a new state:
+
+1. **Update front matter fields in SKILL.md:**
+   - `state:` — state name as it should appear in headings
+   - `senators:` — both senator names and their `.senate.gov` URLs
+   - `house_seats:` — current number of House seats
+
+2. **Create `references/sources-[statecode].md`** using `sources-va.md` as
+   a template. For each new state, find:
+   - A state-level political data project (like VPAP for Virginia)
+   - The state elections authority website
+   - An independent state political news outlet
+   - Official senator and representative pages
+   - The state attorney general's office
+   - Any state-specific legal or civic organizations tracking relevant issues
+
+3. **Carry forward universal sources** — `references/sources-national.md`
+   applies to all states unchanged. Only create the state-specific file.
+
+4. **Create `state-context-[statecode].md`** following step 1 above and the
+   Regenerating a State Context File instructions below.
+
+5. **Seed lessons_learned** — Virginia-specific entries in SKILL.md are
+   prefixed `[Virginia]` so you can identify which lessons generalize. Add
+   state-specific entries for your state with the equivalent prefix.
+
+The `{{state}}` placeholders throughout the template resolve from the front
+matter automatically.
+
+---
+
+## Improving This Skill
+
+After each research session, consider adding an entry to `lessons_learned`
+in SKILL.md front matter. Useful things to note:
+
+- Sources that were stale or hard to find
+- State-specific sources that proved more useful than expected
+- Pitfalls encountered that are not already listed in the skill body
+- Any claim that required extra verification steps
+- Output format issues encountered by recipients
+
+**Tag state-specific lessons** with `[StateName]` so future users from
+other states can tell which lessons generalize.
+
+When source reliability changes, update the relevant `sources-[statecode].md`
+or `sources-national.md` file with the new `last_verified` date and adjust
+the reliability rating.
+
+**Retire codified lessons.** Once a lesson has been added as a rule or
+pitfall in the SKILL.md body, remove it from `lessons_learned`. It is
+costing tokens every session without adding value.
 
 ---
 

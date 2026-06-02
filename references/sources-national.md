@@ -123,17 +123,16 @@ immediately after the claim. Use the shortest recognizable domain as link text:
 | Source | Link text to use |
 |--------|-----------------|
 | congress.gov | `[congress.gov]` |
-| warner.senate.gov | `[warner.senate.gov]` |
-| kaine.senate.gov | `[kaine.senate.gov]` |
 | federalregister.gov | `[federalregister.gov]` |
-| virginiaindependentnews.com | `[virginia independent]` |
 | campaignlegal.org | `[campaign legal center]` |
 | brennancenter.org | `[brennan center]` |
 | naacpldf.org | `[naacp ldf]` |
-| elections.virginia.gov | `[elections.virginia.gov]` |
 | democracydocket.com | `[democracy docket]` |
 | legislativeprocedure.com | `[legislative procedure]` |
 | vote.org | `[vote.org]` |
+
+State-specific sources (senator pages, state elections sites, state news
+outlets) belong in `sources-[statecode].md`, not here.
 
 This format works in Google Docs, PDF export, and Word. Do not use Word-style
 footnote superscripts — they are not tappable in Google Docs.

@@ -45,7 +45,7 @@ references/
 scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
   fetch-state-members.sh     congress.gov API → draft state-context file.
-  fetch-donors.sh            OpenSecrets API → donor context markdown.
+  fetch-donors.sh            FEC API → donor context markdown (industry tables filled manually from opensecrets.org website).
   README.md                  Script setup and usage (human-facing).
 templates/
   brief-base.js              Docx scaffolding: colors, fonts, helpers, header/footer.
@@ -60,6 +60,19 @@ evals/                       Evaluation cases (existing, not modified in this se
 **Skill version:** 1.7  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
+
+## Version History
+
+| Version | Date | Summary |
+|---------|------|---------|
+| 1.0 | 2026-06-01 | Initial version. Derived from live SAVE Act research session. |
+| 1.1 | 2026-06-01 | Converted to portable SKILL.md format. State config in front matter. References split into references/sources.md. INSTALL.md added. |
+| 1.2 | 2026-06-01 | Added output format spec: .docx with inline hyperlink citations. Footnotes dropped. Lessons learned added. |
+| 1.3 | 2026-06-01 | Added Style Rules section: Summary heading, acronyms on first use, jargon glossed. Rebuilt all briefing docx outputs. |
+| 1.4 | 2026-06-01 | Fixed changelog ordering. Fixed example bill number. Added sources (Democracy Docket, Legislative Procedure, dailypress.senate.gov). Added Committee Leverage, Watch List, court challenge monitoring, PageNumberElement note, statewide scope rule. |
+| 1.5 | 2026-06-01 | Removed Virginia hardcoding from skill body. All state-specific references use {{state}} substitution. Skill is now fully portable. |
+| 1.6 | 2026-06-01 | Added Step 0 (load state context file). Added inline Pre-Delivery Self-Check (9-item checklist). Added state-context-va.md for Virginia 119th Congress. |
+| 1.7 | 2026-06-01 | Added docx bug lessons: standalone hyperlink placement error and body() array-argument flattening. Sources split into sources-national.md and sources-va.md. Changelog moved to CLAUDE.md. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -92,7 +105,7 @@ Pass a `sections` object with arrays of Paragraph objects. See the
 All scripts require environment variables. Check that they are set before running:
 ```bash
 echo $CONGRESS_API_KEY    # from api.congress.gov (free)
-echo $OPENSECRETS_KEY     # from opensecrets.org/api (free)
+echo $FEC_API_KEY         # from api.data.gov (free, 1,000 req/hr)
 ```
 
 ```bash

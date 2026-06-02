@@ -11,7 +11,7 @@ description: >
   deal with the SAVE Act for our group" is exactly the kind of thing this skill
   handles. Always produce a .docx file as the final output unless the user
   explicitly asks for something else.
-version: "1.6"
+version: "1.7"
 output_format: docx
 citation_style: inline-hyperlink
 state: Virginia
@@ -21,77 +21,8 @@ senators:
   - name: Tim Kaine
     url: kaine.senate.gov
 house_seats: 11
-state_specific_sources:
-  - name: VPAP
-    url: vpap.org
-    best_for: Virginia political data and district context
-  - name: Virginia Independent
-    url: virginiaindependentnews.com
-    best_for: Virginia-focused political news
-  - name: Blue Virginia
-    url: bluevirginia.us
-    best_for: Virginia progressive political coverage
-  - name: Virginia Department of Elections
-    url: elections.virginia.gov
-    best_for: Voter registration and elections data
 example_legislation: "SAVE America Act (H.R. 22 / S. 1383, 119th Congress)"
-changelog:
-  - version: "1.0"
-    date: "2026-06-01"
-    notes: "Initial version. Derived from live SAVE Act research session."
-  - version: "1.1"
-    date: "2026-06-01"
-    notes: >
-      Converted to portable SKILL.md format. State config moved to front matter.
-      References split into references/sources.md. INSTALL.md added.
-  - version: "1.2"
-    date: "2026-06-01"
-    notes: >
-      Added output format specification: .docx with inline hyperlink citations.
-      Footnotes dropped in favor of inline [source] links — more compatible with
-      Google Docs and PDF export. Lessons learned from live test session added.
-  - version: "1.3"
-    date: "2026-06-01"
-    notes: >
-      Added Style Rules section: Summary heading replaces Plain-Language
-      Summary; acronyms spelled out on first use; jargon glossed for
-      non-legislative audiences. Rebuilt all briefing docx outputs.
-  - version: "1.4"
-    date: "2026-06-01"
-    notes: >
-      Fixed changelog version ordering (1.2 was listed after 1.3). Fixed
-      example_legislation bill number (H.R. 7296 was wrong; correct is H.R. 22).
-      Added lessons from second live SAVE Act session: dailypress.senate.gov
-      granularity, advocacy org post-event confirmation value, reconciliation/
-      Byrd Rule complexity, redistricting caveat, Deseret News for GOP dynamics.
-      Added Democracy Docket and Legislative Procedure to sources. Added optional
-      Committee Leverage and Watch List sections to output template. Added court
-      challenge monitoring to Step 5. Added PageNumberElement docx incompatibility
-      note. Added statewide audience scope rule and district-bias pitfall.
-  - version: "1.6"
-    date: "2026-06-01"
-    notes: >
-      Added Step 0 (load state context file) to Research Workflow. Added inline
-      Pre-Delivery Self-Check section before Accuracy Rules — 9-item checklist
-      targeting AI-specific failure modes, runs before docx generation. Added
-      state-context-va.md for Virginia 119th Congress (all 13 members, committees,
-      contacts, verified from clerk.house.gov and official sources).
-  - version: "1.5"
-    date: "2026-06-01"
-    notes: >
-      Removed Virginia hardcoding from skill body. All state-specific references
-      in workflow, pitfalls, citation examples, and audience scope paragraph now
-      use {{state}} substitution or generic language. Virginia-specific detail
-      retained only in front matter config and dated lessons_learned entries
-      (where state context is appropriate). Skill is now fully portable —
-      adapting to another state requires only updating front matter fields and
-      references/sources.md.
 lessons_learned:
-  - date: "2026-06-01"
-    note: >
-      Word-style footnotes are not tappable in Google Docs. Group leaders
-      are likely to open briefings in Google Docs or download as PDF from
-      Google Docs. Inline hyperlink citations work reliably across both.
   - date: "2026-06-01"
     note: >
       [Virginia] For immigration enforcement briefings, TRAC Immigration
@@ -132,7 +63,7 @@ lessons_learned:
       litigated in early 2026. Always verify current district boundaries and
       member assignments at VPAP (vpap.org) before using district numbers in
       constituent outreach materials. Other states may have equivalent political
-      data projects — see references/sources.md for the pattern to follow.
+      data projects — see references/sources-va.md for the pattern to follow.
   - date: "2026-06-01"
     note: >
       Deseret News (deseret.com) was a strong source for "what's next" analysis
@@ -142,33 +73,21 @@ lessons_learned:
       wavering, regardless of which state the briefing is for.
   - date: "2026-06-01"
     note: >
-      PageNumberElement from the docx npm package causes a validation error
-      in the docx skill environment. Drop page numbers from footers or use
-      a static text fallback. Footer status date is more valuable to readers
-      than page count anyway.
-  - date: "2026-06-01"
-    note: >
       A standalone ExternalHyperlink object placed directly in a section
       content array — e.g. as the last item in a stateImpact list — causes
       a docx schema validation error: "externalHyperlink: This element is not
       expected. Expected is sectPr." Hyperlinks must always be children of a
       Paragraph, never top-level children of the document or section. Wrap
-      any lone link in a para() or body() call: para([run('label: '), lnk(...)]).
+      any lone link in a body() call: body([run('label: '), link(...)]).
   - date: "2026-06-01"
     note: >
-      The para() helper in brief-base.js (and any similar helper) must handle
-      being called with an array as its first argument — para([run(...),
-      lnk(...)]) — as well as the spread form para(run(...), 'text', lnk(...)).
-      If para() uses a naive ...parts spread and doesn't flatten a single-array
-      argument, the array serializes as <0/> in the XML, causing a validation
-      error. Fix: check if parts has a single array argument and flatten before
-      mapping. The validator catches this — always run validate.py after every
-      build.
-  - version: "1.7"
-    date: "2026-06-01"
-    notes: >
-      Added two docx bug lessons: standalone hyperlink placement error and
-      para() array-argument flattening bug. Both caught by validate.py.
+      The body() helper in brief-base.js must handle being called with an array
+      as its first argument — body([run(...), link(...)]) — as well as the spread
+      form body(run(...), 'text', link(...)). If body() uses a naive ...parts
+      spread and doesn't flatten a single-array argument, the array serializes
+      as <0/> in the XML, causing a validation error. Fix: check if parts has a
+      single array argument and flatten before mapping. The validator catches
+      this — always run validate.py after every build.
 ---
 
 # Advocacy Legislation Brief
@@ -198,12 +117,12 @@ This skill is pre-configured for `{{state}}` with the following delegation:
 
 **Senators:** {{senators}}
 **House seats:** {{house_seats}}
-**State-specific sources:** See `references/sources.md`
+**State-specific sources:** See `references/sources-va.md` and `references/sources-national.md`
 
 To adapt this skill for another state, update the front matter fields and
-replace `references/sources.md` with state-appropriate equivalents. See the
-Adapting to Another State section at the end of this file. The workflow,
-output template, and accuracy rules remain the same regardless of state.
+create `references/sources-[statecode].md`. See CONTRIBUTING.md for full
+instructions. The workflow, output template, and accuracy rules remain the
+same regardless of state.
 
 ---
 
@@ -261,7 +180,7 @@ instead of them.
   affiliation alone — find the record or note it as unstated.
 - **Redistricting caveat:** District numbers and member compositions can shift
   mid-Congress due to litigation. Verify current district boundaries and member
-  assignments at the state's political data source (see `references/sources.md`)
+  assignments at the state's political data source (see `references/sources-va.md`)
   before using district numbers in constituent outreach materials.
 
 ### Step 4 — Find state-specific impact data
@@ -272,9 +191,9 @@ ones. A stat like "40% of [state residents] lack a passport" lands harder than
 
 - Official senator/representative press releases — often contain state-specific
   data that takes much longer to find elsewhere. Check these early.
-- State-specific sources listed in `references/sources.md`
+- State-specific sources listed in `references/sources-va.md`
 - Census Bureau (census.gov) for district demographics
-- Nonpartisan research orgs listed in `references/sources.md`
+- Nonpartisan research orgs listed in `references/sources-national.md`
 
 ### Step 5 — Map the action landscape
 
@@ -292,7 +211,7 @@ Determine what actions are available right now:
 - Donor context (optional): If the bill involves a sector where financial
 influence is likely relevant — energy, pharma, financial regulation, firearms,
 healthcare, telecommunications — donor data from scripts/fetch-donors.sh
-(or opensecrets.org directly) may help explain member positions and motivate
+(or api.open.fec.gov directly) may help explain member positions and motivate
 constituent pressure. Include a "Donor Context" section after House Members
 when the human has provided this data. Do not include donor data on every
 briefing — only when sector-linked influence is plausible and illuminates
@@ -500,7 +419,7 @@ error does not just look bad — it can misdirect real people doing real work.
 - **Stale district numbers** — redistricting litigation can change district
   compositions mid-Congress. Verify current district boundaries and member
   assignments at the state's political data source before using them in
-  constituent outreach. See `references/sources.md` for the state-specific
+  constituent outreach. See `references/sources-va.md` for the state-specific
   source to use.
 - **District bias from the requester's location** — the briefing is for the
   statewide network. Do not over-emphasize any particular congressional
@@ -509,55 +428,6 @@ error does not just look bad — it can misdirect real people doing real work.
 
 ---
 
-## Adapting to Another State
-
-The skill body — workflow, template, accuracy rules, pitfalls — is fully
-generic. To deploy this skill for a new state, you only need to:
-
-1. **Update front matter fields:**
-   - `state:` — state name as it should appear in headings
-   - `senators:` — both senator names and their .senate.gov URLs
-   - `house_seats:` — current number of House seats
-   - `state_specific_sources:` — see pattern below
-
-2. **Replace `references/sources.md`** with state-appropriate equivalents.
-   For each new state, find:
-   - A state-level political data project (like VPAP for Virginia)
-   - The state elections authority website
-   - An independent state political news outlet
-   - Official senator and representative pages
-   - The state attorney general's office
-   - Any state-specific legal or civic organizations tracking relevant issues
-
-3. **Carry forward universal sources** — the Primary, Nonpartisan Research,
-   Voting Rights, and News sections of sources.md apply to all states. Only
-   the Virginia-Specific section needs to be replaced.
-
-4. **Seed lessons_learned** — add a note tagging Virginia-specific entries
-   (already done: entries that are Virginia-specific are prefixed `[Virginia]`)
-   so future users know which lessons generalize and which don't.
-
-No changes to the skill body are needed. The `{{state}}` placeholders
-throughout the template resolve from the front matter automatically.
-
----
-
-## Improving This Skill
-
-After each research session, add an entry to the `lessons_learned` field in
-the front matter. Note:
-
-- Sources that were stale or hard to find
-- State-specific sources that proved more useful than expected
-- Pitfalls encountered that aren't already listed above
-- Any claim that required extra verification steps
-- Output format issues encountered by recipients
-
-**Tag state-specific lessons** with `[StateName]` at the start of the note
-so future users in other states can distinguish lessons that generalize from
-those that are state-specific.
-
-When state-specific sources change reliability, update `references/sources.md`
-with a `last_verified` date and adjust the reliability rating.
-
-For full source reference table, see `references/sources.md`.
+For contribution guidelines, adapting to another state, and source maintenance,
+see CONTRIBUTING.md. For source reference tables, see
+`references/sources-national.md` and `references/sources-va.md`.
