@@ -113,78 +113,82 @@ directly. See CONTRIBUTING.md for the manual Claude prompt.
 
 ## Rate Limits
 
-The free congress.gov API key allows 5,000 requests per hour. Both scripts
-make fewer than 10 requests each. Rate limits are not a practical concern
-for normal use.
+| API | Free limit | Script usage |
+|---|---|---|
+| congress.gov | 5,000 req/hour | < 10 per run — not a concern |
+| FEC (api.data.gov) | 1,000 req/hour | ~3 per member, 0.5s sleep between calls |
+| FEC DEMO_KEY | ~50 req/day total | May not complete a full delegation |
+
+Use a real FEC API key (free at api.data.gov) for production runs.
 
 ---
 
 ## fetch-donors.sh
 
+Pulls FEC campaign finance data for a state's congressional delegation and
+overwrites `donor-context-[state].md` with auto-filled fundraising totals
+and top contributing organizations. Industry data is left blank for manual
+entry from opensecrets.org.
+
+**Data sources:**
+- Fundraising totals and top contributing organizations: FEC API (api.open.fec.gov)
+- Top industries: manual entry from opensecrets.org (the OpenSecrets API was
+  discontinued April 2025; the website still shows industry data)
+
 **What the output looks like:**
 
 ```
-### Rep. Morgan Griffith (R, VA-09)
+### VA-09 — Rep. Morgan Griffith (R)
+*opensecrets.org/members-of-congress/ — search: Morgan Griffith Virginia*
 
-2024 cycle fundraising
-- Total raised: $1,842,301
-- From PACs: 52%
-- From individuals: 48%
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
+| Metric | Value |
+|---|---|
+| Total raised | $1,842,301 |
+| From PACs | 52% |
+| From individuals | 48% |
 
-Top contributing organizations
-| Organization              | Total    | From PACs | From Individuals |
-|---------------------------|----------|-----------|-----------------|
-| Murray Energy             | $42,800  | $10,000   | $32,800         |
-| Alpha Natural Resources   | $38,500  | $25,000   | $13,500         |
+**Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
+| Organization | Total |
+|---|---|
+| Murray Energy | $42,800 |
+| Alpha Natural Resources | $38,500 |
 ...
 
-Top industries
-| Industry                  | Total    | From PACs | From Individuals |
-|---------------------------|----------|-----------|-----------------|
-| Oil & Gas                 | $124,300 | $89,000   | $35,300         |
-| Mining                    | $98,200  | $71,500   | $26,700         |
-...
+**Top industries** *(opensecrets.org — fill in manually, top 5)*
+| Industry | Total |
+|---|---|
+| | |
 ```
 
-**When to use it:** Only when the bill involves a sector where financial
-influence is likely relevant to a member's position. Good candidates:
+**When to use in a briefing:** Only when the bill involves a sector where
+financial influence is likely relevant to a member's position:
 
-- Energy and environment legislation (oil, gas, coal, utilities, mining)
+- Energy and environment (oil, gas, coal, utilities, mining)
 - Healthcare and pharmaceutical bills
 - Financial regulation
 - Firearms legislation
 - Telecommunications and tech regulation
-- Agriculture and food policy
 
-Don't run it for every briefing. Donor data that isn't relevant to the bill
-being briefed adds noise and can feel like a fishing expedition to readers.
-
-**When NOT to use it:** Civil rights bills, voting rights legislation,
-immigration policy, foreign policy. Donor influence is less direct in these
-areas and the data is less likely to illuminate member positions.
-
-**Terms of use:** OpenSecrets data is for research and informational purposes.
-Do not redistribute raw API output publicly or post it to social media.
-Summaries and analysis derived from the data may be used in internal advocacy
-briefings. See opensecrets.org/api/docs for full terms.
+Don't include donor context in every briefing — only when sector-linked
+influence plausibly explains a member's position.
 
 ---
 
-### Setup: OpenSecrets API key
+### Setup: FEC API key
 
-Get a free key at opensecrets.org/api — click "API" in the footer,
-then "Get API Key." No payment required.
+The FEC API is free and requires registration at api.data.gov. Visit that
+URL in a browser to complete the signup form (it is JavaScript-rendered and
+cannot be automated).
 
 ```bash
-# Add to ~/.bashrc or ~/.zshrc alongside your congress.gov key:
-export OPENSECRETS_KEY="your-opensecrets-key-here"
-```
-
-You now have two API keys in your environment:
-```bash
+# Add to ~/.bashrc or ~/.zshrc:
+export FEC_API_KEY="your-fec-key-here"
 export CONGRESS_API_KEY="your-congress-key-here"
-export OPENSECRETS_KEY="your-opensecrets-key-here"
 ```
+
+Without `FEC_API_KEY` set, the script falls back to `DEMO_KEY` (~50 requests/day
+total — may not complete a full delegation). Use a real key for production runs.
 
 ---
 
@@ -194,33 +198,26 @@ export OPENSECRETS_KEY="your-opensecrets-key-here"
 ./scripts/fetch-donors.sh <state-code> [cycle]
 
 # Examples:
-./scripts/fetch-donors.sh VA              # Virginia, most recent cycle
-./scripts/fetch-donors.sh VA 2024         # Virginia, 2024 cycle specifically
-./scripts/fetch-donors.sh VA 2024 > donor-context-va-2024.md
+./scripts/fetch-donors.sh VA 2024 > donor-context-va.md
+./scripts/fetch-donors.sh VA      > donor-context-va.md   # defaults to 2024
 ```
 
-**Cycle note:** The cycle must be an even year (election cycles run
-2-year periods ending in even years). Data for the most recent cycle
-is typically complete 3-6 months after the election — 2024 cycle data
-was fully available by mid-2025.
+This overwrites `donor-context-va.md` with fresh FEC data and blank industry
+tables. After running, fill in the industry tables from opensecrets.org.
 
-**Rate limiting:** The free API key allows ~200 requests per hour.
-The script makes 3 API calls per member and pauses 1 second between
-members. A full 13-member Virginia delegation takes about 45 seconds.
+**Run cadence:** Once per year (January). Industry data is stable per
+election cycle — re-enter it once after the script runs, then done until
+the next Congress.
 
 ---
 
 ### After running
 
-The script outputs a full donor context markdown file. Before including
-it in a briefing:
-
-1. Spot-check 2-3 members at opensecrets.org to confirm figures look right
-2. Note the cycle year prominently — readers need to know this isn't live data
-3. Paste the relevant members' sections (not the whole file) into the
-   Claude conversation when generating the briefing
-4. Tell Claude: "Include a Donor Context section for members where the
-   donor profile is relevant to this bill."
-
-You don't need to paste all 13 members' data — just the ones whose
-donor profile is relevant to the bill being briefed.
+1. Open `donor-context-va.md`
+2. For each member, go to their opensecrets.org profile (search hint in each section)
+3. Find the **Industries** section and enter the top 5 by total
+4. Spot-check 2-3 members' FEC totals against their opensecrets.org profile
+   (totals should be close — methodology differs slightly)
+5. When generating a briefing, paste only the relevant members' sections
+   (not the whole file) and tell Claude: "Include a Donor Context section
+   for members where the donor profile is relevant to this bill."

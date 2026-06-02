@@ -1,188 +1,243 @@
 #!/bin/bash
-# fetch-donors.sh — Pull campaign finance data from OpenSecrets API for a
-# state's congressional delegation and output formatted markdown.
+# fetch-donors.sh — Pull FEC campaign finance data for a state's congressional delegation.
 #
-# TERMS OF USE: OpenSecrets data is for research and informational purposes.
-# Do not redistribute raw API output publicly. Summaries and analysis derived
-# from this data may be used in internal advocacy briefings. See:
-# opensecrets.org/api/docs
+# Outputs donor-context markdown to stdout. Redirect to overwrite donor-context-[state].md.
+# After running: manually fill in the Top industries tables from opensecrets.org.
 #
 # Usage:
-#   ./fetch-donors.sh <state-code> [cycle]
+#   ./scripts/fetch-donors.sh <state-code> [cycle]
+#   ./scripts/fetch-donors.sh VA 2024 > donor-context-va.md
+#   ./scripts/fetch-donors.sh VA      > donor-context-va.md   # defaults to 2024
 #
-# Arguments:
-#   state-code   Two-letter state code (e.g. VA, NC, PA)
-#   cycle        Election cycle year — must be even (e.g. 2024, 2022)
-#                Defaults to most recent completed cycle
+# API key: free at api.data.gov — register and set FEC_API_KEY env var:
+#   export FEC_API_KEY="your-key-here"
 #
-# Examples:
-#   ./fetch-donors.sh VA            # Virginia, most recent cycle
-#   ./fetch-donors.sh VA 2024       # Virginia, 2024 cycle specifically
-#   ./fetch-donors.sh VA 2022       # Virginia, 2022 cycle
+# Without a key, falls back to DEMO_KEY (~50 requests/day total limit).
+# A real key allows 1,000 req/hour. Use one for production runs over full delegations.
 #
-# Output: Markdown donor context section, printed to stdout. Redirect:
-#   ./fetch-donors.sh VA 2024 > donor-context-va-2024.md
-#
-# Requires:
-#   - OPENSECRETS_KEY environment variable (free at opensecrets.org/api)
-#   - curl and jq installed
-#
-# Note on cycle lag: OpenSecrets data for the most recent election cycle
-# is typically complete 3-6 months after the election. The 2024 cycle data
-# was fully available by mid-2025. Always note the cycle year in the output.
+# Requires: curl, jq, awk
 
-set -e
+set -euo pipefail
 
-STATE=${1:?Usage: $0 <state-code> [cycle] (e.g. ./fetch-donors.sh VA 2024)}
-STATE_UPPER=$(echo "$STATE" | tr '[:lower:]' '[:upper:]')
-KEY="${OPENSECRETS_KEY:?Set OPENSECRETS_KEY environment variable. Free key at opensecrets.org/api}"
+STATE=${1:?'Usage: ./scripts/fetch-donors.sh <state-code> [cycle]   e.g. VA 2024'}
+S=$(echo "$STATE" | tr '[:lower:]' '[:upper:]')
+CYCLE=${2:-2024}
+KEY="${FEC_API_KEY:-DEMO_KEY}"
+BASE="https://api.open.fec.gov/v1"
+TODAY=$(date +%Y-%m-%d)
 
-# Default cycle: most recent even year at or before current year
-CURRENT_YEAR=$(date +%Y)
-DEFAULT_CYCLE=$(( CURRENT_YEAR % 2 == 0 ? CURRENT_YEAR : CURRENT_YEAR - 1 ))
-CYCLE=${2:-$DEFAULT_CYCLE}
+log()  { echo "  $*" >&2; }
+warn() { echo "  WARNING: $*" >&2; }
 
-# Validate cycle is an even number
-if (( CYCLE % 2 != 0 )); then
-  echo "Error: Cycle must be an even year (e.g. 2024, 2022). Got: ${CYCLE}" >&2
-  exit 1
+if [ "$KEY" = "DEMO_KEY" ]; then
+  warn "Using DEMO_KEY — limited to ~50 requests/day total."
+  warn "Get a free key at api.data.gov to run the full delegation."
 fi
 
-BASE="https://www.opensecrets.org/api"
-
-echo "Fetching ${STATE_UPPER} delegation donor data (${CYCLE} cycle)..." >&2
-
-# Step 1: Get all legislators for the state with their OpenSecrets CIDs
-LEGISLATORS=$(curl -sf \
-  "${BASE}/?method=getLegislators&id=${STATE_UPPER}&output=json&apikey=${KEY}" \
-  2>/dev/null) || {
-  echo "Error: Could not fetch legislators. Check your API key." >&2
-  exit 1
+# Find the most recent FEC candidate ID for a member.
+# Searches by last name, state, and office (H or S).
+# Returns empty string if no match found.
+find_cand() {
+  local q office
+  q=$(echo "$1" | tr ' ' '+')
+  office="$2"
+  curl -sf "${BASE}/candidates/?q=${q}&state=${S}&office=${office}&sort=-last_file_date&per_page=5&api_key=${KEY}" \
+    | jq -r '.results[0].candidate_id // empty'
 }
 
-MEMBER_COUNT=$(echo "$LEGISLATORS" | jq '.response.legislator | length' 2>/dev/null || echo 0)
+# Get fundraising totals for a candidate in a given cycle.
+get_totals() {
+  curl -sf "${BASE}/candidates/totals/?candidate_id=${1}&cycle=${CYCLE}&api_key=${KEY}"
+}
 
-if [ "$MEMBER_COUNT" -eq 0 ]; then
-  echo "Error: No legislators found for state ${STATE_UPPER}. Check the state code." >&2
-  exit 1
-fi
+# Get the principal campaign committee ID for a candidate.
+get_committee() {
+  curl -sf "${BASE}/candidate/${1}/committees/?designation=P&api_key=${KEY}" \
+    | jq -r '.results[0].committee_id // empty'
+}
 
-echo "Found ${MEMBER_COUNT} legislators for ${STATE_UPPER}" >&2
+# Format an integer as a dollar amount: 1234567 -> $1,234,567
+fmt_dollars() {
+  local n="${1%.*}"
+  [ -z "$n" ] || [ "$n" = "null" ] || [ "$n" = "0" ] && echo "—" && return
+  awk -v n="$n" 'BEGIN {
+    s = sprintf("%d", n); r = ""
+    while (length(s) > 3) { r = "," substr(s, length(s)-2) r; s = substr(s, 1, length(s)-3) }
+    print "$" s r
+  }'
+}
 
-# Output header
-cat << HEADER
-## Donor Context — ${STATE_UPPER} Congressional Delegation
-## Cycle: ${CYCLE} | Source: OpenSecrets.org | Retrieved: $(date +%Y-%m-%d)
-## For internal use only. Verify totals at opensecrets.org before citing publicly.
-## Frame as context for understanding voting patterns — not as accusations.
+# Output top 5 employer rows for a committee.
+# Employer names are self-reported by donors — duplicates are possible.
+top_employers() {
+  local committee_id="$1"
+  local data
+  data=$(curl -sf "${BASE}/schedules/schedule_a/by_employer/?committee_id=${committee_id}&two_year_transaction_period=${CYCLE}&sort=-total&per_page=5&api_key=${KEY}" \
+    | jq -r '.results[]? | select(.employer != null and .employer != "") | [(.employer), (.total | round | tostring)] | @tsv' 2>/dev/null) || true
 
----
-
-HEADER
-
-# Step 2: For each member, fetch summary and top contributors
-echo "$LEGISLATORS" | jq -c '.response.legislator[]' | while read -r member; do
-  CID=$(echo "$member" | jq -r '.["@attributes"].cid')
-  NAME=$(echo "$member" | jq -r '.["@attributes"].firstlast')
-  PARTY=$(echo "$member" | jq -r '.["@attributes"].party')
-  DISTRICT=$(echo "$member" | jq -r '.["@attributes"].district')
-  CHAMBER=$(echo "$member" | jq -r '.["@attributes"].chamber')
-
-  # Format district label
-  if [ "$CHAMBER" = "S" ]; then
-    LABEL="Sen. ${NAME} (${PARTY})"
-  else
-    DIST_NUM=$(echo "$DISTRICT" | sed 's/^0*//')
-    LABEL="Rep. ${NAME} (${PARTY}, ${STATE_UPPER}-${DIST_NUM})"
+  if [ -z "$data" ]; then
+    echo "| — | — |"
+    return
   fi
 
-  echo "  Fetching data for ${NAME}..." >&2
+  local count=0
+  while IFS=$'\t' read -r org amt; do
+    echo "| ${org} | $(fmt_dollars "$amt") |"
+    count=$((count + 1))
+  done <<< "$data"
 
-  # Fetch fundraising summary
-  SUMMARY=$(curl -sf \
-    "${BASE}/?method=candSummary&cid=${CID}&cycle=${CYCLE}&output=json&apikey=${KEY}" \
-    2>/dev/null) || { echo "  Warning: Could not fetch summary for ${NAME}" >&2; continue; }
+  # Pad to 5 rows
+  while [ "$count" -lt 5 ]; do
+    echo "| | |"
+    count=$((count + 1))
+  done
+}
 
-  TOTAL_RAISED=$(echo "$SUMMARY" | jq -r '.response.summary["@attributes"].total // "N/A"')
-  TOTAL_SPENT=$(echo "$SUMMARY" | jq -r '.response.summary["@attributes"].spent // "N/A"')
-  CASH_ON_HAND=$(echo "$SUMMARY" | jq -r '.response.summary["@attributes"].cash_on_hand // "N/A"')
-  PAC_PCT=$(echo "$SUMMARY" | jq -r '.response.summary["@attributes"].pacs // "N/A"')
-  INDIV_PCT=$(echo "$SUMMARY" | jq -r '.response.summary["@attributes"].indivs // "N/A"')
+# Output a complete member section.
+# Args: display_title  search_name  office(H|S)  opensecrets_search_hint
+member_section() {
+  local title="$1" name="$2" office="$3" os_hint="$4"
 
-  # Format dollar amounts
-  format_dollars() {
-    local val="$1"
-    if [[ "$val" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-      printf "$%'.0f" "$val"
+  log "Processing ${title}..."
+
+  echo ""
+  echo "### ${title}"
+  echo "*opensecrets.org/members-of-congress/ — search: ${os_hint}*"
+  echo ""
+
+  local cand_id
+  cand_id=$(find_cand "$name" "$office") || true
+
+  if [ -z "$cand_id" ]; then
+    warn "FEC lookup failed for '${name}' — fill in manually"
+    cat <<EOF
+**${CYCLE} cycle fundraising** *(FEC lookup failed — fill in manually)*
+| Metric | Value |
+|---|---|
+| Total raised | |
+| From PACs | |
+| From individuals | |
+
+**Top contributing organizations** *(fill in manually from opensecrets.org)*
+| Organization | Total |
+|---|---|
+| | |
+| | |
+| | |
+| | |
+| | |
+EOF
+  else
+    sleep 0.5
+    local totals
+    totals=$(get_totals "$cand_id")
+
+    local total_raised pac indiv pac_pct indiv_pct
+    total_raised=$(echo "$totals" | jq -r '.results[0].receipts // 0')
+    pac=$(echo "$totals" | jq -r '.results[0].other_political_committee_contributions // 0')
+    indiv=$(echo "$totals" | jq -r '.results[0].individual_itemized_contributions // 0')
+    pac_pct=$(echo "$totals" | jq -r \
+      'if (.results[0].receipts // 0) > 0
+       then (.results[0].other_political_committee_contributions / .results[0].receipts * 100 | round | tostring) + "%"
+       else "—" end')
+    indiv_pct=$(echo "$totals" | jq -r \
+      'if (.results[0].receipts // 0) > 0
+       then (.results[0].individual_itemized_contributions / .results[0].receipts * 100 | round | tostring) + "%"
+       else "—" end')
+
+    sleep 0.5
+    local committee_id
+    committee_id=$(get_committee "$cand_id") || true
+    sleep 0.5
+
+    cat <<EOF
+**${CYCLE} cycle fundraising** *(FEC — api.open.fec.gov)*
+| Metric | Value |
+|---|---|
+| Total raised | $(fmt_dollars "$total_raised") |
+| From PACs | ${pac_pct} |
+| From individuals | ${indiv_pct} |
+
+**Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
+| Organization | Total |
+|---|---|
+EOF
+
+    if [ -n "$committee_id" ]; then
+      top_employers "$committee_id"
     else
-      echo "$val"
+      printf "| | |\n%.0s" {1..5}
     fi
-  }
+  fi
 
-  RAISED_FMT=$(format_dollars "$TOTAL_RAISED")
-  SPENT_FMT=$(format_dollars "$TOTAL_SPENT")
-  COH_FMT=$(format_dollars "$CASH_ON_HAND")
+  cat <<EOF
 
-  # Fetch top contributing organizations
-  CONTRIBS=$(curl -sf \
-    "${BASE}/?method=candContrib&cid=${CID}&cycle=${CYCLE}&output=json&apikey=${KEY}" \
-    2>/dev/null) || { echo "  Warning: Could not fetch contributors for ${NAME}" >&2; CONTRIBS="{}"; }
-
-  CONTRIB_LIST=$(echo "$CONTRIBS" | \
-    jq -r '.response.contributors.contributor[]? | 
-      "| \(.["@attributes"].org_name) | \(.["@attributes"].total) | \(.["@attributes"].pacs) | \(.["@attributes"].indivs) |"' \
-    2>/dev/null || echo "| Could not retrieve contributor data | | | |")
-
-  # Fetch top industries
-  INDUSTRIES=$(curl -sf \
-    "${BASE}/?method=candIndustry&cid=${CID}&cycle=${CYCLE}&output=json&apikey=${KEY}" \
-    2>/dev/null) || INDUSTRIES="{}"
-
-  INDUSTRY_LIST=$(echo "$INDUSTRIES" | \
-    jq -r '.response.industries.industry[:5]? | 
-      .[] | "| \(.["@attributes"].industry_name) | \(.["@attributes"].total) | \(.["@attributes"].pacs) | \(.["@attributes"].indivs) |"' \
-    2>/dev/null || echo "| Could not retrieve industry data | | | |")
-
-  # Output member section
-  cat << MEMBER_SECTION
-### ${LABEL}
-OpenSecrets profile: opensecrets.org/members-of-congress/summary?cid=${CID}
-
-**${CYCLE} cycle fundraising**
-- Total raised: ${RAISED_FMT}
-- Total spent: ${SPENT_FMT}
-- Cash on hand: ${COH_FMT}
-- From PACs: ${PAC_PCT}%
-- From individuals: ${INDIV_PCT}%
-
-**Top contributing organizations**
-| Organization | Total | From PACs | From Individuals |
-|---|---|---|---|
-${CONTRIB_LIST}
-
-**Top industries**
-| Industry | Total | From PACs | From Individuals |
-|---|---|---|---|
-${INDUSTRY_LIST}
+**Top industries** *(opensecrets.org — fill in manually, top 5)*
+| Industry | Total |
+|---|---|
+| | |
+| | |
+| | |
+| | |
+| | |
 
 ---
 
-MEMBER_SECTION
+EOF
+}
 
-  # Polite rate limiting — OpenSecrets free tier allows ~200 req/hour
-  sleep 1
+# ── Output ────────────────────────────────────────────────────────────────────
 
-done
+log "Generating ${S} donor context (${CYCLE} cycle)..."
 
-cat << FOOTER
-*Data: OpenSecrets.org | Cycle: ${CYCLE} | Retrieved: $(date +%Y-%m-%d)*
-*Note: "Organizations" include subsidiaries and affiliated PACs bundled under*
-*parent company names. Industry totals include both PAC and individual*
-*contributions from people employed in that industry.*
-*Cycle lag: Data for the most recent election cycle may be incomplete*
-*until 3-6 months after the election.*
-FOOTER
+cat <<EOF
+# ${S} Donor Context — 119th Congress
+<!-- Cycle: ${CYCLE} | FEC: auto-filled ${TODAY} | Industries: fill in manually -->
+<!-- Next full update: January 2027 (120th Congress) -->
 
-echo "" >&2
-echo "Done. Review output before including in briefings." >&2
-echo "Verify significant figures at opensecrets.org before citing publicly." >&2
+## How to fill in industry data
+
+For each member below:
+1. Go to opensecrets.org/members-of-congress/
+2. Search by member name (hint in each section)
+3. On their profile, scroll to **Industries** — note the top 5 by total
+4. Enter industry name and total in the table, largest first
+
+Industry totals are stable per election cycle — fill them in once and
+they hold through the full 119th Congress (through January 2027).
+
+FEC employer names are self-reported by donors and may appear in multiple forms
+(e.g. "Boeing" and "Boeing Co." as separate entries).
+
+---
+
+## Senate
+
+EOF
+
+member_section "Sen. Mark Warner (D)"          "Warner"      "S" "Mark Warner"
+member_section "Sen. Tim Kaine (D)"            "Kaine"       "S" "Tim Kaine"
+
+echo "## House"
+
+member_section "VA-01 — Rep. Rob Wittman (R)"        "Wittman"     "H" "Rob Wittman"
+member_section "VA-02 — Rep. Jen Kiggans (R)"        "Kiggans"     "H" "Jen Kiggans"
+member_section "VA-03 — Rep. Bobby Scott (D)"        "Scott"       "H" "Bobby Scott Virginia"
+member_section "VA-04 — Rep. Jennifer McClellan (D)" "McClellan"   "H" "Jennifer McClellan Virginia"
+member_section "VA-05 — Rep. John McGuire (R)"       "McGuire"     "H" "John McGuire Virginia"
+member_section "VA-06 — Rep. Ben Cline (R)"          "Cline"       "H" "Ben Cline Virginia"
+member_section "VA-07 — Rep. Eugene Vindman (D)"     "Vindman"     "H" "Eugene Vindman"
+member_section "VA-08 — Rep. Don Beyer (D)"          "Beyer"       "H" "Don Beyer Virginia"
+member_section "VA-09 — Rep. Morgan Griffith (R)"    "Griffith"    "H" "Morgan Griffith Virginia"
+member_section "VA-10 — Rep. Suhas Subramanyam (D)"  "Subramanyam" "H" "Suhas Subramanyam"
+member_section "VA-11 — Rep. James Walkinshaw (D)"   "Walkinshaw"  "H" "James Walkinshaw"
+
+cat <<EOF
+*FEC data: api.open.fec.gov | Cycle: ${CYCLE} | Retrieved: ${TODAY}*
+*Employer names are self-reported by donors — verify significant figures*
+*before citing publicly. Industry data entered manually from opensecrets.org.*
+EOF
+
+log ""
+log "Done. Next step: fill in Top industries tables from opensecrets.org."
+log "Review FEC employer data for obvious duplicates before distributing."

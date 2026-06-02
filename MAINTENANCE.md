@@ -29,6 +29,21 @@ Roll Call and Politico cover mid-Congress committee changes.
 
 ## Annual / Session Updates
 
+### Annual donor context update (January of each year)
+
+Run `./scripts/fetch-donors.sh VA 2024 > donor-context-va.md` to refresh FEC
+fundraising totals and top contributing organizations. After the script runs,
+re-enter the Top industries tables from opensecrets.org.
+
+- FEC totals update continuously as campaigns file; a January refresh captures
+  the most current data before the advocacy season ramps up
+- Industry data is stable per election cycle — re-enter once per Congress
+  (the 2024 cycle data holds through January 2027)
+- If a new member joined via special election, they may not appear in the
+  script output — add them manually using the section format in donor-context-va.md
+
+Requires a free FEC API key from api.data.gov (set as `FEC_API_KEY` env var).
+
 ### Start of each new Congress (January of odd years)
 
 Full regeneration of state-context files. Complete this within the first
@@ -53,6 +68,85 @@ If court orders or legislation redraws district lines mid-Congress:
 - [ ] Add a redistricting note at the top of the file
 - [ ] Notify group leaders that district context has changed
 - [ ] Update vpap.org as reference for new boundaries
+
+---
+
+## Committee Update Routine
+
+This section is written as instructions for a scheduled Claude agent that runs
+annually on January 15. A human can also follow these steps manually.
+
+The agent loads this file from the repository and executes the steps below.
+
+### Step 1 — Read the current state
+
+Read `state-context-va.md` in full. Note the current committee assignments
+for all 13 members so you can identify what changed.
+
+### Step 2 — Check Senate assignments
+
+Fetch `https://www.senate.gov/general/committee_assignments/assignments.htm`
+and find the entries for Warner and Kaine. For each senator, record:
+- Full committee names
+- Subcommittee assignments
+- Leadership roles (Chair, Ranking Member, Vice Chair)
+
+### Step 3 — Check House member assignments
+
+For each of the 11 Virginia House members, fetch their official page and
+find their current committee assignments. Note full committee names,
+subcommittee assignments, and any leadership roles.
+
+| Member | Page |
+|---|---|
+| VA-01 Rob Wittman | wittman.house.gov |
+| VA-02 Jen Kiggans | kiggans.house.gov |
+| VA-03 Bobby Scott | bobbyscott.house.gov |
+| VA-04 Jennifer McClellan | mcclellan.house.gov |
+| VA-05 John McGuire | mcguire.house.gov |
+| VA-06 Ben Cline | cline.house.gov |
+| VA-07 Eugene Vindman | vindman.house.gov |
+| VA-08 Don Beyer | beyer.house.gov |
+| VA-09 Morgan Griffith | griffith.house.gov |
+| VA-10 Suhas Subramanyam | subramanyam.house.gov |
+| VA-11 James Walkinshaw | walkinshaw.house.gov |
+
+If a page is unavailable, skip that member and note them in the PR description.
+
+### Step 4 — Update state-context-va.md if anything changed
+
+Compare what you found against the current file. For each member with changes:
+- Update the **Committees:** section with current assignments
+- Update leadership roles (Chair, Ranking Member, Vice Chair, subcommittee roles)
+- Update the `Verified:` date on the changed section(s) to today's date
+- Update the Delegation Summary table at the bottom if Key Committee columns changed
+
+**Do not change:** phone numbers, contact URLs, advocacy notes, file header,
+Update Triggers section.
+
+**Accuracy rules:**
+- Only update based on what you actually read from official pages
+- Never infer or guess committee assignments
+- If a member has been replaced entirely (death, resignation, special election),
+  flag it prominently in the PR description rather than restructuring the file —
+  that requires human review
+
+### Step 5 — Commit and open a PR
+
+If you made changes to state-context-va.md:
+
+```bash
+git checkout -b committee-update-$(date +%Y-%m)
+git add state-context-va.md
+git commit -m "Update committee assignments $(date +'%B %Y')"
+git push origin HEAD
+gh pr create \
+  --title "Committee assignments update $(date +'%B %Y')" \
+  --body "Annual committee assignment check by scheduled agent. Review diff carefully before merging. Any pages that were unavailable during the run are noted here: [list them]."
+```
+
+If no changes were found, do not commit. Output a summary noting that
+assignments are current as of today's date.
 
 ---
 
@@ -105,5 +199,5 @@ independent of the skill version.
 
 ## Contact
 
-Virginia Indivisible Steering Committee legislative tracking team.
+Virginia Indivisible statewide network legislative tracking team.
 See CONTRIBUTING.md for contribution instructions.
