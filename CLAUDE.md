@@ -20,8 +20,7 @@ and the `docx` npm package.
 **Primary users:** Virginia Indivisible group leaders — busy non-technical
 people who open documents in Google Docs and read on their phones.
 
-**Maintained by:** Virginia Indivisible Steering Committee legislative
-tracking team.
+**Maintained by:** Virginia Indivisible Steering Committee legislative team.
 
 ---
 

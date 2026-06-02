@@ -273,7 +273,7 @@ async function buildBrief(config) {
     issueArea,
     statusDate,
     isActiveThreat = false,
-    orgHeader = 'Virginia Indivisible Steering Committee  |  Federal Legislation Tracking Brief',
+    orgHeader = 'Virginia Indivisible Steering Committee  |  Federal Legislation Brief',
     sections: s
   } = config;
 
