@@ -239,3 +239,25 @@ To verify the skill is working correctly after changes:
 
 Known issue to watch for: any use of `PageNumberElement` or `new Tab()`
 outside of a `TextRun` will cause XML validation errors in the docx output.
+
+---
+
+## Docx Layout Defaults
+
+These elements produced the clean look validated in the 2026-06-02 SAVE Act
+briefing. Apply all five by default in every briefing docx — do not revert
+to simpler alternatives without being asked.
+
+**Status box table at top** — two-column label/value layout with alternating
+blue/yellow shading. Gives a quick-reference summary before the body text.
+
+**Three-line title block** — briefing type, bill name, and issue area on
+separate lines. Creates visual hierarchy before the first heading.
+
+**Red headings for urgency sections** — "Why This Matters" and "Recommended
+Actions" use heading color `C00000` to draw the eye to action items.
+
+**`ShadingType.CLEAR` (not `SOLID`)** — prevents black table cell backgrounds.
+
+**Dual table widths** — set `columnWidths` array on the table AND `width` on
+each cell, both in DXA units. Required for consistent rendering in Google Docs.
