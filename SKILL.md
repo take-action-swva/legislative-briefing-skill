@@ -15,13 +15,13 @@ version: "1.7"
 output_format: docx
 citation_style: inline-hyperlink
 state: Virginia
+state_code: va
 senators:
   - name: Mark Warner
     url: warner.senate.gov
   - name: Tim Kaine
     url: kaine.senate.gov
 house_seats: 11
-example_legislation: "SAVE America Act (H.R. 22 / S. 1383, 119th Congress)"
 lessons_learned:
   - date: "2026-06-01"
     note: >
@@ -130,12 +130,19 @@ same regardless of state.
 
 Execute these steps in order. Do not write the briefing until Step 5.
 
-### Step 0 — Load state context
+### Step 0 — Load state context and source references
 
-Before doing any research, load `state-context-{{state_code}}.md`. This file
-contains the current congressional delegation, committee assignments, and
-contact information for `{{state}}`. Do not search for any information already
-present in this file — it is pre-verified and saves significant research time.
+Before doing any research, load these three files:
+
+1. `state-context-{{state_code}}.md` — pre-verified delegation, committee
+   assignments, and contact information for `{{state}}`. Do not search for
+   any information already present here.
+2. `references/sources-national.md` — universal source hierarchy and
+   reliability ratings for all states.
+3. `references/sources-{{state_code}}.md` — state-specific sources,
+   citation formats, and session notes.
+
+Load all three now. Do not proceed to Step 1 until they are in context.
 
 If no state context file exists yet, complete Steps 1–3 manually and create
 one before the next session. See CONTRIBUTING.md for the format.

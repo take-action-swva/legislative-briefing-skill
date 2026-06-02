@@ -85,8 +85,9 @@ passed docx npm package validation.
 
 When asked to produce a briefing, Claude should:
 
-1. Load `SKILL.md`, `state-context-va.md`, `references/sources-national.md`,
-   and `references/sources-va.md` as context
+1. Load `SKILL.md` as context — Step 0 in the workflow instructs loading
+   the remaining files (`state-context-va.md`, `references/sources-national.md`,
+   `references/sources-va.md`)
 2. Follow the Step 0–5 research workflow in `SKILL.md`
 3. Run the Pre-Delivery Self-Check before generating the docx
 4. Use `templates/brief-base.js` — do not regenerate document scaffolding
