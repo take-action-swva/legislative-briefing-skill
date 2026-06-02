@@ -21,7 +21,10 @@ set -euo pipefail
 
 STATE=${1:?'Usage: ./scripts/fetch-donors.sh <state-code> [cycle]   e.g. VA 2024'}
 S=$(echo "$STATE" | tr '[:lower:]' '[:upper:]')
+STATE_LOWER=$(echo "$STATE" | tr '[:upper:]' '[:lower:]')
 CYCLE=${2:-2024}
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CONTEXT_FILE="${SCRIPT_DIR}/../state-context-${STATE_LOWER}.md"
 KEY="${FEC_API_KEY:-DEMO_KEY}"
 BASE="https://api.open.fec.gov/v1"
 TODAY=$(date +%Y-%m-%d)
@@ -186,13 +189,46 @@ EOF
 EOF
 }
 
+# Parse member roster from state-context-[state].md.
+# Reads section headers of the form:
+#   ### Sen. Mark Warner (D)
+#   ### VA-01 — Rep. Rob Wittman (R)
+# Outputs one tab-separated line per member: OFFICE  TITLE  LAST_NAME  FULL_NAME
+parse_members() {
+  while IFS= read -r line; do
+    if echo "$line" | grep -qE '^### Sen\.'; then
+      local full_name party last
+      full_name=$(echo "$line" | sed 's/^### Sen\. //; s/ ([DR])$//')
+      party=$(echo "$line" | grep -oE '\([DR]\)' | tr -d '()')
+      last=$(echo "$full_name" | awk '{print $NF}')
+      printf 'S\t%s\t%s\t%s\n' "Sen. ${full_name} (${party})" "$last" "$full_name"
+
+    elif echo "$line" | grep -qE '^### VA-[0-9]+'; then
+      local district rep_name party last
+      district=$(echo "$line" | grep -oE 'VA-[0-9]+')
+      rep_name=$(echo "$line" | sed 's/^.*Rep\. //; s/ ([DR])$//')
+      party=$(echo "$line" | grep -oE '\([DR]\)' | tr -d '()')
+      last=$(echo "$rep_name" | awk '{print $NF}')
+      printf 'H\t%s\t%s\t%s\n' "${district} — Rep. ${rep_name} (${party})" "$last" "$rep_name"
+    fi
+  done < "$CONTEXT_FILE"
+}
+
 # ── Output ────────────────────────────────────────────────────────────────────
 
+if [ ! -f "$CONTEXT_FILE" ]; then
+  warn "state-context-${STATE_LOWER}.md not found at ${CONTEXT_FILE}"
+  warn "Cannot determine member roster. Create that file first."
+  exit 1
+fi
+
 log "Generating ${S} donor context (${CYCLE} cycle)..."
+log "Reading member roster from state-context-${STATE_LOWER}.md..."
 
 cat <<EOF
 # ${S} Donor Context — 119th Congress
 <!-- Cycle: ${CYCLE} | FEC: auto-filled ${TODAY} | Industries: fill in manually -->
+<!-- Member roster sourced from state-context-${STATE_LOWER}.md -->
 <!-- Next full update: January 2027 (120th Congress) -->
 
 ## How to fill in industry data
@@ -211,26 +247,21 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-## Senate
-
 EOF
 
-member_section "Sen. Mark Warner (D)"          "Warner"      "S" "Mark Warner"
-member_section "Sen. Tim Kaine (D)"            "Kaine"       "S" "Tim Kaine"
-
-echo "## House"
-
-member_section "VA-01 — Rep. Rob Wittman (R)"        "Wittman"     "H" "Rob Wittman"
-member_section "VA-02 — Rep. Jen Kiggans (R)"        "Kiggans"     "H" "Jen Kiggans"
-member_section "VA-03 — Rep. Bobby Scott (D)"        "Scott"       "H" "Bobby Scott Virginia"
-member_section "VA-04 — Rep. Jennifer McClellan (D)" "McClellan"   "H" "Jennifer McClellan Virginia"
-member_section "VA-05 — Rep. John McGuire (R)"       "McGuire"     "H" "John McGuire Virginia"
-member_section "VA-06 — Rep. Ben Cline (R)"          "Cline"       "H" "Ben Cline Virginia"
-member_section "VA-07 — Rep. Eugene Vindman (D)"     "Vindman"     "H" "Eugene Vindman"
-member_section "VA-08 — Rep. Don Beyer (D)"          "Beyer"       "H" "Don Beyer Virginia"
-member_section "VA-09 — Rep. Morgan Griffith (R)"    "Griffith"    "H" "Morgan Griffith Virginia"
-member_section "VA-10 — Rep. Suhas Subramanyam (D)"  "Subramanyam" "H" "Suhas Subramanyam"
-member_section "VA-11 — Rep. James Walkinshaw (D)"   "Walkinshaw"  "H" "James Walkinshaw"
+current_chamber=""
+while IFS=$'\t' read -r office title last full_name; do
+  if [ "$office" = "S" ] && [ "$current_chamber" != "S" ]; then
+    echo "## Senate"
+    echo ""
+    current_chamber="S"
+  elif [ "$office" = "H" ] && [ "$current_chamber" != "H" ]; then
+    echo "## House"
+    echo ""
+    current_chamber="H"
+  fi
+  member_section "$title" "$last" "$office" "$full_name"
+done < <(parse_members)
 
 cat <<EOF
 *FEC data: api.open.fec.gov | Cycle: ${CYCLE} | Retrieved: ${TODAY}*
