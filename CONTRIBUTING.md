@@ -118,4 +118,4 @@ particular should be traced to official sources.
 ## Questions
 
 Open an issue in the repository or contact the Virginia Indivisible
-statewide network legislative intelligence team.
+statewide network legislative tracking team.

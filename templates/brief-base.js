@@ -273,7 +273,7 @@ async function buildBrief(config) {
     issueArea,
     statusDate,
     isActiveThreat = false,
-    orgHeader = 'Virginia Indivisible Steering Committee  |  Federal Legislative Briefing',
+    orgHeader = 'Virginia Indivisible Network  |  Federal Legislation Tracking Brief',
     sections: s
   } = config;
 
@@ -297,6 +297,9 @@ async function buildBrief(config) {
     // Watch List (optional)
     ...(s.watchList ? section('Watch List', s.watchList) : []),
 
+    // Donor Context (optional — only for sector-linked bills)
+    ...(s.donorContext ? section('Donor Context', s.donorContext) : []),
+
     ...section(s.stateImpactHeading || 'State-Specific Impact', s.stateImpact, isActiveThreat),
     ...section('Who to Contact', s.whoToContact),
     ...section('Recommended Actions — Right Now', s.recommendedActions, isActiveThreat),
@@ -305,9 +308,9 @@ async function buildBrief(config) {
     rule(C.NAVY),
     body([
       run(
-        'Prepared by the Virginia Indivisible Steering Committee's legislative tracking team. ' +
-        'Questions or corrections: contact your regional chapter coordinator. ' +
-        'This briefing is for internal use by chapter leaders; verify status before distributing publicly. ' +
+        'Prepared by the Virginia Indivisible statewide network legislation tracking team. ' +
+        'Questions or corrections: contact your regional group coordinator. ' +
+        'This briefing is for internal use by group leaders; verify status before distributing publicly. ' +
         'Sources are all publicly available and linked inline.',
         { italics: true, color: C.GRAY, size: 20 }
       )

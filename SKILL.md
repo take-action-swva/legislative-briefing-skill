@@ -89,7 +89,7 @@ changelog:
 lessons_learned:
   - date: "2026-06-01"
     note: >
-      Word-style footnotes are not tappable in Google Docs. Chapter leaders
+      Word-style footnotes are not tappable in Google Docs. Group leaders
       are likely to open briefings in Google Docs or download as PDF from
       Google Docs. Inline hyperlink citations work reliably across both.
   - date: "2026-06-01"
@@ -161,10 +161,10 @@ erodes trust and can misdirect real organizing energy. Verify every specific
 claim before it goes in the briefing.
 
 **Audience scope:** These briefings are written for the statewide network —
-all `{{state}}` chapter leaders, not any single chapter or congressional
+all `{{state}}` group leaders, not any single group or congressional
 district. Cover all relevant state members evenhandedly. Do not weight,
 emphasize, or call out any particular district just because the requester
-happens to live there. If a specific chapter wants a district-focused version,
+happens to live there. If a specific group wants a district-focused version,
 that is a separate, narrower deliverable.
 
 ---
@@ -266,6 +266,18 @@ Determine what actions are available right now:
   moves faster than legislation — check this early, not as an afterthought.
 - State-level responses → state legislature, governor's office, AG office
 - Constituent contact windows → town halls, recess periods
+- Donor context (optional): If the bill involves a sector where financial
+influence is likely relevant — energy, pharma, financial regulation, firearms,
+healthcare, telecommunications — donor data from scripts/fetch-donors.sh
+(or opensecrets.org directly) may help explain member positions and motivate
+constituent pressure. Include a "Donor Context" section after House Members
+when the human has provided this data. Do not include donor data on every
+briefing — only when sector-linked influence is plausible and illuminates
+the bill. **Framing rule:** state donor figures as facts, not conclusions.
+"Rep. X received $124,000 from oil and gas industry sources in the 2024
+cycle" belongs in a briefing. "Rep. X votes for the oil industry" does not.
+Always note the cycle year — donor data is typically one cycle behind.
+
 
 ---
 
@@ -291,7 +303,7 @@ supporters signaling they will pursue provisions through other paths [vote.org].
 **Why inline links, not footnotes:** Word-style footnote superscripts are not
 tappable in Google Docs and do not survive all PDF export workflows. Inline
 bracketed hyperlinks work in Google Docs, in PDF (one tap opens the source),
-and in Word. Chapter leaders reading on phones need one-tap access to sources.
+and in Word. Group leaders reading on phones need one-tap access to sources.
 
 Use the shortest recognizable form of the domain as the link text:
 - `[congress.gov]` not `[H.R. 22 on Congress.gov]`
@@ -470,7 +482,7 @@ error does not just look bad — it can misdirect real people doing real work.
 - **District bias from the requester's location** — the briefing is for the
   statewide network. Do not over-emphasize any particular congressional
   district just because the person who requested the briefing lives there.
-  All chapters need the full picture.
+  All groups need the full picture.
 
 ---
 

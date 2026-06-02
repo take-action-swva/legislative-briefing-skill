@@ -51,7 +51,7 @@ Checklist:
 If court orders or legislation redraws district lines mid-Congress:
 - [ ] Update district numbers and boundaries in state-context-va.md
 - [ ] Add a redistricting note at the top of the file
-- [ ] Notify chapter leaders that district context has changed
+- [ ] Notify group leaders that district context has changed
 - [ ] Update vpap.org as reference for new boundaries
 
 ---
