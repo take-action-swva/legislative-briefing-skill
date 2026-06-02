@@ -234,7 +234,7 @@ function buildTitleBlock(title, subtitle, issueArea, statusDate, isActiveThreat)
     }),
     new Paragraph({
       spacing: { before: 0, after: 40 },
-      children: [bold('Date: '), run(`${statusDate}  `), bold('— Verify before distributing')]
+      children: [bold('Date: '), run(statusDate)]
     }),
     rule(C.NAVY),
     spacer()
