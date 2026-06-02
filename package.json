@@ -1,0 +1,15 @@
+{
+  "name": "legislative-briefing-skill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Advocacy legislation brief skill for Virginia Indivisible statewide network",
+  "scripts": {
+    "install-check": "node -e \"require('docx'); console.log('docx OK');\""
+  },
+  "dependencies": {
+    "docx": "^9.7.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
