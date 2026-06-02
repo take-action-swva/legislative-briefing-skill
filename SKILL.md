@@ -261,18 +261,18 @@ Use the shortest recognizable form of the domain as the link text:
   for virginiaindependentnews.com, `[democracy docket]` for democracydocket.com.
   Apply the same pattern to your state's news outlets.
 
-**Link precision:** Always link to the specific page containing the data —
-never to a root domain or homepage. A reader clicking `[vera.org]` cannot
-find the claim; a reader clicking `[vera.org — ICE detention trends]` lands
-on the exact article.
+**Link precision:** The link text stays short (`[vera.org]`), but the URL
+must point to the specific article or page containing the claim — never to a
+root domain or homepage. A reader tapping `[vera.org]` should land on the
+exact page, not the front door.
 
-- Link to the specific article, report page, or press release — not `[vera.org]`,
-  `[brennancenter.org]`, or `[congress.gov]` alone when a deeper URL exists.
+- The URL behind the label must be the specific article, report page, or press
+  release — not `https://vera.org` when a deeper URL exists.
 - For interactive dashboards or data tools that have no permalink: find the
-  static article or report that cites the same figure and link to that instead.
-  Most data publishers (Vera, TRAC, Census) publish companion articles that
-  contain citable versions of dashboard findings.
-- When the only source is a root domain or dashboard with no static page,
+  static article or report that cites the same figure and use that URL instead.
+  Most data publishers (Vera, TRAC, Census) publish companion articles with
+  citable versions of dashboard findings.
+- When the only available URL is a root domain or un-permalinkable dashboard,
   flag it in Notes so the human reviewer can verify before distribution.
 
 ### Document structure
