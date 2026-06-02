@@ -146,6 +146,29 @@ lessons_learned:
       in the docx skill environment. Drop page numbers from footers or use
       a static text fallback. Footer status date is more valuable to readers
       than page count anyway.
+  - date: "2026-06-01"
+    note: >
+      A standalone ExternalHyperlink object placed directly in a section
+      content array — e.g. as the last item in a stateImpact list — causes
+      a docx schema validation error: "externalHyperlink: This element is not
+      expected. Expected is sectPr." Hyperlinks must always be children of a
+      Paragraph, never top-level children of the document or section. Wrap
+      any lone link in a para() or body() call: para([run('label: '), lnk(...)]).
+  - date: "2026-06-01"
+    note: >
+      The para() helper in brief-base.js (and any similar helper) must handle
+      being called with an array as its first argument — para([run(...),
+      lnk(...)]) — as well as the spread form para(run(...), 'text', lnk(...)).
+      If para() uses a naive ...parts spread and doesn't flatten a single-array
+      argument, the array serializes as <0/> in the XML, causing a validation
+      error. Fix: check if parts has a single array argument and flatten before
+      mapping. The validator catches this — always run validate.py after every
+      build.
+  - version: "1.7"
+    date: "2026-06-01"
+    notes: >
+      Added two docx bug lessons: standalone hyperlink placement error and
+      para() array-argument flattening bug. Both caught by validate.py.
 ---
 
 # Advocacy Legislation Brief
