@@ -1,5 +1,5 @@
 # Sources Reference — Virginia
-# Maintained by the Virginia Indivisible statewide network
+# Maintained by the Virginia Indivisible Steering Committee
 # Last full review: 2026-06-01 | Next review: January 2027
 
 # For universal sources (primary/official, nonpartisan research, news),

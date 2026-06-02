@@ -1,6 +1,6 @@
 # Contributing to advocacy-legislation-brief
 
-This skill is maintained by the Virginia Indivisible statewide network and
+This skill is maintained by the Virginia Indivisible Steering Committee and
 designed for use by any state Indivisible network. Contributions from other
 states are welcome.
 
@@ -118,4 +118,4 @@ particular should be traced to official sources.
 ## Questions
 
 Open an issue in the repository or contact the Virginia Indivisible
-statewide network legislative tracking team.
+Steering Committee legislative tracking team.
