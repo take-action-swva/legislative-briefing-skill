@@ -11,7 +11,7 @@ description: >
   deal with the SAVE Act for our group" is exactly the kind of thing this skill
   handles. Always produce a .docx file as the final output unless the user
   explicitly asks for something else.
-version: "1.7"
+version: "1.8"
 output_format: docx
 citation_style: inline-hyperlink
 state: Virginia
@@ -236,8 +236,8 @@ Produce a `.docx` file using the docx skill. Do not output plain markdown
 unless the user explicitly asks for a draft or quick summary.
 
 The docx format is specified because briefings are shared with group leaders
-who open documents in Google Docs or download them as PDFs. The format must
-work reliably in both environments.
+who open documents in Google Docs or download them as PDFs. All layout
+decisions are made for Google Docs readability, including on a phone.
 
 ### Citation style: inline hyperlinks
 
@@ -254,12 +254,10 @@ tappable in Google Docs and do not survive all PDF export workflows. Inline
 bracketed hyperlinks work in Google Docs, in PDF (one tap opens the source),
 and in Word. Group leaders reading on phones need one-tap access to sources.
 
-Use the shortest recognizable form of the domain as the link text:
-- `[congress.gov]` not `[H.R. 22 on Congress.gov]`
-- `[senator-name.senate.gov]` not `[Senator Name's website]`
-- Use a short readable label for long or obscure domains: e.g., `[virginia independent]`
-  for virginiaindependentnews.com, `[democracy docket]` for democracydocket.com.
-  Apply the same pattern to your state's news outlets.
+Link text: use the shortest recognizable domain form. For navigational links
+add an arrow suffix (`"warner.senate.gov →"`). For long or obscure domains
+use a short readable label (e.g., `[democracy docket]` for
+democracydocket.com). Never use generic text like "click here."
 
 **Link precision:** The link text stays short (`[vera.org]`), but the URL
 must point to the specific article or page containing the claim — never to a
@@ -273,74 +271,98 @@ exact page, not the front door.
   Most data publishers (Vera, TRAC, Census) publish companion articles with
   citable versions of dashboard findings.
 - When the only available URL is a root domain or un-permalinkable dashboard,
-  flag it in Notes so the human reviewer can verify before distribution.
+  flag it in Notes & Caveats so the human reviewer can verify before
+  distribution.
 
-### Document structure
+### Output structure
 
-Use this template. Sections marked **[optional]** may be omitted when not
-applicable, but include them whenever relevant content exists.
+Follow the inverted pyramid — most actionable content first, supporting detail
+below, background last. Busy group leaders should be able to act on this
+briefing without reading past the first two sections.
 
-```
-# [Bill Name or EO Title]
-## Briefing for {{state}} Indivisible Group Leaders
-## Date: [DATE]
+1. **Title block**
+   Organization name, bill title, audience, issue area, and date. One line each.
 
----
+2. **TL;DR box**
+   A shaded alert box. What is happening, why it matters, and what
+   `{{state}}`'s key lever is. Aim for three sentences; five maximum — if it
+   cannot be said in five sentences, the detail belongs in Why It Matters, not
+   here. Use red border and shading if the threat level is high; navy border
+   and light gray shading otherwise.
 
-### Summary
-[2–4 sentences. What does it actually do?]
+3. **Status at a Glance**
+   A compact labeled table with these fields: Current status, Last action,
+   Next decision point, Core dispute, Administration position, Bill supporters,
+   Threat level. No prose. Readers should orient themselves in under 10 seconds.
 
-### Current Status
-[Where is it right now? What is the next procedural moment?]
+4. **Recommended Actions — Right Now**
+   Open with contact actions before any other actions, ranked by leverage:
+   1. Committee gatekeepers — members who control scheduling, amendments, or
+      whether the bill moves at all
+   2. Persuadables — members who haven't stated a position or are wavering
+   3. Confirmed allies — thank them and ask them to pressure wavering colleagues
+   4. Confirmed opponents — do not list for direct contact; route to
+      constituent pressure via Watch List
 
-### {{state}} Senators' Positions
-[Stated positions with inline source links. If no public statement, say so.]
+   Each contact entry:
+   - **Name — Role** (bold directive on its own line)
+   - DC: [phone] | [contact form link] on the same line — no hunting required
+   - One sentence on why this person is the lever right now
+   - Call script directly below, italicized
 
-### {{state}} House Members — Key Votes & Positions
-[All state members with their vote record or stated position. Focus on
-committee members and persuadable votes. Note district numbers. Cover the
-full delegation evenhandedly — do not give extra weight to any one district.]
+   After all contact items, list any other time-sensitive actions (open
+   comment periods, petitions, hearings).
 
-#### Committee Leverage [optional]
-[If any state member serves on the committee with jurisdiction, note it here.
-Committee chairs and ranking members have disproportionate influence over
-scheduling, amendments, and floor timing. Omit if no state member is on the
-relevant committee.]
+5. **Why It Matters**
+   Bulleted, not prose paragraphs. Lead each bullet with a bold key phrase,
+   followed by one to two supporting sentences. One bullet per key point:
+   core problem, documented abuse, `{{state}}`-specific impact, any related
+   issues. Inline hyperlinks only — no footnotes.
 
-### Watch List [optional]
-[Senators or House members from other states whose votes are pivotal — swing
-votes, committee gatekeepers, or members facing constituent pressure that
-could move them. Useful when the state's own senators are reliably for or
-against and the real leverage is elsewhere. Name them specifically.]
+6. **`{{state}}` Members — Positions & Contact**
+   A two-column table. Column 1 (narrow): member name in bold, role in smaller
+   mid-gray text on a second line, district below that. Column 2 (wide): three
+   lines in order — priority action label in bold, position in plain language,
+   DC phone and contact form link inline.
 
-### {{state}}-Specific Impact
-[Concrete local data with inline source links.]
+   Priority labels (use exactly these):
+   - **→ Call now** — persuadable, wavering, or position unclear
+   - **→ Thank and reinforce** — confirmed ally; thank them and ask them to
+     press colleagues
+   - **→ Constituent pressure only** — firm opponent; mobilize their own
+     constituents, not ours
 
-### Who to Contact
-[Ranked: allies to thank and reinforce, persuadables to pressure, opponents
-whose constituents should be mobilized. Name the members specifically.
-Cover the full state delegation — do not give extra weight to any district
-because of who requested the briefing.]
+   Priority label order in the table must match the contact ranking in
+   section 4. Every row includes DC phone number and contact form link.
+   Include public email address if one exists.
 
-### Recommended Actions — Right Now
-[Numbered, ranked by urgency. Specific about what to do and where to go.]
+7. **Donor Context** [optional — sector-linked bills only]
+   One paragraph per relevant member. State figures as facts: amount, industry
+   sector, cycle year. Never editorialize. Include only when the bill involves
+   a sector where financial influence is plausibly explanatory (energy, pharma,
+   financial regulation, firearms, healthcare, telecommunications). Omit
+   entirely otherwise.
 
-### Notes
-[Flag any claims that could not be fully verified. Note the date of last
-status check. Flag if briefing is more than one week old.]
-```
+8. **Watch List** [optional]
+   Non-`{{state}}` members whose votes are pivotal. Bullet points only. Name,
+   role, and one sentence on why they matter to the outcome. No priority
+   labels — these are not our members to call.
+
+9. **Legislative Timeline**
+   Reference material, not primary reading. Bold date labels followed by
+   one-sentence summaries.
+
+10. **Notes & Caveats**
+    De-emphasized. Bullet list of unverified claims, source disclosures, and
+    the status date. Followed by the prepared-by line in small italic text.
 
 ### Style rules
 
-- **Summary, not Plain-Language Summary.** The section heading is always
-  "Summary" — the plain language is implied by how it is written, not by
-  labeling it as such.
-
-- **Spell out acronyms on first use.** The first time any acronym or
-  abbreviation appears that a non-specialist might not recognize, write out
-  the full name followed by the acronym in parentheses. Subsequent references
-  may use the acronym alone. Apply this to committee names, agency names,
-  bill titles, and legislative procedures.
+- **Acronyms on first use.** The first time any acronym or abbreviation
+  appears that a non-specialist might not recognize, write out the full name
+  followed by the acronym in parentheses. Subsequent references may use the
+  acronym alone. Apply to committee names, agency names, bill titles, and
+  legislative procedures.
 
   Examples:
   - First use: "Senate Homeland Security and Governmental Affairs Committee (HSGAC)"
@@ -354,19 +376,69 @@ status check. Flag if briefing is more than one week old.]
   "markup," and "vote-a-rama" should be briefly glossed on first use. Group
   leaders may not have a legislative background.
 
-### Docx formatting conventions
+### Visual formatting conventions
 
-- **Page size:** US Letter (8.5 × 11 in)
-- **Margins:** 1 inch all sides
-- **Font:** Arial, 11pt body
-- **Header:** Organization name and briefing type
-- **Footer:** Status date (page numbers optional — see note below)
-- **Active threat sections:** Use red heading color to signal urgency
-- **Active opportunity sections:** Use standard heading color
-- **Page numbers:** `PageNumberElement` from the docx npm package causes a
-  validation error in the current skill environment. Use a static footer with
-  the status date instead. If page numbers are essential, investigate
-  `SimpleField("PAGE")` as an alternative, but validate the output carefully.
+**Page setup**
+US Letter (8.5 × 11 in). Margins: 0.75 in top/bottom, 0.875 in left/right.
+Font: Arial throughout. Body text: 11pt. Header and footer in mid-gray, 9pt.
+
+**Color palette**
+
+| Role       | Hex       | Used for                                                          |
+|------------|-----------|-------------------------------------------------------------------|
+| Navy       | `#1F3864` | Primary headings, table header backgrounds, standard TL;DR border |
+| Red        | `#C00000` | Standalone threat H1s, high-threat TL;DR border, Threat Level value |
+| Mid-gray   | `#595959` | De-emphasized text, footer, member role labels                    |
+| White      | `#FFFFFF` | Table data cells, document background                             |
+| Light gray | `#F2F2F2` | Table rows, Status label column, standard TL;DR fill              |
+
+**Shaded boxes**
+Used for TL;DR and Recommended Actions only. Each is a single-cell table
+with cell padding of 120 top/bottom, 180 left/right.
+
+| Box                        | Fill      | Border color    |
+|----------------------------|-----------|-----------------|
+| TL;DR (high threat)        | `#FFE5E5` | `#C00000` (red) |
+| TL;DR (standard)           | `#F2F2F2` | `#1F3864` (navy)|
+| Recommended Actions        | `#FFF3CD` | `#E6A817` (amber)|
+
+**Heading hierarchy**
+- H1: Arial 14pt bold, navy, with a bottom border rule in the heading color.
+  Space before: 240. Space after: 120.
+- H2: Arial 12pt bold, navy. Space before: 200. Space after: 80.
+- H3: Arial 11pt bold, navy. Space before: 160. Space after: 60.
+- Active threat H1 (standalone sections only, not inside a shaded box): red
+  instead of navy. H1 headings inside shaded boxes always use navy.
+
+**Tables**
+All tables set to full content width (9360 DXA for US Letter with these
+margins). Always use `WidthType.DXA` — never percentage. Set width on both
+the table and each cell. Use `ShadingType.CLEAR` for all shading. Cell
+padding: 80 top/bottom, 120 left/right.
+
+- Status at a Glance: Two columns — label (2880 DXA, light gray fill, bold)
+  and value (6480 DXA, white). Threat level value in red bold.
+- Members: Two columns — member (2880 DXA, light gray fill) and action
+  (6480 DXA, white). Member column: name bold, role in smaller mid-gray
+  below, district below that. Action column: priority label bold, then
+  position, then contact — each on its own line. Header row in navy fill
+  with white bold text.
+
+**Inline hyperlinks**
+All citations as inline hyperlinks — never footnotes. Link text should be
+descriptive (`"warner.senate.gov →"`) not generic (`"click here"`). Link
+color: `#1155CC`, underlined.
+
+**Header and footer**
+- Header: Organization name and briefing type, 9pt mid-gray, bottom border
+  rule in navy.
+- Footer: Status date and distribution note, 9pt mid-gray, centered, top
+  border rule in mid-gray. Static text only — no page number fields.
+
+**Page numbers:** `PageNumberElement` from the docx npm package causes a
+validation error in the current skill environment. Use a static footer with
+the status date instead. If page numbers are essential, investigate
+`SimpleField("PAGE")` as an alternative, but validate the output carefully.
 
 ### Pre-Delivery Self-Check
 
@@ -377,11 +449,16 @@ catches the most common AI failure modes before they reach group leaders.
 - [ ] Bill number and Congress session are specified exactly
 - [ ] Status confirmed from congress.gov or dailypress.senate.gov — not only from news
 - [ ] State-specific data used where available — not only national statistics
-- [ ] All `{{state}}` House members covered evenhandedly — no district given extra weight
-- [ ] Reconciliation pathway claims (if any) flagged in Notes unless confirmed via a procedural primary source
-- [ ] Recommended Actions has at least one action doable right now, not just "watch and wait"
-- [ ] Notes section present and flags all unverified claims
-- [ ] Date of last status check stated in Notes
+- [ ] All `{{state}}` members covered evenhandedly in the Members table — no district given extra weight
+- [ ] Reconciliation pathway claims (if any) flagged in Notes & Caveats unless confirmed via a procedural primary source
+- [ ] Recommended Actions opens with contact actions ranked by leverage order
+- [ ] Every contact action includes DC phone number and contact form link
+- [ ] TL;DR is five sentences or fewer
+- [ ] Status at a Glance table has all seven required fields
+- [ ] Member table priority labels match the contact ranking in Recommended Actions
+- [ ] Donor Context included only if bill is sector-linked and donor data was provided
+- [ ] Notes & Caveats present and flags all unverified claims
+- [ ] Date of last status check stated in Notes & Caveats
 
 ---
 
@@ -407,7 +484,7 @@ error does not just look bad — it can misdirect real people doing real work.
    for impact analysis and context. Use congress.gov, senate.gov, and
    federalregister.gov for facts about status and text.
 
-5. **Flag what you could not verify.** Put uncertain claims in Notes
+5. **Flag what you could not verify.** Put uncertain claims in Notes & Caveats
    with a note that they need human verification before distribution.
 
 6. **Recheck before distribution.** Run a final status check on congress.gov
@@ -433,7 +510,7 @@ error does not just look bad — it can misdirect real people doing real work.
 - **Citing a root domain instead of the specific page** — `[vera.org]` is not
   a verifiable citation. Always link to the article, report, or press release
   containing the exact claim. For interactive dashboards with no permalink,
-  find the companion static article and link to that; flag in Notes
+  find the companion static article and link to that; flag in Notes & Caveats
   if no static page exists.
 - **Using Word footnotes** — not tappable in Google Docs. Use inline
   hyperlink citations instead.

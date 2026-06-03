@@ -57,7 +57,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 
 ## Current State
 
-**Skill version:** 1.7  
+**Skill version:** 1.8  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -73,6 +73,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 | 1.5 | 2026-06-01 | Removed Virginia hardcoding from skill body. All state-specific references use {{state}} substitution. Skill is now fully portable. |
 | 1.6 | 2026-06-01 | Added Step 0 (load state context file). Added inline Pre-Delivery Self-Check (9-item checklist). Added state-context-va.md for Virginia 119th Congress. |
 | 1.7 | 2026-06-01 | Added docx bug lessons: standalone hyperlink placement error and body() array-argument flattening. Sources split into sources-national.md and sources-va.md. Changelog moved to CLAUDE.md. |
+| 1.8 | 2026-06-03 | Redesigned output structure: inverted pyramid, 10 sections, two-column Members table with embedded priority labels, shaded TL;DR and Actions boxes, moved Timeline to end. Full visual formatting spec added. Designed for Google Docs on mobile. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -258,20 +259,19 @@ outside of a `TextRun` will cause XML validation errors in the docx output.
 
 ## Docx Layout Defaults
 
-These elements produced the clean look validated in the 2026-06-02 SAVE Act
-briefing. Apply all five by default in every briefing docx — do not revert
-to simpler alternatives without being asked.
-
-**Status box table at top** — two-column label/value layout with alternating
-blue/yellow shading. Gives a quick-reference summary before the body text.
-
-**Three-line title block** — briefing type, bill name, and issue area on
-separate lines. Creates visual hierarchy before the first heading.
-
-**Red headings for urgency sections** — "Why This Matters" and "Recommended
-Actions" use heading color `C00000` to draw the eye to action items.
+The visual spec is now fully defined in SKILL.md under "Visual formatting
+conventions." The items below are the critical technical constraints that
+apply to every briefing regardless of content — do not revert them.
 
 **`ShadingType.CLEAR` (not `SOLID`)** — prevents black table cell backgrounds.
 
 **Dual table widths** — set `columnWidths` array on the table AND `width` on
 each cell, both in DXA units. Required for consistent rendering in Google Docs.
+
+**Red headings are standalone only** — H1 headings inside shaded boxes (TL;DR,
+Recommended Actions) always use navy, not red. Red is reserved for standalone
+threat sections with no box. Two urgency signals on one element cancel each other.
+
+**Two-column tables only** — the Members table and Status at a Glance are both
+two-column. Four-column tables collapse to unreadable on Google Docs mobile.
+Never add columns; consolidate content into the wide right column instead.
