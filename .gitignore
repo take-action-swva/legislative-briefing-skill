@@ -3,3 +3,4 @@ node_modules/
 *.bak
 .claude/
 .DS_Store
+briefs/

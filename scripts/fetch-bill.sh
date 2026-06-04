@@ -105,8 +105,10 @@ ${ACTION_LIST}
 
 ## Key Votes
 
-<!-- Script cannot retrieve vote details — check these manually -->
-- **House passage (if applicable):** FILL IN date, vote count, roll call URL from clerk.house.gov
+<!-- For House passage: run fetch-votes.sh with the year and roll call number shown above -->
+<!-- Example: ./scripts/fetch-votes.sh 2025 199 VA                                       -->
+<!-- For Senate votes: check dailypress.senate.gov for exact cloture counts               -->
+- **House passage (if applicable):** FILL IN date, vote count — then run fetch-votes.sh for delegation breakdown
 - **Senate cloture attempts (if applicable):** FILL IN dates and counts from dailypress.senate.gov
 - **Senate final vote (if applicable):** FILL IN
 

@@ -1,14 +1,15 @@
 # Scripts
 
-Two utility scripts that reduce manual research work. Neither is required
-for normal briefing operation — they are productivity tools for one-time
-setup and Congress transitions.
+Four scripts. Three are productivity tools for research, setup, and Congress
+transitions. One (`check-acronyms.sh`) is mandatory — it runs before every
+docx build and enforces the acronym expansion rule.
 
 ---
 
 ## Setup
 
-Both scripts require a free congress.gov API key.
+`fetch-bill.sh`, `fetch-state-members.sh`, and `fetch-donors.sh` require a
+free congress.gov API key. `fetch-votes.sh` requires no API key.
 
 **Get a key:**
 1. Go to api.congress.gov
@@ -108,6 +109,72 @@ add committee assignments manually from:
 
 Alternatively, you can skip the script and ask Claude to generate the file
 directly. See CONTRIBUTING.md for the manual Claude prompt.
+
+---
+
+## check-acronyms.sh
+
+**What it does:** Scans a briefing `.js` file for known legislative acronyms
+and verifies that each one's full expansion appears somewhere in the file.
+Exits non-zero if any acronym is used without being expanded.
+
+**When to use:** Before every `node <brief>.js` run. This is mandatory, not
+optional. The SKILL.md Pre-Delivery Self-Check requires it as Step 1.
+
+**Usage:**
+```bash
+./scripts/check-acronyms.sh <briefing-file.js>
+
+# Example:
+./scripts/check-acronyms.sh iran-war-powers-brief.js
+```
+
+**Output:** `OK` or `FAIL` for each acronym found, followed by a summary.
+Non-zero exit code if any FAILs are found — stops the build pipeline.
+
+**Adding new acronyms:** When you use a legislative acronym not already in
+the checker, add it to the `check` list in this script before using it in a
+briefing. The script is append-only — adding is always safe.
+
+**No API key or dependencies needed** beyond python3 (standard on macOS).
+
+---
+
+## fetch-votes.sh
+
+**What it does:** Pulls a House roll call vote from the House Clerk's canonical
+XML and shows how a state delegation voted. No API key required.
+
+**When to use:** Any time a bill has already had a House floor vote and you need
+individual member votes for the state. This is the primary source — more reliable
+than web search or third-party aggregators, which can contain state-assignment
+errors.
+
+**Usage:**
+```bash
+./scripts/fetch-votes.sh <year> <roll-call-number> <state-code>
+
+# Examples:
+./scripts/fetch-votes.sh 2025 199 VA    # CLARITY Act, Virginia
+./scripts/fetch-votes.sh 2025 22 VA     # Any other House vote
+```
+
+The year and roll call number come from the congress.gov bill actions page. Look
+for the "Passed House" action — it will show the date and roll call number.
+
+**Output:** A markdown table with the full chamber party totals and each state
+member's individual vote (Yea / Nay / Not Voting).
+
+**No API key needed.** Reads directly from:
+```
+https://clerk.house.gov/evs/<year>/roll<number>.xml
+```
+
+**After running:**
+1. Paste the output into your briefing session as part of the research context
+2. The member votes go directly into the Members table — no "verify manually" needed
+3. Cross-check any surprising votes (unexpected party breaks) against the member's
+   official press releases
 
 ---
 

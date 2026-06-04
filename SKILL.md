@@ -170,6 +170,16 @@ Check these in order. Do not rely on news summaries for status.
    congress.gov often shows only "In Senate" with minimal procedural detail,
    while the daily press log shows exact cloture counts, amendment votes, and
    which senators voted how.
+5. **`scripts/fetch-votes.sh`** — When a House floor vote has already occurred,
+   run this script to get the state delegation breakdown directly from the House
+   Clerk's canonical XML. Do not use web search or third-party aggregators for
+   individual member votes — they can contain errors (e.g., members from other
+   states appearing in the wrong state's results). Usage:
+   ```
+   ./scripts/fetch-votes.sh <year> <roll-number> <state-code>
+   ./scripts/fetch-votes.sh 2025 199 VA
+   ```
+   The year and roll call number come from the congress.gov bill actions page.
 
 Search web sources for recent news *after* anchoring on primary sources, not
 instead of them.
@@ -340,7 +350,7 @@ briefing without reading past the first two sections.
    One paragraph per relevant member. State figures as facts: amount, industry
    sector, cycle year. Never editorialize. Include only when the bill involves
    a sector where financial influence is plausibly explanatory (energy, pharma,
-   financial regulation, firearms, healthcare, telecommunications). Omit
+   financial regulation, firearms, healthcare, telecommunications, cryptocurrency). Omit
    entirely otherwise.
 
 8. **Watch List** [optional]
@@ -442,8 +452,29 @@ the status date instead. If page numbers are essential, investigate
 
 ### Pre-Delivery Self-Check
 
-Before writing the final docx, verify each item below internally. This check
-catches the most common AI failure modes before they reach group leaders.
+Before writing the final docx, complete every item below in order. Do not
+skip steps or mark them complete without actually checking. These exist
+because briefing failures have occurred on each of these points.
+
+**Step 1 — Run the acronym checker (mandatory, non-negotiable)**
+
+After writing the briefing .js file and before running `node` to build the
+docx, run:
+
+```
+./scripts/check-acronyms.sh <briefing-file.js>
+```
+
+Fix every FAIL before proceeding. The checker catches unexpanded acronyms
+mechanically — do not rely on memory or a mental scan. This step exists
+because AUMF appeared unexpanded in a Status at a Glance field in a prior
+briefing, violating the style rule. The checker enforces it.
+
+Beyond the checked list, manually scan the briefing .js for any additional
+acronyms that may not be in the checker's list yet. If you add a new acronym,
+add it to `scripts/check-acronyms.sh` before using it in a briefing.
+
+**Step 2 — Verify the following internally:**
 
 - [ ] Every stated member position has a source URL — not inferred from party
 - [ ] Bill number and Congress session are specified exactly
@@ -475,9 +506,14 @@ error does not just look bad — it can misdirect real people doing real work.
    last checked status. Flag the briefing as potentially outdated if it is
    more than a week old.
 
-3. **Do not infer positions.** Do not write that a member "likely opposes"
-   based on party. Find a press release, floor statement, or vote record — or
-   write "position not publicly stated."
+3. **Do not infer positions, and do not assert absence.** Do not write that
+   a member "likely opposes" based on party. Find a press release, floor
+   statement, or vote record. If you cannot find one, write **"position not
+   found during research"** — never "position not publicly stated." Readers
+   who attended a town hall, heard a floor speech, or follow their member
+   closely may know of a stated position the research didn't surface. Claiming
+   a position is "not publicly stated" asserts absence; "not found during
+   research" accurately describes what happened.
 
 4. **Distinguish source types.** Advocacy organizations like the Brennan
    Center produce high-quality analysis but have a point of view. Use them
@@ -505,6 +541,12 @@ error does not just look bad — it can misdirect real people doing real work.
   the fastest path to verified state-specific data.
 - **Omitting the "so what"** — analysis without a specific recommended action
   is incomplete for this audience.
+- **Writing "position not publicly stated"** — this asserts that no position
+  exists. Group leaders are often more plugged in than the research sources:
+  they may have attended a town hall, heard a floor speech, or seen a
+  constituent newsletter that never made it into the press. Write **"position
+  not found during research"** instead. It's accurate about what you did, not
+  what the member did or didn't do.
 - **Overstating committee leverage** — committee assignments change each
   Congress. Verify current assignments, not ones from memory.
 - **Citing a root domain instead of the specific page** — `[vera.org]` is not

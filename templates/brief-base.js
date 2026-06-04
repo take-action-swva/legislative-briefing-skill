@@ -225,6 +225,7 @@ function statusTable(fields) {
         : [run(String(f.value))];
 
     return new TableRow({
+      cantSplit: true,
       children: [
         new TableCell({
           width: { size: COL_NARROW, type: WidthType.DXA },
@@ -271,6 +272,7 @@ function membersTable(members) {
 
   const headerRow = new TableRow({
     tableHeader: true,
+    cantSplit: true,
     children: [
       new TableCell({
         width: { size: COL_NARROW, type: WidthType.DXA },
@@ -311,6 +313,7 @@ function membersTable(members) {
     ];
 
     return new TableRow({
+      cantSplit: true,
       children: [
         new TableCell({
           width: { size: COL_NARROW, type: WidthType.DXA },

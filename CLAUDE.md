@@ -93,12 +93,25 @@ When asked to produce a briefing, Claude should:
 4. Use `templates/brief-base.js` — do not regenerate document scaffolding
    from scratch
 
-To use `brief-base.js`:
+To use `brief-base.js` (note the `../` — briefs live in `briefs/`, one level below templates):
 ```javascript
-const { buildBrief, run, bold, link, bullet, numbered, body, spacer } = require('./templates/brief-base');
+const { buildBrief, run, bold, link, bullet, numbered, body, spacer } = require('../templates/brief-base');
 ```
 Pass a `sections` object with arrays of Paragraph objects. See the
 `buildBrief` JSDoc comment in `brief-base.js` for the full sections schema.
+
+**Briefing file lifecycle:**
+1. Write `<topic>-brief.js` in the project root
+2. Run `./scripts/check-acronyms.sh <topic>-brief.js` — fix any FAILs
+3. Run `node <topic>-brief.js` to generate the docx
+4. Copy the docx to Google Drive (see memory for the path)
+5. Move both the `.js` and `.docx` to `briefs/`:
+   ```bash
+   mv <topic>-brief.js <topic>-brief.docx briefs/
+   ```
+
+The `briefs/` directory is gitignored. Generated files never accumulate in
+the project root.
 
 ---
 
@@ -119,11 +132,19 @@ echo $FEC_API_KEY         # from api.data.gov (free, 1,000 req/hr)
 
 # Get donor data for sector-linked bills:
 ./scripts/fetch-donors.sh VA 2024 > donor-context-va-2024.md
+
+# Get House delegation vote breakdown when a floor vote has already occurred:
+./scripts/fetch-votes.sh 2025 199 VA
+
+# Check acronym expansions before building the docx (mandatory pre-build step):
+./scripts/check-acronyms.sh <briefing-file.js>
 ```
 
 Scripts output markdown to stdout. Redirect to files for use in briefings.
 `fetch-state-members.sh` output requires human verification of committee
 assignments before use — the congress.gov API does not include committee data.
+`fetch-votes.sh` requires no API key — it reads the House Clerk's public XML
+directly and is the canonical primary source for individual member votes.
 
 ---
 
