@@ -44,7 +44,7 @@ find_cand() {
   local q office
   q=$(echo "$1" | tr ' ' '+')
   office="$2"
-  curl -sf "${BASE}/candidates/?q=${q}&state=${S}&office=${office}&sort=-last_file_date&per_page=5&api_key=${KEY}" \
+  curl -sf "${BASE}/candidates/?q=${q}&state=${S}&office=${office}&sort=-receipts&per_page=5&api_key=${KEY}" \
     | jq -r '.results[0].candidate_id // empty'
 }
 
