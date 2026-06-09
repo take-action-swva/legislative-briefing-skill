@@ -102,6 +102,7 @@ key facts back to primary sources before including them in a briefing.
 | NPR Politics | npr.org | Accessible legislative and EO coverage | high | 2026-06-01 |
 | PBS NewsHour | pbs.org/newshour | Court rulings and EO implementation news | high | 2026-06-01 |
 | Deseret News | deseret.com | GOP internal dynamics, Western/conservative Republican perspective on Senate strategy | high | 2026-06-01 |
+| The Lobby News | thelobbynews.com | Lobbying activity, industry influence, corporate advocacy tracking | high | 2026-06-09 |
 
 **Notes from live research sessions:**
 - Deseret News had the strongest "what's next" analysis on GOP internal
@@ -130,6 +131,7 @@ immediately after the claim. Use the shortest recognizable domain as link text:
 | democracydocket.com | `[democracy docket]` |
 | legislativeprocedure.com | `[legislative procedure]` |
 | vote.org | `[vote.org]` |
+| thelobbynews.com | `[the lobby news]` |
 
 State-specific sources (senator pages, state elections sites, state news
 outlets) belong in `sources-[statecode].md`, not here.
