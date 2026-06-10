@@ -11,7 +11,7 @@ description: >
   deal with the SAVE Act for our group" is exactly the kind of thing this skill
   handles. Always produce a .docx file as the final output unless the user
   explicitly asks for something else.
-version: "1.8"
+version: "1.9"
 output_format: docx
 citation_style: inline-hyperlink
 state: Virginia
@@ -88,37 +88,6 @@ lessons_learned:
       as <0/> in the XML, causing a validation error. Fix: check if parts has a
       single array argument and flatten before mapping. The validator catches
       this — always run validate.py after every build.
-  - date: "2026-06-05"
-    note: >
-      House roll call vote data: clerk.house.gov does not support state-filtered
-      queries — the XML is a flat file of all 435 members. fetch-votes.sh assumes
-      bash network access, but clerk.house.gov is not in the bash allowlist and
-      curl will fail silently. Fallback: fetch the full roll call via web_fetch
-      with text_content_token_limit=40000 (required to avoid mid-alphabet
-      truncation), then filter in Python by state attribute. Never use web search
-      or third-party aggregators for individual member votes — use the House Clerk
-      record directly. The Notes & Caveats section should say votes were
-      "confirmed from the House Clerk official roll call record" — no need to
-      mention the underlying file format.
-  - date: "2026-06-05"
-    note: >
-      Do not use or recommend the ProPublica Congress API. It is closed and out
-      of date. The correct primary source for House roll call votes is the House
-      Clerk (clerk.house.gov). For Senate votes, use dailypress.senate.gov.
-  - date: "2026-06-05"
-    note: >
-      "Funding" is a neutral term — it does not imply an increase or a cut.
-      Do not flag it as implying either direction without explicit context in
-      the source material.
-  - date: "2026-06-05"
-    note: >
-      Apostrophes in JavaScript string literals cause SyntaxError if the string
-      delimiter is a single quote (e.g., bold('Warner's') fails). Use Unicode
-      smart quotes (U+2019, \u2019) for possessives and contractions inside
-      single-quoted JS strings, or switch the delimiter to a backtick. Run
-      node <file>.js immediately after writing to catch these before building
-      the docx. sed replacements can also corrupt property names — always
-      inspect the output of any bulk find-replace before running node.
 ---
 
 # Advocacy Legislation Brief
@@ -201,34 +170,16 @@ Check these in order. Do not rely on news summaries for status.
    congress.gov often shows only "In Senate" with minimal procedural detail,
    while the daily press log shows exact cloture counts, amendment votes, and
    which senators voted how.
-5. **House Clerk roll call** — When a House floor vote has already occurred,
-   get the state delegation breakdown directly from the House Clerk's official
-   roll call record. Do not use web search or third-party aggregators for
-   individual member votes — they can contain errors.
-
-   **Preferred:** run `scripts/fetch-votes.sh` if bash network access is
-   available:
+5. **`scripts/fetch-votes.sh`** — When a House floor vote has already occurred,
+   run this script to get the state delegation breakdown directly from the House
+   Clerk's canonical XML. Do not use web search or third-party aggregators for
+   individual member votes — they can contain errors (e.g., members from other
+   states appearing in the wrong state's results). Usage:
    ```
    ./scripts/fetch-votes.sh <year> <roll-number> <state-code>
-   ./scripts/fetch-votes.sh 2026 205 VA
+   ./scripts/fetch-votes.sh 2025 199 VA
    ```
-
-   **Fallback (clerk.house.gov not in bash allowlist):** fetch the full roll
-   call via `web_fetch` with `text_content_token_limit=40000` — the default
-   limit truncates mid-alphabet and will miss members with later last names.
-   Then filter in Python locally:
-   ```python
-   import xml.etree.ElementTree as ET
-   # xml_content = string returned by web_fetch
-   root = ET.fromstring(xml_content)
-   for rv in root.findall('.//recorded-vote'):
-       leg = rv.find('legislator')
-       vote = rv.find('vote')
-       if leg is not None and leg.get('state') == 'VA':
-           print(f"{leg.get('unaccented-name')} ({leg.get('party')}): {vote.text}")
-   ```
-   URL pattern: `https://clerk.house.gov/evs/{year}/roll{number}.xml`
-   Roll number and year come from the congress.gov bill Actions tab.
+   The year and roll call number come from the congress.gov bill actions page.
 
 Search web sources for recent news *after* anchoring on primary sources, not
 instead of them.
@@ -523,7 +474,25 @@ Beyond the checked list, manually scan the briefing .js for any additional
 acronyms that may not be in the checker's list yet. If you add a new acronym,
 add it to `scripts/check-acronyms.sh` before using it in a briefing.
 
-**Step 2 — Verify the following internally:**
+**Step 2 — Apply humanizer pass (mandatory)**
+
+Before finalizing any prose content, apply the `humanizer` skill to all
+free-text sections: TL;DR, Why It Matters bullets, Recommended Actions
+narrative text, Watch List, and Notes & Caveats. Do not apply to:
+
+- The Status at a Glance table (structured fields only)
+- Member contact tables (name, role, phone, link)
+- Legislative Timeline entries (date + one-sentence summaries)
+- Call scripts (these use intentional plain language already)
+- Citation link text
+
+The humanizer pass is a final prose scan — it does not change facts,
+citations, section structure, or deliberate uncertainty flags in Notes &
+Caveats. Its job is to remove AI vocabulary, significance inflation, vague
+attributions, excessive hedging, and formulaic structure tells before the
+briefing goes to group leaders.
+
+**Step 3 — Verify the following internally:**
 
 - [ ] Every stated member position has a source URL — not inferred from party
 - [ ] Bill number and Congress session are specified exactly
@@ -619,17 +588,6 @@ error does not just look bad — it can misdirect real people doing real work.
   statewide network. Do not over-emphasize any particular congressional
   district just because the person who requested the briefing lives there.
   All groups need the full picture.
-- **Using the ProPublica Congress API for vote data** — this API is closed and
-  out of date. Do not use it or recommend it. Use the House Clerk roll call
-  record for House votes and dailypress.senate.gov for Senate votes.
-- **Inferring member votes from party affiliation** — when a House floor vote
-  has occurred, always confirm individual member votes from the House Clerk
-  roll call record directly. Do not infer votes from party-line patterns even
-  when the vote appears nearly unanimous. The fallback fetch procedure is
-  documented in Step 2.
-- **Treating "funding" as directional** — "funding" is a neutral term. It does
-  not imply an increase or a cut. Do not characterize a bill as increasing or
-  reducing funding without explicit support from the source material.
 
 ---
 
