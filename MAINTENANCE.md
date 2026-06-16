@@ -124,6 +124,11 @@ Compare what you found against the current file. For each member with changes:
 **Do not change:** phone numbers, contact URLs, advocacy notes, file header,
 Update Triggers section.
 
+Also update `templates/va-members-table.js` for any committee changes found
+above — it maintains its own hardcoded MEMBERS array with committee assignments.
+Update the matching member entry and the `Committees verified` caption string
+near the bottom of the file.
+
 **Accuracy rules:**
 - Only update based on what you actually read from official pages
 - Never infer or guess committee assignments

@@ -27,20 +27,30 @@ people who open documents in Google Docs and read on their phones.
 ## File Map
 
 ```
-SKILL.md                     Core skill — workflow, template, accuracy rules,
-                             pre-delivery self-check. Claude loads this first.
+SKILL.md                     Parent skill — state config, lessons_learned, sub-skill
+                             routing, Step 0, shared accuracy rules. Lightweight;
+                             loads first. Sub-skills are lazy-loaded from skills/.
 CLAUDE.md                    This file. Claude Code context only.
 INSTALL.md                   Human setup instructions.
 CONTRIBUTING.md              How other state networks adopt the skill.
 MAINTENANCE.md               Update triggers and Congress-transition checklist.
 briefing-qa-checklist.md     Human reviewer checklist (not needed by Claude
-                             during generation — self-check is inline in SKILL.md).
+                             during generation — self-check is in brief-full.md).
 state-context-va.md          Virginia 119th Congress delegation: all 13 members,
                              committees, contacts. Claude loads this at Step 0
-                             of every briefing — eliminates Step 3 searches.
+                             of every session — eliminates fresh member searches.
 references/
   sources-national.md        Universal source hierarchy for all states.
   sources-va.md              Virginia-specific sources.
+skills/
+  brief-full.md              Sub-skill: full briefing workflow (Steps 1–5),
+                             10-section output format, visual spec, pre-delivery
+                             check, common pitfalls. Loaded for detailed briefings.
+  brief-short.md             Sub-skill: markdown output for Gmail, Signal, Discord,
+                             Slack. 300–400 words, 2–3 most-actionable members,
+                             links to full brief. No docx, no call scripts.
+  horizon-90.md              Sub-skill: 90-day forward scan workflow and output.
+                             (To be written — plan firms up in one week.)
 scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
   fetch-state-members.sh     congress.gov API → draft state-context file.
@@ -50,6 +60,10 @@ scripts/
 templates/
   brief-base.js              Docx scaffolding: colors, fonts, helpers, header/footer.
                              Claude fills sections object; this handles structure.
+  va-members-table.js        Virginia delegation reference table (4-column: member,
+                             phone, committees, briefing notes). Used in section 6
+                             of every full briefing. Caller passes briefingNotes
+                             object keyed by member ID.
 evals/                       Evaluation cases (existing, not modified in this session).
 ```
 
@@ -57,7 +71,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 
 ## Current State
 
-**Skill version:** 1.9  
+**Skill version:** 2.0  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -75,6 +89,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 | 1.7 | 2026-06-01 | Added docx bug lessons: standalone hyperlink placement error and body() array-argument flattening. Sources split into sources-national.md and sources-va.md. Changelog moved to CLAUDE.md. |
 | 1.8 | 2026-06-03 | Redesigned output structure: inverted pyramid, 10 sections, two-column Members table with embedded priority labels, shaded TL;DR and Actions boxes, moved Timeline to end. Full visual formatting spec added. Designed for Google Docs on mobile. |
 | 1.9 | 2026-06-10 | Added mandatory humanizer pass (new Step 2) before the pre-delivery self-check. Simplified the vote-fetching workflow to rely solely on `fetch-votes.sh` now that it works reliably, removing the House Clerk web_fetch fallback. Removed superseded lessons_learned entries and pitfalls (roll call fetch fallback, ProPublica deprecation, funding-neutral framing, JS apostrophe quoting, inferred-votes) now that the script and updated workflow handle them. |
+| 2.0 | 2026-06-16 | Restructured to parent + sub-skills. SKILL.md is now a lightweight parent (config, Step 0, shared accuracy rules). Full briefing workflow and output format moved to `skills/brief-full.md`. Added `skills/` directory; stubs for `brief-short.md` and `horizon-90.md`. Added `va-members-table.js` to build-zip.sh. Updated `briefing-qa-checklist.md` to v1.9 section structure. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -84,15 +99,19 @@ passed docx npm package validation.
 
 ## How to Generate a Briefing
 
-When asked to produce a briefing, Claude should:
+When asked to produce any output, Claude should:
 
-1. Load `SKILL.md` as context — Step 0 in the workflow instructs loading
-   the remaining files (`state-context-va.md`, `references/sources-national.md`,
+1. Load `SKILL.md` (parent) — provides state config, sub-skill routing table,
+   Step 0 instructions, and shared accuracy rules
+2. Load the relevant sub-skill from `skills/` based on the request type:
+   - Full briefing → `skills/brief-full.md`
+   - Short brief → `skills/brief-short.md`
+   - 90-day scan → `skills/horizon-90.md`
+3. Execute Step 0 (load `state-context-va.md`, `references/sources-national.md`,
    `references/sources-va.md`)
-2. Follow the Step 0–5 research workflow in `SKILL.md`
-3. Run the Pre-Delivery Self-Check before generating the docx
-4. Use `templates/brief-base.js` — do not regenerate document scaffolding
-   from scratch
+4. Follow the research workflow and output format in the sub-skill file
+5. For full briefings: use `templates/brief-base.js` and `templates/va-members-table.js`
+   — do not regenerate document scaffolding from scratch
 
 To use `brief-base.js` (note the `../` — briefs live in `briefs/`, one level below templates):
 ```javascript
@@ -294,6 +313,11 @@ each cell, both in DXA units. Required for consistent rendering in Google Docs.
 Recommended Actions) always use navy, not red. Red is reserved for standalone
 threat sections with no box. Two urgency signals on one element cancel each other.
 
-**Two-column tables only** — the Members table and Status at a Glance are both
-two-column. Four-column tables collapse to unreadable on Google Docs mobile.
-Never add columns; consolidate content into the wide right column instead.
+**Two-column tables only (except the delegation reference table)** — Status at
+a Glance is two-column. The delegation reference table (`templates/va-members-table.js`)
+is intentionally four-column (member / phone / committees / briefing notes) and
+occupies its own page as a reference appendix — acceptable because readers can
+scroll horizontally on a dedicated reference page. All other tables must stay
+two-column; four-column tables collapse to unreadable as inline content on Google
+Docs mobile. Never add columns to other tables; consolidate into the wide right
+column instead.
