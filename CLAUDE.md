@@ -124,7 +124,11 @@ Pass a `sections` object with arrays of Paragraph objects. See the
 1. Write `<topic>-brief.js` in the project root
 2. Run `./scripts/check-acronyms.sh <topic>-brief.js` — fix any FAILs
 3. Run `node <topic>-brief.js` to generate the docx
-4. Copy the docx to Google Drive (see memory for the path)
+4. Copy the docx to Google Drive using cp — do not use base64 or the Drive
+   MCP upload tool, both bloat context and can stall:
+   ```bash
+   cp <topic>-brief.docx "/Users/ernie/Library/CloudStorage/GoogleDrive-ernie.braganza@gmail.com/My Drive/Statewide Coordinating Committee /Legislation Briefings/"
+   ```
 5. Move both the `.js` and `.docx` to `briefs/`:
    ```bash
    mv <topic>-brief.js <topic>-brief.docx briefs/

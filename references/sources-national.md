@@ -13,21 +13,30 @@ Reliability ratings:
   context and impact analysis, but verify key facts against primary sources
 - **monitor** — source has shown inconsistency or staleness; use with caution
 
+Access method ratings (use this to choose the right tool):
+- **script** — use the dedicated shell script in `scripts/` (preferred; pre-tested)
+- **WebFetch** — plain `WebFetch` tool works; server-side rendered or static HTML
+- **Firecrawl** — use the Firecrawl MCP tool; site is JS-rendered, uses anti-scrape
+  protection, or has a metered/soft paywall that blocks plain HTTP
+
+When `WebFetch` fails (redirect loop, empty body, JS placeholder), fall back to
+`Firecrawl` regardless of the rating below.
+
 ---
 
 ## Primary / Official Sources
 
-| Source | URL | Best For | Reliability | Last Verified |
-|--------|-----|----------|-------------|---------------|
-| Congress.gov | congress.gov | Bill text, status, votes, committees, co-sponsors | primary | 2026-06-01 |
-| Senate.gov | senate.gov | Committee assignments, floor schedule, member pages | primary | 2026-06-01 |
-| House.gov | house.gov | Member info, committee assignments, floor schedule | primary | 2026-06-01 |
-| Federal Register | federalregister.gov | Executive orders, agency rulemaking, comment periods | primary | 2026-06-01 |
-| Regulations.gov | regulations.gov | Open public comment periods | primary | 2026-06-01 |
-| Senate Daily Press | dailypress.senate.gov | Senate floor activity logs, timestamped procedural votes, exact cloture counts | primary | 2026-06-01 |
-| White House | whitehouse.gov | EO text, administration statements | primary | 2026-06-01 |
-| GovTrack | govtrack.us | Bill prognosis, vote history, member scorecards | high | 2026-06-01 |
-| CRS Reports | crsreports.congress.gov | Deep nonpartisan legislative analysis, reconciliation procedure | primary | 2026-06-01 |
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| Congress.gov | congress.gov | Bill text, status, votes, committees, co-sponsors | primary | script | 2026-06-01 |
+| Senate.gov | senate.gov | Committee assignments, floor schedule, member pages | primary | WebFetch | 2026-06-01 |
+| House.gov | house.gov | Member info, committee assignments, floor schedule | primary | WebFetch | 2026-06-01 |
+| Federal Register | federalregister.gov | Executive orders, agency rulemaking, comment periods | primary | WebFetch | 2026-06-01 |
+| Regulations.gov | regulations.gov | Open public comment periods | primary | WebFetch | 2026-06-01 |
+| Senate Daily Press | dailypress.senate.gov | Senate floor activity logs, timestamped procedural votes, exact cloture counts | primary | WebFetch | 2026-06-01 |
+| White House | whitehouse.gov | EO text, administration statements | primary | WebFetch | 2026-06-01 |
+| GovTrack | govtrack.us | Bill prognosis, vote history, member scorecards | high | WebFetch | 2026-06-01 |
+| CRS Reports | crsreports.congress.gov | Deep nonpartisan legislative analysis, reconciliation procedure | primary | WebFetch | 2026-06-01 |
 
 **Notes from live research sessions:**
 - congress.gov often shows only "In Senate" or "In Committee" with minimal
@@ -41,16 +50,16 @@ Reliability ratings:
 
 ## Nonpartisan Research, Legal & Procedural
 
-| Source | URL | Best For | Reliability | Last Verified |
-|--------|-----|----------|-------------|---------------|
-| Brennan Center | brennancenter.org | Voting rights, elections law, democracy analysis | high | 2026-06-01 |
-| Campaign Legal Center | campaignlegal.org | Election law, litigation status, legal challenge tracking | high | 2026-06-01 |
-| Democracy Docket | democracydocket.com | Voting rights litigation, real-time court challenge and injunction tracking | high | 2026-06-01 |
-| Legislative Procedure | legislativeprocedure.com | Senate/House procedure deep dives, Byrd Rule analysis, reconciliation pathway analysis | high | 2026-06-01 |
-| Bipartisan Policy Center | bipartisanpolicy.org | Balanced legislative analysis across party lines | high | 2026-06-01 |
-| Brookings Institution | brookings.edu | Policy analysis, EO impact assessment | high | 2026-06-01 |
-| TRAC Immigration | trac.syr.edu | ICE enforcement data by state and district, deportation statistics, detention data | high | 2026-06-01 |
-| Census Bureau | census.gov | District demographics, population data | primary | 2026-06-01 |
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| Brennan Center | brennancenter.org | Voting rights, elections law, democracy analysis | high | WebFetch | 2026-06-01 |
+| Campaign Legal Center | campaignlegal.org | Election law, litigation status, legal challenge tracking | high | WebFetch | 2026-06-01 |
+| Democracy Docket | democracydocket.com | Voting rights litigation, real-time court challenge and injunction tracking | high | Firecrawl | 2026-06-01 |
+| Legislative Procedure | legislativeprocedure.com | Senate/House procedure deep dives, Byrd Rule analysis, reconciliation pathway analysis | high | WebFetch | 2026-06-01 |
+| Bipartisan Policy Center | bipartisanpolicy.org | Balanced legislative analysis across party lines | high | WebFetch | 2026-06-01 |
+| Brookings Institution | brookings.edu | Policy analysis, EO impact assessment | high | WebFetch | 2026-06-01 |
+| TRAC Immigration | trac.syr.edu | ICE enforcement data by state and district, deportation statistics, detention data | high | WebFetch | 2026-06-01 |
+| Census Bureau | census.gov | District demographics, population data | primary | WebFetch | 2026-06-01 |
 
 **Notes from live research sessions:**
 - Democracy Docket is the fastest and most reliable source for tracking active
@@ -68,13 +77,13 @@ Reliability ratings:
 
 ## Voting Rights & Civic Advocacy
 
-| Source | URL | Best For | Reliability | Last Verified |
-|--------|-----|----------|-------------|---------------|
-| League of Women Voters | lwv.org | Voting access advocacy and analysis | moderate | 2026-06-01 |
-| NAACP Legal Defense Fund | naacpldf.org | Civil rights and voting rights impact analysis; post-event status confirmation | moderate | 2026-06-01 |
-| Vote.org | vote.org | Voter registration data, access statistics, practical voter guidance | moderate | 2026-06-01 |
-| ACLU | aclu.org | Civil liberties litigation, court challenge tracking | moderate | 2026-06-01 |
-| Votebeat | votebeat.org | Election administration news, EO implementation tracking | high | 2026-06-01 |
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| League of Women Voters | lwv.org | Voting access advocacy and analysis | moderate | WebFetch | 2026-06-01 |
+| NAACP Legal Defense Fund | naacpldf.org | Civil rights and voting rights impact analysis; post-event status confirmation | moderate | WebFetch | 2026-06-01 |
+| Vote.org | vote.org | Voter registration data, access statistics, practical voter guidance | moderate | Firecrawl | 2026-06-01 |
+| ACLU | aclu.org | Civil liberties litigation, court challenge tracking | moderate | WebFetch | 2026-06-01 |
+| Votebeat | votebeat.org | Election administration news, EO implementation tracking | high | WebFetch | 2026-06-01 |
 
 **Notes from live research sessions:**
 - Votebeat proved highly useful for tracking EO 14399 implementation and
@@ -93,16 +102,16 @@ Reliability ratings:
 Use news sources to find recent developments, quotes, and context — but trace
 key facts back to primary sources before including them in a briefing.
 
-| Source | URL | Best For | Reliability | Last Verified |
-|--------|-----|----------|-------------|---------------|
-| AP News | apnews.com | Breaking legislative news, wire reporting | high | 2026-06-01 |
-| The 19th | 19thnews.org | Gender, politics, voting rights coverage | high | 2026-06-01 |
-| Politico | politico.com | Congressional procedure, whip counts, committee news | high | 2026-06-01 |
-| Roll Call | rollcall.com | Congressional floor and committee activity | high | 2026-06-01 |
-| NPR Politics | npr.org | Accessible legislative and EO coverage | high | 2026-06-01 |
-| PBS NewsHour | pbs.org/newshour | Court rulings and EO implementation news | high | 2026-06-01 |
-| Deseret News | deseret.com | GOP internal dynamics, Western/conservative Republican perspective on Senate strategy | high | 2026-06-01 |
-| The Lobby News | thelobbynews.com | Lobbying activity, industry influence, corporate advocacy tracking | high | 2026-06-09 |
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| AP News | apnews.com | Breaking legislative news, wire reporting | high | Firecrawl | 2026-06-01 |
+| The 19th | 19thnews.org | Gender, politics, voting rights coverage | high | WebFetch | 2026-06-01 |
+| Politico | politico.com | Congressional procedure, whip counts, committee news | high | Firecrawl | 2026-06-01 |
+| Roll Call | rollcall.com | Congressional floor and committee activity | high | Firecrawl | 2026-06-01 |
+| NPR Politics | npr.org | Accessible legislative and EO coverage | high | WebFetch | 2026-06-01 |
+| PBS NewsHour | pbs.org/newshour | Court rulings and EO implementation news | high | WebFetch | 2026-06-01 |
+| Deseret News | deseret.com | GOP internal dynamics, Western/conservative Republican perspective on Senate strategy | high | Firecrawl | 2026-06-01 |
+| The Lobby News | thelobbynews.com | Lobbying activity, industry influence, corporate advocacy tracking | high | WebFetch | 2026-06-09 |
 
 **Notes from live research sessions:**
 - Deseret News had the strongest "what's next" analysis on GOP internal
@@ -156,5 +165,5 @@ into briefings. Do not cite them as evidence for factual claims.
 
 ---
 
-*Last full review: 2026-06-01*
+*Last full review: 2026-06-16*
 *Next recommended review: Start of 120th Congress (January 2027)*

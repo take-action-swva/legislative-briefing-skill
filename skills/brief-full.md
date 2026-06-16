@@ -270,6 +270,7 @@ briefing without reading past the first two sections.
   "markup," and "vote-a-rama" should be briefly glossed on first use. Group
   leaders may not have a legislative background.
 
+
 ### Visual formatting conventions
 
 **Page setup**

@@ -129,6 +129,7 @@ Based on what the user is asking for, load the relevant sub-file now:
 |---|---|
 | Full legislative briefing, detailed analysis, `.docx` output | `skills/brief-full.md` |
 | Short brief, quick summary, one-pager | `skills/brief-short.md` |
+| Monthly digest, newsletter, what's moving this month | `skills/newsletter.md` |
 | 90-day outlook, what's coming, forward scan | `skills/horizon-90.md` |
 
 Load the matching sub-file before proceeding to Step 0.
@@ -184,3 +185,29 @@ horizon scan. No exceptions.
 
 6. **Recheck before distribution.** Run a final status check on congress.gov
    before the output goes to group leaders.
+
+---
+
+## Shared Style Rules
+
+These rules apply to all output types — full brief, short brief, and
+horizon scan. Sub-skills may add format-specific rules on top of these.
+
+- **No em dashes in prose.** Em dashes are acceptable in structured fields
+  (e.g., member entry headers: "Sen. Warner — Ranking Member") but not in
+  sentences. Rewrite to a period or plain conjunction instead.
+
+- **Concrete nouns over generic ones.** Write "emails, text messages, and
+  phone calls" not "messages." Write "your doctor, your bank" not "private
+  parties." Specifics land harder on a phone screen.
+
+- **Break long bullets into short sentences.** A bullet with two or three
+  short sentences reads faster than one long sentence with multiple clauses.
+
+- **Acronyms on first use.** Write out the full name followed by the
+  acronym in parentheses on first mention. Subsequent uses may use the
+  acronym alone.
+
+- **Gloss jargon on first use.** Terms like "cloture," "Byrd Rule," and
+  "markup" need a brief plain-language parenthetical the first time they
+  appear. Group leaders may not have a legislative background.

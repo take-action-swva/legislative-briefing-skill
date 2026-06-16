@@ -95,9 +95,10 @@ No call scripts. The ask line is one directive sentence, not a script.
 Phone numbers and contact URLs must be present — do not omit them.
 Pull contact info from `state-context-va.md` — do not search for it.
 
-**3. Why it matters — 3 bullets maximum**
-Bold key phrase, then one sentence. No more than three bullets.
-Cut anything that does not directly support the action ask.
+**3. Why it matters — 2 bullets, 3 maximum**
+Bold key phrase, then one tight sentence. Two bullets is often better than three — don't pad.
+Cut anything that does not directly reinforce the action ask. Specifically: do not include
+framing that argues for the opposition's position, even if it appeared in source material.
 
 **4. Next trigger — 1 line**
 The single next decision point and its deadline.
@@ -125,6 +126,8 @@ Example:
   full brief. The short brief does not carry inline citations.
 - **Active voice, short sentences.** Aim for eighth-grade reading level.
   These messages are read fast, often on a phone, often mid-meeting.
+- See SKILL.md "Shared Style Rules" for em dash, concrete nouns, and
+  sentence-length rules that apply to all output types.
 
 ---
 
@@ -156,3 +159,8 @@ Before sending, verify:
   to call and to read more. Without the link, half the job is missing.
 - **Writing "position not publicly stated."** Use "position not found during
   research" — same rule as the full brief.
+- **Including source framing that cuts against the action ask.** If a source
+  uses urgency to argue for the opposition's position (e.g., "the program
+  must be extended immediately for security reasons"), do not carry that
+  framing into the brief even if the source is credible. Stick to what
+  supports the recommended action.
