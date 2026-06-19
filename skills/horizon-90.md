@@ -66,7 +66,10 @@ Cast a wide net: pull 12–15 candidates before narrowing.
 
 ### Step 3 — Classify every candidate by certainty
 
-Use exactly these three labels. Never blend them or soften the distinction:
+This is the structural, per-item application of SKILL.md's Shared Accuracy
+Rule on future dates ("never state a future date as more certain than it
+is"). Use exactly these three labels as a tag on every item. Never blend
+them or soften the distinction:
 
 - **Scheduled** — a confirmed date exists on a calendar or committee notice
 - **Expected** — leadership or a committee has stated intent to act in this
@@ -106,24 +109,11 @@ Virginia-specific angle exists, write that plainly rather than forcing one.
 
 ## Output Format
 
-File lifecycle: write `horizon-90-[scan-date].js` in the project root (e.g.
-`horizon-90-2026-06-19.js`), run the acronym checker, generate the docx,
-copy to Google Drive, then move both files to `briefs/`.
-
-```bash
-# 1. Check acronyms
-./scripts/check-acronyms.sh horizon-90-[scan-date].js
-
-# 2. Generate docx
-node horizon-90-[scan-date].js
-
-# 3. Copy to Google Drive — use cp, not base64 or the Drive MCP tool
-cp horizon-90-[scan-date].docx \
-  "/Users/ernie/Library/CloudStorage/GoogleDrive-ernie.braganza@gmail.com/My Drive/Statewide Coordinating Committee /Legislation Briefings/"
-
-# 4. Move source files to briefs/
-mv horizon-90-[scan-date].js horizon-90-[scan-date].docx briefs/
-```
+Write `horizon-90-[scan-date].js` in the project root (e.g.
+`horizon-90-2026-06-19.js`), then follow CLAUDE.md's "Briefing file
+lifecycle," substituting `horizon-90-[scan-date]` for `<topic>-brief`: run
+`./scripts/check-acronyms.sh`, run `node` to generate the docx, `cp` to
+Google Drive, then `mv` both files to `briefs/`.
 
 ### Document header
 

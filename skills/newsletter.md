@@ -61,28 +61,19 @@ Confirm from primary sources:
 Do not include an item if you cannot confirm current status from congress.gov
 or a primary source. A stale status is worse than a missing item.
 
+If the Status line cites a future date (a markup, a vote), apply SKILL.md's
+Shared Accuracy Rule on future dates: state plainly whether it's confirmed
+on a calendar/notice or only a stated intention. Do not write the latter as
+if it were the former.
+
 ---
 
 ## Output Format
 
-File lifecycle: write `[month]-[year]-newsletter.js` in the project root, run
-the acronym checker, generate the docx, copy to Google Drive, then move both
-files to `briefs/`.
-
-```bash
-# 1. Check acronyms
-./scripts/check-acronyms.sh [month]-[year]-newsletter.js
-
-# 2. Generate docx
-node [month]-[year]-newsletter.js
-
-# 3. Copy to Google Drive — use cp, not base64 or the Drive MCP tool
-cp [month]-[year]-newsletter.docx \
-  "/Users/ernie/Library/CloudStorage/GoogleDrive-ernie.braganza@gmail.com/My Drive/Statewide Coordinating Committee /Legislation Briefings/"
-
-# 4. Move source files to briefs/
-mv [month]-[year]-newsletter.js [month]-[year]-newsletter.docx briefs/
-```
+Follow CLAUDE.md's "Briefing file lifecycle," substituting
+`[month]-[year]-newsletter` for `<topic>-brief`: write the `.js`, run
+`./scripts/check-acronyms.sh`, run `node` to generate the docx, `cp` to
+Google Drive, then `mv` both files to `briefs/`.
 
 ### Document header
 
@@ -122,8 +113,8 @@ divider in the docx).
 ```
 MEDICAID CUTS
 
-Status: The Senate Finance Committee is expected to mark up the bill the
-week of June 23.
+Status: Senate Finance Committee leadership has signaled it intends to mark
+up the bill the week of June 23, though no markup notice is posted yet.
 
 Roughly 600,000 Virginians rely on Medicaid. The current draft cuts federal
 matching funds by 10%, which would require the state to either reduce

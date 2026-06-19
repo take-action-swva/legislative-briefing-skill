@@ -53,9 +53,9 @@ Do not list confirmed opponents. Do not list members just because they are
 senior or on a relevant committee if they are already locked in. Two or three
 movable members is enough — more dilutes the ask.
 
-Skip Step 4 (deep state-specific impact research) unless a key statistic is
-already known or quickly found in a senator's press release. Do not delay the
-brief to chase state data.
+Skip `brief-full.md`'s Step 4 (deep state-specific impact research) unless a
+key statistic is already known or quickly found in a senator's press release.
+Do not delay the brief to chase state data.
 
 ### Step 4 — Confirm the full brief link
 

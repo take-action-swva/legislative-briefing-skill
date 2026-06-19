@@ -10,7 +10,7 @@ description: >
   summary", "what's coming up in the next 90 days", "what should we be
   watching", "research this EO for our members", "what's the status of", or
   any request combining legislation with advocacy, action, or organizing.
-version: "2.0"
+version: "2.1"
 output_format: docx
 citation_style: inline-hyperlink
 state: Virginia
@@ -132,6 +132,13 @@ Based on what the user is asking for, load the relevant sub-file now:
 | Monthly digest, newsletter, what's moving this month | `skills/newsletter.md` |
 | 90-day outlook, what's coming, forward scan | `skills/horizon-90.md` |
 
+If a request could plausibly match more than one row (e.g. "a quick summary
+of what's moving this month" matches both `brief-short.md`'s "quick summary"
+and `newsletter.md`'s "what's moving this month"), disambiguate by scope and
+artifact shape, not by keyword count: a single bill with an act-now ask →
+`brief-short.md`; multiple items as this month's digest → `newsletter.md`.
+If still unclear, ask which one the user means rather than guessing.
+
 Load the matching sub-file before proceeding to Step 0.
 
 ---
@@ -157,8 +164,8 @@ one before the next session. See CONTRIBUTING.md for the format.
 
 ## Shared Accuracy Rules
 
-These rules apply to all output types — full brief, short brief, and
-horizon scan. No exceptions.
+These rules apply to all output types — full brief, short brief, newsletter,
+and horizon scan. No exceptions.
 
 1. **Every specific claim needs a source.** Vote counts, committee
    assignments, statistics, stated positions — all must trace to a verifiable
@@ -186,12 +193,25 @@ horizon scan. No exceptions.
 6. **Recheck before distribution.** Run a final status check on congress.gov
    before the output goes to group leaders.
 
+7. **Never state a future date as more certain than it is.** When citing a
+   markup, floor vote, rule effective date, or any other date that hasn't
+   happened yet, distinguish what's confirmed from what's merely intended:
+   **Scheduled** (a confirmed date exists on a calendar or committee notice),
+   **Expected** (leadership or a committee has stated intent, but no
+   confirmed date exists), or **Watch** (could happen in this timeframe
+   depending on developments, but timing isn't knowable yet). Leadership
+   "wanting" a vote by a certain date is not the same as a markup notice
+   existing — do not write the former as if it were the latter.
+   `skills/horizon-90.md` applies this as a structural Scheduled/Expected/Watch
+   tag on every item; other output types should apply the same distinction in
+   prose whenever a future date is stated.
+
 ---
 
 ## Shared Style Rules
 
-These rules apply to all output types — full brief, short brief, and
-horizon scan. Sub-skills may add format-specific rules on top of these.
+These rules apply to all output types — full brief, short brief, newsletter,
+and horizon scan. Sub-skills may add format-specific rules on top of these.
 
 - **No em dashes in prose.** Em dashes are acceptable in structured fields
   (e.g., member entry headers: "Sen. Warner — Ranking Member") but not in

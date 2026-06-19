@@ -306,13 +306,14 @@ with cell padding of 120 top/bottom, 180 left/right.
   instead of navy. H1 headings inside shaded boxes always use navy.
 
 **Tables**
-All tables set to full content width (9360 DXA for US Letter with these
-margins). Always use `WidthType.DXA` — never percentage. Set width on both
-the table and each cell. Use `ShadingType.CLEAR` for all shading. Cell
-padding: 80 top/bottom, 120 left/right.
+All tables set to full content width (9720 DXA for US Letter with these
+margins — `templates/brief-base.js`'s `CONTENT_WIDTH` constant). Always use
+`WidthType.DXA` — never percentage. Set width on both the table and each
+cell. Use `ShadingType.CLEAR` for all shading. Cell padding: 80 top/bottom,
+120 left/right.
 
 - Status at a Glance: Two columns — label (2880 DXA, light gray fill, bold)
-  and value (6480 DXA, white). Threat level value in red bold.
+  and value (6840 DXA, white). Threat level value in red bold.
 - Members (delegation reference): Four columns via `templates/va-members-table.js`.
   Column widths: 1600 / 1400 / 2760 / 3960 DXA (total 9720 DXA). Column 1:
   seat, name bold, party. Column 2: DC phone and contact form link. Column 3:

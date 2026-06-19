@@ -25,22 +25,17 @@ const {
   AlignmentType, BorderStyle, WidthType, ShadingType, HeadingLevel,
 } = require('docx');
 
-const FONT       = 'Arial';
+// Reuse brand color, font, and page-content-width constants from
+// brief-base.js rather than redefining them — keeps this table in sync if
+// the brand palette or page geometry ever changes.
+const { C: BASE_C, FONT, CONTENT_WIDTH } = require('./brief-base');
+
 const BODY_SIZE  = 20;   // 10pt — compact for a reference table
 const LABEL_SIZE = 18;   // 9pt — column headers and role labels
 const H1_SIZE    = 28;
 
-const C = {
-  NAVY:  '1F3864',
-  GRAY:  '595959',
-  LGRAY: 'F2F2F2',
-  DKGRAY:'404040',
-  WHITE: 'FFFFFF',
-  AMBER: 'E6A817',
-  RED:   'C00000',
-};
-
-const CONTENT_WIDTH = 9720;
+// DKGRAY is specific to this table; everything else comes from brief-base.js.
+const C = { ...BASE_C, DKGRAY: '404040' };
 
 // Column widths (DXA). Total = CONTENT_WIDTH.
 // Member | Phone/Contact | Committees | Briefing Notes

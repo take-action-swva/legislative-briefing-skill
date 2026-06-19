@@ -26,6 +26,8 @@ TEMPLATE_FILES=(
 SKILLS_FILES=(
   skills/brief-full.md
   skills/brief-short.md
+  skills/newsletter.md
+  skills/horizon-90.md
 )
 
 # Verify all source files exist before touching the zip.
