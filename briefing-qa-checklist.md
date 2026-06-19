@@ -1,7 +1,7 @@
 ---
 title: Briefing QA Checklist
 skill: advocacy-legislation-brief
-version: "1.5"
+version: "1.9"
 ---
 
 # Briefing QA Checklist
@@ -27,22 +27,23 @@ State: ____________________________________________   Reviewer: ________________
 
 ## 2. Document Structure
 
-Every required section below should be present. Optional sections should be
-present when applicable. A missing required section is a red flag.
+Every required section below should be present and in the correct order (inverted
+pyramid — most actionable first). Optional sections should be present when
+applicable. A missing required section is a red flag.
 
-**Required:**
-- [ ] Summary present
-- [ ] Current Status present
-- [ ] [State] Senators' Positions present
-- [ ] [State] House Members / Key Votes present
-- [ ] [State]-Specific Impact present
-- [ ] Who to Contact present
-- [ ] Recommended Actions — Right Now present and numbered
-- [ ] Notes present
+**Required (in order):**
+- [ ] Title block present (org name, bill title, audience, issue area, date)
+- [ ] TL;DR box present — five sentences or fewer; shading matches threat level
+- [ ] Status at a Glance table present — all seven fields: Current status, Last action, Next decision point, Core dispute, Administration position, Bill supporters, Threat level
+- [ ] Recommended Actions — Right Now present and opens with contact actions ranked by leverage
+- [ ] Why It Matters present — bulleted, leads with bold key phrase per bullet
+- [ ] Delegation — Committee & Position Reference table present (built from `templates/va-members-table.js`, on its own page)
+- [ ] Notes & Caveats present
 
 **Optional (include when applicable):**
-- [ ] Committee Leverage present if any state member sits on the relevant committee
+- [ ] Donor Context present if bill is sector-linked and donor data was provided
 - [ ] Watch List present if pivotal swing votes exist outside the state delegation
+- [ ] Legislative Timeline present as reference material
 
 ---
 
@@ -73,10 +74,11 @@ briefing should not be distributed.**
 - [ ] Every stated member position has a source
   *(press release, floor statement, or vote record)*
 - [ ] No positions inferred from party affiliation alone
-- [ ] Unstated positions are noted as "position not publicly stated" — not left blank
+- [ ] Unstated positions are noted as "position not found during research" — not left blank and not "position not publicly stated"
 - [ ] District numbers and member assignments verified at the state's political
   data source *(redistricting litigation can change these mid-Congress — see
-  references/sources.md for the correct source for this state)*
+  references/sources-national.md and the state-specific sources-[statecode].md
+  for the correct source for this state)*
 
 ### Statistics & Impact Claims
 
@@ -103,7 +105,7 @@ A briefing without a clear call to action is incomplete for this audience.
 - [ ] Recommended Actions are numbered and ranked by urgency
 - [ ] Each action is specific
   *(names a person to call, a URL to visit, a deadline to meet)*
-- [ ] "Who to Contact" section distinguishes allies to thank from targets to pressure
+- [ ] Recommended Actions distinguishes allies to thank from targets to pressure, and persuadables for direct calls
 - [ ] At least one action is doable **right now** — not just "watch and wait"
 
 ---

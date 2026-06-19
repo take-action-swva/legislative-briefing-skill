@@ -21,10 +21,17 @@ REF_FILES=(
 )
 TEMPLATE_FILES=(
   templates/brief-base.js
+  templates/va-members-table.js
+)
+SKILLS_FILES=(
+  skills/brief-full.md
+  skills/brief-short.md
+  skills/newsletter.md
+  skills/horizon-90.md
 )
 
 # Verify all source files exist before touching the zip.
-for f in "${SKILL_FILES[@]}" "${REF_FILES[@]}" "${TEMPLATE_FILES[@]}"; do
+for f in "${SKILL_FILES[@]}" "${REF_FILES[@]}" "${TEMPLATE_FILES[@]}" "${SKILLS_FILES[@]}"; do
   [ -f "${REPO}/${f}" ] || { echo "ERROR: missing ${f}"; exit 1; }
 done
 
@@ -33,11 +40,13 @@ trap 'rm -rf "$TMPDIR"' EXIT
 
 mkdir -p \
   "${TMPDIR}/advocacy-legislation-brief/references" \
-  "${TMPDIR}/advocacy-legislation-brief/templates"
+  "${TMPDIR}/advocacy-legislation-brief/templates" \
+  "${TMPDIR}/advocacy-legislation-brief/skills"
 
 for f in "${SKILL_FILES[@]}";    do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/"; done
 for f in "${REF_FILES[@]}";      do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/references/"; done
 for f in "${TEMPLATE_FILES[@]}"; do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/templates/"; done
+for f in "${SKILLS_FILES[@]}";   do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/skills/"; done
 
 rm -f "$ZIP"
 (cd "$TMPDIR" && zip -qr "$ZIP" advocacy-legislation-brief/)
