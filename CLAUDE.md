@@ -49,8 +49,13 @@ skills/
   brief-short.md             Sub-skill: markdown output for Gmail, Signal, Discord,
                              Slack. 300–400 words, 2–3 most-actionable members,
                              links to full brief. No docx, no call scripts.
+  newsletter.md              Sub-skill: monthly digest workflow and output. Up
+                             to 5 items with a near-term action point, docx,
+                             minimal formatting (clean handoff to newsletter team).
   horizon-90.md              Sub-skill: 90-day forward scan workflow and output.
-                             (To be written — plan firms up in one week.)
+                             Planning document, not an action document — certainty
+                             tags (Scheduled/Expected/Watch), no call scripts. 6–10
+                             items, docx.
 scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
   fetch-state-members.sh     congress.gov API → draft state-context file.
@@ -106,6 +111,7 @@ When asked to produce any output, Claude should:
 2. Load the relevant sub-skill from `skills/` based on the request type:
    - Full briefing → `skills/brief-full.md`
    - Short brief → `skills/brief-short.md`
+   - Monthly digest/newsletter → `skills/newsletter.md`
    - 90-day scan → `skills/horizon-90.md`
 3. Execute Step 0 (load `state-context-va.md`, `references/sources-national.md`,
    `references/sources-va.md`)
