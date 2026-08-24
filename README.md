@@ -11,18 +11,35 @@ setup and Congress transitions.
 Both scripts require a free congress.gov API key.
 
 **Get a key:**
-1. Go to api.congress.gov
-2. Click "Sign Up" and create a free account
-3. Your API key is displayed on your account page
+1. Go to https://api.congress.gov/sign-up/
+2. Fill in the form (first name, last name, email) and submit it
+3. The key arrives by email
 
-**Set the environment variable:**
+There is no account to log into — api.congress.gov keys are issued by
+api.data.gov, which has no dashboard. That also means a key **cannot be
+revoked by you**: if one leaks, the only route is asking Library of Congress
+staff to disable it via their [issue
+tracker](https://github.com/LibraryOfCongress/api.congress.gov/issues). Treat
+the key accordingly.
+
+**Store the key:** keep it in a file only your user can read, and source that
+from your shell rc — rather than pasting the value into `~/.zshrc` directly,
+where it is world-readable by default and ends up in every backup of that file.
+
 ```bash
-# Add to ~/.bashrc or ~/.zshrc for persistence:
-export CONGRESS_API_KEY="your-key-here"
-
-# Or set it just for the current session:
-export CONGRESS_API_KEY="your-key-here"
+mkdir -p ~/.config/secrets && chmod 700 ~/.config/secrets
+touch ~/.config/secrets/env && chmod 600 ~/.config/secrets/env
+$EDITOR ~/.config/secrets/env      # add a line: export CONGRESS_API_KEY=your-key-here
 ```
+
+Then add this one line to `~/.zshrc` (or `~/.bashrc`):
+
+```bash
+[ -f "$HOME/.config/secrets/env" ] && source "$HOME/.config/secrets/env"
+```
+
+Editing the file directly, rather than `export`-ing on the command line, also
+keeps the key out of your shell history.
 
 **Install dependencies:**
 ```bash
@@ -177,14 +194,22 @@ influence plausibly explains a member's position.
 
 ### Setup: FEC API key
 
-The FEC API is free and requires registration at api.data.gov. Visit that
-URL in a browser to complete the signup form (it is JavaScript-rendered and
-cannot be automated).
+The FEC API is free. Sign up at https://api.open.fec.gov/developers/ (the form
+is on that page) or at https://api.data.gov/signup/ — both issue the same
+api.data.gov key. The form is JavaScript-rendered and cannot be automated; the
+key arrives by email.
+
+As with the congress.gov key, there is no account and no self-service
+revocation. To retire a leaked FEC key you must email APIinfo@fec.gov and ask
+them to disable it.
+
+Store it the same way as the congress.gov key — in `~/.config/secrets/env`
+(mode `600`), sourced from your shell rc, not pasted into `~/.zshrc`:
 
 ```bash
-# Add to ~/.bashrc or ~/.zshrc:
-export FEC_API_KEY="your-fec-key-here"
-export CONGRESS_API_KEY="your-congress-key-here"
+# in ~/.config/secrets/env
+export FEC_API_KEY=your-fec-key-here
+export CONGRESS_API_KEY=your-congress-key-here
 ```
 
 Without `FEC_API_KEY` set, the script falls back to `DEMO_KEY` (~50 requests/day

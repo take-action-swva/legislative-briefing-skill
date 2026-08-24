@@ -13,7 +13,10 @@
 # Bill types: hr, s, hjres, sjres, hconres, sconres, hres, sres
 #
 # Requires:
-#   - CONGRESS_API_KEY environment variable (free at api.congress.gov)
+#   - CONGRESS_API_KEY environment variable. Free key at
+#     https://api.congress.gov/sign-up/ (arrives by email). Store it in
+#     ~/.config/secrets/env (chmod 600), sourced from your shell rc — not
+#     pasted into ~/.zshrc. See README.md#setup.
 #   - curl and jq installed
 #
 # Output: Markdown intake form printed to stdout. Redirect to a file:

@@ -16,7 +16,10 @@
 #   ./fetch-state-members.sh PA    # Pennsylvania
 #
 # Requires:
-#   - CONGRESS_API_KEY environment variable (free at api.congress.gov)
+#   - CONGRESS_API_KEY environment variable. Free key at
+#     https://api.congress.gov/sign-up/ (arrives by email). Store it in
+#     ~/.config/secrets/env (chmod 600), sourced from your shell rc — not
+#     pasted into ~/.zshrc. See README.md#setup.
 #   - curl and jq installed
 #
 # Output: Draft markdown file printed to stdout. Redirect to a file:

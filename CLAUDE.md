@@ -148,11 +148,21 @@ the project root.
 
 ## How to Run the Scripts
 
-All scripts require environment variables. Check that they are set before running:
+All scripts require environment variables. Check they are set **without printing
+their values** — `echo $CONGRESS_API_KEY` writes the key to the terminal, into
+your scrollback, and into the transcript of any agent session running the
+command:
+
 ```bash
-echo $CONGRESS_API_KEY    # from api.congress.gov (free)
-echo $FEC_API_KEY         # from api.data.gov (free, 1,000 req/hr)
+# prints "set" or "MISSING" only, never the value (works in bash and zsh)
+[ -n "${CONGRESS_API_KEY:-}" ] && echo "CONGRESS_API_KEY: set" || echo "CONGRESS_API_KEY: MISSING"
+[ -n "${FEC_API_KEY:-}" ]      && echo "FEC_API_KEY: set"      || echo "FEC_API_KEY: MISSING"
 ```
+
+`CONGRESS_API_KEY` comes from api.congress.gov (free); `FEC_API_KEY` from
+api.data.gov (free, 1,000 req/hr). Both live in `~/.config/secrets/env` — see
+the [README](README.md#setup). Neither can be self-service revoked, so never
+echo, log, or paste them into a chat.
 
 ```bash
 # Generate a research intake form for a bill:
