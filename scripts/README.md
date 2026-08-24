@@ -24,8 +24,11 @@ follows every backup of that file):
 mkdir -p ~/.config/secrets && chmod 700 ~/.config/secrets
 touch ~/.config/secrets/env && chmod 600 ~/.config/secrets/env
 $EDITOR ~/.config/secrets/env      # add: export CONGRESS_API_KEY=your-key-here
+```
 
-# then add this line to ~/.zshrc or ~/.bashrc:
+Then add this one line to `~/.zshrc` (or `~/.bashrc`) so it loads in new shells:
+
+```bash
 [ -f "$HOME/.config/secrets/env" ] && source "$HOME/.config/secrets/env"
 ```
 
