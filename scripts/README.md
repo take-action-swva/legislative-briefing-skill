@@ -12,18 +12,28 @@ docx build and enforces the acronym expansion rule.
 free congress.gov API key. `fetch-votes.sh` requires no API key.
 
 **Get a key:**
-1. Go to api.congress.gov
-2. Click "Sign Up" and create a free account
-3. Your API key is displayed on your account page
+1. Go to https://api.congress.gov/sign-up/
+2. Fill in the form (first name, last name, email) and submit it
+3. The key arrives by email — there is no account page
 
-**Set the environment variable:**
+**Store the key** in a file only your user can read, sourced from your shell
+rc, rather than pasting it into `~/.zshrc` (world-readable by default, and it
+follows every backup of that file):
+
 ```bash
-# Add to ~/.bashrc or ~/.zshrc for persistence:
-export CONGRESS_API_KEY="your-key-here"
-
-# Or set it just for the current session:
-export CONGRESS_API_KEY="your-key-here"
+mkdir -p ~/.config/secrets && chmod 700 ~/.config/secrets
+touch ~/.config/secrets/env && chmod 600 ~/.config/secrets/env
+$EDITOR ~/.config/secrets/env      # add: export CONGRESS_API_KEY=your-key-here
 ```
+
+Then add this one line to `~/.zshrc` (or `~/.bashrc`) so it loads in new shells:
+
+```bash
+[ -f "$HOME/.config/secrets/env" ] && source "$HOME/.config/secrets/env"
+```
+
+See the top-level [README](../README.md#setup) for why these keys cannot be
+revoked once leaked.
 
 **Install dependencies:**
 ```bash

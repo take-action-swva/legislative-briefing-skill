@@ -42,7 +42,8 @@ re-enter the Top industries tables from opensecrets.org.
 - If a new member joined via special election, they may not appear in the
   script output — add them manually using the section format in donor-context-va.md
 
-Requires a free FEC API key from api.data.gov (set as `FEC_API_KEY` env var).
+Requires a free FEC API key (`FEC_API_KEY`), stored in `~/.config/secrets/env`
+and sourced from your shell rc — see [README](README.md#setup-fec-api-key).
 
 ### Start of each new Congress (January of odd years)
 

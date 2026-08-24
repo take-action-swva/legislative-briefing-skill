@@ -9,8 +9,11 @@
 #   ./scripts/fetch-donors.sh VA 2024 > donor-context-va.md
 #   ./scripts/fetch-donors.sh VA      > donor-context-va.md   # defaults to 2024
 #
-# API key: free at api.data.gov — register and set FEC_API_KEY env var:
-#   export FEC_API_KEY="your-key-here"
+# API key: free at https://api.open.fec.gov/developers/ (arrives by email).
+# Store it in ~/.config/secrets/env (chmod 600), sourced from your shell rc —
+# not pasted into ~/.zshrc. See README.md#setup.
+#   # in ~/.config/secrets/env
+#   export FEC_API_KEY=your-key-here
 #
 # Without a key, falls back to DEMO_KEY (~50 requests/day total limit).
 # A real key allows 1,000 req/hour. Use one for production runs over full delegations.
