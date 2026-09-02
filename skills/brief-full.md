@@ -417,7 +417,8 @@ humanizer items — running them satisfies both.
   hyperlink citations instead.
 - **Assuming reconciliation viability** — reconciliation pathway claims
   require procedural verification (Byrd Rule analysis). Flag as uncertain
-  unless confirmed via legislativeprocedure.com or a CRS report.
+  unless confirmed via legislativeprocedure.com or a
+  Congressional Research Service (CRS) report.
 - **Stale district numbers** — redistricting litigation can change district
   compositions mid-Congress. Verify at the state's political data source before
   using district numbers in constituent outreach.

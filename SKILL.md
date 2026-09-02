@@ -31,7 +31,8 @@ lessons_learned:
   - date: "2026-06-01"
     note: >
       [Virginia] For immigration enforcement briefings, TRAC Immigration
-      (trac.syr.edu) provides ICE enforcement data by state and district,
+      (trac.syr.edu) provides Immigration and Customs Enforcement (ICE)
+      enforcement data by state and district,
       deportation statistics, and detention data. Warner and Kaine official
       .senate.gov press releases were the best first source for Virginia-specific
       statistics (passport data, women's name-change issue). Check official

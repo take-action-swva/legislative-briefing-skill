@@ -156,8 +156,11 @@ sentence-length rules that apply to all output types.
   reconciliation works, or what cloture means unless the procedural fact is
   itself the news. If a gloss is needed, one parenthetical is enough.
 - **Issue name over bill number as the lead.** Use the issue name (MEDICAID
-  CUTS, FISA REAUTHORIZATION) as the item headline. Include the bill number
-  in the Status line.
+  CUTS, SURVEILLANCE REAUTHORIZATION) as the item headline. Include the bill
+  number in the Status line. An acronym in a headline still needs its
+  expansion somewhere in the item: a headline reading "FISA
+  REAUTHORIZATION" requires "Foreign Intelligence Surveillance Act" in the
+  Status line or body.
 - **One ask per member, one sentence.** The act line is a directive, not a
   script. Group leaders will adapt it for their members.
 

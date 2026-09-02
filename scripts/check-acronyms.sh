@@ -45,9 +45,12 @@ print('yes' if re.search(r'\b' + re.escape(sys.argv[2]) + r'\b', text) else 'no'
   if [ "$found" = "yes" ]; then
     local expanded
     expanded=$(python3 -c "
-import sys
-text = open(sys.argv[1]).read().lower()
-print('yes' if sys.argv[2].lower() in text else 'no')
+import re, sys
+# Collapse whitespace before matching. A multi-word expansion that wraps across
+# two lines is still an expansion; matching the raw text reads it as a FAIL.
+text = re.sub(r'\s+', ' ', open(sys.argv[1]).read().lower())
+needle = re.sub(r'\s+', ' ', sys.argv[2].lower())
+print('yes' if needle in text else 'no')
 " "$FILE" "$expansion" 2>/dev/null)
 
     if [ "$expanded" = "yes" ]; then
@@ -75,9 +78,12 @@ print('yes' if sys.argv[2] in text else 'no')
   if [ "$found" = "yes" ]; then
     local expanded
     expanded=$(python3 -c "
-import sys
-text = open(sys.argv[1]).read().lower()
-print('yes' if sys.argv[2].lower() in text else 'no')
+import re, sys
+# Collapse whitespace before matching. A multi-word expansion that wraps across
+# two lines is still an expansion; matching the raw text reads it as a FAIL.
+text = re.sub(r'\s+', ' ', open(sys.argv[1]).read().lower())
+needle = re.sub(r'\s+', ' ', sys.argv[2].lower())
+print('yes' if needle in text else 'no')
 " "$FILE" "$expansion" 2>/dev/null)
 
     if [ "$expanded" = "yes" ]; then
