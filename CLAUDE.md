@@ -49,19 +49,19 @@ skills/
   brief-short.md             Sub-skill: markdown output for Gmail, Signal, Discord,
                              Slack. 300–400 words, 2–3 most-actionable members,
                              links to full brief. No docx, no call scripts.
-  newsletter.md              Sub-skill: monthly digest workflow and output. Up
-                             to 5 items with a near-term action point, docx,
-                             minimal formatting (clean handoff to newsletter team).
   horizon-90.md              Sub-skill: 90-day forward scan workflow and output.
                              Planning document, not an action document — certainty
                              tags (Scheduled/Expected/Watch), no call scripts. 6–10
                              items, docx.
-  cta-roundup.md             Sub-skill: calls-to-action roundup. Campaign-shaped
-                             rather than bill-shaped. Tiers the delegation by
-                             leverage (Aligned/Movable/Locked), requires an
-                             "Answer looks like" line per ask, carries the
-                             volatile-items pre-publish checklist. Markdown
-                             default, docx on request.
+  cta-roundup.md             Sub-skill: all ask-shaped output, in two modes.
+                             Campaign mode is the CTA roundup (markdown default,
+                             docx on request, full delegation). Digest mode is
+                             the monthly newsletter (always docx, minimal
+                             formatting, up to 5 items, 1-2 members each).
+                             Shared across both: leverage tiering
+                             (Aligned/Movable/Locked), a mandatory "Answer looks
+                             like" line per ask, and the volatile-items
+                             pre-publish checklist. Absorbed newsletter.md in 3.0.
 scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
   fetch-state-members.sh     congress.gov API → draft state-context file.
@@ -82,7 +82,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 
 ## Current State
 
-**Skill version:** 2.3  
+**Skill version:** 3.0  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -104,6 +104,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 | 2.1 | 2026-06-19 | Wrote `skills/horizon-90.md` (90-day forward scan: Scheduled/Expected/Watch certainty tags, no call scripts). Promoted the certainty-tagging discipline to a new Shared Accuracy Rule 7 in SKILL.md. Added `skills/newsletter.md` and `skills/horizon-90.md` to `build-zip.sh`'s `SKILLS_FILES`. Fixed brief-full.md's content-width contradiction (9360→9720 DXA). De-duplicated the file-lifecycle block in `newsletter.md`/`horizon-90.md` to reference CLAUDE.md instead of restating it. Added routing disambiguation guidance for overlapping `brief-short.md`/`newsletter.md` requests. |
 | 2.2 | 2026-09-02 | Added `skills/cta-roundup.md` (campaign-shaped calls-to-action roundup: leverage-based delegation tiering, mandatory "Answer looks like" line per ask, volatile-items pre-publish checklist) and moved it from the repo root into `skills/`. Widened the SKILL.md description to match CTA phrasing and named campaigns, with "CTA brief" as an explicit invocation phrase. `output_format` is now `[docx, markdown]`. Broadened Shared Accuracy Rule 6 beyond congress.gov to cover cosponsor lists, Federal Register dockets, appropriations vehicle, litigation, and delegation composition. Recorded the Virginia redistricting resolution in `lessons_learned` and `state-context-va.md`. Added `skills/cta-roundup.md` to `build-zip.sh`'s `SKILLS_FILES`. |
 | 2.3 | 2026-09-02 | Added a Shared Pre-Delivery Check to SKILL.md and pointed all five sub-skills at it, removing the items they each duplicated. `check-acronyms.sh` now accepts `.md` as well as `.js`, so markdown outputs (short briefs, CTA roundups) are acronym-checked too. Gave `cta-roundup.md` the docx and markdown production paths its "docx on request" line implied but never described. Markdown outputs are now archived to Drive alongside the docx ones. Added the humanizer pass to `newsletter.md` and `horizon-90.md`, which were the two output types missing it. |
+| 3.0 | 2026-09-02 | Absorbed `skills/newsletter.md` into `skills/cta-roundup.md` as Digest mode and deleted it. The two were the vaguest boundary in the set: both multi-item, both current-moment, both ending in a member and an ask, distinguished only by what the request started from. One document now carries both, sharing the research workflow, delegation tiering, ask verification, and volatile-items check, and differing in structure, length, and output format. Digest items gain the mandatory "Answer looks like" line; campaign asks gain the digest's rule about dropping stalled items. Added digest phrasing to the SKILL.md description, which never carried it — "monthly newsletter" and "what's moving this month" could fail to trigger the skill at all. Routing table down to four rows. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -120,9 +121,9 @@ When asked to produce any output, Claude should:
 2. Load the relevant sub-skill from `skills/` based on the request type:
    - Full briefing → `skills/brief-full.md`
    - Short brief → `skills/brief-short.md`
-   - Monthly digest/newsletter → `skills/newsletter.md`
    - 90-day scan → `skills/horizon-90.md`
-   - Calls to action, campaign asks → `skills/cta-roundup.md`
+   - Calls to action, campaign asks, monthly digest/newsletter →
+     `skills/cta-roundup.md` (pick the mode from the table in that file)
 3. Execute Step 0 (load `state-context-va.md`, `references/sources-national.md`,
    `references/sources-va.md`)
 4. Follow the research workflow and output format in the sub-skill file

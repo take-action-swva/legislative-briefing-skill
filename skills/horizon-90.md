@@ -7,15 +7,15 @@ not what to act on right now, but what to prepare for.
 The parent skill (`SKILL.md`) has completed Step 0 (state context loaded) and
 provides the shared accuracy and style rules. Begin at Step 1.
 
-**This is a planning document, not an action document.** The newsletter
+**This is a planning document, not an action document.** The monthly digest
 answers "what's moving this month, call now." The short brief answers "act
 on this one bill now." This sub-skill answers "what's coming in the next 90
 days so group leaders can recruit, schedule, and budget volunteer time
 ahead of it." No call scripts, no phone numbers — point readers to the
-newsletter or a short brief once an item actually enters its action window.
+digest or a short brief once an item actually enters its action window.
 
 **Output format: docx.** Use `templates/brief-base.js`. Same minimal
-formatting as the newsletter: bold for issue headlines and field labels,
+formatting as the digest: bold for issue headlines and field labels,
 plain paragraphs for body text. One two-column table near the top
 (`Looking Ahead at a Glance`) — see Docx Layout Defaults in CLAUDE.md for
 the two-column constraint that applies to every table except the delegation
@@ -153,7 +153,7 @@ Virginia angle: [one sentence, or "No Virginia-specific angle identified."]
 
 Prepare: [one sentence of concrete organizational prep — recruiting,
 scheduling, drafting materials. Not a call script. Once an item enters its
-actual action window, it belongs in the newsletter or a short brief.]
+actual action window, it belongs in the digest or a short brief.]
 ```
 
 ### Closing note — recess and quiet weeks
@@ -178,7 +178,7 @@ sentence-length rules that apply to all output types.
   Expected or Watch item's timing as if it were confirmed.
 - **No member contact details, no call scripts.** This is a calendar, not
   an action sheet. If a reader needs to act now, point them to the
-  newsletter or a short brief.
+  digest or a short brief.
 
 ---
 
@@ -207,7 +207,7 @@ checker, and the humanizer pass. Then verify these horizon-specific items:
 - **Padding the back half of the window.** If confirmed items thin out
   past day 45, say so in the closing note instead of filling the gap with
   low-confidence Watch items just to hit 6–10.
-- **Writing this like a newsletter.** No call-now asks. The point is
+- **Writing this like a digest.** No call-now asks. The point is
   organizational lead time, not a phone call this week.
 - **Forgetting recess weeks.** A group leader who doesn't know Congress is
   out may schedule a Hill-focused action against a closed building, or miss
