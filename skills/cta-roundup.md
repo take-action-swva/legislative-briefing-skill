@@ -213,11 +213,11 @@ ask carries:
 
 **Ask:** [The specific action, with bill number or docket where applicable]
 **Target:** [Which tier, or which named members]
-**Answer looks like:** [What a yes actually is — a cosponsorship, a signed
+**Expectation:** [What a yes actually is — a cosponsorship, a signed
 letter, a recorded statement]
 ```
 
-The "Answer looks like" line is mandatory. It is what separates this output
+The "Expectation" line is mandatory. It is what separates this output
 type from a list of talking points.
 
 **4. Sequencing**
@@ -263,14 +263,14 @@ beyond what a reader needs to understand the current moment.]
 Act: [One or two members. For each: name, role, phone, contact URL,
 one-sentence ask.]
 
-Answer looks like: [What a yes actually is — a cosponsorship, a signed
+Expectation: [What a yes actually is — a cosponsorship, a signed
 letter, a recorded statement, a scheduled meeting.]
 ```
 
 Separate items with a horizontal rule (`---` in the JS, rendered as a page
 divider in the docx).
 
-The "Answer looks like" line is mandatory here too. It is the single field
+The "Expectation" line is mandatory here too. It is the single field
 that keeps an item from degrading into a talking point, and digest items are
 the ones most likely to be forwarded without their context.
 
@@ -292,7 +292,7 @@ Sen. Tim Kaine — Health, Education, Labor, and Pensions Committee
 DC: (202) 224-4024 | kaine.senate.gov/contact
 Ask him to oppose any markup that cuts federal Medicaid matching rates.
 
-Answer looks like: a public statement opposing the matching-rate cut, or an
+Expectation: a public statement opposing the matching-rate cut, or an
 amendment filed at markup.
 ```
 
@@ -390,7 +390,7 @@ checker, and the humanizer pass. Then verify these roundup-specific items:
 Both modes:
 
 - [ ] Every ask names a bill, docket, or specific action
-- [ ] Every ask has an "Answer looks like" line
+- [ ] Every ask has an "Expectation" line
 - [ ] No ask requests something the target has already done
 - [ ] Contact details pulled from state context, not searched
 - [ ] Volatile items checklist above completed on the day of distribution
