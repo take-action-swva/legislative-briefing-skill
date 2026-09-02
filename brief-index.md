@@ -14,7 +14,8 @@ Drive folder: <https://drive.google.com/drive/folders/199yNMBV3HD9pXw4-JiUBpoRF3
 
 | Date | Type | Title | File | Issue |
 |---|---|---|---|---|
-| 2026-09-02 | digest | September 2026 Legislative Update — NOT YET PUBLISHED to Drive | `september-2026-digest` | federal-funding-fy2027, save-america-act, federal-grants-rule, aca-premium-tax-credits, immigration-enforcement-oversight |
+| 2026-09-02 | CTA roundup | Immigrant Justice: Calls to Action for Virginia Groups | `cta-roundup-2026-09-02.md` | immigration-enforcement-oversight |
+| 2026-09-02 | digest | September 2026 Legislative Update | `september-2026-digest.docx` | federal-funding-fy2027, save-america-act, federal-grants-rule, aca-premium-tax-credits, immigration-enforcement-oversight |
 | 2026-07 | full brief | July 2026 Statewide Network Legislative Brief | `July 2026 Virginia Indivisibles Statewide Network Legislative Brief.docx` | — |
 | 2026-06-19 | horizon | 90-Day Outlook | `horizon-90-2026-06-19.docx` | — |
 | 2026-06 | digest | June 2026 newsletter | `old-june-2026-newsletter.docx` | — |
