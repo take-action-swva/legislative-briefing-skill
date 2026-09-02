@@ -14,6 +14,7 @@ Drive folder: <https://drive.google.com/drive/folders/199yNMBV3HD9pXw4-JiUBpoRF3
 
 | Date | Type | Title | File | Issue |
 |---|---|---|---|---|
+| 2026-09-02 | full brief | SAVE Act (H.R. 22): Dormant Bill, Live Policy | `hr22-brief.docx` | save-america-act |
 | 2026-09-02 | CTA roundup | Immigrant Justice: Calls to Action for Virginia Groups | `cta-roundup-2026-09-02.md` | immigration-enforcement-oversight |
 | 2026-09-02 | digest | September 2026 Legislative Update | `september-2026-digest.docx` | federal-funding-fy2027, save-america-act, federal-grants-rule, aca-premium-tax-credits, immigration-enforcement-oversight |
 | 2026-07 | full brief | July 2026 Statewide Network Legislative Brief | `July 2026 Virginia Indivisibles Statewide Network Legislative Brief.docx` | — |
