@@ -56,6 +56,12 @@ skills/
                              Planning document, not an action document — certainty
                              tags (Scheduled/Expected/Watch), no call scripts. 6–10
                              items, docx.
+  cta-roundup.md             Sub-skill: calls-to-action roundup. Campaign-shaped
+                             rather than bill-shaped. Tiers the delegation by
+                             leverage (Aligned/Movable/Locked), requires an
+                             "Answer looks like" line per ask, carries the
+                             volatile-items pre-publish checklist. Markdown
+                             default, docx on request.
 scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
   fetch-state-members.sh     congress.gov API → draft state-context file.
@@ -76,7 +82,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 
 ## Current State
 
-**Skill version:** 2.1  
+**Skill version:** 2.2  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -96,6 +102,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 | 1.9 | 2026-06-10 | Added mandatory humanizer pass (new Step 2) before the pre-delivery self-check. Simplified the vote-fetching workflow to rely solely on `fetch-votes.sh` now that it works reliably, removing the House Clerk web_fetch fallback. Removed superseded lessons_learned entries and pitfalls (roll call fetch fallback, ProPublica deprecation, funding-neutral framing, JS apostrophe quoting, inferred-votes) now that the script and updated workflow handle them. |
 | 2.0 | 2026-06-16 | Restructured to parent + sub-skills. SKILL.md is now a lightweight parent (config, Step 0, shared accuracy rules). Full briefing workflow and output format moved to `skills/brief-full.md`. Added `skills/` directory; `brief-short.md` written in full, stub for `horizon-90.md`. Added `va-members-table.js` to build-zip.sh. Updated `briefing-qa-checklist.md` to v1.9 section structure. |
 | 2.1 | 2026-06-19 | Wrote `skills/horizon-90.md` (90-day forward scan: Scheduled/Expected/Watch certainty tags, no call scripts). Promoted the certainty-tagging discipline to a new Shared Accuracy Rule 7 in SKILL.md. Added `skills/newsletter.md` and `skills/horizon-90.md` to `build-zip.sh`'s `SKILLS_FILES`. Fixed brief-full.md's content-width contradiction (9360→9720 DXA). De-duplicated the file-lifecycle block in `newsletter.md`/`horizon-90.md` to reference CLAUDE.md instead of restating it. Added routing disambiguation guidance for overlapping `brief-short.md`/`newsletter.md` requests. |
+| 2.2 | 2026-09-02 | Added `skills/cta-roundup.md` (campaign-shaped calls-to-action roundup: leverage-based delegation tiering, mandatory "Answer looks like" line per ask, volatile-items pre-publish checklist) and moved it from the repo root into `skills/`. Added it to `build-zip.sh`'s `SKILLS_FILES` and to the SKILL.md routing table, with a disambiguation note keeping single-bill requests on `brief-short.md`/`brief-full.md`. Recorded the Virginia redistricting resolution in `state-context-va.md`. Fixed a CLAUDE.md "Do Not" bullet that contradicted Shared Accuracy Rule 3 on position phrasing. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -114,6 +121,7 @@ When asked to produce any output, Claude should:
    - Short brief → `skills/brief-short.md`
    - Monthly digest/newsletter → `skills/newsletter.md`
    - 90-day scan → `skills/horizon-90.md`
+   - Calls to action, campaign asks → `skills/cta-roundup.md`
 3. Execute Step 0 (load `state-context-va.md`, `references/sources-national.md`,
    `references/sources-va.md`)
 4. Follow the research workflow and output format in the sub-skill file
@@ -260,7 +268,8 @@ These were explicitly considered and ruled out. Don't reintroduce them.
 - **Do not weight any congressional district in briefing content** — briefings
   are for the statewide network, not any individual group's district
 - **Do not infer member positions from party** — find a press release, floor
-  statement, or vote record, or write "position not publicly stated"
+  statement, or vote record, or write "position not found during research"
+  (never "position not publicly stated" — see Shared Accuracy Rule 3)
 - **Do not run donor lookups on every briefing** — sector-linked bills only
 - **Do not create a per-briefing research intake form requirement** — too
   much burden on busy group leaders; `fetch-bill.sh` covers the automatable

@@ -10,7 +10,7 @@ description: >
   summary", "what's coming up in the next 90 days", "what should we be
   watching", "research this EO for our members", "what's the status of", or
   any request combining legislation with advocacy, action, or organizing.
-version: "2.1"
+version: "2.2"
 output_format: docx
 citation_style: inline-hyperlink
 state: Virginia
@@ -131,12 +131,18 @@ Based on what the user is asking for, load the relevant sub-file now:
 | Short brief, quick summary, one-pager | `skills/brief-short.md` |
 | Monthly digest, newsletter, what's moving this month | `skills/newsletter.md` |
 | 90-day outlook, what's coming, forward scan | `skills/horizon-90.md` |
+| CTA brief, calls to action, campaign asks, what to ask our reps for | `skills/cta-roundup.md` |
 
 If a request could plausibly match more than one row (e.g. "a quick summary
 of what's moving this month" matches both `brief-short.md`'s "quick summary"
 and `newsletter.md`'s "what's moving this month"), disambiguate by scope and
 artifact shape, not by keyword count: a single bill with an act-now ask →
 `brief-short.md`; multiple items as this month's digest → `newsletter.md`.
+A request naming a single bill is never a CTA roundup, even when it asks
+what the group should do about it: one bill with an act-now ask stays with
+`brief-short.md` or `brief-full.md`. Route to `cta-roundup.md` only when the
+starting point is a campaign, a training track, or a set of asks spanning
+several bills and agency actions.
 If still unclear, ask which one the user means rather than guessing.
 
 Load the matching sub-file before proceeding to Step 0.

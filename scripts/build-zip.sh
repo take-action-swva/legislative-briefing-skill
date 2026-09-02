@@ -28,6 +28,7 @@ SKILLS_FILES=(
   skills/brief-short.md
   skills/newsletter.md
   skills/horizon-90.md
+  skills/cta-roundup.md
 )
 
 # Verify all source files exist before touching the zip.
