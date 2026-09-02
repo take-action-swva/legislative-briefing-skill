@@ -26,7 +26,6 @@ TEMPLATE_FILES=(
 SKILLS_FILES=(
   skills/brief-full.md
   skills/brief-short.md
-  skills/newsletter.md
   skills/horizon-90.md
   skills/cta-roundup.md
 )
