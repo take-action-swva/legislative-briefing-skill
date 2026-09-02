@@ -319,6 +319,8 @@ These were explicitly considered and ruled out. Don't reintroduce them.
   cache is a drafting aid, never a substitute for the pre-publish check.
 - **Do not hardcode the Drive path in a sub-skill** — call `publish.sh`. The
   path exists in one place so it can be changed in one place.
+- **Do not grow the SKILL.md description past 1024 characters** — claude.ai
+  rejects the upload. `build-zip.sh` enforces it. See Skill Upload Constraints.
 - **Do not run donor lookups on every briefing** — sector-linked bills only
 - **Do not create a per-briefing research intake form requirement** — too
   much burden on busy group leaders; `fetch-bill.sh` covers the automatable
@@ -337,6 +339,35 @@ See `CONTRIBUTING.md` for full instructions. The short version:
 
 No changes to the skill body are needed. The `{{state}}` placeholders
 resolve from front matter.
+
+---
+
+## Skill Upload Constraints
+
+claude.ai enforces limits on the uploaded skill package. These are checked by
+`./scripts/build-zip.sh`, which fails the build rather than letting a bad zip
+reach the upload dialog.
+
+- **`description` must be at most 1024 characters.** This bites because the
+  description is the routing surface — every trigger phrase for every output
+  type lives there, so it grows with each new sub-skill. It hit the limit at
+  1,220 characters after the digest phrasing was added in 3.0. When adding an
+  output type, budget for its phrases rather than appending indefinitely.
+  Remember YAML folds a `>` block by joining lines with single spaces, so the
+  character count is the folded length, not the file's line lengths.
+- The zip must contain a `SKILL.md` with `name` and `description` in YAML
+  front matter.
+- A security scan runs on save.
+
+To install the skill locally for testing in Claude Code, which uses the same
+description-matching mechanism as claude.ai:
+
+```bash
+./scripts/build-zip.sh
+unzip -q -o advocacy-legislation-brief-claude-upload.zip -d ~/.claude/skills/
+```
+
+Then start a NEW session — skills are read at session start.
 
 ---
 
