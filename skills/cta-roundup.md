@@ -21,6 +21,8 @@ alongside full briefs. Unlike `brief-short.md`, markdown link syntax is
 acceptable here. This document is read on a laptop or printed, not pasted
 into Signal.
 
+See "Producing the file" below for how to build and archive either format.
+
 **Length target: 1,200–2,000 words.** Long enough to carry every live ask
 across the campaigns in scope. Short enough that a group leader reads it in
 one sitting before a meeting.
@@ -62,7 +64,7 @@ For each campaign, gather candidate asks across all four categories. A
 roundup covering only bills is incomplete.
 
 1. **Legislation.** Cosponsorship, floor votes, discharge petitions.
-2. **Appropriations.** Riders, funding levels, program eliminations, and whatever is live in the current CR or full-year bill. Check the House and Senate committee reports, not just the bill text. Program eliminations often appear only in report language.
+2. **Appropriations.** Riders, funding levels, program eliminations, and whatever is live in the current continuing resolution (CR) or full-year bill. Check the House and Senate committee reports, not just the bill text. Program eliminations often appear only in report language.
 3. **Oversight.** Facility inspections, document demands, hearing requests, letters to agency heads. These are available to minority-party members and are frequently the only asks that produce movement.
 4. **Public commitments.** On-record pledges, town hall statements, named staff contacts. These cost an office nothing to give and are therefore the easiest asks to win, which makes them good openers.
 
@@ -175,6 +177,27 @@ direction to re-verify before any coordinated push.
 
 ---
 
+## Producing the file
+
+**Markdown (default).** Write `cta-roundup-[YYYY-MM-DD].md` in the project
+root. Run `./scripts/check-acronyms.sh cta-roundup-[YYYY-MM-DD].md` and fix
+every FAIL. Then follow CLAUDE.md's "Briefing file lifecycle" from the copy
+step onward: `cp` the `.md` to Google Drive, then `mv` it to `briefs/`.
+Markdown outputs are archived in Drive alongside the docx ones so the folder
+holds every deliverable, not just the docx subset.
+
+**Docx (on request).** Write `cta-roundup-[YYYY-MM-DD].js` using
+`templates/brief-base.js` and follow CLAUDE.md's "Briefing file lifecycle"
+in full, substituting `cta-roundup-[YYYY-MM-DD]` for `<topic>-brief`.
+
+Use the newsletter's minimal formatting, not the full brief's: bold for ask
+headlines and field labels, plain paragraphs for body text. No shaded boxes,
+no colored headings, no tables. Do not use `templates/va-members-table.js` —
+the delegation tiers in this document are prose, and the four-column
+reference table belongs to full briefings.
+
+---
+
 ## Volatile Items — Pre-Publish Verification
 
 Parent skill Rule 6 requires a status recheck on congress.gov before
@@ -198,17 +221,18 @@ legislation has not moved.
 
 ## Pre-Delivery Check
 
+Run SKILL.md's Shared Pre-Delivery Check first. It covers acronyms, em dashes,
+position phrasing, primary-source status, future-date tagging, the acronym
+checker, and the humanizer pass. Then verify these roundup-specific items:
+
 - [ ] Every ask names a bill, docket, or specific action
 - [ ] Every ask has an "Answer looks like" line
 - [ ] No ask requests something the target has already done
 - [ ] Full delegation covered, tiered by leverage not by district number
 - [ ] Tier 3 framed as documentation, not as persuasion
 - [ ] Framing-facts section carries any logged corrections
-- [ ] Every future date tagged Scheduled, Expected, or Watch
 - [ ] Contact details pulled from state context, not searched
-- [ ] Volatile items checklist completed on the day of distribution
-- [ ] Uncertain claims flagged in Notes for human verification
-- [ ] Apply humanizer pass before sending
+- [ ] Volatile items checklist above completed on the day of distribution
 
 ---
 

@@ -82,7 +82,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 
 ## Current State
 
-**Skill version:** 2.2  
+**Skill version:** 2.3  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -103,6 +103,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 | 2.0 | 2026-06-16 | Restructured to parent + sub-skills. SKILL.md is now a lightweight parent (config, Step 0, shared accuracy rules). Full briefing workflow and output format moved to `skills/brief-full.md`. Added `skills/` directory; `brief-short.md` written in full, stub for `horizon-90.md`. Added `va-members-table.js` to build-zip.sh. Updated `briefing-qa-checklist.md` to v1.9 section structure. |
 | 2.1 | 2026-06-19 | Wrote `skills/horizon-90.md` (90-day forward scan: Scheduled/Expected/Watch certainty tags, no call scripts). Promoted the certainty-tagging discipline to a new Shared Accuracy Rule 7 in SKILL.md. Added `skills/newsletter.md` and `skills/horizon-90.md` to `build-zip.sh`'s `SKILLS_FILES`. Fixed brief-full.md's content-width contradiction (9360→9720 DXA). De-duplicated the file-lifecycle block in `newsletter.md`/`horizon-90.md` to reference CLAUDE.md instead of restating it. Added routing disambiguation guidance for overlapping `brief-short.md`/`newsletter.md` requests. |
 | 2.2 | 2026-09-02 | Added `skills/cta-roundup.md` (campaign-shaped calls-to-action roundup: leverage-based delegation tiering, mandatory "Answer looks like" line per ask, volatile-items pre-publish checklist) and moved it from the repo root into `skills/`. Widened the SKILL.md description to match CTA phrasing and named campaigns, with "CTA brief" as an explicit invocation phrase. `output_format` is now `[docx, markdown]`. Broadened Shared Accuracy Rule 6 beyond congress.gov to cover cosponsor lists, Federal Register dockets, appropriations vehicle, litigation, and delegation composition. Recorded the Virginia redistricting resolution in `lessons_learned` and `state-context-va.md`. Added `skills/cta-roundup.md` to `build-zip.sh`'s `SKILLS_FILES`. |
+| 2.3 | 2026-09-02 | Added a Shared Pre-Delivery Check to SKILL.md and pointed all five sub-skills at it, removing the items they each duplicated. `check-acronyms.sh` now accepts `.md` as well as `.js`, so markdown outputs (short briefs, CTA roundups) are acronym-checked too. Gave `cta-roundup.md` the docx and markdown production paths its "docx on request" line implied but never described. Markdown outputs are now archived to Drive alongside the docx ones. Added the humanizer pass to `newsletter.md` and `horizon-90.md`, which were the two output types missing it. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -149,6 +150,11 @@ Pass a `sections` object with arrays of Paragraph objects. See the
    mv <topic>-brief.js <topic>-brief.docx briefs/
    ```
 
+**Markdown outputs** (short briefs, CTA roundups) have no `.js` or `node`
+stage. They run `check-acronyms.sh` against the `.md` directly, then follow
+steps 4 and 5 with the `.md` file. Every deliverable is archived in Drive,
+not just the docx ones.
+
 The `briefs/` directory is gitignored. Generated files never accumulate in
 the project root.
 
@@ -185,8 +191,9 @@ echo, log, or paste them into a chat.
 # Get House delegation vote breakdown when a floor vote has already occurred:
 ./scripts/fetch-votes.sh 2025 199 VA
 
-# Check acronym expansions before building the docx (mandatory pre-build step):
-./scripts/check-acronyms.sh <briefing-file.js>
+# Check acronym expansions (mandatory for every output type).
+# Accepts .js for docx outputs, .md for markdown outputs:
+./scripts/check-acronyms.sh <briefing-file.js|.md>
 ```
 
 Scripts output markdown to stdout. Redirect to files for use in briefings.

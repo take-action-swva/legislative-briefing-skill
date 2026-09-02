@@ -16,7 +16,7 @@ description: >
   any request combining legislation with advocacy, action, or organizing. Also
   trigger on named campaigns and training tracks, including Hands Off Our Vote,
   Immigrant Justice Summer, and Dismantling Detention.
-version: "2.2"
+version: "2.3"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia
@@ -249,6 +249,31 @@ horizon scan, and CTA roundup. No exceptions.
    `skills/horizon-90.md` applies this as a structural Scheduled/Expected/Watch
    tag on every item; other output types should apply the same distinction in
    prose whenever a future date is stated.
+
+---
+
+## Shared Pre-Delivery Check
+
+Every output type runs these items before it goes anywhere. Each sub-skill
+adds its own format-specific items on top; none of them repeat these.
+
+- [ ] Acronyms expanded on first use (Shared Style Rules)
+- [ ] No em dashes in prose (Shared Style Rules)
+- [ ] Every stated member position traces to a source URL, and any member with
+      no record found is written as "position not found during research"
+      (Accuracy Rule 3)
+- [ ] Status confirmed from a primary source, not only from news coverage
+      (Accuracy Rule 1)
+- [ ] Every future date tagged Scheduled, Expected, or Watch, in prose or as a
+      structural tag (Accuracy Rule 7)
+- [ ] Claims that could not be verified are flagged for human review
+      (Accuracy Rule 5)
+- [ ] Volatile items re-verified on the day of distribution (Accuracy Rule 6)
+- [ ] `./scripts/check-acronyms.sh` run against the output source, `.js` or
+      `.md`, with every FAIL fixed
+- [ ] `humanizer` skill applied to all free-text prose. Do not apply it to
+      structured fields: tables, contact blocks, date lines, citation link
+      text, or call scripts.
 
 ---
 

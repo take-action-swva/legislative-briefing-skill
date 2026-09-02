@@ -165,14 +165,13 @@ sentence-length rules that apply to all output types.
 
 ## Pre-Delivery Check
 
+Run SKILL.md's Shared Pre-Delivery Check first. It covers acronyms, em dashes,
+position phrasing, primary-source status, future-date tagging, the acronym
+checker, and the humanizer pass. Then verify these newsletter-specific items:
+
 - [ ] No more than 5 items
 - [ ] Each item has a confirmed near-term action point
-- [ ] Status confirmed from congress.gov or a primary source — not only news
 - [ ] Each Act entry has phone number and contact URL from state-context-va.md
-- [ ] No item uses "position not publicly stated" — use "position not found
-      during research"
-- [ ] Acronyms expanded on first use per SKILL.md
-- [ ] No em dashes in prose per SKILL.md
 - [ ] Docx generated and opens without validation errors
 - [ ] Both .js and .docx moved to briefs/
 

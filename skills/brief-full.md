@@ -367,11 +367,16 @@ narrative text, Watch List, and Notes & Caveats. Do not apply to:
 - Call scripts (these use intentional plain language already)
 - Citation link text
 
-**Step 3 — Verify the following internally:**
+**Step 3 — Run SKILL.md's Shared Pre-Delivery Check**
 
-- [ ] Every stated member position has a source URL — not inferred from party
+It covers acronyms, em dashes, position phrasing, primary-source status,
+future-date tagging, and unverified-claim flagging. Steps 1 and 2 above are
+this output type's more specific version of that check's acronym-checker and
+humanizer items — running them satisfies both.
+
+**Step 4 — Verify the following internally:**
+
 - [ ] Bill number and Congress session are specified exactly
-- [ ] Status confirmed from congress.gov or dailypress.senate.gov — not only from news
 - [ ] State-specific data used where available — not only national statistics
 - [ ] All `{{state}}` members covered evenhandedly in the Members table — no district given extra weight
 - [ ] Reconciliation pathway claims (if any) flagged in Notes & Caveats unless confirmed via a procedural primary source
