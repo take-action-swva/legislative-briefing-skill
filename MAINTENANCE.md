@@ -60,10 +60,18 @@ endpoint, and govinfo's CCAL collection records only days a chamber was
 - House: the Majority Leader's office publishes the House calendar
 - <https://www.congress.gov/days-in-session/119th-congress>
 
+These calendars encode session status **in color**, so `pdftotext` strips the
+one fact you need. Render them as images with `pdftoppm` and read them — the
+exact commands are in `calendar-119.md`. Always cross-check the reading against
+the convening and target-adjournment dates printed on the same page.
+
 Record the source URL and the date you read it in the file. Do not estimate a
 date — `skills/horizon-90.md` builds its calendar backbone from this file, and
 a group leader who schedules a Hill action against a closed building has been
 actively misled.
+
+**Senate 2026 is populated (read 2026-09-02). House 2026 is not.** The chambers
+publish separate calendars and their recess weeks differ.
 
 ### Research cache review (quarterly)
 
