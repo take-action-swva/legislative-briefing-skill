@@ -1,20 +1,31 @@
 #!/bin/bash
-# check-acronyms.sh — Verify common legislative acronyms are expanded in a briefing .js file.
-# Runs against the .js source before the docx is built, so violations are caught early.
+# check-acronyms.sh — Verify common legislative acronyms are expanded in a briefing file.
+# Accepts either a .js source (docx outputs, checked before the docx is built, so
+# violations are caught early) or a .md file (markdown outputs: short briefs and
+# CTA roundups, which have no .js stage). The checks are plain text matching, so
+# both formats work identically.
 #
 # Usage:
-#   ./scripts/check-acronyms.sh <briefing-file.js>
+#   ./scripts/check-acronyms.sh <briefing-file.js|.md>
 #
 # Exit code 0 = all clear. Exit code 1 = one or more acronyms used without expansion.
 #
 # Requires: python3 (used for reliable word-boundary matching across macOS/Linux)
 
-FILE=${1:?Usage: $0 <briefing-file.js>}
+FILE=${1:?Usage: $0 <briefing-file.js|.md>}
 
 if [ ! -f "$FILE" ]; then
   echo "Error: File not found: $FILE" >&2
   exit 1
 fi
+
+case "$FILE" in
+  *.js|*.md) ;;
+  *)
+    echo "Error: expected a .js or .md file, got: $FILE" >&2
+    exit 1
+    ;;
+esac
 
 ERRORS=0
 
@@ -34,9 +45,12 @@ print('yes' if re.search(r'\b' + re.escape(sys.argv[2]) + r'\b', text) else 'no'
   if [ "$found" = "yes" ]; then
     local expanded
     expanded=$(python3 -c "
-import sys
-text = open(sys.argv[1]).read().lower()
-print('yes' if sys.argv[2].lower() in text else 'no')
+import re, sys
+# Collapse whitespace before matching. A multi-word expansion that wraps across
+# two lines is still an expansion; matching the raw text reads it as a FAIL.
+text = re.sub(r'\s+', ' ', open(sys.argv[1]).read().lower())
+needle = re.sub(r'\s+', ' ', sys.argv[2].lower())
+print('yes' if needle in text else 'no')
 " "$FILE" "$expansion" 2>/dev/null)
 
     if [ "$expanded" = "yes" ]; then
@@ -64,9 +78,12 @@ print('yes' if sys.argv[2] in text else 'no')
   if [ "$found" = "yes" ]; then
     local expanded
     expanded=$(python3 -c "
-import sys
-text = open(sys.argv[1]).read().lower()
-print('yes' if sys.argv[2].lower() in text else 'no')
+import re, sys
+# Collapse whitespace before matching. A multi-word expansion that wraps across
+# two lines is still an expansion; matching the raw text reads it as a FAIL.
+text = re.sub(r'\s+', ' ', open(sys.argv[1]).read().lower())
+needle = re.sub(r'\s+', ' ', sys.argv[2].lower())
+print('yes' if needle in text else 'no')
 " "$FILE" "$expansion" 2>/dev/null)
 
     if [ "$expanded" = "yes" ]; then
@@ -130,6 +147,9 @@ echo ""
 if [ "$ERRORS" -eq 0 ]; then
   echo "All acronym checks passed."
 else
-  echo "${ERRORS} acronym expansion(s) missing — fix before running node to build the docx."
+  case "$FILE" in
+    *.js) echo "${ERRORS} acronym expansion(s) missing — fix before running node to build the docx." ;;
+    *)    echo "${ERRORS} acronym expansion(s) missing — fix before distributing." ;;
+  esac
   exit 1
 fi

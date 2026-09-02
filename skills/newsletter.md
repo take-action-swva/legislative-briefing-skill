@@ -156,8 +156,11 @@ sentence-length rules that apply to all output types.
   reconciliation works, or what cloture means unless the procedural fact is
   itself the news. If a gloss is needed, one parenthetical is enough.
 - **Issue name over bill number as the lead.** Use the issue name (MEDICAID
-  CUTS, FISA REAUTHORIZATION) as the item headline. Include the bill number
-  in the Status line.
+  CUTS, SURVEILLANCE REAUTHORIZATION) as the item headline. Include the bill
+  number in the Status line. An acronym in a headline still needs its
+  expansion somewhere in the item: a headline reading "FISA
+  REAUTHORIZATION" requires "Foreign Intelligence Surveillance Act" in the
+  Status line or body.
 - **One ask per member, one sentence.** The act line is a directive, not a
   script. Group leaders will adapt it for their members.
 
@@ -165,14 +168,13 @@ sentence-length rules that apply to all output types.
 
 ## Pre-Delivery Check
 
+Run SKILL.md's Shared Pre-Delivery Check first. It covers acronyms, em dashes,
+position phrasing, primary-source status, future-date tagging, the acronym
+checker, and the humanizer pass. Then verify these newsletter-specific items:
+
 - [ ] No more than 5 items
 - [ ] Each item has a confirmed near-term action point
-- [ ] Status confirmed from congress.gov or a primary source — not only news
 - [ ] Each Act entry has phone number and contact URL from state-context-va.md
-- [ ] No item uses "position not publicly stated" — use "position not found
-      during research"
-- [ ] Acronyms expanded on first use per SKILL.md
-- [ ] No em dashes in prose per SKILL.md
 - [ ] Docx generated and opens without validation errors
 - [ ] Both .js and .docx moved to briefs/
 

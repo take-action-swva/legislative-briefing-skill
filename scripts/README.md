@@ -124,19 +124,26 @@ directly. See CONTRIBUTING.md for the manual Claude prompt.
 
 ## check-acronyms.sh
 
-**What it does:** Scans a briefing `.js` file for known legislative acronyms
-and verifies that each one's full expansion appears somewhere in the file.
-Exits non-zero if any acronym is used without being expanded.
+**What it does:** Scans a briefing file for known legislative acronyms and
+verifies that each one's full expansion appears somewhere in the file. Exits
+non-zero if any acronym is used without being expanded.
 
-**When to use:** Before every `node <brief>.js` run. This is mandatory, not
-optional. The SKILL.md Pre-Delivery Self-Check requires it as Step 1.
+Accepts `.js` (docx outputs) or `.md` (markdown outputs: short briefs and CTA
+roundups, which have no `.js` stage). The checks are plain text matching, so
+both formats behave identically. Any other extension is rejected.
+
+**When to use:** For docx outputs, before every `node <brief>.js` run. For
+markdown outputs, before the file is copied to Drive or pasted into a channel.
+This is mandatory, not optional — SKILL.md's Shared Pre-Delivery Check
+requires it for every output type.
 
 **Usage:**
 ```bash
-./scripts/check-acronyms.sh <briefing-file.js>
+./scripts/check-acronyms.sh <briefing-file.js|.md>
 
-# Example:
+# Examples:
 ./scripts/check-acronyms.sh iran-war-powers-brief.js
+./scripts/check-acronyms.sh cta-roundup-2026-09-02.md
 ```
 
 **Output:** `OK` or `FAIL` for each acronym found, followed by a summary.

@@ -62,6 +62,15 @@ Do not delay the brief to chase state data.
 Confirm the Google Drive URL for the full briefing document before writing.
 Include it at the end of the short brief.
 
+### Step 5 — Produce and archive the file
+
+Write `<topic>-short-brief.md` in the project root. Run
+`./scripts/check-acronyms.sh <topic>-short-brief.md` and fix every FAIL. Then
+follow CLAUDE.md's "Briefing file lifecycle" from the copy step onward: `cp`
+the `.md` to Google Drive, then `mv` it to `briefs/`. The message you paste
+into Signal or Gmail is this file's content, but the file itself is archived
+so the Drive folder holds every deliverable.
+
 ---
 
 ## Output Format
@@ -133,17 +142,19 @@ Example:
 
 ## Pre-Delivery Check
 
-Before sending, verify:
+Run SKILL.md's Shared Pre-Delivery Check first. It covers acronyms, em dashes,
+position phrasing, primary-source status, future-date tagging, the acronym
+checker, and the humanizer pass — for this output type the humanizer applies
+to the hook, the why-it-matters bullets, and the ask lines. Then verify these
+short-brief-specific items:
 
 - [ ] Bill number and Congress session correct
-- [ ] Status confirmed from congress.gov — not only from a news article
 - [ ] Action members are the most movable right now — not just the most senior
 - [ ] Each action entry has phone number and contact URL from state-context-va.md
 - [ ] Next trigger date is specific — not "soon" or "in coming weeks"
 - [ ] Full brief link present and resolves
 - [ ] Total word count under 400
 - [ ] Readable as plain text — no markdown link syntax, no nested formatting
-- [ ] Apply humanizer pass to hook, bullets, and ask lines before sending
 
 ---
 

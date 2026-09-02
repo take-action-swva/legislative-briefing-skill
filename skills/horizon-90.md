@@ -184,6 +184,10 @@ sentence-length rules that apply to all output types.
 
 ## Pre-Delivery Check
 
+Run SKILL.md's Shared Pre-Delivery Check first. It covers acronyms, em dashes,
+position phrasing, primary-source status, future-date tagging, the acronym
+checker, and the humanizer pass. Then verify these horizon-specific items:
+
 - [ ] Every item has a Scheduled / Expected / Watch tag matching Step 3
 - [ ] No invented dates — every Scheduled date traces to a primary source
 - [ ] Recess/district weeks inside the window are listed
@@ -191,8 +195,6 @@ sentence-length rules that apply to all output types.
 - [ ] Glance table is two-column
 - [ ] No phone numbers or call scripts included
 - [ ] Virginia angle present, or explicitly marked absent, for every item
-- [ ] Acronyms expanded on first use per SKILL.md
-- [ ] No em dashes in prose per SKILL.md
 - [ ] Docx generated and opens without validation errors
 - [ ] Both .js and .docx moved to briefs/
 
