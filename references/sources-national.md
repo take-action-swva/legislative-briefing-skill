@@ -36,13 +36,68 @@ When `WebFetch` fails (redirect loop, empty body, JS placeholder), fall back to
 | Senate Daily Press | dailypress.senate.gov | Senate floor activity logs, timestamped procedural votes, exact cloture counts | primary | WebFetch | 2026-06-01 |
 | White House | whitehouse.gov | EO text, administration statements | primary | WebFetch | 2026-06-01 |
 | GovTrack | govtrack.us | Bill prognosis, vote history, member scorecards | high | WebFetch | 2026-06-01 |
-| CRS Reports | crsreports.congress.gov | Deep nonpartisan legislative analysis, reconciliation procedure | primary | WebFetch | 2026-06-01 |
+| Congressional Research Service (CRS) Reports | crsreports.congress.gov | Deep nonpartisan legislative analysis, reconciliation procedure | primary | WebFetch | 2026-06-01 |
 
 **Notes from live research sessions:**
 - congress.gov often shows only "In Senate" or "In Committee" with minimal
   procedural detail for bills actively on the floor. When a bill has been
   debated in the Senate, check dailypress.senate.gov for the full procedural
   record — it provides timestamped vote logs that congress.gov doesn't surface.
+
+---
+
+## Congressional Calendars
+
+Where to find session weeks, recess/district work periods, and adjournment
+targets. Recorded 2026-09-02 after working these out from scratch — start here
+rather than searching.
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| Senate annual calendar | senate.gov/legislative/resources/pdf/2026_calendar.pdf | Senate session and recess days, convening and target adjournment dates | primary | PDF, render as image | 2026-09-02 |
+| House Majority Leader | majorityleader.gov/house-legislative-calendar-2026/ | House session days; links the one-page and full PDFs | primary | WebFetch for the links, then PDF | 2026-09-02 |
+| House Majority Leader — schedule | majorityleader.gov/schedule/ | Current week's House floor schedule | primary | WebFetch | 2026-09-02 |
+| House legislative activity | house.gov/legislative-activity | Day-to-day House floor activity | primary | WebFetch | 2026-09-02 |
+| congress.gov days in session | congress.gov/days-in-session/119th-congress | Days already in session | primary | blocked to WebFetch (403); open in a browser | 2026-09-02 |
+| govinfo CCAL collection | api.govinfo.gov/collections/CCAL/{timestamp} | One package per day a chamber was in session — a machine-readable RETROSPECTIVE record | primary | API, api.data.gov key | 2026-09-02 |
+
+**There is no machine-readable forward calendar.** This was checked directly,
+so do not go looking again:
+
+- The congress.gov API has **no** calendar endpoint. `/v3/house-calendar`
+  returns 404.
+- govinfo's CCAL collection publishes packages named `CCAL-119hcal-YYYY-MM-DD`
+  and `CCAL-119scal-YYYY-MM-DD`, one per day a chamber actually sat. That is a
+  reliable record of the past and says nothing about next month. It works with
+  the same api.data.gov key used for the FEC.
+- The forward schedule exists only as annual PDFs from each chamber.
+
+Because of this, `calendar-119.md` in the repo root is hand-maintained. Read it
+before researching any date; refresh it twice a year per MAINTENANCE.md.
+
+**The two chambers use opposite color conventions, and neither PDF is
+readable as text.**
+
+- **Senate:** red days = NOT in session.
+- **House:** gold highlight = IS in session.
+- Reading one with the other's convention inverts the entire year.
+- `pdftotext` strips the color and returns a bare date grid — output that looks
+  like data and carries none of the information. Render the page as an image
+  instead:
+
+```bash
+pdftoppm -png -r 300 -f 1 -l 1 cal.pdf out            # whole page
+pdftoppm -png -r 300 -f 1 -l 1 -x 540 -y 920 -W 1500 -H 480 cal.pdf q1
+```
+
+Always cross-check a color reading against the convening and target-adjournment
+dates printed on the same page. If the first and last in-session days do not
+match those figures, the reading is wrong.
+
+The House PDF carries its own revision date in the filename
+(`..._revised_march_2026.png.pdf`) and was revised after the Senate's was
+published. Check for a newer revision rather than assuming a cached copy is
+current.
 
 ---
 
@@ -58,7 +113,7 @@ When `WebFetch` fails (redirect loop, empty body, JS placeholder), fall back to
 | Legislative Procedure | legislativeprocedure.com | Senate/House procedure deep dives, Byrd Rule analysis, reconciliation pathway analysis | high | WebFetch | 2026-06-01 |
 | Bipartisan Policy Center | bipartisanpolicy.org | Balanced legislative analysis across party lines | high | WebFetch | 2026-06-01 |
 | Brookings Institution | brookings.edu | Policy analysis, EO impact assessment | high | WebFetch | 2026-06-01 |
-| TRAC Immigration | trac.syr.edu | ICE enforcement data by state and district, deportation statistics, detention data | high | WebFetch | 2026-06-01 |
+| TRAC Immigration | trac.syr.edu | Immigration and Customs Enforcement (ICE) enforcement data by state and district, deportation statistics, detention data | high | WebFetch | 2026-06-01 |
 | Census Bureau | census.gov | District demographics, population data | primary | WebFetch | 2026-06-01 |
 
 **Notes from live research sessions:**
