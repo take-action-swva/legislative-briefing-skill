@@ -97,7 +97,7 @@ templates/
 
 ## Current State
 
-**Skill version:** 3.4  
+**Skill version:** 3.5  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -124,6 +124,7 @@ templates/
 | 3.2 | 2026-09-02 | Added `scripts/fetch-cosponsors.sh` (current cosponsors with the delegation flagged; separates withdrawn cosponsors, which the congress.gov endpoint returns mixed in with current ones) and `scripts/publish.sh` (single source of truth for the Drive path, refuses to run when Drive for Desktop is down). Added the `issues/` research cache with explicit freshness limits and a hard rule that it never satisfies Accuracy Rule 6, plus `brief-index.md` and the hand-maintained `calendar-119.md`. Established that no machine-readable forward congressional calendar exists, so no fetch script was written for it. |
 | 3.3 | 2026-09-02 | Made feeding the research cache a required, checked step. Writing or updating the issue file and publishing with `publish.sh` are now items in SKILL.md's Shared Pre-Delivery Check, and Digest mode carries its own. The cache was read-only in practice: 3.2 told Claude to read `issues/` but never required writing it, so the September 2026 digest produced no issue files and October would have been full price. Raised the position and campaign-ask cache from 30 to 45 days — a 30-day limit expires exactly on a monthly cadence, so the most expensive research was the one thing the cache never delivered. Backfilled five issue files from the September digest. |
 | 3.4 | 2026-09-02 | Renamed the CTA roundup's per-ask field from "Answer looks like" to "Expectations" across both modes. Added a retired-label guard to `build-zip.sh` that fails the build if a renamed label reappears in the skill files, seeded with "Answer looks like" and "Constituent pressure only" — the latter having already survived a rename in the docs while the template kept emitting it. |
+| 3.5 | 2026-09-02 | Added a Shared Style Rule separating writer guardrails from reader content. Cached corrections exist to stop a draft going wrong, not to inform group leaders, and the September CTA roundup published the Virginia redistricting guardrail as a framing fact the network already knew. Rewrote `cta-roundup.md`'s Framing facts instruction, which had told the writer to state logged corrections "rather than relying on readers to already know." |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -322,6 +323,10 @@ These were explicitly considered and ruled out. Don't reintroduce them.
   path exists in one place so it can be changed in one place.
 - **Do not grow the SKILL.md description past 1024 characters** — claude.ai
   rejects the upload. `build-zip.sh` enforces it. See Skill Upload Constraints.
+- **Do not publish a cached correction as reader content** — most exist to
+  stop Claude making an error, not to inform group leaders. The Virginia
+  redistricting fact is the standing example. See the Shared Style Rule on
+  guardrails.
 - **Do not reintroduce a retired field label** — "Answer looks like" is now
   "Expectations", and "Constituent pressure only" is now "Contact and log".
   `build-zip.sh` fails the build if either reappears in `skills/`, `SKILL.md`,

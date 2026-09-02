@@ -15,7 +15,7 @@ description: >
   with advocacy, action, or organizing. Also trigger on named campaigns and
   training tracks, including Hands Off Our Vote, Immigrant Justice Summer, and
   Dismantling Detention.
-version: "3.4"
+version: "3.5"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia
@@ -407,6 +407,15 @@ scan, and CTA roundup in either mode. Sub-skills may add format-specific rules o
 - **Acronyms on first use.** Write out the full name followed by the
   acronym in parentheses on first mention. Subsequent uses may use the
   acronym alone.
+
+- **Guardrails are for you, not for the reader.** Much of what is recorded in
+  `state-context-{{state_code}}.md`, `lessons_learned`, and `issues/` exists to
+  stop a draft going wrong, not to inform group leaders. Virginia's district
+  lines are the standing example: the fact is cached so no draft misstates it,
+  and the network already knows it. Publishing it tells readers something they
+  know and implies they might not. Before stating a correction in output, ask
+  what a group leader would do differently having read it. If the answer is
+  nothing, leave it in the cache.
 
 - **Gloss jargon on first use.** Terms like "cloture," "Byrd Rule," and
   "markup" need a brief plain-language parenthetical the first time they

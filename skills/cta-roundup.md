@@ -193,9 +193,18 @@ resolved litigation, seats on the ballot, and anything a reader might
 otherwise get wrong. This section exists because CTA roundups get forwarded
 and excerpted, and a wrong premise at the top propagates.
 
-If a factual correction has been logged in `state-context-{{state_code}}.md`,
-and it bears on the asks, state it here explicitly rather than relying on
-readers to already know.
+**Do not publish corrections that exist to keep you from making an error.**
+Most logged corrections are guardrails for the writer, not news for the
+reader. Virginia's district lines are the standing example: the fact is
+recorded in `state-context-{{state_code}}.md` and in `issues/` so a draft
+never gets it wrong, and the network already knows it. Printing it tells
+group leaders something they know and implies they might not.
+
+A correction belongs in this section only when a reader acting on the asks
+would otherwise get it wrong, and the error is live in circulation. Test it
+by asking what a group leader would do differently having read it. If the
+answer is nothing, cut it and leave the fact in the cache where it does its
+actual work.
 
 **2. Delegation and tiers**
 
