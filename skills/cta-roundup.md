@@ -112,10 +112,10 @@ bills is incomplete in either mode.
 1. **Near-term action point.** A vote, markup, or procedural moment expected
    this month or early next. No action point means it is not digest material
    right now.
-2. **Constituent pressure can move the outcome.** A member is persuadable,
-   undecided, or facing a close vote. Locked votes on either side are less
-   actionable.
-3. **Virginia relevance.** A Virginia member has leverage, is the persuadable
+2. **Constituent pressure can move the outcome.** A Tier 2 Movable member is
+   involved, or a close vote is in play. Items where every relevant member is
+   Tier 1 or Tier 3 are weaker digest material, though not disqualified.
+3. **Virginia relevance.** A Virginia member has leverage, is the deciding
    vote, or the bill has a notable Virginia-specific impact.
 
 Drop items that matter but are stalled with no near-term moment. Save them
@@ -142,40 +142,27 @@ stale status is worse than a missing item.
 
 ### Step 4 — Tier the delegation by leverage
 
-Sort every member of the delegation into one of three tiers. Tiering is by
-current movability, not by party alone and not by seniority.
+Sort every member of the delegation using SKILL.md's Shared Member Taxonomy:
+Tier 1 Aligned, Tier 2 Movable, Tier 3 Locked, plus the Gatekeeper flag. That
+section carries the definitions, the rule that an unknown position is Tier 2,
+and the contact ranking. This sub-skill originated that vocabulary and the
+other output types now render it in their own labels.
 
-**Tier 1 — Aligned.** Members who will vote the right way without pressure.
-The ask here is escalation, not persuasion: use procedural tools, go on
-record publicly, do oversight in the open. A supportive vote is the floor.
-Name the specific escalation. "Keep up the good work" is not an ask.
+Two notes specific to this output type:
 
-**Tier 2 — Movable.** Members in competitive seats, members who have broken
-with their party on a related vote, members whose stated position is
-unclear. This tier gets the most words in the output. Asks here should be
-public and local: town hall questions, letters to the editor, constituent
-stories.
+**Tier 2 gets the most words.** It is the tier where the document changes an
+outcome, so it earns the most space in campaign mode.
 
-**Tier 3 — Locked.** Members who will not move on any ask in scope. Do not
-omit them and do not pretend they are persuadable. The deliverable in these
-districts is documentation: a written ask, a logged non-response, and a
-public record usable with local press and at candidate forums. Say so
-plainly so group leaders in those districts do not measure success by
-whether the office responds.
+**Tier 3 gets a real ask, not a shrug.** Write the ask, name what a logged
+non-response is worth, and say plainly that success in those districts is
+measured by the record produced rather than by whether the office replies.
 
 **Digest mode** applies the same tiering but publishes less of it. Each item
 names only the one or two members with the most leverage on that item, chosen
-by the tiers above. There is no delegation-wide section. Do not spend item
-space on members who are already locked in either direction.
+by the tiers above. There is no delegation-wide section.
 
 Pull all member names, districts, phone numbers, and contact URLs from
 `state-context-{{state_code}}.md`. Do not search for them.
-
-Apply the parent skill's rule on inferring positions. A member is Tier 2 or
-Tier 3 based on a found record, not on your read of their party. Where no
-record exists, write "position not found during research" and place them in
-Tier 2 by default. An unknown position is a movable one until proven
-otherwise.
 
 ### Step 5 — Build the sequence
 

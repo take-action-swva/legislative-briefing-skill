@@ -42,16 +42,20 @@ point, and when is it?** Everything in this brief flows from that.
 
 ### Step 3 — Identify the 2–3 most actionable members right now
 
-Filter by *current leverage*, not seniority or general influence:
+Classify the full delegation using SKILL.md's Shared Member Taxonomy, then
+publish only the two or three with the most leverage on this bill right now.
+Follow the shared contact ranking: Gatekeepers first regardless of tier, then
+Tier 2 Movable, then Tier 1 Aligned, then Tier 3 Locked.
 
-1. **Persuadables** — members who haven't stated a position or are wavering
-2. **Gatekeepers** — members who control scheduling or whether the bill moves
-3. **Allies who can move others** — confirmed supporters with influence over
-   wavering colleagues
+In practice a short brief is mostly Gatekeepers and Tier 2 members, because
+those are where a phone call changes an outcome this week. A Tier 3 Locked
+member belongs here when they are genuinely the highest-leverage target — the
+only delegation member on the committee of jurisdiction, say. Include them with
+the documentation framing from the taxonomy, so a caller knows a logged refusal
+is the point rather than a failure.
 
-Do not list confirmed opponents. Do not list members just because they are
-senior or on a relevant committee if they are already locked in. Two or three
-movable members is enough — more dilutes the ask.
+Do not list a member merely because they are senior or on a relevant committee
+if someone else is more movable. Two or three is enough — more dilutes the ask.
 
 Skip `brief-full.md`'s Step 4 (deep state-specific impact research) unless a
 key statistic is already known or quickly found in a senator's press release.
@@ -91,7 +95,8 @@ Example:
 > registration.
 
 **2. Act now — 2–3 members maximum**
-One entry per member. Each entry on its own line block:
+One entry per member, in the shared contact ranking order. Each entry on its
+own line block:
 
 ```
 **[Name] — [Role/why they matter right now]**
@@ -162,6 +167,10 @@ short-brief-specific items:
 
 - **Listing too many members.** Two or three is enough. More than three and
   group leaders call nobody.
+- **Dropping a Locked member who is the real lever.** The two-or-three cap is
+  a space constraint, not a rule that opponents go uncontacted. If the only
+  delegation member on the committee of jurisdiction is Tier 3, they belong in
+  the brief with the documentation framing.
 - **Burying the ask.** The action section comes before the background bullets,
   not after. Leaders who stop reading after the hook still know who to call.
 - **Using the full brief's "Why It Matters" section verbatim.** It was written
