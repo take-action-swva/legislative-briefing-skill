@@ -122,6 +122,66 @@ directly. See CONTRIBUTING.md for the manual Claude prompt.
 
 ---
 
+## fetch-cosponsors.sh
+
+**What it does:** Pulls the current cosponsor list for a bill from the
+congress.gov API, flags which of them are in the configured state's
+delegation, and separates withdrawn cosponsors from current ones.
+
+**Why the separation matters:** the API returns withdrawn cosponsors mixed in
+with current ones, distinguished only by a `sponsorshipWithdrawnDate` field.
+S.1383 in the 119th Congress reports eight cosponsor records and two actual
+cosponsors — six senators withdrew. Reading the raw list would tell an
+organizer to thank six members for support they publicly pulled.
+
+**When to use:** on the DAY a document goes out, for every bill it names. A
+stale cosponsor list is the most common factual error in ask-shaped output,
+and this is one of the items Shared Accuracy Rule 6 forbids caching.
+
+**Usage:**
+```bash
+./scripts/fetch-cosponsors.sh <congress> <bill-type> <bill-number> [state-code]
+
+# Examples:
+./scripts/fetch-cosponsors.sh 119 hr 22 VA
+./scripts/fetch-cosponsors.sh 119 s 1383
+```
+
+**Requires:** `CONGRESS_API_KEY`, curl, jq. Pages through in batches of 250
+(the API maximum) so long cosponsor lists are not silently truncated.
+
+---
+
+## publish.sh
+
+**What it does:** Copies a finished deliverable to the Google Drive briefings
+folder, verifies the bytes landed by checksum, and moves the source files into
+`briefs/`.
+
+**Why it exists:** the Drive path was restated in CLAUDE.md and three
+sub-skills, and a bare `cp` reports success even when Drive for Desktop is
+quit or signed out — leaving the file locally forever while the session claims
+it published. The script refuses to run in that state.
+
+**What it does not verify:** the upload itself. Drive uploads asynchronously
+and exposes no completion signal readable from a shell. The script says so in
+its own output rather than implying the file is live.
+
+**Usage:**
+```bash
+./scripts/publish.sh <file> [more files...]
+
+# Examples:
+./scripts/publish.sh iran-war-powers-brief.docx iran-war-powers-brief.js
+./scripts/publish.sh cta-roundup-2026-09-02.md
+```
+
+Accepts `.docx` and `.md` deliverables and `.js` sources. Only deliverables
+are copied to Drive; `.js` files are archived to `briefs/` but never
+published.
+
+---
+
 ## check-acronyms.sh
 
 **What it does:** Scans a briefing file for known legislative acronyms and

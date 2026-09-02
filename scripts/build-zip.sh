@@ -14,6 +14,8 @@ ZIP="${REPO}/advocacy-legislation-brief-claude-upload.zip"
 SKILL_FILES=(
   SKILL.md
   state-context-va.md
+  calendar-119.md
+  brief-index.md
 )
 REF_FILES=(
   references/sources-national.md
