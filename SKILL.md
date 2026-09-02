@@ -1,23 +1,20 @@
 ---
 name: legislative-briefing-skill
 description: >
-  Use this skill whenever someone asks you to research, analyze, summarize, or
-  produce a briefing on federal legislation or executive orders for civic
-  advocacy, grassroots organizing, Indivisible groups, or similar audiences.
-  Also use for short summaries or quick briefs on legislation, for
-  forward-looking 90-day legislative outlook scans, for monthly legislative
-  digests and newsletters, and for calls-to-action roundups that turn a
-  national campaign into specific congressional asks.
-  Trigger immediately on the phrases "CTA brief" or "calls to action brief".
-  Also trigger on phrases like "brief me on this bill", "what should our group
-  do about", "give me a quick summary", "what's coming up in the next 90 days",
-  "what should we be watching", "research this EO for our members", "what's the
-  status of", "calls to action", "CTAs", "action asks", "what should we ask our
-  reps", "what should we be demanding", "what do we tell our members to do",
-  "monthly newsletter", "the digest", "what's moving this month", or
-  any request combining legislation with advocacy, action, or organizing. Also
-  trigger on named campaigns and training tracks, including Hands Off Our Vote,
-  Immigrant Justice Summer, and Dismantling Detention.
+  Use whenever someone asks you to research, analyze, summarize, or produce a
+  briefing on federal legislation or executive orders for civic advocacy,
+  grassroots organizing, Indivisible groups, or similar audiences. Covers full
+  briefings, short briefs, 90-day legislative outlook scans, monthly digests
+  and newsletters, and calls-to-action roundups that turn a campaign into
+  specific congressional asks. Trigger on "CTA brief", "calls to action",
+  "CTAs", "action asks", "what should we ask our reps", "brief me on this
+  bill", "what should our group do about", "give me a quick summary", "what's
+  the status of", "research this EO for our members", "what's coming up in the
+  next 90 days", "what should we be watching", "monthly newsletter", "the
+  digest", "what's moving this month", or any request combining legislation
+  with advocacy, action, or organizing. Also trigger on named campaigns and
+  training tracks, including Hands Off Our Vote, Immigrant Justice Summer, and
+  Dismantling Detention.
 version: "3.2"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
