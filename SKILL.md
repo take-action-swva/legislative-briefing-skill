@@ -18,7 +18,7 @@ description: >
   any request combining legislation with advocacy, action, or organizing. Also
   trigger on named campaigns and training tracks, including Hands Off Our Vote,
   Immigrant Justice Summer, and Dismantling Detention.
-version: "3.0"
+version: "3.1"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia
@@ -255,6 +255,69 @@ scan, and CTA roundup in either mode. No exceptions.
    `skills/horizon-90.md` applies this as a structural Scheduled/Expected/Watch
    tag on every item; other output types should apply the same distinction in
    prose whenever a future date is stated.
+
+---
+
+## Shared Member Taxonomy
+
+Every output type classifies members the same way. The classes below are the
+vocabulary; each sub-skill renders them in labels suited to its channel, and
+the mapping table at the end of this section says how.
+
+Classify by *current movability on the issue in scope*, never by party alone
+and never by seniority.
+
+**Tier 1 — Aligned.** On record supporting our position. The ask is
+escalation, not persuasion: use procedural tools, go on record publicly, do
+oversight in the open. A supportive vote is the floor, not the finish line.
+Name the specific escalation. "Keep up the good work" is not an ask.
+
+**Tier 2 — Movable.** In a competitive seat, has broken with party on a
+related vote, or has no stated position on this issue. Asks here should be
+public and local: town hall questions, letters to the editor, constituent
+stories. **This is the default class when no record exists** — an unknown
+position is a movable one until proven otherwise.
+
+**Tier 3 — Locked.** On record against, with no realistic movement on any ask
+in scope. Locked members are contacted like everyone else. Do not omit them
+and do not pretend they are persuadable. The deliverable in these districts is
+a written ask, a logged response or non-response, and a public record usable
+with local press and at candidate forums. Say so plainly, so group leaders in
+those districts do not measure success by whether the office replies.
+
+**Gatekeeper** is a flag, not a class. It marks a member who controls
+scheduling, a markup, or whether the thing moves at all — a chair, a ranking
+member, or leadership. A member carries a tier *and*, optionally, this flag. An
+Aligned Gatekeeper is usually the highest-leverage target in the delegation,
+which a scheme that treated "gatekeeper" as a peer tier could not express.
+
+### Applying it
+
+- A member is Tier 1 or Tier 3 only on a found record: a press release, floor
+  statement, or vote. Absent that, they are Tier 2 and the output says
+  "position not found during research" (Accuracy Rule 3).
+- Classify the full delegation every time. Output types differ in how many
+  members reach the page, never in how many get classified.
+- Contact ranking within an output follows leverage: Gatekeepers first
+  regardless of tier, then Movable, then Aligned, then Locked.
+
+### Rendering labels by output type
+
+| Class | brief-full §6 | brief-short | cta-roundup |
+|---|---|---|---|
+| Tier 1 — Aligned | → Thank and reinforce | (omitted for space) | Tier 1 — Aligned |
+| Tier 2 — Movable | → Call now | listed | Tier 2 — Movable |
+| Tier 3 — Locked | → Contact and log | listed only if the highest-leverage target | Tier 3 — Locked |
+| Gatekeeper flag | noted in the member's note | "— controls scheduling" | noted in the tier paragraph |
+
+`brief-short.md` carries only two or three members total, so most of the
+delegation is absent from it by design. That is a space constraint, not a
+judgment that the omitted members should go uncontacted.
+
+`skills/horizon-90.md` is absent from the table on purpose. It names no
+members and carries no contact details, so it never classifies anyone. If a
+horizon item has reached the point of naming who to call, it belongs in a
+short brief or the digest instead.
 
 ---
 

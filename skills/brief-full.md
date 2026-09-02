@@ -167,13 +167,17 @@ briefing without reading past the first two sections.
    Threat level. No prose. Readers should orient themselves in under 10 seconds.
 
 4. **Recommended Actions — Right Now**
-   Open with contact actions before any other actions, ranked by leverage:
-   1. Committee gatekeepers — members who control scheduling, amendments, or
-      whether the bill moves at all
-   2. Persuadables — members who haven't stated a position or are wavering
-   3. Confirmed allies — thank them and ask them to pressure wavering colleagues
-   4. Confirmed opponents — do not list for direct contact; route to
-      constituent pressure via Watch List
+   Classify the delegation using SKILL.md's Shared Member Taxonomy, then open
+   with contact actions before any other actions, in the shared ranking:
+   1. Gatekeepers — control scheduling, amendments, or whether the bill moves
+      at all. First regardless of tier; an Aligned Gatekeeper is usually the
+      highest-leverage target in the delegation.
+   2. Tier 2 Movable — no stated position, wavering, or has broken with party
+      on a related vote
+   3. Tier 1 Aligned — thank them, and name the specific escalation you want
+   4. Tier 3 Locked — a written ask with the documentation framing. These
+      members are contacted, not skipped. What the district gets out of it is
+      a logged response or non-response and a public record.
 
    Each contact entry:
    - **Name — Role** (bold directive on its own line)
@@ -206,11 +210,14 @@ briefing without reading past the first two sections.
    `va-members-table.js`) to a string covering the member's relevance to this
    specific briefing. For each member include, in order:
 
-   - **Priority label first** (use exactly these):
-     - **→ Call now** — persuadable, wavering, or position unclear
-     - **→ Thank and reinforce** — confirmed ally; ask them to press colleagues
-     - **→ Constituent pressure only** — firm opponent; route to constituent
-       pressure, not direct calls from the statewide network
+   - **Priority label first** (use exactly these). Each maps to one class in
+     SKILL.md's Shared Member Taxonomy:
+     - **→ Call now** — Tier 2 Movable: wavering, or position not found
+     - **→ Thank and reinforce** — Tier 1 Aligned; name the escalation you want
+     - **→ Contact and log** — Tier 3 Locked: send the written ask, record the
+       response or the silence. Not a lesser action, a different deliverable.
+     - Append **(Gatekeeper)** to any of the three when the member controls
+       scheduling, a markup, or whether the bill moves
    - Position on the bill or issue, sourced from a press release, floor
      statement, or vote record — not inferred from party
    - Key vote(s) with roll call number and date if available
@@ -219,9 +226,10 @@ briefing without reading past the first two sections.
    Example `briefingNotes` entries:
    ```javascript
    const briefingNotes = {
-     'warner': '→ Call now. Voted YES on cloture (Roll Call 45, Jan 2025). Ask him to use his Intelligence Committee role to block companion provisions.',
+     'warner': '→ Call now (Gatekeeper). Voted YES on cloture (Roll Call 45, Jan 2025). Ask him to use his Intelligence Committee role to block companion provisions.',
      'kaine':  '→ Thank and reinforce. Publicly opposed the bill [kaine.senate.gov →]. Ask him to lobby wavering Democrats.',
-     'scott':  '→ Thank and reinforce. Position not found during research; party leadership opposed. Thank for expected support.',
+     'scott':  '→ Call now. Position not found during research. An unknown position is Tier 2 Movable, not an assumed ally.',
+     'griffith': '→ Contact and log. Voted YES on passage (Roll Call 199, Sep 2025) [clerk.house.gov →]. Send the written ask and log the reply or the silence for local press.',
    };
    ```
 
@@ -229,6 +237,11 @@ briefing without reading past the first two sections.
    duplicate them in the note string. All 13 delegation members must appear.
    Members with no issue-specific note still receive a priority label.
    Priority label order must match the contact ranking in section 4.
+
+   Note what the `scott` entry demonstrates: a member with no found record is
+   Tier 2 Movable and gets "→ Call now". Do not label them an ally on the
+   strength of party leadership's position — that is the inference Accuracy
+   Rule 3 forbids.
 
 7. **Donor Context** [optional — sector-linked bills only]
    One paragraph per relevant member. State figures as facts: amount, industry
@@ -240,7 +253,8 @@ briefing without reading past the first two sections.
 8. **Watch List** [optional]
    Non-`{{state}}` members whose votes are pivotal. Bullet points only. Name,
    role, and one sentence on why they matter to the outcome. No priority
-   labels — these are not our members to call.
+   labels and no taxonomy tiers — these are not our members to call, and the
+   taxonomy classifies the delegation only.
 
 9. **Legislative Timeline**
    Reference material, not primary reading. Bold date labels followed by

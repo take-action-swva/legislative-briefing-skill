@@ -82,7 +82,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 
 ## Current State
 
-**Skill version:** 3.0  
+**Skill version:** 3.1  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -105,6 +105,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 | 2.2 | 2026-09-02 | Added `skills/cta-roundup.md` (campaign-shaped calls-to-action roundup: leverage-based delegation tiering, mandatory "Answer looks like" line per ask, volatile-items pre-publish checklist) and moved it from the repo root into `skills/`. Widened the SKILL.md description to match CTA phrasing and named campaigns, with "CTA brief" as an explicit invocation phrase. `output_format` is now `[docx, markdown]`. Broadened Shared Accuracy Rule 6 beyond congress.gov to cover cosponsor lists, Federal Register dockets, appropriations vehicle, litigation, and delegation composition. Recorded the Virginia redistricting resolution in `lessons_learned` and `state-context-va.md`. Added `skills/cta-roundup.md` to `build-zip.sh`'s `SKILLS_FILES`. |
 | 2.3 | 2026-09-02 | Added a Shared Pre-Delivery Check to SKILL.md and pointed all five sub-skills at it, removing the items they each duplicated. `check-acronyms.sh` now accepts `.md` as well as `.js`, so markdown outputs (short briefs, CTA roundups) are acronym-checked too. Gave `cta-roundup.md` the docx and markdown production paths its "docx on request" line implied but never described. Markdown outputs are now archived to Drive alongside the docx ones. Added the humanizer pass to `newsletter.md` and `horizon-90.md`, which were the two output types missing it. |
 | 3.0 | 2026-09-02 | Absorbed `skills/newsletter.md` into `skills/cta-roundup.md` as Digest mode and deleted it. The two were the vaguest boundary in the set: both multi-item, both current-moment, both ending in a member and an ask, distinguished only by what the request started from. One document now carries both, sharing the research workflow, delegation tiering, ask verification, and volatile-items check, and differing in structure, length, and output format. Digest items gain the mandatory "Answer looks like" line; campaign asks gain the digest's rule about dropping stalled items. Added digest phrasing to the SKILL.md description, which never carried it — "monthly newsletter" and "what's moving this month" could fail to trigger the skill at all. Routing table down to four rows. |
+| 3.1 | 2026-09-02 | Added a Shared Member Taxonomy to SKILL.md and retired the four competing vocabularies. `cta-roundup.md`'s naming won: Tier 1 Aligned / Tier 2 Movable / Tier 3 Locked, with Gatekeeper as an orthogonal flag rather than a peer tier, so an Aligned Gatekeeper is expressible. Resolved the contradiction between sub-skills on confirmed opponents in favor of contacting them: Tier 3 members get a written ask and a logged response, and `brief-full.md`'s "Constituent pressure only" label becomes "Contact and log". Each output keeps channel-appropriate rendering labels, mapped in a table in SKILL.md. Fixed a brief-full example that labeled a member with no found record as an ally, which contradicted Accuracy Rule 3. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -278,6 +279,12 @@ These were explicitly considered and ruled out. Don't reintroduce them.
 - **Do not infer member positions from party** — find a press release, floor
   statement, or vote record, or write "position not found during research"
   (never "position not publicly stated" — see Shared Accuracy Rule 3)
+- **Do not omit Tier 3 Locked members from contact** — reversed in 3.1. They
+  get a written ask and a logged response; the deliverable in those districts
+  is the record, not a reply. See SKILL.md's Shared Member Taxonomy.
+- **Do not invent a new vocabulary for member classification** — one taxonomy
+  lives in SKILL.md. Sub-skills render it in their own labels via the mapping
+  table; they do not define new classes.
 - **Do not run donor lookups on every briefing** — sector-linked bills only
 - **Do not create a per-briefing research intake form requirement** — too
   much burden on busy group leaders; `fetch-bill.sh` covers the automatable
