@@ -37,7 +37,13 @@ importance.
 ### Step 1 — Build the calendar backbone first
 
 Before looking for legislative items, establish the structural calendar for
-the 90-day window:
+the 90-day window. **Start from `calendar-119.md`**, which holds the session
+weeks, recess periods, and statutory deadlines for this Congress so they are
+not re-researched on every scan. If it is unpopulated or its verification date
+predates a leadership revision, fill it in from the published calendars it
+cites rather than working around it.
+
+Then confirm the rest:
 
 - House and Senate floor calendars — confirm which weeks are session weeks
   and which are recess/district weeks

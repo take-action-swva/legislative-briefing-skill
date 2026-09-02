@@ -125,10 +125,13 @@ for a month when they move.
 
 Apply the parent skill's accuracy rules to every ask. Specifically:
 
-- **Cosponsorship asks require a current cosponsor list.** Pull it from  
-  congress.gov on the day you write. Asking a member to cosponsor a bill  
-  they already cosponsored destroys credibility with that office and with  
-  the group leader who made the call.
+- **Cosponsorship asks require a current cosponsor list.** Run  
+  `./scripts/fetch-cosponsors.sh <congress> <type> <number> {{state_code}}`  
+  on the day you write. Asking a member to cosponsor a bill they already  
+  cosponsored destroys credibility with that office and with the group  
+  leader who made the call. The script separates current cosponsors from  
+  withdrawn ones — the congress.gov endpoint returns both mixed together,  
+  and a member who withdrew is not a supporter to thank.
 - **Rulemaking asks require the Federal Register docket.** Get the docket  
   number, the comment period status, and whether a final rule has issued.  
   congress.gov will not have this.
@@ -365,7 +368,7 @@ contain asks that congress.gov cannot confirm.
 
 Re-verify all of the following on the day the document goes out:
 
-- [ ] **Cosponsor lists** for every bill named, from congress.gov
+- [ ] **Cosponsor lists** for every bill named — `./scripts/fetch-cosponsors.sh`, run today
 - [ ] **Federal Register rulemakings** — docket status, comment period, whether a final rule has issued
 - [ ] **Appropriations posture** — current CR or full-year bill, and whether any named rider or program elimination is still live
 - [ ] **Litigation** affecting district maps, election procedure, or any agency action cited

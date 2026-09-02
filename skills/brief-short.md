@@ -63,8 +63,11 @@ Do not delay the brief to chase state data.
 
 ### Step 4 — Confirm the full brief link
 
-Confirm the Google Drive URL for the full briefing document before writing.
-Include it at the end of the short brief.
+Check `brief-index.md` first — it lists everything published to the Drive
+folder, and is faster and more reliable than searching Drive. Confirm the URL
+for the full briefing document before writing, and include it at the end of
+the short brief. If the index has no row for this bill, no full brief exists
+yet; say so rather than linking to something adjacent.
 
 ### Step 5 — Produce and archive the file
 

@@ -62,8 +62,24 @@ skills/
                              (Aligned/Movable/Locked), a mandatory "Answer looks
                              like" line per ask, and the volatile-items
                              pre-publish checklist. Absorbed newsletter.md in 3.0.
+issues/                      Research cache. One file per active issue: bill
+                             status, member positions, campaign linkage,
+                             corrections, outputs, and outcomes. Every fact
+                             carries a verified date and source URL. README.md
+                             holds the freshness rules; _template.md is the
+                             per-issue skeleton. Never caches the Rule 6
+                             volatile items.
+brief-index.md               Index of everything published to the Drive folder.
+                             Fixes brief-short.md's full-brief link step.
+calendar-119.md              Session weeks, recesses, statutory deadlines for
+                             the 119th Congress. Hand-maintained: no
+                             machine-readable forward calendar exists.
 scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
+  fetch-cosponsors.sh        congress.gov API → current cosponsors, delegation
+                             flagged, withdrawn cosponsors separated out.
+  publish.sh                 Copy a deliverable to Drive, verify, archive to
+                             briefs/. Single source of truth for the Drive path.
   fetch-state-members.sh     congress.gov API → draft state-context file.
   fetch-donors.sh            FEC API → donor context markdown (industry tables filled manually from opensecrets.org website).
   build-zip.sh               Rebuild advocacy-legislation-brief-claude-upload.zip from current skill files.
@@ -82,7 +98,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 
 ## Current State
 
-**Skill version:** 3.1  
+**Skill version:** 3.2  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -106,6 +122,7 @@ evals/                       Evaluation cases (existing, not modified in this se
 | 2.3 | 2026-09-02 | Added a Shared Pre-Delivery Check to SKILL.md and pointed all five sub-skills at it, removing the items they each duplicated. `check-acronyms.sh` now accepts `.md` as well as `.js`, so markdown outputs (short briefs, CTA roundups) are acronym-checked too. Gave `cta-roundup.md` the docx and markdown production paths its "docx on request" line implied but never described. Markdown outputs are now archived to Drive alongside the docx ones. Added the humanizer pass to `newsletter.md` and `horizon-90.md`, which were the two output types missing it. |
 | 3.0 | 2026-09-02 | Absorbed `skills/newsletter.md` into `skills/cta-roundup.md` as Digest mode and deleted it. The two were the vaguest boundary in the set: both multi-item, both current-moment, both ending in a member and an ask, distinguished only by what the request started from. One document now carries both, sharing the research workflow, delegation tiering, ask verification, and volatile-items check, and differing in structure, length, and output format. Digest items gain the mandatory "Answer looks like" line; campaign asks gain the digest's rule about dropping stalled items. Added digest phrasing to the SKILL.md description, which never carried it — "monthly newsletter" and "what's moving this month" could fail to trigger the skill at all. Routing table down to four rows. |
 | 3.1 | 2026-09-02 | Added a Shared Member Taxonomy to SKILL.md and retired the four competing vocabularies. `cta-roundup.md`'s naming won: Tier 1 Aligned / Tier 2 Movable / Tier 3 Locked, with Gatekeeper as an orthogonal flag rather than a peer tier, so an Aligned Gatekeeper is expressible. Resolved the contradiction between sub-skills on confirmed opponents in favor of contacting them: Tier 3 members get a written ask and a logged response, and `brief-full.md`'s "Constituent pressure only" label becomes "Contact and log". Each output keeps channel-appropriate rendering labels, mapped in a table in SKILL.md. Fixed a brief-full example that labeled a member with no found record as an ally, which contradicted Accuracy Rule 3. |
+| 3.2 | 2026-09-02 | Added `scripts/fetch-cosponsors.sh` (current cosponsors with the delegation flagged; separates withdrawn cosponsors, which the congress.gov endpoint returns mixed in with current ones) and `scripts/publish.sh` (single source of truth for the Drive path, refuses to run when Drive for Desktop is down). Added the `issues/` research cache with explicit freshness limits and a hard rule that it never satisfies Accuracy Rule 6, plus `brief-index.md` and the hand-maintained `calendar-119.md`. Established that no machine-readable forward congressional calendar exists, so no fetch script was written for it. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
@@ -142,19 +159,23 @@ Pass a `sections` object with arrays of Paragraph objects. See the
 1. Write `<topic>-brief.js` in the project root
 2. Run `./scripts/check-acronyms.sh <topic>-brief.js` — fix any FAILs
 3. Run `node <topic>-brief.js` to generate the docx
-4. Copy the docx to Google Drive using cp — do not use base64 or the Drive
-   MCP upload tool, both bloat context and can stall:
+4. Publish and archive in one step:
    ```bash
-   cp <topic>-brief.docx "/Users/ernie/Library/CloudStorage/GoogleDrive-ernie.braganza@gmail.com/My Drive/Statewide Coordinating Committee /Legislation Briefings/"
+   ./scripts/publish.sh <topic>-brief.docx <topic>-brief.js
    ```
-5. Move both the `.js` and `.docx` to `briefs/`:
-   ```bash
-   mv <topic>-brief.js <topic>-brief.docx briefs/
-   ```
+   This copies the deliverable to Google Drive, verifies the bytes landed,
+   and moves both files to `briefs/`. It refuses to run if Drive for Desktop
+   is not running, which a bare `cp` would not catch.
+
+   Do not use base64 or the Drive MCP upload tool. Both bloat context and can
+   stall — a 20 KB docx costs roughly 10,000 tokens, re-billed on every
+   subsequent turn.
+5. Add the deliverable to `brief-index.md`, and record it in the issue's file
+   under `issues/`.
 
 **Markdown outputs** (short briefs, CTA roundups) have no `.js` or `node`
-stage. They run `check-acronyms.sh` against the `.md` directly, then follow
-steps 4 and 5 with the `.md` file. Every deliverable is archived in Drive,
+stage. They run `check-acronyms.sh` against the `.md` directly, then go
+through `publish.sh` the same way. Every deliverable is archived in Drive,
 not just the docx ones.
 
 The `briefs/` directory is gitignored. Generated files never accumulate in
@@ -196,6 +217,13 @@ echo, log, or paste them into a chat.
 # Check acronym expansions (mandatory for every output type).
 # Accepts .js for docx outputs, .md for markdown outputs:
 ./scripts/check-acronyms.sh <briefing-file.js|.md>
+
+# Current cosponsors, with the state delegation flagged. Run on the DAY of
+# distribution — never cache this:
+./scripts/fetch-cosponsors.sh 119 hr 22 VA
+
+# Copy a finished deliverable to Drive and archive it to briefs/:
+./scripts/publish.sh iran-war-powers-brief.docx iran-war-powers-brief.js
 ```
 
 Scripts output markdown to stdout. Redirect to files for use in briefings.
@@ -285,6 +313,12 @@ These were explicitly considered and ruled out. Don't reintroduce them.
 - **Do not invent a new vocabulary for member classification** — one taxonomy
   lives in SKILL.md. Sub-skills render it in their own labels via the mapping
   table; they do not define new classes.
+- **Do not satisfy Accuracy Rule 6 from `issues/`** — cosponsor lists,
+  Federal Register dockets, appropriations vehicle, litigation, and delegation
+  composition are re-verified live on the day of distribution, every time. The
+  cache is a drafting aid, never a substitute for the pre-publish check.
+- **Do not hardcode the Drive path in a sub-skill** — call `publish.sh`. The
+  path exists in one place so it can be changed in one place.
 - **Do not run donor lookups on every briefing** — sector-linked bills only
 - **Do not create a per-briefing research intake form requirement** — too
   much burden on busy group leaders; `fetch-bill.sh` covers the automatable

@@ -18,7 +18,7 @@ description: >
   any request combining legislation with advocacy, action, or organizing. Also
   trigger on named campaigns and training tracks, including Hands Off Our Vote,
   Immigrant Justice Summer, and Dismantling Detention.
-version: "3.1"
+version: "3.2"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia
@@ -197,7 +197,12 @@ Before doing any research, load these three files:
 3. `references/sources-{{state_code}}.md` — state-specific sources,
    citation formats, and session notes.
 
-Load all three now. Do not proceed to Step 1 until they are in context.
+Then check `issues/` for a file matching the issue in scope. If one exists,
+load it and treat every fact in it as valid only within the freshness limits
+in `issues/README.md`. If none exists, you are doing this research fresh and
+should create one when you are done.
+
+Load these now. Do not proceed to Step 1 until they are in context.
 
 If no state context file exists yet, complete Steps 1–3 manually and create
 one before the next session. See CONTRIBUTING.md for the format.
@@ -255,6 +260,33 @@ scan, and CTA roundup in either mode. No exceptions.
    `skills/horizon-90.md` applies this as a structural Scheduled/Expected/Watch
    tag on every item; other output types should apply the same distinction in
    prose whenever a future date is stated.
+
+---
+
+## The Research Cache
+
+`issues/` holds one file per active issue: bill status, member positions,
+campaign linkage, corrections, outputs produced, and outcomes. It exists so
+that the same positions are not re-derived from the same press releases on
+every run. `issues/README.md` carries the full rules; the essentials:
+
+**Every fact carries the date it was verified and the URL it came from.** A
+fact without both is not usable and must be re-researched.
+
+**Freshness limits.** Member positions cache for 30 days and are void
+immediately on any new vote, press release, or floor statement. Bill status
+caches for 7 days. Campaign ask wording caches for 30 days.
+
+**The cache never satisfies Accuracy Rule 6.** Cosponsor lists, Federal
+Register docket status, the current appropriations vehicle, litigation, and
+delegation composition are never cached. Re-verify them live on the day of
+distribution, from primary sources, every time. Caching is how both errors in
+`lessons_learned` reached distributed documents — a struck-down map and a stale
+rulemaking, each a fact that had once been true.
+
+**Record outcomes.** After distribution, write what happened into the issue
+file: who responded, who did not, whether a position moved. Nothing else in
+this skill records whether the work worked.
 
 ---
 

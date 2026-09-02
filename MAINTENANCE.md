@@ -45,6 +45,38 @@ re-enter the Top industries tables from opensecrets.org.
 Requires a free FEC API key (`FEC_API_KEY`), stored in `~/.config/secrets/env`
 and sourced from your shell rc — see [README](README.md#setup-fec-api-key).
 
+### Congressional calendar (twice a year)
+
+Refresh `calendar-119.md` when a chamber publishes its calendar for the coming
+year, typically in the fall, and again if leadership revises it mid-year.
+
+There is no script for this and there cannot be one: no machine-readable
+forward congressional calendar exists. The congress.gov API has no calendar
+endpoint, and govinfo's CCAL collection records only days a chamber was
+*already* in session. The forward schedule is published as PDFs:
+
+- Senate: <https://www.senate.gov/legislative/resources/pdf/2026_calendar.pdf>
+  (change the year)
+- House: the Majority Leader's office publishes the House calendar
+- <https://www.congress.gov/days-in-session/119th-congress>
+
+Record the source URL and the date you read it in the file. Do not estimate a
+date — `skills/horizon-90.md` builds its calendar backbone from this file, and
+a group leader who schedules a Hill action against a closed building has been
+actively misled.
+
+### Research cache review (quarterly)
+
+Walk `issues/` and check each file's `verified:` dates against the freshness
+table in `issues/README.md`. Move genuinely closed issues to `issues/archive/`
+rather than deleting them — the Outcomes sections stay useful after an issue
+ends, and an office's history of ignoring written asks is a fact worth
+keeping.
+
+This is housekeeping, not a correctness control. The correctness control is
+Accuracy Rule 6, which re-verifies the volatile items live before every
+distribution regardless of what the cache says.
+
 ### Start of each new Congress (January of odd years)
 
 Full regeneration of state-context files. Complete this within the first
