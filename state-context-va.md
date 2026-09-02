@@ -75,9 +75,13 @@ official committee announcements, member press releases
 
 **Dean of the delegation:** Rep. Bobby Scott (VA-03), serving since 1993.
 
-**Redistricting note:** Virginia redistricting litigation was active in early
-2026. Confirm district boundaries at vpap.org before using district numbers
-in constituent outreach materials.
+**Redistricting note (resolved 2026-05-15):** Virginia's mid-decade
+redistricting amendment was approved by voters on April 21, 2026, then struck
+down by the Supreme Court of Virginia on May 8, 2026. The U.S. Supreme Court
+declined the emergency appeal on May 15, 2026. The 2021 court-ordered maps
+remain in force, and the district numbers below are current. Never state or
+imply that Virginia district lines changed. Re-check vpap.org before future
+outreach materials in case of new litigation.
 
 ---
 

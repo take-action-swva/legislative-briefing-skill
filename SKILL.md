@@ -4,14 +4,20 @@ description: >
   Use this skill whenever someone asks you to research, analyze, summarize, or
   produce a briefing on federal legislation or executive orders for civic
   advocacy, grassroots organizing, Indivisible groups, or similar audiences.
-  Also use for short summaries or quick briefs on legislation, and for
-  forward-looking 90-day legislative outlook scans. Trigger on phrases like
-  "brief me on this bill", "what should our group do about", "give me a quick
-  summary", "what's coming up in the next 90 days", "what should we be
-  watching", "research this EO for our members", "what's the status of", or
-  any request combining legislation with advocacy, action, or organizing.
-version: "2.1"
-output_format: docx
+  Also use for short summaries or quick briefs on legislation, for
+  forward-looking 90-day legislative outlook scans, and for calls-to-action
+  roundups that turn a national campaign into specific congressional asks.
+  Trigger immediately on the phrases "CTA brief" or "calls to action brief".
+  Also trigger on phrases like "brief me on this bill", "what should our group
+  do about", "give me a quick summary", "what's coming up in the next 90 days",
+  "what should we be watching", "research this EO for our members", "what's the
+  status of", "calls to action", "CTAs", "action asks", "what should we ask our
+  reps", "what should we be demanding", "what do we tell our members to do", or
+  any request combining legislation with advocacy, action, or organizing. Also
+  trigger on named campaigns and training tracks, including Hands Off Our Vote,
+  Immigrant Justice Summer, and Dismantling Detention.
+version: "2.2"
+output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia
 state_code: va
@@ -56,12 +62,16 @@ lessons_learned:
       pathway claims in Notes unless verified via a procedural primary source.
   - date: "2026-06-01"
     note: >
-      [Virginia] House district numbers and compositions can shift mid-Congress
-      due to redistricting litigation. Virginia redistricting was actively
-      litigated in early 2026. Always verify current district boundaries and
-      member assignments at VPAP (vpap.org) before using district numbers in
-      constituent outreach materials. Other states may have equivalent political
-      data projects — see references/sources-va.md for the pattern to follow.
+      [Virginia] (Updated 2026-09-02.) House district numbers and compositions
+      can shift mid-Congress due to redistricting litigation. Virginia's 2026
+      mid-decade redistricting amendment was approved by voters on 2026-04-21,
+      struck down by the Supreme Court of Virginia on 2026-05-08, and the U.S.
+      Supreme Court declined the emergency appeal on 2026-05-15. The 2021 maps
+      remain in force. Never state or imply that Virginia district lines
+      changed. Always verify current district boundaries and member assignments
+      at VPAP (vpap.org) before using district numbers in constituent outreach
+      materials. Other states may have equivalent political data projects —
+      see references/sources-va.md for the pattern to follow.
   - date: "2026-06-01"
     note: >
       Deseret News (deseret.com) was a strong source for "what's next" analysis
@@ -84,6 +94,26 @@ lessons_learned:
       spread and doesn't flatten a single-array argument, the array serializes
       as <0/> in the XML. Fix: check if parts has a single array argument and
       flatten before mapping.
+  - date: "2026-09-02"
+    note: >
+      Rule 6's congress.gov recheck is not sufficient for any output that cites
+      something outside the legislative process. Two errors reached a
+      distributed Virginia document: a congressional map that had already been
+      struck down, and a stale account of the USPS mail-ballot rulemaking.
+      Neither appears on congress.gov. Before distribution, separately
+      re-verify cosponsor lists, Federal Register dockets, the current
+      appropriations vehicle, litigation affecting district maps or election
+      procedure, and delegation composition. skills/cta-roundup.md carries this
+      as a structural checklist.
+  - date: "2026-09-02"
+    note: >
+      Skill descriptions are matched against the user's phrasing before any
+      sub-skill loads, so a guardrail written only in the body cannot fire if
+      the description does not match. The v2.1 description was bill-shaped
+      ("brief me on this bill", "what's the status of") and did not match
+      campaign-shaped requests about calls to action, so the redistricting
+      guardrail already recorded above never loaded. When adding a new output
+      type, add its natural phrasing to the description in the same change.
 ---
 
 # Advocacy Legislation Brief — Virginia Indivisible
@@ -131,12 +161,18 @@ Based on what the user is asking for, load the relevant sub-file now:
 | Short brief, quick summary, one-pager | `skills/brief-short.md` |
 | Monthly digest, newsletter, what's moving this month | `skills/newsletter.md` |
 | 90-day outlook, what's coming, forward scan | `skills/horizon-90.md` |
+| Calls to action, CTAs, campaign asks, what to ask the delegation | `skills/cta-roundup.md` |
 
 If a request could plausibly match more than one row (e.g. "a quick summary
 of what's moving this month" matches both `brief-short.md`'s "quick summary"
 and `newsletter.md`'s "what's moving this month"), disambiguate by scope and
 artifact shape, not by keyword count: a single bill with an act-now ask →
-`brief-short.md`; multiple items as this month's digest → `newsletter.md`.
+`brief-short.md`; multiple items as this month's digest → `newsletter.md`;
+one or more campaigns carrying a set of asks across the whole delegation →
+`cta-roundup.md`. The distinguishing test for `cta-roundup.md` is whether the
+request starts from a campaign or a set of asks rather than from a bill,
+an executive order, or a calendar window.
+
 If still unclear, ask which one the user means rather than guessing.
 
 Load the matching sub-file before proceeding to Step 0.
@@ -165,7 +201,7 @@ one before the next session. See CONTRIBUTING.md for the format.
 ## Shared Accuracy Rules
 
 These rules apply to all output types — full brief, short brief, newsletter,
-and horizon scan. No exceptions.
+horizon scan, and CTA roundup. No exceptions.
 
 1. **Every specific claim needs a source.** Vote counts, committee
    assignments, statistics, stated positions — all must trace to a verifiable
@@ -191,7 +227,15 @@ and horizon scan. No exceptions.
    a note that they need human verification before distribution.
 
 6. **Recheck before distribution.** Run a final status check on congress.gov
-   before the output goes to group leaders.
+   before the output goes to group leaders. congress.gov alone is not enough
+   whenever an output cites something outside the legislative process. Also
+   re-verify, on the day of distribution: cosponsor lists for every bill
+   named, Federal Register dockets for any agency rulemaking cited, the
+   current appropriations vehicle (continuing resolution or full-year bill),
+   any litigation affecting district maps or election procedure, and the
+   current delegation roster. `skills/cta-roundup.md` applies this as a
+   structural checklist; other output types should work through the same list
+   in whatever form applies to their content.
 
 7. **Never state a future date as more certain than it is.** When citing a
    markup, floor vote, rule effective date, or any other date that hasn't
@@ -211,7 +255,7 @@ and horizon scan. No exceptions.
 ## Shared Style Rules
 
 These rules apply to all output types — full brief, short brief, newsletter,
-and horizon scan. Sub-skills may add format-specific rules on top of these.
+horizon scan, and CTA roundup. Sub-skills may add format-specific rules on top of these.
 
 - **No em dashes in prose.** Em dashes are acceptable in structured fields
   (e.g., member entry headers: "Sen. Warner — Ranking Member") but not in
