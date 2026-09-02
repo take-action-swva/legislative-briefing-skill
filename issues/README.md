@@ -28,9 +28,9 @@ from, and the freshness table below is not advisory.
 
 | Fact | Cache life | Void immediately when |
 |---|---|---|
-| Member position on the issue | 30 days | Any new vote, press release, or floor statement on the issue |
+| Member position on the issue | 45 days | Any new vote, press release, or floor statement on the issue |
 | Bill status | 7 days | Any action appears on congress.gov |
-| Campaign ask wording | 30 days | The national org runs a new training or revises the toolkit |
+| Campaign ask wording | 45 days | The national org runs a new training or revises the toolkit |
 | Committee, phone, contact URL | Not cached here | Lives in `state-context-va.md` |
 
 **Never cached, in this directory or anywhere:**
@@ -46,6 +46,12 @@ satisfies that check.** The cache speeds up drafting. The pre-distribution
 verification still runs live, every time, against primary sources.
 
 ## Using it
+
+**45 days, not 30.** A 30-day limit expires exactly on a monthly publishing
+cadence, so the positions researched for September would be stale on the day
+October is drafted — the cache would never pay off for its main use case. The
+event-based invalidation in the right-hand column is the real correctness
+control; the clock is a backstop behind it.
 
 1. Before researching an issue, look for `issues/<slug>.md`. If it exists, read
    it and check every `verified:` date against the table above.

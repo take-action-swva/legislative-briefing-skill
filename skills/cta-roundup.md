@@ -403,6 +403,7 @@ Campaign mode:
 
 Digest mode:
 
+- [ ] An issue file in `issues/` written or updated for every item in the digest
 - [ ] No more than 5 items
 - [ ] Every item has a confirmed near-term action point
 - [ ] Each Act entry has phone number and contact URL from state context

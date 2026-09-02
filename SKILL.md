@@ -15,7 +15,7 @@ description: >
   with advocacy, action, or organizing. Also trigger on named campaigns and
   training tracks, including Hands Off Our Vote, Immigrant Justice Summer, and
   Dismantling Detention.
-version: "3.2"
+version: "3.3"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia
@@ -270,9 +270,14 @@ every run. `issues/README.md` carries the full rules; the essentials:
 **Every fact carries the date it was verified and the URL it came from.** A
 fact without both is not usable and must be re-researched.
 
-**Freshness limits.** Member positions cache for 30 days and are void
+**Freshness limits.** Member positions cache for 45 days and are void
 immediately on any new vote, press release, or floor statement. Bill status
-caches for 7 days. Campaign ask wording caches for 30 days.
+caches for 7 days. Campaign ask wording caches for 45 days.
+
+The 45 days is deliberate. A 30-day limit expires exactly on a monthly
+publishing cadence, so the most expensive research in the skill would be the
+one thing the cache never delivers. The event-based invalidation above is the
+real correctness control; the clock is a backstop.
 
 **The cache never satisfies Accuracy Rule 6.** Cosponsor lists, Federal
 Register docket status, the current appropriations vehicle, litigation, and
@@ -372,6 +377,14 @@ adds its own format-specific items on top; none of them repeat these.
 - [ ] `humanizer` skill applied to all free-text prose. Do not apply it to
       structured fields: tables, contact blocks, date lines, citation link
       text, or call scripts.
+- [ ] The issue file in `issues/` is written or updated with what this output
+      established: positions found, status, corrections, and the output itself.
+      **This is not optional and not a tidy-up step.** Research that is not
+      written down is re-done from scratch next month, and the cache only pays
+      off if every run feeds it.
+- [ ] The deliverable is published with `./scripts/publish.sh` and added to
+      `brief-index.md`. A document that never left the working directory has
+      not been delivered.
 
 ---
 
