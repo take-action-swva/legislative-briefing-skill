@@ -78,6 +78,22 @@ if len(folded) > limit:
 print(f"description: {len(folded)}/{limit} characters ({limit - len(folded)} to spare)")
 PYCHECK
 
+# Retired field labels must not reappear in the skill files. A renamed field
+# that drifts back produces briefs using vocabulary the network has moved off,
+# and nothing else would catch it until a group leader noticed.
+RETIRED_LABELS=(
+  "Answer looks like"
+  "Constituent pressure only"
+)
+for label in "${RETIRED_LABELS[@]}"; do
+  if grep -rqF "$label" "${REPO}/skills" "${REPO}/SKILL.md" "${REPO}/templates" 2>/dev/null; then
+    echo "ERROR: retired label \"${label}\" found in the skill files:"
+    grep -rnF "$label" "${REPO}/skills" "${REPO}/SKILL.md" "${REPO}/templates" 2>/dev/null
+    echo "It was renamed deliberately. Use the current label instead."
+    exit 1
+  fi
+done
+
 TMPDIR=$(mktemp -d)
 trap 'rm -rf "$TMPDIR"' EXIT
 
