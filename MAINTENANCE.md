@@ -70,8 +70,14 @@ date — `skills/horizon-90.md` builds its calendar backbone from this file, and
 a group leader who schedules a Hill action against a closed building has been
 actively misled.
 
-**Senate 2026 is populated (read 2026-09-02). House 2026 is not.** The chambers
-publish separate calendars and their recess weeks differ.
+**Senate and House 2026 are both populated (read 2026-09-02).**
+
+The two chambers use **opposite color conventions**: the Senate marks days it
+is NOT in session (red), the House marks days it IS in session (gold). Reading
+one with the other's convention inverts the entire year. The House calendar
+also carries its own revision date — the 2026 edition was revised in March
+2026, after the Senate's was published — so check for a newer revision rather
+than assuming the file is current.
 
 ### Research cache review (quarterly)
 

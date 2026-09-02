@@ -97,7 +97,7 @@ Contact: wittman.house.gov/contact
   Fisheries subcommittees)
 - Select Committee on Strategic Competition Between the U.S. and the CCP
 
-**Advocacy notes:** Wittman's HASC Vice Chair and TAL Chair roles give him
+**Advocacy notes:** Wittman's House Armed Services Committee (HASC) Vice Chair and TAL Chair roles give him
 significant influence over defense procurement and military readiness
 legislation. One of the most senior Virginia Republicans.
 
@@ -190,7 +190,7 @@ Contact: vindman.house.gov/contact
 - Armed Services (Seapower and Projection Forces subcommittee)
 - Agriculture
 
-**Advocacy notes:** 25-year Army veteran and JAG prosecutor. Twin brother of
+**Advocacy notes:** 25-year Army veteran and Judge Advocate General (JAG) prosecutor. Twin brother of
 Alexander Vindman (both served on NSC during first Trump impeachment inquiry).
 District includes Quantico, Fort Walker, and Naval Surface Warfare Center
 Dahlgren — three major military installations. Agriculture committee covers
@@ -264,7 +264,7 @@ Contact: walkinshaw.house.gov/contact
 September 10, 2025 — newest member of the Virginia delegation. Won 2025
 special election. Oversight committee role covers federal accountability,
 government operations, and civil service. Has been active on federal worker
-protections and DOGE-related oversight.
+protections and Department of Government Efficiency (DOGE) related oversight.
 
 ---
 

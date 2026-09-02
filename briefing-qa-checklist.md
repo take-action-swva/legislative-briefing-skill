@@ -87,7 +87,7 @@ briefing should not be distributed.**
 - [ ] Advocacy org sources *(Brennan Center, Campaign Legal Center, Democracy
   Docket, etc.)* are used for context/analysis, not for stating legislative status
 - [ ] Reconciliation pathway claims (if present) flagged in Notes
-  unless confirmed via a procedural primary source such as a CRS report or
+  unless confirmed via a procedural primary source such as a Congressional Research Service (CRS) report or
   legislativeprocedure.com analysis
 
 ### Notes Section

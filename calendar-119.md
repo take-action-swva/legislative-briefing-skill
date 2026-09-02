@@ -4,7 +4,7 @@ Session weeks, recess/district work periods, and statutory deadlines.
 `skills/horizon-90.md` Step 1 builds its calendar backbone from this file
 instead of re-researching the same dates every scan.
 
-**Status: Senate 2026 populated 2026-09-02. House 2026 NOT populated.**
+**Status: Senate and House 2026 both populated 2026-09-02.**
 
 ---
 
@@ -107,17 +107,77 @@ calendar confirms the specific action.
 
 ## 2026 — House
 
-**Source:** FILL IN (Majority Leader's published calendar)
-**Read on:** FILL IN
+**Source:** <https://www.majorityleader.gov/house-legislative-calendar-2026/>
+**PDF read:** <https://www.majorityleader.gov/uploadedfiles/one_page_-_2026_house_calendar_-_revised_march_2026.png.pdf>
+**Read on:** 2026-09-02
+**Document:** "2026 House Calendar | 119th Congress | Second Session",
+**revised March 2026** — a later revision than the Senate calendar above.
+Landing page: <https://www.majorityleader.gov/schedule/>
 
-**Not yet populated.** Do not assume the House tracks the Senate — the two
-chambers publish separate calendars and their recess weeks differ. An output
-that cites "Congress is in recess" while only the Senate calendar has been
-checked is wrong half the time.
+**The House calendar uses the opposite convention from the Senate's.** Gold
+highlight marks days the House **is** in session; everything unmarked is a
+district work period. The Senate calendar marks the reverse, in red. Reading
+one with the other's convention inverts the entire year.
 
-| Period | Dates | Notes |
+**Days the House IS in session:**
+
+| Month | In session |
+|---|---|
+| January | 6–9, 12–15, 20–23 |
+| February | 2–4, 9–12, 23–25 |
+| March | 3–5, 16–19, 24–27 |
+| April | 14–17, 20–23, 27–30 |
+| May | 12–15, 18–21 |
+| June | 2–5, 8–11, 23–26, 29–30 |
+| July | 1–2, 13–16, 20–23 |
+| August | 31 only |
+| September | 1–3, 14–17, 22–25, 28–30 |
+| October | 1 only |
+| November | 9–12, 17–20, 30 |
+| December | 1–3, 8–11, 14–17 |
+
+**District work periods of a week or longer:**
+
+| Period | Dates |
+|---|---|
+| Late January | Jan 24 – Feb 1 |
+| February | Feb 13 – Feb 22 |
+| March | Mar 6 – Mar 15 |
+| Spring | Mar 28 – Apr 13 |
+| Early May | May 1 – May 11 |
+| Memorial Day | May 22 – Jun 1 |
+| Mid-June | Jun 12 – Jun 22 |
+| Independence Day | Jul 3 – Jul 12 |
+| **Summer** | **Jul 24 – Aug 30** |
+| Early September | Sep 4 – Sep 13 |
+| **Election** | **Oct 2 – Nov 8** |
+| Thanksgiving | Nov 21 – Nov 29 |
+| End of session | Dec 18 onward |
+
+---
+
+## Where the two chambers diverge
+
+Do not write "Congress is in recess" from one chamber's calendar. The 2026
+schedules differ materially:
+
+| Window | House | Senate |
 |---|---|---|
-| FILL IN | FILL IN | |
+| **Return from summer** | **Aug 31** | **Sep 14** |
+| February recess | Feb 13 – Feb 22 | Feb 15 – Feb 22 |
+| Early May | Out May 1 – 11 | In session |
+| Mid-June | Out Jun 12 – 22 | In session |
+| July | Out Jul 3 – 12 | Out Jul 1 – 12 |
+| October | Out from Oct 2 | Out from Oct 3 |
+| End of session | Adjourns after Dec 17 | Target adjournment Dec 18 |
+
+The summer gap is the one most likely to cause an error: **the House returns
+two full weeks before the Senate.** As of this file's read date, 2026-09-02,
+the House is in session and the Senate is not.
+
+A House-focused action in early September lands on members who are back at
+work; the same action aimed at Warner or Kaine hits an empty office until
+September 14.
 
 ---
 
@@ -126,6 +186,16 @@ checked is wrong half the time.
 Dates that exist in law rather than on a floor schedule. These do not move
 when the calendar does, which is what makes them the most reliable anchors in
 a 90-day scan.
+
+**Not populated.** Unlike the chamber calendars, these are not published in one
+document — appropriations deadlines, program reauthorization expirations, and
+debt limit dates each have to be traced to the statute or the current funding
+vehicle. Fill them in as a scan encounters them, with a source and a date.
+
+Note the boundary against Accuracy Rule 6: a reauthorization expiry written in
+statute belongs here and is stable. The *current appropriations vehicle* does
+not — which continuing resolution is live, and when it lapses, is a volatile
+item that gets re-verified before every distribution and is never cached.
 
 | Deadline | Date | What happens if missed | verified |
 |---|---|---|---|
