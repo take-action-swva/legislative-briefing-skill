@@ -44,6 +44,7 @@ advocacy-legislation-brief/
     fetch-votes.sh               House roll-call breakdown for the delegation
     fetch-donors.sh              FEC fundraising and top employers → donor context
     check-acronyms.sh            Mandatory acronym gate before every output
+    check-delegation-parity.sh   Diffs state context against the members table
     publish.sh                   Copies deliverables to the Drive folder
     build-zip.sh                 Packages the skill for upload to claude.ai
     README.md                    API key setup, usage, rate limits

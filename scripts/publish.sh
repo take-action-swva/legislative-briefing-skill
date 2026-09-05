@@ -54,6 +54,18 @@ if [ "$(uname -s)" = "Darwin" ]; then
   fi
 fi
 
+# Warn, do not block: the delegation table only appears in full briefings, so
+# drift is irrelevant to a digest or a short brief and should not stop them
+# publishing. The QA checklist is where this is a required gate.
+if [ -x "${REPO}/scripts/check-delegation-parity.sh" ]; then
+  if ! PARITY=$("${REPO}/scripts/check-delegation-parity.sh" 2>&1); then
+    echo "WARNING: delegation data has drifted between the state context and" >&2
+    echo "the members table. Full briefings built from it may be wrong:" >&2
+    echo "$PARITY" | sed -n 's/^DRIFT/  DRIFT/p' >&2
+    echo "" >&2
+  fi
+fi
+
 mkdir -p "$ARCHIVE"
 
 PUBLISHED=0

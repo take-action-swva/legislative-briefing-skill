@@ -1,13 +1,17 @@
 # Scripts
 
-Eight scripts.
+Nine scripts.
 
 - **Research and setup:** `fetch-bill.sh`, `fetch-state-members.sh`,
   `fetch-cosponsors.sh`, `fetch-votes.sh`, `fetch-donors.sh`
-- **Mandatory gate:** `check-acronyms.sh` — runs before every output and
-  enforces the acronym expansion rule
+- **Checks:** `check-acronyms.sh` — mandatory before every output, enforces
+  the acronym expansion rule; `check-delegation-parity.sh` — catches drift
+  between the two files that both hold delegation data
 - **Delivery:** `publish.sh` (copies deliverables to Drive), `build-zip.sh`
   (packages the skill for upload to claude.ai)
+
+When adding a script, update this count and add a `##` section below — every
+prose count in this repo has gone stale at least once.
 
 ---
 
@@ -327,6 +331,37 @@ Code and silently does not exist on claude.ai.
 
 **No API key needed.** The script preflights the SKILL.md description length
 against claude.ai's 1024-character limit and refuses to build if it is over.
+
+---
+
+## check-delegation-parity.sh
+
+Compares the delegation data that exists in two places: `state-context-[code].md`,
+which a briefing session reads, and the hardcoded `MEMBERS` array in
+`templates/[code]-members-table.js`, which renders the delegation table in every
+full briefing.
+
+```bash
+./scripts/check-delegation-parity.sh          # defaults to va
+./scripts/check-delegation-parity.sh tx
+```
+
+Nothing keeps those two in sync except a human editing both, and that has
+already failed once — Griffith's Communications & Technology subcommittee was
+in the markdown and not in the table, so every full briefing understated his
+committee footprint until someone diffed the files by hand.
+
+Catches four kinds of drift: a member in one file and not the other, a
+committee or subcommittee named in the state context with no counterpart in
+the table, and a table entry no verified source backs.
+
+The table abbreviates to fit a narrow docx column, so matching is on
+distinctive words rather than exact strings. Where the table drops a
+subcommittee on purpose, record it in `INTENTIONALLY_OMITTED` at the top of
+the script with a reason — an omission should be written down, not silent.
+
+**No API key needed.** `publish.sh` runs it and warns on drift without
+blocking, since the delegation table appears only in full briefings.
 
 ---
 

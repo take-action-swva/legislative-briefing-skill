@@ -65,6 +65,8 @@ Complete only the subsection matching this output's type.
 - [ ] Why It Matters — bulleted, bold key phrase leading each bullet
 - [ ] Delegation — Committee & Position Reference table, built from
   `templates/va-members-table.js`, on its own page
+- [ ] `./scripts/check-delegation-parity.sh` run and passing — the table
+  duplicates `state-context-va.md` by hand, and has drifted from it before
 - [ ] Notes & Caveats
 
 **Optional, when applicable:**
