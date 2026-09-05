@@ -286,13 +286,13 @@ EOF
   cat <<EOF
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
-| Industry | Total |
-|---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| Industry | Total | Indiv. | PACs | Sector |
+|---|---|---|---|---|
+| | | | | |
+| | | | | |
+| | | | | |
+| | | | | |
+| | | | | |
 
 ---
 
@@ -355,8 +355,9 @@ cat <<EOF
 For each member below:
 1. Go to opensecrets.org/members-of-congress/
 2. Search by member name (hint in each section)
-3. On their profile, scroll to **Industries** — note the top 5 by total
-4. Enter industry name and total in the table, largest first
+3. On their profile, scroll to **Industries** — note the top 5 by total,
+   along with the individual/PAC split and sector each falls under
+4. Enter each row largest first: Industry | Total | Indiv. | PACs | Sector
 
 Industry totals are stable per election cycle — fill them in once and
 they hold through the full 119th Congress (through January 2027).
