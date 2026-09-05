@@ -121,6 +121,7 @@ CAPS_WORDS = {
     "FALSE","NULL","ACT","BILL","HOUSE","SENATE","INDUSTRY","ORGANIZATION",
     "METRIC","VALUE","MEMBER","PARTY","PHONE","CONTACT","NEXT","INCOMPLETE",
     "REQUIRED","OPTIONAL","EXAMPLE","DRAFT","FINAL","RETIRED","NONE",
+    "YET","PUBLISHED",
 }
 
 def js_prose(src):
@@ -223,8 +224,11 @@ for m in re.finditer(r"\b[A-Z][A-Z]+\b", text):
     if re.match(r"\.(md|js|sh|json|docx|pdf|xml|csv)\b", text[end:], re.I):
         continue
     # Bill short titles are used bare by convention: the SAVE Act is named
-    # "the SAVE Act", and spelling out the backronym helps nobody.
-    if re.match(r"\s+Act\b", text[end:]):
+    # "the SAVE Act", and spelling out the backronym helps nobody. Titles can
+    # carry up to a few extra words before "Act" ("SAVE America Act",
+    # "WATCH ICE Act"), so allow a short run of words between the acronym and
+    # "Act" rather than requiring it immediately adjacent.
+    if re.match(r"\s+(?:\w+\s+){0,3}Act\b", text[end:]):
         continue
 
     seen.add(token)
