@@ -17,40 +17,80 @@ context files are already included. You only need to:
 
 ```
 advocacy-legislation-brief/
-  SKILL.md                       Core skill — workflow, template, accuracy rules
+  SKILL.md                       Core skill — routing, shared rules, member taxonomy
+  CLAUDE.md                      Repo working notes, file map, version history
+  README.md                      Project overview and script setup
   INSTALL.md                     This file
   CONTRIBUTING.md                How other state networks adopt and contribute
   MAINTENANCE.md                 Update triggers and Congress-transition checklist
   briefing-qa-checklist.md       Human reviewer checklist (also used as AI self-check)
-  state-context-va.md            Virginia 119th Congress delegation — AI loads this first
+  state-context-va.md            Virginia 119th Congress delegation — loaded every session
+  donor-context-va.md            FEC fundraising and top contributors per member
+  brief-index.md                 Index of everything published to the Drive folder
+  calendar-119.md                Session weeks, recesses, statutory deadlines
+  package.json                   Pins the docx npm dependency
+  skills/                        Sub-skills — exactly one loads per session
+    brief-full.md                Full briefing, docx output
+    brief-short.md               Short brief / one-pager
+    horizon-90.md                90-day forward outlook scan
+    cta-roundup.md               Calls to action (campaign mode) and digest mode
+  issues/                        Research cache, one file per issue area
+    README.md                    Freshness limits and the never-cache list
+    _template.md                 Blank issue file to copy
   scripts/
-    fetch-bill.sh                Pulls bill data from congress.gov API → intake form
-    fetch-state-members.sh       Pulls delegation data → draft state-context file
-    README.md                    API key setup and usage
+    fetch-bill.sh                Bill data from congress.gov → intake form
+    fetch-state-members.sh       Delegation data → draft state-context file
+    fetch-cosponsors.sh          Current cosponsors, delegation flagged
+    fetch-votes.sh               House roll-call breakdown for the delegation
+    fetch-donors.sh              FEC fundraising and top employers → donor context
+    check-acronyms.sh            Mandatory acronym gate before every output
+    publish.sh                   Copies deliverables to the Drive folder
+    build-zip.sh                 Packages the skill for upload to claude.ai
+    README.md                    API key setup, usage, rate limits
   templates/
     brief-base.js                Docx scaffolding (structure, colors, helpers)
+    va-members-table.js          Delegation reference table for full briefings
   references/
     sources-national.md          Universal sources — all states
     sources-va.md                Virginia-specific sources
-  evals/                         Evaluation cases for testing skill quality
 ```
 
 ---
 
 ## What Claude Loads Each Session
 
-Two files are loaded at the start of every briefing:
+Since version 2.0 the skill is a parent plus four sub-skills, and the load
+is a routing step rather than a fixed list.
 
-1. `SKILL.md` — workflow, template, accuracy rules, self-check
-2. `state-context-[statecode].md` — pre-verified delegation and committee data
+**1. Always loaded first — `SKILL.md`.** Routing table, the shared accuracy
+rules, the Shared Member Taxonomy, and the pre-delivery check.
 
-Two more are referenced during research:
+**2. One sub-skill, chosen from the request.** Exactly one of these loads,
+per SKILL.md's routing table:
 
-3. `references/sources-national.md` — universal source hierarchy
-4. `references/sources-[statecode].md` — state-specific sources
+| Request type | Sub-file |
+|---|---|
+| Full briefing, detailed analysis, `.docx` | `skills/brief-full.md` |
+| Short brief, quick summary, one-pager | `skills/brief-short.md` |
+| 90-day outlook, what's coming, forward scan | `skills/horizon-90.md` |
+| Calls to action, campaign asks, monthly digest | `skills/cta-roundup.md` |
 
-The scripts and templates are used by humans or by Claude when generating
-documents — they are not loaded as context.
+**3. Context files, loaded before research starts.**
+
+- `state-context-[statecode].md` — delegation, committees, contact details
+- `references/sources-national.md` — universal source hierarchy
+- `references/sources-[statecode].md` — state-specific sources
+
+**4. `issues/`, checked for a matching issue file.** If one exists it loads
+as a drafting aid, valid only within the freshness limits in
+`issues/README.md`. If none exists, the session creates one when finished.
+
+**5. On demand, by the sub-skill that needs them.** `calendar-119.md` for
+horizon scans, `brief-index.md` for what has already been published,
+`donor-context-va.md` for sector-linked bills.
+
+The scripts and templates are run when generating documents — they are not
+loaded as context.
 
 ---
 
@@ -80,9 +120,10 @@ At the start of each new Congress:
 
 ## Dependencies
 
-The docx output requires:
+The docx output requires the pinned `docx` package. Install it from the
+repo root, which reads `package.json`:
 ```bash
-npm install -g docx
+npm install
 ```
 
 The scripts require:
@@ -94,16 +135,26 @@ brew install curl jq
 sudo apt-get install curl jq
 ```
 
-And a free congress.gov API key — see `scripts/README.md`.
+Two free API keys, both covered in `scripts/README.md`:
+
+- `CONGRESS_API_KEY` — congress.gov, for bills, cosponsors, and delegation
+- `FEC_API_KEY` — api.data.gov, for donor context. Without it the scripts
+  fall back to `DEMO_KEY`, which is capped near 50 requests a day; a single
+  13-member delegation run exceeds that, so get a real key before running
+  `fetch-donors.sh` over a full delegation.
+
+`publish.sh` writes to a Google Drive folder. Set `BRIEFING_DRIVE_PATH` to
+your own Drive mount — see `scripts/README.md`.
 
 ---
 
 ## Troubleshooting
 
-**briefing-qa-checklist.md references `[State]` — is that a bug?**
-No. The checklist is state-generic. When using it for Virginia, read
-`[State]` as Virginia. The checklist intentionally avoids hardcoding
-a state name so it works for all networks.
+**briefing-qa-checklist.md has blank fields at the top — is that a bug?**
+No. The header carries fill-in-the-blank lines (`State: ____`,
+`Reviewer: ____`, `Briefing topic: ____`, `Date: ____`) for whoever runs
+the review to complete by hand. The checklist is state-generic on purpose
+so every network can use the same file.
 
 **The docx has no page numbers**
 This is intentional. `PageNumberElement` from the docx npm package causes

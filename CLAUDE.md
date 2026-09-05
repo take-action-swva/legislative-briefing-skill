@@ -91,7 +91,6 @@ templates/
                              phone, committees, briefing notes). Used in section 6
                              of every full briefing. Caller passes briefingNotes
                              object keyed by member ID.
-evals/                       Evaluation cases (existing, not modified in this session).
 ```
 
 ---

@@ -1,17 +1,27 @@
 # Scripts
 
-Four scripts. Three are productivity tools for research, setup, and Congress
-transitions. One (`check-acronyms.sh`) is mandatory — it runs before every
-docx build and enforces the acronym expansion rule.
+Eight scripts.
+
+- **Research and setup:** `fetch-bill.sh`, `fetch-state-members.sh`,
+  `fetch-cosponsors.sh`, `fetch-votes.sh`, `fetch-donors.sh`
+- **Mandatory gate:** `check-acronyms.sh` — runs before every output and
+  enforces the acronym expansion rule
+- **Delivery:** `publish.sh` (copies deliverables to Drive), `build-zip.sh`
+  (packages the skill for upload to claude.ai)
 
 ---
 
 ## Setup
 
-`fetch-bill.sh`, `fetch-state-members.sh`, and `fetch-donors.sh` require a
-free congress.gov API key. `fetch-votes.sh` requires no API key.
+Two different keys are involved, from two different places:
 
-**Get a key:**
+| Script | Key needed |
+|---|---|
+| `fetch-bill.sh`, `fetch-state-members.sh`, `fetch-cosponsors.sh` | `CONGRESS_API_KEY` |
+| `fetch-donors.sh` | `FEC_API_KEY` |
+| `fetch-votes.sh`, `check-acronyms.sh`, `publish.sh`, `build-zip.sh` | none |
+
+**Get a congress.gov key:**
 1. Go to https://api.congress.gov/sign-up/
 2. Fill in the form (first name, last name, email) and submit it
 3. The key arrives by email — there is no account page
@@ -34,6 +44,20 @@ Then add this one line to `~/.zshrc` (or `~/.bashrc`) so it loads in new shells:
 
 See the top-level [README](../README.md#setup) for why these keys cannot be
 revoked once leaked.
+
+**Get an FEC key** (only needed for `fetch-donors.sh`): free at
+https://api.open.fec.gov/developers/, issued through api.data.gov. Store it
+the same way, as `export FEC_API_KEY=your-key-here`. Without it the script
+falls back to `DEMO_KEY` — see Rate Limits below for why that is not enough
+for a full delegation.
+
+**Set your Drive path** (only needed for `publish.sh`): it defaults to the
+Virginia committee's Google Drive mount, so every other deployment must
+override it. Add to the same file:
+
+```bash
+export BRIEFING_DRIVE_PATH="/path/to/your/Drive/Legislation Briefings"
+```
 
 **Install dependencies:**
 ```bash
@@ -255,8 +279,69 @@ https://clerk.house.gov/evs/<year>/roll<number>.xml
 
 ---
 
+## fetch-donors.sh
+
+Pulls FEC campaign finance data for an entire delegation and writes a
+donor-context markdown file.
+
+```bash
+./scripts/fetch-donors.sh <state-code> [cycle]
+
+# Examples:
+./scripts/fetch-donors.sh VA 2024 > donor-context-va.md
+./scripts/fetch-donors.sh VA      > donor-context-va.md   # cycle defaults to 2024
+```
+
+Redirect **stdout only**. The script writes progress to stderr on purpose, so
+`> file 2>&1` bakes log lines into the markdown.
+
+**Output:** Per member, a cycle fundraising table (total raised, PAC share,
+individual share) and a top contributing organizations table. Employer names
+are self-reported free text, so case and punctuation variants are merged, and
+occupation placeholders (`RETIRED`, `HOMEMAKER`, `N/A`) are excluded from the
+organization table and reported in a note beneath it.
+
+**Top industries tables are left blank** — that data is not in the FEC API and
+is entered by hand from opensecrets.org. The generated file carries an
+INCOMPLETE banner until someone fills them in and deletes it.
+
+**Requires `FEC_API_KEY`.** See Rate Limits — `DEMO_KEY` is not sufficient.
+
+---
+
+## build-zip.sh
+
+Packages the skill into the `.zip` uploaded to claude.ai, which is the second
+deployment surface alongside running the repo directly in Claude Code.
+
+```bash
+./scripts/build-zip.sh
+```
+
+**Output:** `advocacy-legislation-brief-claude-upload.zip` in the repo root.
+
+The file manifest lives in arrays at the top of the script. Anything not
+listed there does not ship, so a new file that a session is told to load must
+be added to the manifest in the same change — otherwise it works in Claude
+Code and silently does not exist on claude.ai.
+
+**No API key needed.** The script preflights the SKILL.md description length
+against claude.ai's 1024-character limit and refuses to build if it is over.
+
+---
+
 ## Rate Limits
 
-The free congress.gov API key allows 5,000 requests per hour. Both scripts
-make fewer than 10 requests each. Rate limits are not a practical concern
-for normal use.
+**congress.gov** allows 5,000 requests per hour with a free key. The scripts
+that use it — `fetch-bill.sh`, `fetch-state-members.sh`, `fetch-cosponsors.sh`
+— make fewer than 10 requests each. Not a practical concern.
+
+**clerk.house.gov** (`fetch-votes.sh`) is a plain file fetch, one request per
+run, no key and no limit.
+
+**FEC (api.data.gov)** is the one real constraint. `fetch-donors.sh` makes
+roughly four calls per member — find candidate, totals, committee, top
+employers — so a 13-member delegation runs past 50 requests in a single pass.
+The `DEMO_KEY` fallback is capped near 50 requests per day, which one full run
+exhausts, usually partway through, leaving a half-populated file. Get a real
+key before running a full delegation; a real key allows 1,000 per hour.
