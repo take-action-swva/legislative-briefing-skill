@@ -176,6 +176,14 @@ above — it maintains its own hardcoded MEMBERS array with committee assignment
 Update the matching member entry and the `Committees verified` caption string
 near the bottom of the file.
 
+Run `./scripts/check-delegation-parity.sh VA` after updating both files. It
+diffs state-context-va.md against the MEMBERS array and catches a member or
+committee present in one and not the other — this is exactly the drift that
+happens when only one of the two files gets edited. Fix any reported mismatch
+before committing; if a table abbreviation or intentional omission is flagged,
+resolve it in the script's `INTENTIONALLY_OMITTED` list, not by ignoring the
+output.
+
 **Accuracy rules:**
 - Only update based on what you actually read from official pages
 - Never infer or guess committee assignments
@@ -185,7 +193,8 @@ near the bottom of the file.
 
 ### Step 5 — Commit and open a PR
 
-If you made changes to state-context-va.md:
+If you made changes to state-context-va.md, confirm
+`./scripts/check-delegation-parity.sh VA` exits 0 before committing.
 
 ```bash
 git checkout -b committee-update-$(date +%Y-%m)
