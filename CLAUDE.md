@@ -78,10 +78,18 @@ scripts/
   fetch-bill.sh              congress.gov API → pre-filled research intake form.
   fetch-cosponsors.sh        congress.gov API → current cosponsors, delegation
                              flagged, withdrawn cosponsors separated out.
-  publish.sh                 Copy a deliverable to Drive, verify, archive to
-                             briefs/. Single source of truth for the Drive path.
+  fetch-votes.sh             House Clerk public XML → delegation vote breakdown for
+                             a floor vote that has already occurred. No API key needed.
   fetch-state-members.sh     congress.gov API → draft state-context file.
   fetch-donors.sh            FEC API → donor context markdown (industry tables filled manually from opensecrets.org website).
+  check-acronyms.sh          Mandatory pre-delivery gate: fails if an acronym's first
+                             use isn't preceded by its expansion. Accepts .js or .md.
+  check-delegation-parity.sh Diffs state-context-va.md against va-members-table.js's
+                             hardcoded MEMBERS array — catches a member or committee
+                             present in one and not the other. Required QA-checklist
+                             gate for full briefings; publish.sh warns but doesn't block.
+  publish.sh                 Copy a deliverable to Drive, verify, archive to
+                             briefs/. Single source of truth for the Drive path.
   build-zip.sh               Rebuild advocacy-legislation-brief-claude-upload.zip from current skill files.
   README.md                  Script setup and usage (human-facing).
 templates/
@@ -224,6 +232,10 @@ echo, log, or paste them into a chat.
 # distribution — never cache this:
 ./scripts/fetch-cosponsors.sh 119 hr 22 VA
 
+# Check that state-context-va.md and va-members-table.js agree on members
+# and committees. Required before publishing any full briefing:
+./scripts/check-delegation-parity.sh VA
+
 # Copy a finished deliverable to Drive and archive it to briefs/:
 ./scripts/publish.sh iran-war-powers-brief.docx iran-war-powers-brief.js
 ```
@@ -233,6 +245,8 @@ Scripts output markdown to stdout. Redirect to files for use in briefings.
 assignments before use — the congress.gov API does not include committee data.
 `fetch-votes.sh` requires no API key — it reads the House Clerk's public XML
 directly and is the canonical primary source for individual member votes.
+`check-delegation-parity.sh` requires no API key — it diffs two local files
+and needs python3. Exit 0 means the files agree; exit 1 means they've drifted.
 
 ---
 
