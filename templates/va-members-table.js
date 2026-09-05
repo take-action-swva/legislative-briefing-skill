@@ -183,6 +183,7 @@ const MEMBERS = [
     contactUrl: 'https://griffith.house.gov/contact',
     committees: [
       'Energy & Commerce',
+      '— Communications & Technology subcommittee',
       '— Health subcommittee',
       '— Environment subcommittee',
       'House Administration',

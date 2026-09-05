@@ -73,30 +73,71 @@ fmt_dollars() {
   }'
 }
 
-# Output top 5 employer rows for a committee.
-# Employer names are self-reported by donors — duplicates are possible.
+# Donors self-report their employer as free text, so the FEC returns these
+# occupation placeholders as if they were organizations. Left in, they crowd
+# out every real employer: one member's top five were all "RETIRED".
+PLACEHOLDER_EMPLOYERS='["RETIRED","NOT EMPLOYED","SELF EMPLOYED","SELF","HOMEMAKER","UNEMPLOYED","NONE","N/A","NA","INFORMATION REQUESTED","REQUESTED","BEST EFFORTS","REFUSED","DECLINED","NOT APPLICABLE","STUDENT"]'
+
+# Group employer rows by a case- and punctuation-normalized key, summing
+# totals, so "RETIRED" / "Retired" / "RETIRED." collapse into one entry.
+# Display keeps the spelling of the largest contribution in each group.
+EMPLOYER_AGG='
+[ .results[]?
+  | select(.employer != null and .employer != "")
+  | { disp:  .employer,
+      key:   (.employer | ascii_upcase | gsub("[-.,]"; " ") | gsub("\\s+"; " ")
+                        | sub("^ "; "") | sub(" $"; "")),
+      total: (.total // 0) }
+]
+| map(. as $e | select(($skip | index($e.key) | not) == $keep_real))
+| group_by(.key)
+| map(sort_by(-.total) | { disp: .[0].disp, total: (map(.total) | add) })
+| sort_by(-.total)'
+
+# Output top 5 employer rows for a committee, followed by a note naming any
+# occupation placeholders that were excluded — they are real money and stay
+# visible, they just are not organizations.
 top_employers() {
   local committee_id="$1"
-  local data
-  data=$(curl -sf "${BASE}/schedules/schedule_a/by_employer/?committee_id=${committee_id}&two_year_transaction_period=${CYCLE}&sort=-total&per_page=5&api_key=${KEY}" \
-    | jq -r '.results[]? | select(.employer != null and .employer != "") | [(.employer), (.total | round | tostring)] | @tsv' 2>/dev/null) || true
+  # Initialized because the script runs under `set -u` and a failed curl
+  # leaves these unassigned.
+  local raw="" data="" excluded=""
+  # per_page is 100 rather than 5: duplicates and placeholders are merged and
+  # filtered below, so the top five real employers may sit well down the list.
+  raw=$(curl -sf "${BASE}/schedules/schedule_a/by_employer/?committee_id=${committee_id}&two_year_transaction_period=${CYCLE}&sort=-total&per_page=100&api_key=${KEY}" 2>/dev/null) || true
+
+  if [ -n "$raw" ]; then
+    data=$(echo "$raw" | jq -r --argjson skip "$PLACEHOLDER_EMPLOYERS" --argjson keep_real true \
+      "${EMPLOYER_AGG} | .[:5][] | [ .disp, (.total|round|tostring) ] | @tsv" 2>/dev/null) || true
+    excluded=$(echo "$raw" | jq -r --argjson skip "$PLACEHOLDER_EMPLOYERS" --argjson keep_real false \
+      "${EMPLOYER_AGG} | .[:5][] | [ .disp, (.total|round|tostring) ] | @tsv" 2>/dev/null) || true
+  fi
 
   if [ -z "$data" ]; then
     echo "| — | — |"
-    return
+  else
+    local count=0
+    while IFS=$'\t' read -r org amt; do
+      echo "| ${org} | $(fmt_dollars "$amt") |"
+      count=$((count + 1))
+    done <<< "$data"
+
+    # Pad to 5 rows
+    while [ "$count" -lt 5 ]; do
+      echo "| | |"
+      count=$((count + 1))
+    done
   fi
 
-  local count=0
-  while IFS=$'\t' read -r org amt; do
-    echo "| ${org} | $(fmt_dollars "$amt") |"
-    count=$((count + 1))
-  done <<< "$data"
-
-  # Pad to 5 rows
-  while [ "$count" -lt 5 ]; do
-    echo "| | |"
-    count=$((count + 1))
-  done
+  if [ -n "$excluded" ]; then
+    local note=""
+    while IFS=$'\t' read -r org amt; do
+      [ -n "$org" ] || continue
+      note="${note}${note:+; }${org} $(fmt_dollars "$amt")"
+    done <<< "$excluded"
+    echo ""
+    echo "*Excluded as self-reported occupations rather than organizations: ${note}.*"
+  fi
 }
 
 # Output a complete member section.
@@ -164,7 +205,7 @@ EOF
 | From PACs | ${pac_pct} |
 | From individuals | ${indiv_pct} |
 
-**Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
+**Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
 EOF
@@ -206,9 +247,9 @@ parse_members() {
       last=$(echo "$full_name" | awk '{print $NF}')
       printf 'S\t%s\t%s\t%s\n' "Sen. ${full_name} (${party})" "$last" "$full_name"
 
-    elif echo "$line" | grep -qE '^### VA-[0-9]+'; then
+    elif echo "$line" | grep -qE "^### ${S}-[0-9]+"; then
       local district rep_name party last
-      district=$(echo "$line" | grep -oE 'VA-[0-9]+')
+      district=$(echo "$line" | grep -oE "${S}-[0-9]+")
       rep_name=$(echo "$line" | sed 's/^.*Rep\. //; s/ ([DR])$//')
       party=$(echo "$line" | grep -oE '\([DR]\)' | tr -d '()')
       last=$(echo "$rep_name" | awk '{print $NF}')
@@ -274,4 +315,6 @@ EOF
 
 log ""
 log "Done. Next step: fill in Top industries tables from opensecrets.org."
-log "Review FEC employer data for obvious duplicates before distributing."
+log "Employer spelling variants are merged and occupation placeholders (RETIRED,"
+log "HOMEMAKER, N/A) are excluded automatically. Still skim the tables before"
+log "distributing — self-reported employer text varies more than any list covers."
