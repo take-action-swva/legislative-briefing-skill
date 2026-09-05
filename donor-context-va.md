@@ -447,7 +447,7 @@ skim each table before citing figures publicly.
 | | |
 | | |
 
-**Top industries** *(opensecrets.org search — position not found during research, September 5, 2026)*
+**Top industries** *(opensecrets.org search — no profile found, researched September 5, 2026)*
 | Industry | Total | Indiv. | PACs | Sector |
 |---|---|---|---|---|
 | | | | | |
