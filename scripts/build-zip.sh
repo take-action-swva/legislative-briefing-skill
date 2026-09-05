@@ -31,9 +31,23 @@ SKILLS_FILES=(
   skills/horizon-90.md
   skills/cta-roundup.md
 )
+# SKILL.md Step 0 tells every session to check issues/ for the issue in scope.
+# Without these the instruction points at a directory that does not exist on
+# the claude.ai surface, though it works fine in the git repo.
+ISSUES_FILES=(
+  issues/README.md
+  issues/_template.md
+)
+# check-acronyms.sh is a mandatory pre-delivery gate, not a convenience — it
+# ships so the claude.ai surface can run the same gate the repo does. The
+# fetch-* scripts stay out: they need API keys and network access.
+SCRIPT_FILES=(
+  scripts/check-acronyms.sh
+)
 
 # Verify all source files exist before touching the zip.
-for f in "${SKILL_FILES[@]}" "${REF_FILES[@]}" "${TEMPLATE_FILES[@]}" "${SKILLS_FILES[@]}"; do
+for f in "${SKILL_FILES[@]}" "${REF_FILES[@]}" "${TEMPLATE_FILES[@]}" "${SKILLS_FILES[@]}" \
+         "${ISSUES_FILES[@]}" "${SCRIPT_FILES[@]}"; do
   [ -f "${REPO}/${f}" ] || { echo "ERROR: missing ${f}"; exit 1; }
 done
 
@@ -70,12 +84,17 @@ trap 'rm -rf "$TMPDIR"' EXIT
 mkdir -p \
   "${TMPDIR}/advocacy-legislation-brief/references" \
   "${TMPDIR}/advocacy-legislation-brief/templates" \
-  "${TMPDIR}/advocacy-legislation-brief/skills"
+  "${TMPDIR}/advocacy-legislation-brief/skills" \
+  "${TMPDIR}/advocacy-legislation-brief/issues" \
+  "${TMPDIR}/advocacy-legislation-brief/scripts"
 
 for f in "${SKILL_FILES[@]}";    do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/"; done
 for f in "${REF_FILES[@]}";      do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/references/"; done
 for f in "${TEMPLATE_FILES[@]}"; do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/templates/"; done
 for f in "${SKILLS_FILES[@]}";   do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/skills/"; done
+for f in "${ISSUES_FILES[@]}";   do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/issues/"; done
+for f in "${SCRIPT_FILES[@]}";   do cp "${REPO}/${f}" "${TMPDIR}/advocacy-legislation-brief/scripts/"; done
+chmod +x "${TMPDIR}/advocacy-legislation-brief/scripts/"*.sh
 
 rm -f "$ZIP"
 (cd "$TMPDIR" && zip -qr "$ZIP" advocacy-legislation-brief/)
