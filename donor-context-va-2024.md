@@ -1,7 +1,5 @@
-  Generating VA donor context (2024 cycle)...
-  Reading member roster from state-context-va.md...
 # VA Donor Context — 119th Congress
-<!-- Cycle: 2024 | FEC: auto-filled 2026-06-03 | Industries: fill in manually -->
+<!-- Cycle: 2024 | FEC: auto-filled 2026-09-05 | Industries: fill in manually -->
 <!-- Member roster sourced from state-context-va.md -->
 <!-- Next full update: January 2027 (120th Congress) -->
 
@@ -23,7 +21,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ## Senate
 
-  Processing Sen. Mark Warner (D)...
 
 ### Sen. Mark Warner (D)
 *opensecrets.org/members-of-congress/ — search: Mark Warner*
@@ -31,18 +28,18 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | — |
-| From PACs | — |
-| From individuals | — |
+| Total raised | $4,266,868 |
+| From PACs | 17% |
+| From individuals | 46% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| HOMEMAKER | $82,000 |
-| RETIRED | $36,087 |
-| ATTORNEY | $22,250 |
-| COLUMBIA CAPITAL | $18,750 |
-| FRIEDMAN BILLINGS | $18,500 |
+| NOT EMPLOYED | $492,960 |
+| SELF EMPLOYED | $234,066 |
+| N/A | $227,069 |
+| CAPITAL GROUP | $50,000 |
+| THE BOEING COMPANY | $40,000 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -55,7 +52,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing Sen. Tim Kaine (D)...
 
 ### Sen. Tim Kaine (D)
 *opensecrets.org/members-of-congress/ — search: Tim Kaine*
@@ -63,7 +59,7 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | $21,950,099 |
+| Total raised | $18,308,453 |
 | From PACs | 12% |
 | From individuals | 33% |
 
@@ -71,10 +67,10 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 | Organization | Total |
 |---|---|
 | NOT EMPLOYED | $4,923,627 |
-| N/A | $3,675,970 |
-| N/A | $3,281,330 |
-| SELF EMPLOYED | $2,042,565 |
-| SELF EMPLOYED | $1,299,814 |
+| SELF-EMPLOYED | $623,898 |
+| SELF EMPLOYED | $310,255 |
+| COVINGTON & BURLING LLP | $89,800 |
+| PAUL WEISS | $52,400 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -89,7 +85,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ## House
 
-  Processing VA-01 — Rep. Rob Wittman (R)...
 
 ### VA-01 — Rep. Rob Wittman (R)
 *opensecrets.org/members-of-congress/ — search: Rob Wittman*
@@ -104,11 +99,11 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| RETIRED | $274,610 |
 | RETIRED | $225,000 |
-| RETIRED | $222,597 |
-| RETIRED | $183,587 |
-| RETIRED | $122,233 |
+| NULL | $103,150 |
+| SELF | $72,145 |
+| NONE | $46,270 |
+| HOMEMAKER | $23,350 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -121,7 +116,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-02 — Rep. Jen Kiggans (R)...
 
 ### VA-02 — Rep. Jen Kiggans (R)
 *opensecrets.org/members-of-congress/ — search: Jen Kiggans*
@@ -137,10 +131,10 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 | Organization | Total |
 |---|---|
 | RETIRED | $1,241,336 |
-| RETIRED | $977,593 |
-| RETIRED | $686,156 |
 | NULL | $169,799 |
 | SELF EMPLOYED | $142,699 |
+| HOMEMAKER | $98,604 |
+| INFORMATION REQUESTED PER BEST EFFORTS | $29,428 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -153,7 +147,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-03 — Rep. Bobby Scott (D)...
 
 ### VA-03 — Rep. Bobby Scott (D)
 *opensecrets.org/members-of-congress/ — search: Bobby Scott*
@@ -161,18 +154,18 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | — |
-| From PACs | — |
-| From individuals | — |
+| Total raised | $869,636 |
+| From PACs | 56% |
+| From individuals | 40% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| N/A | $187,047 |
-| HOMEMAKER | $153,820 |
-| HOMEMAKER | $111,118 |
-| RETIRED | $107,768 |
-| RETIRED | $99,960 |
+| NOT EMPLOYED | $81,830 |
+| RETIRED | $29,885 |
+| SELF | $17,675 |
+| DOMINION ENERGY | $13,650 |
+| SEIU | $10,000 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -185,7 +178,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-04 — Rep. Jennifer McClellan (D)...
 
 ### VA-04 — Rep. Jennifer McClellan (D)
 *opensecrets.org/members-of-congress/ — search: Jennifer McClellan*
@@ -201,10 +193,10 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 | Organization | Total |
 |---|---|
 | NOT EMPLOYED | $376,294 |
-| NOT EMPLOYED | $125,094 |
 | SELF EMPLOYED | $64,209 |
 | SELF | $49,787 |
 | NULL | $35,670 |
+| RETIRED | $35,192 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -217,7 +209,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-05 — Rep. John McGuire (R)...
 
 ### VA-05 — Rep. John McGuire (R)
 *opensecrets.org/members-of-congress/ — search: John McGuire*
@@ -225,18 +216,18 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | — |
-| From PACs | — |
-| From individuals | — |
+| Total raised | $1,841,418 |
+| From PACs | 14% |
+| From individuals | 53% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| RETIRED | $245,903 |
-| SELF EMPLOYED | $42,375 |
-| HOMEMAKER | $22,600 |
-| SPENCER ENTERPRISES | $5,600 |
-| COX ENTERPRISES INC | $5,600 |
+| RETIRED | $444,328 |
+| SELF | $87,718 |
+| NOT EMPLOYED | $47,970 |
+| NULL | $45,873 |
+| CEO | $43,950 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -249,7 +240,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-06 — Rep. Ben Cline (R)...
 
 ### VA-06 — Rep. Ben Cline (R)
 *opensecrets.org/members-of-congress/ — search: Ben Cline*
@@ -264,11 +254,11 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| RETIRED | $153,905 |
-| RETIRED | $126,632 |
 | RETIRED | $124,630 |
-| RETIRED | $120,863 |
-| RETIRED | $78,785 |
+| HOMEMAKER | $15,000 |
+| SELF-EMPLOYED | $14,150 |
+| SELF | $10,136 |
+| DYNAMIC AVIATION | $10,000 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -281,7 +271,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-07 — Rep. Eugene Vindman (D)...
 
 ### VA-07 — Rep. Eugene Vindman (D)
 *opensecrets.org/members-of-congress/ — search: Eugene Vindman*
@@ -297,10 +286,10 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 | Organization | Total |
 |---|---|
 | NOT EMPLOYED | $3,192,492 |
-| NOT EMPLOYED | $1,987,201 |
 | SELF | $506,188 |
-| SELF | $262,470 |
 | RETIRED | $206,300 |
+| NULL | $154,800 |
+| NONE | $91,241 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -313,7 +302,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-08 — Rep. Don Beyer (D)...
 
 ### VA-08 — Rep. Don Beyer (D)
 *opensecrets.org/members-of-congress/ — search: Don Beyer*
@@ -328,11 +316,11 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| N/A | $384,631 |
-| NOT EMPLOYED | $318,973 |
-| N/A | $314,046 |
-| N/A | $305,423 |
-| N/A | $270,168 |
+| N/A | $227,128 |
+| NOT EMPLOYED | $88,525 |
+| SELF EMPLOYED | $54,285 |
+| RETIRED | $26,025 |
+| NULL | $11,950 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -345,7 +333,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-09 — Rep. Morgan Griffith (R)...
 
 ### VA-09 — Rep. Morgan Griffith (R)
 *opensecrets.org/members-of-congress/ — search: Morgan Griffith*
@@ -360,25 +347,23 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| RETIRED | $120,733 |
-| SELF EMPLOYED | $92,663 |
-| RETIRED | $70,817 |
-| RETIRED | $65,815 |
-| HOMEMAKER | $61,237 |
+| SELF EMPLOYED | $23,065 |
+| RETIRED | $16,570 |
+| THE UROLOGY GROUP | $8,500 |
+| PCCA | $6,700 |
+| HOMEMAKER | $6,700 |
 
-**Top industries** *(opensecrets.org — entered manually June 3, 2026)*
-| Industry | Total | Indiv. | PACs | Sector |
-|---|---|---|---|---|
-| Other physician specialists | $85,178 | $20,678 | $64,500 | Health |
-| Pharmacists | $80,646 | $52,346 | $28,300 | Health |
-| Lobbyists & Public Relations | $73,900 | $70,900 | $3,000 | Lawyers & Lobbyists |
-| Cable distributors & service providers | $40,500 | $500 | $40,000 | Communic/Electronics |
-| Biotech products & research | $32,500 | $1,000 | $31,500 | Health |
-| Pharmaceutical manufacturing | $31,000 | $1,000 | $30,000 | Health |
+**Top industries** *(opensecrets.org — fill in manually, top 5)*
+| Industry | Total |
+|---|---|
+| | |
+| | |
+| | |
+| | |
+| | |
 
 ---
 
-  Processing VA-10 — Rep. Suhas Subramanyam (D)...
 
 ### VA-10 — Rep. Suhas Subramanyam (D)
 *opensecrets.org/members-of-congress/ — search: Suhas Subramanyam*
@@ -395,9 +380,9 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 |---|---|
 | NOT EMPLOYED | $443,460 |
 | SELF | $184,149 |
-| NOT EMPLOYED | $145,330 |
 | NULL | $78,925 |
 | RETIRED | $63,430 |
+| SELF EMPLOYED | $60,100 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -410,7 +395,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-  Processing VA-11 — Rep. James Walkinshaw (D)...
 
 ### VA-11 — Rep. James Walkinshaw (D)
 *opensecrets.org/members-of-congress/ — search: James Walkinshaw*
@@ -419,17 +403,13 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 | Metric | Value |
 |---|---|
 | Total raised | — |
-| From PACs | — |
-| From individuals | — |
+| From PACs |  |
+| From individuals |  |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| NOT EMPLOYED | $286,476 |
-| NONE | $85,351 |
-| NULL | $63,650 |
-| RETIRED | $56,925 |
-| SELF | $43,925 |
+| — | — |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -442,9 +422,6 @@ FEC employer names are self-reported by donors and may appear in multiple forms
 
 ---
 
-*FEC data: api.open.fec.gov | Cycle: 2024 | Retrieved: 2026-06-03*
+*FEC data: api.open.fec.gov | Cycle: 2024 | Retrieved: 2026-09-05*
 *Employer names are self-reported by donors — verify significant figures*
 *before citing publicly. Industry data entered manually from opensecrets.org.*
-  
-  Done. Next step: fill in Top industries tables from opensecrets.org.
-  Review FEC employer data for obvious duplicates before distributing.
