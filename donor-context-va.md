@@ -116,13 +116,13 @@ skim each table before citing figures publicly.
 **Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
-| NULL | $103,150 |
 | ES3 | $23,200 |
 | EAW GROUP LLC | $16,600 |
 | ALTRIA GROUP INC. | $16,500 |
 | CACI | $15,255 |
+| BGR GROUP | $15,205 |
 
-*Excluded as self-reported occupations rather than organizations: RETIRED $225,000; SELF $72,145; NONE $46,270; HOMEMAKER $23,350; NOT EMPLOYED $14,093.*
+*Excluded as self-reported occupations rather than organizations: RETIRED $225,000; NULL $103,150; SELF $72,145; NONE $46,270; HOMEMAKER $23,350.*
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -149,13 +149,13 @@ skim each table before citing figures publicly.
 **Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
-| NULL | $169,799 |
 | INFORMATION REQUESTED PER BEST EFFORTS | $29,428 |
 | HEPBURN & SONS LLC | $23,100 |
 | ENTREPRENEUR | $19,547 |
 | INVESTMENTS LIMITED | $15,008 |
+| C & M INDUSTRIES | $14,100 |
 
-*Excluded as self-reported occupations rather than organizations: RETIRED $1,241,336; SELF EMPLOYED $166,223; HOMEMAKER $98,604.*
+*Excluded as self-reported occupations rather than organizations: RETIRED $1,241,336; NULL $169,799; SELF EMPLOYED $166,223; HOMEMAKER $98,604.*
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -215,13 +215,13 @@ skim each table before citing figures publicly.
 **Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
-| NULL | $35,670 |
 | VERIZON | $19,463 |
 | DOMINION ENERGY | $13,500 |
 | WELBURN MANAGEMENT | $12,900 |
 | WEISSBERG CORP. | $10,800 |
+| MCGUIREWOODS LLP | $10,340 |
 
-*Excluded as self-reported occupations rather than organizations: NOT EMPLOYED $376,294; SELF EMPLOYED $70,209; SELF $49,787; RETIRED $35,192; N/A $4,650.*
+*Excluded as self-reported occupations rather than organizations: NOT EMPLOYED $376,294; SELF EMPLOYED $70,209; SELF $49,787; NULL $35,670; RETIRED $35,192.*
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -248,13 +248,13 @@ skim each table before citing figures publicly.
 **Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
-| NULL | $45,873 |
 | CEO | $43,950 |
 | PRESIDENT | $17,609 |
 | EXECUTIVE | $14,900 |
 | OWNER | $14,450 |
+| FOSTER FUELS INC. | $9,100 |
 
-*Excluded as self-reported occupations rather than organizations: RETIRED $444,328; SELF $87,718; NOT EMPLOYED $47,970; INFORMATION REQUESTED $42,450; SELF EMPLOYED $11,810.*
+*Excluded as self-reported occupations rather than organizations: RETIRED $444,328; SELF $87,718; NOT EMPLOYED $47,970; NULL $45,873; INFORMATION REQUESTED $42,450.*
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -314,13 +314,13 @@ skim each table before citing figures publicly.
 **Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
-| NULL | $154,800 |
 | COVINGTON & BURLING LLP | $20,150 |
 | ARNOLD & PORTER | $15,500 |
 | GOOGLE | $13,625 |
 | STATE OF CALIFORNIA | $8,427 |
+| SINGLETON SCHREIBER | $7,600 |
 
-*Excluded as self-reported occupations rather than organizations: NOT EMPLOYED $3,192,492; SELF $506,188; RETIRED $206,300; SELF-EMPLOYED $132,554; NONE $91,241.*
+*Excluded as self-reported occupations rather than organizations: NOT EMPLOYED $3,192,492; SELF $506,188; RETIRED $206,300; NULL $154,800; SELF-EMPLOYED $132,554.*
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -347,13 +347,13 @@ skim each table before citing figures publicly.
 **Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
-| NULL | $11,950 |
 | AKIN GUMP STRAUSS HAUER & FELD LLP | $8,500 |
 | GENERATION INVESTMENT MANAGEMENT | $6,600 |
 | ROONEY HOLDINGS | $6,600 |
 | | |
+| | |
 
-*Excluded as self-reported occupations rather than organizations: N/A $227,128; NOT EMPLOYED $88,525; SELF EMPLOYED $54,285; RETIRED $26,025.*
+*Excluded as self-reported occupations rather than organizations: N/A $227,128; NOT EMPLOYED $88,525; SELF EMPLOYED $54,285; RETIRED $26,025; NULL $11,950.*
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -414,13 +414,13 @@ skim each table before citing figures publicly.
 **Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
-| NULL | $78,925 |
 | STAR PIPE PRODUCTS | $19,500 |
 | ZILLION | $10,000 |
 | APEX COVANTAGE | $9,900 |
 | DALLAS ENT | $8,600 |
+| BAYLOR | $8,350 |
 
-*Excluded as self-reported occupations rather than organizations: NOT EMPLOYED $443,460; SELF $184,149; SELF EMPLOYED $66,251; RETIRED $63,430; N/A $35,650.*
+*Excluded as self-reported occupations rather than organizations: NOT EMPLOYED $443,460; SELF $184,149; NULL $78,925; SELF EMPLOYED $66,251; RETIRED $63,430.*
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |

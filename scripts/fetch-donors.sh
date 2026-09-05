@@ -130,9 +130,10 @@ fmt_dollars() {
 }
 
 # Donors self-report their employer as free text, so the FEC returns these
-# occupation placeholders as if they were organizations. Left in, they crowd
-# out every real employer: one member's top five were all "RETIRED".
-PLACEHOLDER_EMPLOYERS='["RETIRED","NOT EMPLOYED","SELF EMPLOYED","SELF","HOMEMAKER","UNEMPLOYED","NONE","N/A","NA","INFORMATION REQUESTED","REQUESTED","BEST EFFORTS","REFUSED","DECLINED","NOT APPLICABLE","STUDENT"]'
+# occupation placeholders (plus its own "NULL" sentinel for missing data) as
+# if they were organizations. Left in, they crowd out every real employer:
+# one member's top five were all "RETIRED".
+PLACEHOLDER_EMPLOYERS='["RETIRED","NOT EMPLOYED","SELF EMPLOYED","SELF","HOMEMAKER","UNEMPLOYED","NONE","N/A","NA","NULL","INFORMATION REQUESTED","REQUESTED","BEST EFFORTS","REFUSED","DECLINED","NOT APPLICABLE","STUDENT"]'
 
 # Group employer rows by a case- and punctuation-normalized key, summing
 # totals, so "RETIRED" / "Retired" / "RETIRED." collapse into one entry.
