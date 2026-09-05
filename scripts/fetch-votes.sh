@@ -95,7 +95,7 @@ ORDER = {'Yea': 0, 'Nay': 1}
 state_votes.sort(key=lambda x: (ORDER.get(x[2], 2), x[0]))
 
 # Output
-clerk_url = f"https://clerk.house.gov/Votes/{year}{roll_padded}"
+clerk_url = f"https://clerk.house.gov/Votes/{year}{roll}"
 print(f"## {bill} — {desc}")
 print(f"**Roll call {rollnum} | {congress}th Congress | {date} | {question} | Result: {result}**")
 print(f"**Source:** {clerk_url}")
