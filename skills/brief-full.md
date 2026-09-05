@@ -14,11 +14,23 @@ until Step 5 is complete.
 
 ### Step 1 — Confirm the bill or EO identity
 
-- Confirm the exact bill number (e.g., H.R. 22, S. 1383) or EO number.
+- Confirm the exact bill number (e.g., H.R. 22, S. 128) or EO number.
 - Check whether the legislation has been renamed, reintroduced, or superseded.
-  Bills often evolve — the SAVE Act became the SAVE America Act mid-cycle, and
-  the House bill (H.R. 22) and Senate companion (S. 1383) are different records
-  on congress.gov even when substantively identical.
+  Bills often evolve. The SAVE Act became the SAVE America Act mid-cycle, and
+  the House bill (H.R. 22) and its Senate companion (S. 128) are different
+  records on congress.gov even when substantively identical.
+- **Verify the companion number against congress.gov every time.** Until
+  2026-09-02 this example named S. 1383 as the SAVE Act companion. S. 1383 is
+  the Veterans Accessibility Advisory Committee Act and unrelated. The wrong
+  number sat in the instruction that teaches this rule, and it propagated into
+  a research cache file before anyone checked it. A plausible bill number is
+  not a verified one.
+- **Check whether the bill is still the live vehicle.** A bill can pass one
+  chamber and stop while its policy moves inside something else. H.R. 22 has
+  not moved since 2025-04-10; the same requirements are now text in the
+  fiscal year 2027 defense authorization. Briefing the dormant bill as though
+  it were live sends group leaders to make asks that offices can truthfully
+  dismiss.
 - Note the Congress session (e.g., 119th Congress, 2025–2026).
 
 ### Step 2 — Verify current status from primary sources

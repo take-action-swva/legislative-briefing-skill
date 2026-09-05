@@ -193,9 +193,18 @@ resolved litigation, seats on the ballot, and anything a reader might
 otherwise get wrong. This section exists because CTA roundups get forwarded
 and excerpted, and a wrong premise at the top propagates.
 
-If a factual correction has been logged in `state-context-{{state_code}}.md`,
-and it bears on the asks, state it here explicitly rather than relying on
-readers to already know.
+**Do not publish corrections that exist to keep you from making an error.**
+Most logged corrections are guardrails for the writer, not news for the
+reader. Virginia's district lines are the standing example: the fact is
+recorded in `state-context-{{state_code}}.md` and in `issues/` so a draft
+never gets it wrong, and the network already knows it. Printing it tells
+group leaders something they know and implies they might not.
+
+A correction belongs in this section only when a reader acting on the asks
+would otherwise get it wrong, and the error is live in circulation. Test it
+by asking what a group leader would do differently having read it. If the
+answer is nothing, cut it and leave the fact in the cache where it does its
+actual work.
 
 **2. Delegation and tiers**
 
@@ -213,11 +222,11 @@ ask carries:
 
 **Ask:** [The specific action, with bill number or docket where applicable]
 **Target:** [Which tier, or which named members]
-**Answer looks like:** [What a yes actually is — a cosponsorship, a signed
+**Expectations:** [What a yes actually is — a cosponsorship, a signed
 letter, a recorded statement]
 ```
 
-The "Answer looks like" line is mandatory. It is what separates this output
+The "Expectations" line is mandatory. It is what separates this output
 type from a list of talking points.
 
 **4. Sequencing**
@@ -263,14 +272,14 @@ beyond what a reader needs to understand the current moment.]
 Act: [One or two members. For each: name, role, phone, contact URL,
 one-sentence ask.]
 
-Answer looks like: [What a yes actually is — a cosponsorship, a signed
+Expectations: [What a yes actually is — a cosponsorship, a signed
 letter, a recorded statement, a scheduled meeting.]
 ```
 
 Separate items with a horizontal rule (`---` in the JS, rendered as a page
 divider in the docx).
 
-The "Answer looks like" line is mandatory here too. It is the single field
+The "Expectations" line is mandatory here too. It is the single field
 that keeps an item from degrading into a talking point, and digest items are
 the ones most likely to be forwarded without their context.
 
@@ -292,7 +301,7 @@ Sen. Tim Kaine — Health, Education, Labor, and Pensions Committee
 DC: (202) 224-4024 | kaine.senate.gov/contact
 Ask him to oppose any markup that cuts federal Medicaid matching rates.
 
-Answer looks like: a public statement opposing the matching-rate cut, or an
+Expectations: a public statement opposing the matching-rate cut, or an
 amendment filed at markup.
 ```
 
@@ -390,7 +399,7 @@ checker, and the humanizer pass. Then verify these roundup-specific items:
 Both modes:
 
 - [ ] Every ask names a bill, docket, or specific action
-- [ ] Every ask has an "Answer looks like" line
+- [ ] Every ask has an "Expectations" line
 - [ ] No ask requests something the target has already done
 - [ ] Contact details pulled from state context, not searched
 - [ ] Volatile items checklist above completed on the day of distribution
@@ -403,6 +412,7 @@ Campaign mode:
 
 Digest mode:
 
+- [ ] An issue file in `issues/` written or updated for every item in the digest
 - [ ] No more than 5 items
 - [ ] Every item has a confirmed near-term action point
 - [ ] Each Act entry has phone number and contact URL from state context
