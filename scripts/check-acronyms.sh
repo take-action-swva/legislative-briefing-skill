@@ -107,7 +107,20 @@ STATE_CODES = {
 }
 SAFE = STATE_CODES | {
     "US","USA","TV","AM","PM","EST","EDT","CST","CDT","MST","MDT","PST","PDT",
-    "TLDR","TL","DR","OK","ID","AI","URL","PDF","FAQ","OK","NO","YES",
+    "TLDR","TL","DR","OK","ID","AI","URL","PDF","FAQ","NO","YES",
+}
+
+# Ordinary English words written in capitals for emphasis, as a label, or as a
+# structural placeholder ("[ISSUE NAME — bold, all caps]"). They are not
+# acronyms and have no expansion to give. Real agency acronyms — ACLU, FEMA,
+# NEPA — are not ordinary words, so suppressing these costs no coverage.
+CAPS_WORDS = {
+    "FAIL","PASS","NOTE","TODO","WARNING","ERROR","ISSUE","NAME","STATUS",
+    "ASK","TARGET","ANSWER","WINDOW","PREPARE","DATE","TIME","TOTAL","NEW",
+    "OLD","ALL","AND","OR","NOT","THE","FOR","STOP","START","END","TRUE",
+    "FALSE","NULL","ACT","BILL","HOUSE","SENATE","INDUSTRY","ORGANIZATION",
+    "METRIC","VALUE","MEMBER","PARTY","PHONE","CONTACT","NEXT","INCOMPLETE",
+    "REQUIRED","OPTIONAL","EXAMPLE","DRAFT","FINAL","RETIRED","NONE",
 }
 
 def js_prose(src):
@@ -201,11 +214,20 @@ for acronym, expansion in ENUMERATED:
 seen = set()
 for m in re.finditer(r"\b[A-Z][A-Z]+\b", text):
     token = m.group(0)
-    if token in seen or token in enumerated_tokens or token in SAFE:
+    if token in seen or token in enumerated_tokens or token in SAFE or token in CAPS_WORDS:
         continue
-    seen.add(token)
 
     start, end = m.start(), m.end()
+
+    # A filename (SKILL.md, README.md) is not an acronym use.
+    if re.match(r"\.(md|js|sh|json|docx|pdf|xml|csv)\b", text[end:], re.I):
+        continue
+    # Bill short titles are used bare by convention: the SAVE Act is named
+    # "the SAVE Act", and spelling out the backronym helps nobody.
+    if re.match(r"\s+Act\b", text[end:]):
+        continue
+
+    seen.add(token)
     defined = False
 
     if start > 0 and text[start - 1] == "(" and end < len(text) and text[end] == ")":
