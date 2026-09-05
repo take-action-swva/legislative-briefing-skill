@@ -29,6 +29,25 @@ TYPE=${2:?Usage: $0 <congress> <bill-type> <bill-number>}
 NUM=${3:?Usage: $0 <congress> <bill-type> <bill-number>}
 KEY="${CONGRESS_API_KEY:?Set CONGRESS_API_KEY environment variable. Get a free key at api.congress.gov}"
 
+# congress.gov's web URLs spell the bill type out, while the API takes the
+# short form. Map explicitly — a sed chain cannot do this safely, because the
+# short forms are substrings of one another (hr/hres, s/sres/sjres).
+case "$TYPE" in
+  hr)      URL_TYPE="house-bill" ;;
+  s)       URL_TYPE="senate-bill" ;;
+  hjres)   URL_TYPE="house-joint-resolution" ;;
+  sjres)   URL_TYPE="senate-joint-resolution" ;;
+  hconres) URL_TYPE="house-concurrent-resolution" ;;
+  sconres) URL_TYPE="senate-concurrent-resolution" ;;
+  hres)    URL_TYPE="house-resolution" ;;
+  sres)    URL_TYPE="senate-resolution" ;;
+  *)
+    echo "Error: unknown bill type '$TYPE'." >&2
+    echo "Expected one of: hr, s, hjres, sjres, hconres, sconres, hres, sres" >&2
+    exit 1
+    ;;
+esac
+
 BASE="https://api.congress.gov/v3"
 PARAMS="?api_key=${KEY}&format=json"
 
@@ -82,7 +101,7 @@ cat << INTAKE
 - **Origin chamber:** ${ORIGIN}
 - **Policy area:** ${POLICY_AREA}
 - **Cosponsors:** ${COSPONSOR_COUNT}
-- **Congress.gov URL:** https://www.congress.gov/bill/${CONGRESS}th-congress/$(echo "$TYPE" | sed 's/hr/house-bill/;s/s$/senate-bill/;s/hjres/house-joint-resolution/;s/sjres/senate-joint-resolution/')/${NUM}
+- **Congress.gov URL:** https://www.congress.gov/bill/${CONGRESS}th-congress/${URL_TYPE}/${NUM}
 
 ---
 

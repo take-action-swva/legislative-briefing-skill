@@ -24,7 +24,9 @@
 
 set -e
 
-DRIVE="/Users/ernie/Library/CloudStorage/GoogleDrive-ernie.braganza@gmail.com/My Drive/Statewide Coordinating Committee /Legislation Briefings"
+# Defaults to the Virginia committee's Drive mount. Every other deployment
+# overrides it — see scripts/README.md and CONTRIBUTING.md.
+DRIVE="${BRIEFING_DRIVE_PATH:-/Users/ernie/Library/CloudStorage/GoogleDrive-ernie.braganza@gmail.com/My Drive/Statewide Coordinating Committee /Legislation Briefings}"
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 ARCHIVE="${REPO}/briefs"
 
@@ -41,10 +43,27 @@ if [ ! -d "$DRIVE" ]; then
   exit 1
 fi
 
-if ! pgrep -qf "/Applications/Google Drive.app/Contents/MacOS/Google Drive"; then
-  echo "Error: Google Drive for Desktop is not running." >&2
-  echo "The copy would succeed locally and never upload. Start it and retry." >&2
-  exit 1
+# Drive for Desktop is a macOS app, and `pgrep -q` is macOS-only. On other
+# platforms the mount check above is the whole preflight — a network mount
+# that is present is the best signal available there.
+if [ "$(uname -s)" = "Darwin" ]; then
+  if ! pgrep -qf "/Applications/Google Drive.app/Contents/MacOS/Google Drive"; then
+    echo "Error: Google Drive for Desktop is not running." >&2
+    echo "The copy would succeed locally and never upload. Start it and retry." >&2
+    exit 1
+  fi
+fi
+
+# Warn, do not block: the delegation table only appears in full briefings, so
+# drift is irrelevant to a digest or a short brief and should not stop them
+# publishing. The QA checklist is where this is a required gate.
+if [ -x "${REPO}/scripts/check-delegation-parity.sh" ]; then
+  if ! PARITY=$("${REPO}/scripts/check-delegation-parity.sh" 2>&1); then
+    echo "WARNING: delegation data has drifted between the state context and" >&2
+    echo "the members table. Full briefings built from it may be wrong:" >&2
+    echo "$PARITY" | sed -n 's/^DRIFT/  DRIFT/p' >&2
+    echo "" >&2
+  fi
 fi
 
 mkdir -p "$ARCHIVE"

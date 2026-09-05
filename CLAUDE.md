@@ -91,7 +91,6 @@ templates/
                              phone, committees, briefing notes). Used in section 6
                              of every full briefing. Caller passes briefingNotes
                              object keyed by member ID.
-evals/                       Evaluation cases (existing, not modified in this session).
 ```
 
 ---
@@ -209,7 +208,7 @@ echo, log, or paste them into a chat.
 ./scripts/fetch-state-members.sh VA > state-context-va-draft.md
 
 # Get donor data for sector-linked bills:
-./scripts/fetch-donors.sh VA 2024 > donor-context-va-2024.md
+./scripts/fetch-donors.sh VA 2024 > donor-context-va.md
 
 # Get House delegation vote breakdown when a floor vote has already occurred:
 ./scripts/fetch-votes.sh 2025 199 VA

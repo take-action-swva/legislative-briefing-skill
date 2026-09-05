@@ -31,6 +31,8 @@ set -e
 
 STATE=${1:?Usage: $0 <state-code> (e.g. VA, NC, PA)}
 STATE_UPPER=$(echo "$STATE" | tr '[:lower:]' '[:upper:]')
+# macOS ships bash 3.2, which has no ${var,,} — use tr for the lowercase form.
+STATE_LOWER=$(echo "$STATE" | tr '[:upper:]' '[:lower:]')
 KEY="${CONGRESS_API_KEY:?Set CONGRESS_API_KEY environment variable. Get a free key at api.congress.gov}"
 
 BASE="https://api.congress.gov/v3"
@@ -64,7 +66,7 @@ cat << HEADER
 #   House: clerk.house.gov/members/[member-id]
 #   Senate: senate.gov/general/committee_assignments/assignments.htm
 #
-# After verifying, remove this header block and save as state-context-${STATE,,}.md
+# After verifying, remove this header block and save as state-context-${STATE_LOWER}.md
 
 ---
 
@@ -130,4 +132,4 @@ echo "Draft complete. Next steps:" >&2
 echo "  1. Fill in all FILL IN sections (especially committees)" >&2
 echo "  2. Verify committee assignments at clerk.house.gov and senate.gov" >&2
 echo "  3. Remove the draft warning header" >&2
-echo "  4. Save as state-context-${STATE,,}.md" >&2
+echo "  4. Save as state-context-${STATE_LOWER}.md" >&2

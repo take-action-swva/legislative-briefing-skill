@@ -255,16 +255,23 @@ function statusTable(fields) {
 //   name: string,
 //   role: string,           e.g. "U.S. Senator" or "U.S. Representative"
 //   district?: string,      e.g. "VA-05" (omit for senators)
-//   priority: 'call-now' | 'thank-reinforce' | 'constituent-pressure',
+//   priority: 'call-now' | 'thank-reinforce' | 'contact-log',
+//   gatekeeper?: boolean,   true appends "(Gatekeeper)" to the priority label
 //   position: string,       plain-language position or "Position not publicly stated"
 //   dcPhone: string,        e.g. "202-224-2023"
 //   contactUrl: string,     e.g. "https://warner.senate.gov/contact"
 //   email?: string,         include if a public email address exists
 // }>
+//
+// Keys map to SKILL.md's Shared Member Taxonomy: Tier 1 Aligned takes
+// 'thank-reinforce', Tier 2 Movable 'call-now', Tier 3 Locked 'contact-log'.
+// Gatekeeper is an annotation on top of a tier rather than a tier of its own —
+// a member can be both Tier 2 Movable and a Gatekeeper — so it rides on the
+// separate `gatekeeper` flag instead of a fourth key here.
 const PRIORITY_LABELS = {
-  'call-now':             '→ Call now',
-  'thank-reinforce':      '→ Thank and reinforce',
-  'constituent-pressure': '→ Constituent pressure only',
+  'call-now':        '→ Call now',
+  'thank-reinforce': '→ Thank and reinforce',
+  'contact-log':     '→ Contact and log',
 };
 
 function membersTable(members) {
@@ -290,7 +297,17 @@ function membersTable(members) {
   });
 
   const dataRows = members.map(m => {
-    const label = PRIORITY_LABELS[m.priority] || m.priority;
+    if (!Object.prototype.hasOwnProperty.call(PRIORITY_LABELS, m.priority)) {
+      const valid = Object.keys(PRIORITY_LABELS).map(k => `'${k}'`).join(', ');
+      const hint = m.priority === 'constituent-pressure'
+        ? " ('constituent-pressure' was retired in 3.1 — use 'contact-log')"
+        : '';
+      throw new Error(
+        `membersTable: unrecognized priority '${m.priority}' for ${m.name}. ` +
+        `Expected one of ${valid}.${hint}`
+      );
+    }
+    const label = PRIORITY_LABELS[m.priority] + (m.gatekeeper ? ' (Gatekeeper)' : '');
 
     const contactParts = [];
     if (m.dcPhone) contactParts.push(run(`DC: ${m.dcPhone}`));
@@ -407,16 +424,20 @@ function buildTitleBlock(title, subtitle, issueArea, statusDate) {
  *   Administration position, Bill supporters, Threat level (set valueIsRed: true).
  *
  * @param {Paragraph[]} config.sections.recommendedActions
- *   Action items for the amber box. Open with contact items ranked by leverage:
- *   (1) committee gatekeepers, (2) persuadables, (3) allies, (4) skip opponents.
+ *   Action items for the amber box. Open with contact items in the shared
+ *   ranking: (1) Gatekeepers, first regardless of tier, (2) Tier 2 Movable,
+ *   (3) Tier 1 Aligned, (4) Tier 3 Locked — a written ask, never skipped.
  *   Each contact: numbered() for name/role, body() for DC phone + contact form,
  *   body() for leverage context sentence, body() for call script (italicized).
  *
  * @param {Paragraph[]} config.sections.whyItMatters
  *   Bullet paragraphs. Lead each with bold() key phrase + run() supporting text.
  *
- * @param {Array<{name,role,district?,priority,position,dcPhone,contactUrl,email?}>} config.sections.members
- *   priority: 'call-now' | 'thank-reinforce' | 'constituent-pressure'
+ * @param {Array<{name,role,district?,priority,gatekeeper?,position,dcPhone,contactUrl,email?}>} config.sections.members
+ *   priority: 'call-now' (Tier 2 Movable) | 'thank-reinforce' (Tier 1 Aligned)
+ *   | 'contact-log' (Tier 3 Locked). An unrecognized value throws.
+ *   gatekeeper: true appends "(Gatekeeper)" to the label; it layers on a tier
+ *   rather than replacing one.
  *   Order must match the contact ranking in recommendedActions.
  *
  * @param {Paragraph[]} [config.sections.donorContext]   Optional — sector-linked bills only.

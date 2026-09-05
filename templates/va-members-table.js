@@ -70,8 +70,8 @@ const MEMBERS = [
     phone:      '(202) 224-4024',
     contactUrl: 'https://kaine.senate.gov/contact',
     committees: [
-      'Armed Services — Seapower RM',
-      'Foreign Relations — W. Hemisphere RM',
+      'Armed Services — Seapower Ranking Member',
+      'Foreign Relations — Western Hemisphere Ranking Member',
       'Health, Education, Labor & Pensions',
       'Budget',
     ],
@@ -84,9 +84,9 @@ const MEMBERS = [
     phone:      '(202) 225-4261',
     contactUrl: 'https://wittman.house.gov/contact',
     committees: [
-      'Armed Services — Vice Chair; TAL subcommittee Chair',
+      'Armed Services — Vice Chair; Tactical Air & Land Forces subcommittee Chair',
       'Natural Resources',
-      'Select Committee on CCP Competition',
+      'Select Committee on Strategic Competition with China',
     ],
   },
   {
@@ -134,7 +134,7 @@ const MEMBERS = [
     phone:      '(202) 225-4711',
     contactUrl: 'https://mcguire.house.gov/contact',
     committees: [
-      'Armed Services — TAL subcommittee',
+      'Armed Services — Tactical Air & Land Forces subcommittee',
       'Oversight & Government Reform',
     ],
   },
@@ -147,7 +147,7 @@ const MEMBERS = [
     contactUrl: 'https://cline.house.gov/contact',
     committees: [
       'Appropriations',
-      '— Agriculture, Rural Dev., FDA subcommittee',
+      '— Agriculture, Rural Development, Food & Drug Administration subcommittee',
     ],
   },
   {
@@ -183,6 +183,7 @@ const MEMBERS = [
     contactUrl: 'https://griffith.house.gov/contact',
     committees: [
       'Energy & Commerce',
+      '— Communications & Technology subcommittee',
       '— Health subcommittee',
       '— Environment subcommittee',
       'House Administration',
@@ -197,7 +198,7 @@ const MEMBERS = [
     phone:      '(202) 225-5136',
     contactUrl: 'https://subramanyam.house.gov/contact',
     committees: [
-      'Science, Space & Technology — Military/Foreign Affairs RM',
+      'Science, Space & Technology — Military/Foreign Affairs Ranking Member',
       'Oversight & Government Reform',
       'Ethics',
     ],

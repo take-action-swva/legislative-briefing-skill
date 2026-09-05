@@ -40,26 +40,82 @@ if [ "$KEY" = "DEMO_KEY" ]; then
   warn "Get a free key at api.data.gov to run the full delegation."
 fi
 
-# Find the most recent FEC candidate ID for a member.
-# Searches by last name, state, and office (H or S).
-# Returns empty string if no match found.
+# curl with one retry on transient failure (timeout, rate limit, flaky connection).
+curl_retry() {
+  curl -sf "$@" || { sleep 1; curl -sf "$@"; }
+}
+
+# Look up FEC candidates matching a name query, restricted to this cycle's
+# election years so retired/unrelated same-surname candidates (e.g. a former
+# member) can't outrank the current one on lifetime receipts.
+_fec_candidate_search() {
+  local q="$1" office="$2"
+  curl_retry "${BASE}/candidates/?q=${q}&state=${S}&office=${office}&sort=-receipts&per_page=10&api_key=${KEY}" \
+    | jq -r --arg c1 "$CYCLE" --arg c2 "$((CYCLE + 2))" \
+      '[.results[] | select((.election_years // []) | any(. == ($c1 | tonumber) or . == ($c2 | tonumber)))]
+       | .[0].candidate_id // empty'
+}
+
+# Find the current FEC candidate ID for a member.
+# A last-name-only search (e.g. "Scott") can be won by an unrelated,
+# long-retired same-surname candidate with higher lifetime receipts (this
+# happened for Rep. Bobby Scott, which matched a former VA-02 Rep with the
+# same surname instead of him) — so try the full name first, since it's far
+# less likely to collide, and fall back to last name only if that finds
+# nothing (FEC search is literal and won't match a nickname like "Bobby"
+# against a filing's legal name "Robert").
 find_cand() {
-  local q office
-  q=$(echo "$1" | tr ' ' '+')
-  office="$2"
-  curl -sf "${BASE}/candidates/?q=${q}&state=${S}&office=${office}&sort=-receipts&per_page=5&api_key=${KEY}" \
+  local full_name="$1" last_name="$2" office="$3"
+  local cand_id
+
+  cand_id=$(_fec_candidate_search "$(echo "$full_name" | tr ' ' '+')" "$office")
+  [ -n "$cand_id" ] && { echo "$cand_id"; return; }
+
+  cand_id=$(_fec_candidate_search "$(echo "$last_name" | tr ' ' '+')" "$office")
+  [ -n "$cand_id" ] && { echo "$cand_id"; return; }
+
+  # Nothing active this cycle matched — fall back to the old unfiltered
+  # last-name search rather than reporting no match at all, but this is a
+  # weaker result and worth a second look if it's ever hit.
+  warn "No candidate active in ${CYCLE}/$((CYCLE + 2)) matched '${full_name}' — falling back to unfiltered last-name search"
+  curl_retry "${BASE}/candidates/?q=$(echo "$last_name" | tr ' ' '+')&state=${S}&office=${office}&sort=-receipts&per_page=5&api_key=${KEY}" \
     | jq -r '.results[0].candidate_id // empty'
 }
 
-# Get fundraising totals for a candidate in a given cycle.
-get_totals() {
-  curl -sf "${BASE}/candidates/totals/?candidate_id=${1}&cycle=${CYCLE}&api_key=${KEY}"
+# Get fundraising totals for a committee in a given cycle.
+get_committee_totals() {
+  curl_retry "${BASE}/committee/${1}/totals/?api_key=${KEY}" \
+    | jq -r --arg cycle "$CYCLE" '.results[] | select(.cycle == ($cycle | tonumber))'
 }
 
-# Get the principal campaign committee ID for a candidate.
-get_committee() {
-  curl -sf "${BASE}/candidate/${1}/committees/?designation=P&api_key=${KEY}" \
-    | jq -r '.results[0].committee_id // empty'
+# A candidate can have multiple principal-committee registrations over time
+# (e.g. an earlier run's committee that has since gone inactive). Picking
+# .results[0] blindly returns whichever the API lists first, which is not
+# necessarily the one with activity in the cycle we care about — this
+# silently produced blank fundraising data for long-serving members with
+# more than one P-designated committee on file (e.g. Sen. Warner, Rep.
+# McGuire). Instead, check each P committee's totals for this cycle and use
+# the first one that actually has data.
+find_active_committee() {
+  local cand_id="$1"
+  local committee_ids
+  committee_ids=$(curl_retry "${BASE}/candidate/${cand_id}/committees/?designation=P&api_key=${KEY}" \
+    | jq -r '.results[].committee_id // empty')
+
+  local cid totals
+  while IFS= read -r cid; do
+    [ -n "$cid" ] || continue
+    totals=$(get_committee_totals "$cid")
+    if [ -n "$totals" ]; then
+      echo "$cid"
+      return
+    fi
+  done <<< "$committee_ids"
+
+  # None had data for this cycle — fall back to the first committee so the
+  # employer breakdown (which doesn't depend on the cycle having totals) can
+  # still be attempted.
+  echo "$committee_ids" | head -n1
 }
 
 # Format an integer as a dollar amount: 1234567 -> $1,234,567
@@ -73,30 +129,80 @@ fmt_dollars() {
   }'
 }
 
-# Output top 5 employer rows for a committee.
-# Employer names are self-reported by donors — duplicates are possible.
+# Donors self-report their employer as free text, so the FEC returns these
+# occupation placeholders (plus its own "NULL" sentinel for missing data) as
+# if they were organizations. Left in, they crowd out every real employer:
+# one member's top five were all "RETIRED".
+PLACEHOLDER_EMPLOYERS='["RETIRED","NOT EMPLOYED","SELF EMPLOYED","SELF","HOMEMAKER","UNEMPLOYED","NONE","N/A","NA","NULL","INFORMATION REQUESTED","REQUESTED","BEST EFFORTS","REFUSED","DECLINED","NOT APPLICABLE","STUDENT"]'
+
+# Group employer rows by a case- and punctuation-normalized key, summing
+# totals, so "RETIRED" / "Retired" / "RETIRED." collapse into one entry.
+# Display keeps the spelling of the largest contribution in each group.
+#
+# Also restricts to the target cycle client-side: this endpoint's own
+# two_year_transaction_period filter has no effect (confirmed against live
+# data — it returns one row per (employer, cycle) across the committee's
+# entire multi-decade history, not just the requested cycle). Without this
+# filter, group_by(key) would sum an employer's contributions across every
+# cycle the committee has ever filed, wildly inflating totals for long-serving
+# members and their most common placeholder employers.
+EMPLOYER_AGG='
+[ .results[]?
+  | select(.employer != null and .employer != "" and .cycle == ($cycle | tonumber))
+  | { disp:  .employer,
+      key:   (.employer | ascii_upcase | gsub("[-.,]"; " ") | gsub("\\s+"; " ")
+                        | sub("^ "; "") | sub(" $"; "")),
+      total: (.total // 0) }
+]
+| map(. as $e | select(($skip | index($e.key) | not) == $keep_real))
+| group_by(.key)
+| map(sort_by(-.total) | { disp: .[0].disp, total: (map(.total) | add) })
+| sort_by(-.total)'
+
+# Output top 5 employer rows for a committee, followed by a note naming any
+# occupation placeholders that were excluded — they are real money and stay
+# visible, they just are not organizations.
 top_employers() {
   local committee_id="$1"
-  local data
-  data=$(curl -sf "${BASE}/schedules/schedule_a/by_employer/?committee_id=${committee_id}&two_year_transaction_period=${CYCLE}&sort=-total&per_page=5&api_key=${KEY}" \
-    | jq -r '.results[]? | select(.employer != null and .employer != "") | [(.employer), (.total | round | tostring)] | @tsv' 2>/dev/null) || true
+  # Initialized because the script runs under `set -u` and a failed curl
+  # leaves these unassigned.
+  local raw="" data="" excluded=""
+  # per_page is 100 rather than 5: duplicates and placeholders are merged and
+  # filtered below, so the top five real employers may sit well down the list.
+  raw=$(curl_retry "${BASE}/schedules/schedule_a/by_employer/?committee_id=${committee_id}&sort=-total&per_page=100&api_key=${KEY}" 2>/dev/null) || true
+
+  if [ -n "$raw" ]; then
+    data=$(echo "$raw" | jq -r --argjson skip "$PLACEHOLDER_EMPLOYERS" --argjson keep_real true --arg cycle "$CYCLE" \
+      "${EMPLOYER_AGG} | .[:5][] | [ .disp, (.total|round|tostring) ] | @tsv" 2>/dev/null) || true
+    excluded=$(echo "$raw" | jq -r --argjson skip "$PLACEHOLDER_EMPLOYERS" --argjson keep_real false --arg cycle "$CYCLE" \
+      "${EMPLOYER_AGG} | .[:5][] | [ .disp, (.total|round|tostring) ] | @tsv" 2>/dev/null) || true
+  fi
 
   if [ -z "$data" ]; then
     echo "| — | — |"
-    return
+  else
+    local count=0
+    while IFS=$'\t' read -r org amt; do
+      echo "| ${org} | $(fmt_dollars "$amt") |"
+      count=$((count + 1))
+    done <<< "$data"
+
+    # Pad to 5 rows
+    while [ "$count" -lt 5 ]; do
+      echo "| | |"
+      count=$((count + 1))
+    done
   fi
 
-  local count=0
-  while IFS=$'\t' read -r org amt; do
-    echo "| ${org} | $(fmt_dollars "$amt") |"
-    count=$((count + 1))
-  done <<< "$data"
-
-  # Pad to 5 rows
-  while [ "$count" -lt 5 ]; do
-    echo "| | |"
-    count=$((count + 1))
-  done
+  if [ -n "$excluded" ]; then
+    local note=""
+    while IFS=$'\t' read -r org amt; do
+      [ -n "$org" ] || continue
+      note="${note}${note:+; }${org} $(fmt_dollars "$amt")"
+    done <<< "$excluded"
+    echo ""
+    echo "*Excluded as self-reported occupations rather than organizations: ${note}.*"
+  fi
 }
 
 # Output a complete member section.
@@ -112,7 +218,7 @@ member_section() {
   echo ""
 
   local cand_id
-  cand_id=$(find_cand "$name" "$office") || true
+  cand_id=$(find_cand "$search_hint" "$name" "$office") || true
 
   if [ -z "$cand_id" ]; then
     warn "FEC lookup failed for '${name}' — fill in manually"
@@ -135,25 +241,26 @@ member_section() {
 EOF
   else
     sleep 0.5
+    local committee_id
+    committee_id=$(find_active_committee "$cand_id") || true
+    sleep 0.5
+
     local totals
-    totals=$(get_totals "$cand_id")
+    totals=$([ -n "$committee_id" ] && get_committee_totals "$committee_id" || true)
 
     local total_raised pac indiv pac_pct indiv_pct
-    total_raised=$(echo "$totals" | jq -r '.results[0].receipts // 0')
-    pac=$(echo "$totals" | jq -r '.results[0].other_political_committee_contributions // 0')
-    indiv=$(echo "$totals" | jq -r '.results[0].individual_itemized_contributions // 0')
+    total_raised=$(echo "$totals" | jq -r '.receipts // 0')
+    pac=$(echo "$totals" | jq -r '.other_political_committee_contributions // 0')
+    indiv=$(echo "$totals" | jq -r '.individual_itemized_contributions // 0')
     pac_pct=$(echo "$totals" | jq -r \
-      'if (.results[0].receipts // 0) > 0
-       then (.results[0].other_political_committee_contributions / .results[0].receipts * 100 | round | tostring) + "%"
+      'if (.receipts // 0) > 0
+       then (.other_political_committee_contributions / .receipts * 100 | round | tostring) + "%"
        else "—" end')
     indiv_pct=$(echo "$totals" | jq -r \
-      'if (.results[0].receipts // 0) > 0
-       then (.results[0].individual_itemized_contributions / .results[0].receipts * 100 | round | tostring) + "%"
+      'if (.receipts // 0) > 0
+       then (.individual_itemized_contributions / .receipts * 100 | round | tostring) + "%"
        else "—" end')
 
-    sleep 0.5
-    local committee_id
-    committee_id=$(get_committee "$cand_id") || true
     sleep 0.5
 
     cat <<EOF
@@ -164,7 +271,7 @@ EOF
 | From PACs | ${pac_pct} |
 | From individuals | ${indiv_pct} |
 
-**Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
+**Top contributing organizations** *(FEC — employer self-reported; spelling variants merged, occupation placeholders excluded)*
 | Organization | Total |
 |---|---|
 EOF
@@ -206,9 +313,9 @@ parse_members() {
       last=$(echo "$full_name" | awk '{print $NF}')
       printf 'S\t%s\t%s\t%s\n' "Sen. ${full_name} (${party})" "$last" "$full_name"
 
-    elif echo "$line" | grep -qE '^### VA-[0-9]+'; then
+    elif echo "$line" | grep -qE "^### ${S}-[0-9]+"; then
       local district rep_name party last
-      district=$(echo "$line" | grep -oE 'VA-[0-9]+')
+      district=$(echo "$line" | grep -oE "${S}-[0-9]+")
       rep_name=$(echo "$line" | sed 's/^.*Rep\. //; s/ ([DR])$//')
       party=$(echo "$line" | grep -oE '\([DR]\)' | tr -d '()')
       last=$(echo "$rep_name" | awk '{print $NF}')
@@ -234,6 +341,15 @@ cat <<EOF
 <!-- Member roster sourced from state-context-${STATE_LOWER}.md -->
 <!-- Next full update: January 2027 (120th Congress) -->
 
+> **INCOMPLETE — do not read a blank industries table as a finding.**
+>
+> This file was generated on ${TODAY}. Every **Top industries** table below
+> is an empty placeholder awaiting manual entry from opensecrets.org, not a
+> finding that a member has no industry concentration. The FEC sections
+> (cycle fundraising, top contributing organizations) are complete.
+>
+> Delete this banner once the industry tables are filled in.
+
 ## How to fill in industry data
 
 For each member below:
@@ -245,8 +361,12 @@ For each member below:
 Industry totals are stable per election cycle — fill them in once and
 they hold through the full 119th Congress (through January 2027).
 
-FEC employer names are self-reported by donors and may appear in multiple forms
-(e.g. "Boeing" and "Boeing Co." as separate entries).
+FEC employer names are self-reported by donors. Case and punctuation variants
+are merged automatically ("Boeing", "BOEING" and "Boeing."), and occupation
+placeholders such as RETIRED and HOMEMAKER are excluded from the organization
+tables and reported separately beneath them. Differently-worded names for the
+same employer ("Boeing" vs "Boeing Co.") still appear as separate entries —
+skim each table before citing figures publicly.
 
 ---
 
@@ -274,4 +394,6 @@ EOF
 
 log ""
 log "Done. Next step: fill in Top industries tables from opensecrets.org."
-log "Review FEC employer data for obvious duplicates before distributing."
+log "Employer spelling variants are merged and occupation placeholders (RETIRED,"
+log "HOMEMAKER, N/A) are excluded automatically. Still skim the tables before"
+log "distributing — self-reported employer text varies more than any list covers."

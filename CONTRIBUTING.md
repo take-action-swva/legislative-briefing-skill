@@ -6,11 +6,38 @@ states are welcome.
 
 ---
 
-## Adding a New State
+## Adapting to Another State
 
-To deploy this skill for a new state, you need to create two files:
+The skill body — workflow, templates, accuracy rules, pitfalls — is generic,
+and the scripts take a state code as their first argument. Deploying for a
+new state means supplying data and two settings, not editing skill logic.
 
-### 1. `state-context-[statecode].md`
+### 1. Update the front matter in `SKILL.md`
+
+```yaml
+state: [Your State Name]
+senators:
+  - name: [Senator 1 Name]
+    url: [lastname].senate.gov
+  - name: [Senator 2 Name]
+    url: [lastname].senate.gov
+house_seats: [number]
+```
+
+The `{{state}}` placeholders throughout the templates resolve from these
+fields automatically.
+
+### 2. Set `BRIEFING_DRIVE_PATH`
+
+`scripts/publish.sh` copies finished deliverables to a Google Drive folder.
+It defaults to the Virginia committee's mount, so export your own before
+publishing anything:
+
+```bash
+export BRIEFING_DRIVE_PATH="/path/to/your/Drive/Legislation Briefings"
+```
+
+### 3. Create `state-context-[statecode].md`
 
 Copy `state-context-va.md` as a template. Replace all Virginia-specific
 content with your state's delegation. Required fields for each member:
@@ -30,7 +57,7 @@ Verify all committee assignments from primary sources:
 
 Do not copy from news articles or Wikipedia — clerk.house.gov is authoritative.
 
-### 2. `references/sources-[statecode].md`
+### 4. Create `references/sources-[statecode].md`
 
 Copy `references/sources-va.md` as a template. Replace the Virginia-specific
 sources with your state's equivalents. Look for:
@@ -44,20 +71,14 @@ sources with your state's equivalents. Look for:
 | State attorney general | For tracking state-level legal responses to federal action |
 | State legislative research | Equivalent of Virginia's JLARC |
 
-### 3. Front matter update
+`references/sources-national.md` applies to every state unchanged — carry it
+forward as-is and create only the state-specific file.
 
-If you are deploying the skill for your state (not contributing back to the
-shared repo), update the front matter in SKILL.md:
+### 5. Seed `lessons_learned`
 
-```yaml
-state: [Your State Name]
-senators:
-  - name: [Senator 1 Name]
-    url: [lastname].senate.gov
-  - name: [Senator 2 Name]
-    url: [lastname].senate.gov
-house_seats: [number]
-```
+Virginia-specific entries in SKILL.md's front matter are prefixed
+`[Virginia]` so you can tell which lessons generalize and which do not. Add
+entries for your state with the equivalent prefix as you accumulate them.
 
 ---
 
@@ -114,42 +135,6 @@ verification date and flag any assignments you could not confirm.
 
 Review the output carefully before committing — committee assignments in
 particular should be traced to official sources.
-
----
-
----
-
-## Adapting to Another State
-
-The skill body — workflow, template, accuracy rules, pitfalls — is fully
-generic. No changes to SKILL.md are needed. To deploy for a new state:
-
-1. **Update front matter fields in SKILL.md:**
-   - `state:` — state name as it should appear in headings
-   - `senators:` — both senator names and their `.senate.gov` URLs
-   - `house_seats:` — current number of House seats
-
-2. **Create `references/sources-[statecode].md`** using `sources-va.md` as
-   a template. For each new state, find:
-   - A state-level political data project (like VPAP for Virginia)
-   - The state elections authority website
-   - An independent state political news outlet
-   - Official senator and representative pages
-   - The state attorney general's office
-   - Any state-specific legal or civic organizations tracking relevant issues
-
-3. **Carry forward universal sources** — `references/sources-national.md`
-   applies to all states unchanged. Only create the state-specific file.
-
-4. **Create `state-context-[statecode].md`** following step 1 above and the
-   Regenerating a State Context File instructions below.
-
-5. **Seed lessons_learned** — Virginia-specific entries in SKILL.md are
-   prefixed `[Virginia]` so you can identify which lessons generalize. Add
-   state-specific entries for your state with the equivalent prefix.
-
-The `{{state}}` placeholders throughout the template resolve from the front
-matter automatically.
 
 ---
 

@@ -1,16 +1,27 @@
 #!/bin/bash
-# check-acronyms.sh — Verify common legislative acronyms are expanded in a briefing file.
+# check-acronyms.sh — Verify acronyms are expanded on first use in a briefing file.
 # Accepts either a .js source (docx outputs, checked before the docx is built, so
 # violations are caught early) or a .md file (markdown outputs: short briefs and
-# CTA roundups, which have no .js stage). The checks are plain text matching, so
-# both formats work identically.
+# CTA roundups, which have no .js stage).
+#
+# Two passes run over every file:
+#   1. Enumerated — a curated table of acronyms this project uses often, each
+#      requiring a specific expansion. Catches a wrong or vague expansion, not
+#      just a missing one.
+#   2. Generic — any other all-caps token, flagged when nothing nearby defines
+#      it. Catches acronyms nobody thought to enumerate (ACLU, FEMA, NEPA).
+#
+# Both passes enforce ORDER, not mere presence: the expansion has to appear
+# before the acronym's first bare use, which is what "expand on first use"
+# actually means. An expansion buried nine paragraphs below the first bare use
+# does not help the reader who hit the acronym in paragraph one.
 #
 # Usage:
 #   ./scripts/check-acronyms.sh <briefing-file.js|.md>
 #
-# Exit code 0 = all clear. Exit code 1 = one or more acronyms used without expansion.
+# Exit code 0 = all clear. Exit code 1 = one or more violations.
 #
-# Requires: python3 (used for reliable word-boundary matching across macOS/Linux)
+# Requires: python3
 
 FILE=${1:?Usage: $0 <briefing-file.js|.md>}
 
@@ -27,129 +38,227 @@ case "$FILE" in
     ;;
 esac
 
-ERRORS=0
-
-# check: word-boundary search for all-caps acronyms (AUMF, CFTC, etc.)
-# Args: acronym  "required expansion substring"
-check() {
-  local acronym="$1"
-  local expansion="$2"
-
-  local found
-  found=$(python3 -c "
-import re, sys
-text = open(sys.argv[1]).read()
-print('yes' if re.search(r'\b' + re.escape(sys.argv[2]) + r'\b', text) else 'no')
-" "$FILE" "$acronym" 2>/dev/null)
-
-  if [ "$found" = "yes" ]; then
-    local expanded
-    expanded=$(python3 -c "
-import re, sys
-# Collapse whitespace before matching. A multi-word expansion that wraps across
-# two lines is still an expansion; matching the raw text reads it as a FAIL.
-text = re.sub(r'\s+', ' ', open(sys.argv[1]).read().lower())
-needle = re.sub(r'\s+', ' ', sys.argv[2].lower())
-print('yes' if needle in text else 'no')
-" "$FILE" "$expansion" 2>/dev/null)
-
-    if [ "$expanded" = "yes" ]; then
-      echo "OK    ${acronym}"
-    else
-      echo "FAIL  ${acronym}  —  missing expansion: \"${expansion}\""
-      ERRORS=$((ERRORS + 1))
-    fi
-  fi
-}
-
-# check_abbr: plain substring search for dot-notation abbreviations (H.Con.Res., S.J.Res., etc.)
-# Word-boundary regex does not work when the abbreviation contains dots.
-check_abbr() {
-  local acronym="$1"
-  local expansion="$2"
-
-  local found
-  found=$(python3 -c "
+python3 - "$FILE" <<'PYTHON'
+import re
 import sys
-text = open(sys.argv[1]).read()
-print('yes' if sys.argv[2] in text else 'no')
-" "$FILE" "$acronym" 2>/dev/null)
 
-  if [ "$found" = "yes" ]; then
-    local expanded
-    expanded=$(python3 -c "
-import re, sys
-# Collapse whitespace before matching. A multi-word expansion that wraps across
-# two lines is still an expansion; matching the raw text reads it as a FAIL.
-text = re.sub(r'\s+', ' ', open(sys.argv[1]).read().lower())
-needle = re.sub(r'\s+', ' ', sys.argv[2].lower())
-print('yes' if needle in text else 'no')
-" "$FILE" "$expansion" 2>/dev/null)
+path = sys.argv[1]
+raw = open(path, encoding="utf-8").read()
 
-    if [ "$expanded" = "yes" ]; then
-      echo "OK    ${acronym}"
-    else
-      echo "FAIL  ${acronym}  —  missing expansion: \"${expansion}\""
-      ERRORS=$((ERRORS + 1))
-    fi
-  fi
+# (acronym, required expansion). Dotted forms are matched as plain substrings;
+# everything else on word boundaries.
+ENUMERATED = [
+    # Intelligence / surveillance
+    ("NSA",   "National Security Agency"),
+    ("FBI",   "Federal Bureau of Investigation"),
+    ("DNI",   "Director of National Intelligence"),
+    ("FISC",  "Foreign Intelligence Surveillance Court"),
+    ("RISAA", "Reforming Intelligence and Securing America Act"),
+    ("JAG",   "Judge Advocate General"),
+
+    # Core legislative procedure
+    ("AUMF",       "Authorization for Use of Military Force"),
+    ("WPR",        "War Powers Resolution"),
+    ("CR",         "continuing resolution"),
+    ("CRS",        "Congressional Research Service"),
+    ("CBO",        "Congressional Budget Office"),
+    ("H.Con.Res.", "House Concurrent Resolution"),
+    ("S.Con.Res.", "Senate Concurrent Resolution"),
+    ("H.J.Res.",   "House Joint Resolution"),
+    ("S.J.Res.",   "Senate Joint Resolution"),
+
+    # Committees
+    ("HASC",  "House Armed Services"),
+    ("SASC",  "Senate Armed Services"),
+    ("HSGAC", "Homeland Security and Governmental Affairs"),
+    ("SSCI",  "Senate Select Committee on Intelligence"),
+    ("HFSC",  "House Financial Services"),
+    ("HELP",  "Health, Education, Labor, and Pensions"),
+
+    # Agencies and regulators
+    ("CFTC", "Commodity Futures Trading Commission"),
+    ("CFPB", "Consumer Financial Protection Bureau"),
+    ("NLRB", "National Labor Relations"),
+    ("DOGE", "Department of Government Efficiency"),
+    ("CBP",  "Customs and Border Protection"),
+    ("ICE",  "Immigration and Customs Enforcement"),
+    ("DHS",  "Department of Homeland Security"),
+    ("DOJ",  "Department of Justice"),
+    ("FISA", "Foreign Intelligence Surveillance"),
+
+    # Finance and crypto
+    ("DeFi",  "decentralized finance"),
+    ("CBDC",  "central bank digital currency"),
+    ("NASAA", "North American Securities Administrators"),
+
+    # Voting rights / elections
+    ("HAVA", "Help America Vote Act"),
+    ("NVRA", "National Voter Registration Act"),
+    ("VRA",  "Voting Rights Act"),
+]
+
+# Tokens that are not acronyms needing expansion in this context: postal codes
+# (districts read "VA-09"), and a few unambiguous everyday forms.
+STATE_CODES = {
+    "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA",
+    "KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ",
+    "NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT",
+    "VA","WA","WV","WI","WY","DC",
+}
+SAFE = STATE_CODES | {
+    "US","USA","TV","AM","PM","EST","EDT","CST","CDT","MST","MDT","PST","PDT",
+    "TLDR","TL","DR","OK","ID","AI","URL","PDF","FAQ","NO","YES",
 }
 
-# ── Intelligence / surveillance ──────────────────────────────────────────────
-check "NSA"    "National Security Agency"
-check "FBI"    "Federal Bureau of Investigation"
-check "DNI"    "Director of National Intelligence"
-check "FISC"   "Foreign Intelligence Surveillance Court"
-check "RISAA"  "Reforming Intelligence and Securing America Act"
-check "JAG"    "Judge Advocate General"
+# Ordinary English words written in capitals for emphasis, as a label, or as a
+# structural placeholder ("[ISSUE NAME — bold, all caps]"). They are not
+# acronyms and have no expansion to give. Real agency acronyms — ACLU, FEMA,
+# NEPA — are not ordinary words, so suppressing these costs no coverage.
+CAPS_WORDS = {
+    "FAIL","PASS","NOTE","TODO","WARNING","ERROR","ISSUE","NAME","STATUS",
+    "ASK","TARGET","ANSWER","WINDOW","PREPARE","DATE","TIME","TOTAL","NEW",
+    "OLD","ALL","AND","OR","NOT","THE","FOR","STOP","START","END","TRUE",
+    "FALSE","NULL","ACT","BILL","HOUSE","SENATE","INDUSTRY","ORGANIZATION",
+    "METRIC","VALUE","MEMBER","PARTY","PHONE","CONTACT","NEXT","INCOMPLETE",
+    "REQUIRED","OPTIONAL","EXAMPLE","DRAFT","FINAL","RETIRED","NONE",
+}
 
-# ── Core legislative procedure ────────────────────────────────────────────────
-check "AUMF"       "Authorization for Use of Military Force"
-check "WPR"        "War Powers Resolution"
-check "CR"         "continuing resolution"
-check "CRS"        "Congressional Research Service"
-check "CBO"        "Congressional Budget Office"
-check_abbr "H.Con.Res." "House Concurrent Resolution"
-check_abbr "S.Con.Res." "Senate Concurrent Resolution"
-check_abbr "H.J.Res."   "House Joint Resolution"
-check_abbr "S.J.Res."   "Senate Joint Resolution"
+def js_prose(src):
+    """Reader-facing text in a .js source.
 
-# ── Committees ────────────────────────────────────────────────────────────────
-check "HASC"    "House Armed Services"
-check "SASC"    "Senate Armed Services"
-check "HSGAC"   "Homeland Security and Governmental Affairs"
-check "SSCI"    "Senate Select Committee on Intelligence"
-check "HFSC"    "House Financial Services"
-check "HELP"    "Health, Education, Labor, and Pensions"
+    Only string literals reach the page, and only some of those: a scanner is
+    needed rather than a regex because comments hold example text that never
+    ships ("FISA Reform Act" in a JSDoc @param), and because stripping
+    comments by pattern would eat the // in every https:// URL. Single-token
+    literals are dropped too — 'FFFFFF', 'DXA', 'CENTER' are config values,
+    not prose, and the generic pass would otherwise flag every one of them.
+    """
+    out, i, n = [], 0, len(src)
+    while i < n:
+        c = src[i]
+        if c == "/" and i + 1 < n and src[i + 1] == "*":
+            j = src.find("*/", i + 2)
+            i = n if j < 0 else j + 2
+        elif c == "/" and i + 1 < n and src[i + 1] == "/":
+            j = src.find("\n", i)
+            i = n if j < 0 else j + 1
+        elif c in "'\"`":
+            quote, j, buf = c, i + 1, []
+            while j < n and src[j] != quote:
+                if src[j] == "\\":
+                    j += 2
+                    continue
+                buf.append(src[j])
+                j += 1
+            out.append("".join(buf))
+            i = j + 1
+        else:
+            i += 1
+    return " ".join(s for s in out if len(s.split()) >= 3)
 
-# ── Agencies and regulators ───────────────────────────────────────────────────
-check "CFTC"    "Commodity Futures Trading Commission"
-check "CFPB"    "Consumer Financial Protection Bureau"
-check "NLRB"    "National Labor Relations"
-check "DOGE"    "Department of Government Efficiency"
-check "CBP"     "Customs and Border Protection"
-check "ICE"     "Immigration and Customs Enforcement"
-check "DHS"     "Department of Homeland Security"
-check "DOJ"     "Department of Justice"
-check "FISA"    "Foreign Intelligence Surveillance"
 
-# ── Finance and crypto ────────────────────────────────────────────────────────
-check "DeFi"    "decentralized finance"
-check "CBDC"    "central bank digital currency"
-check "NASAA"   "North American Securities Administrators"
+# Text the acronym rule applies to. Markdown drops fenced code and inline code
+# spans, which are not prose either.
+if path.endswith(".js"):
+    prose = js_prose(raw)
+else:
+    prose = re.sub(r"```.*?```", " ", raw, flags=re.S)
+    prose = re.sub(r"`[^`]*`", " ", prose)
 
-# ── Voting rights / elections ─────────────────────────────────────────────────
-check "HAVA"    "Help America Vote Act"
-check "NVRA"    "National Voter Registration Act"
-check "VRA"     "Voting Rights Act"
+# Collapse whitespace so a multi-word expansion wrapped across two lines still
+# reads as one expansion, and so offsets from both searches are comparable.
+text = re.sub(r"\s+", " ", prose)
+lower = text.lower()
 
-echo ""
-if [ "$ERRORS" -eq 0 ]; then
-  echo "All acronym checks passed."
-else
-  case "$FILE" in
-    *.js) echo "${ERRORS} acronym expansion(s) missing — fix before running node to build the docx." ;;
-    *)    echo "${ERRORS} acronym expansion(s) missing — fix before distributing." ;;
-  esac
-  exit 1
-fi
+errors = []
+checked_ok = []
+
+
+def first_acronym_pos(token):
+    if "." in token:
+        i = text.find(token)
+        return i if i >= 0 else None
+    m = re.search(r"\b" + re.escape(token) + r"\b", text)
+    return m.start() if m else None
+
+
+def first_expansion_pos(expansion):
+    i = lower.find(re.sub(r"\s+", " ", expansion.lower()))
+    return i if i >= 0 else None
+
+
+# ── Pass 1: enumerated ───────────────────────────────────────────────────────
+enumerated_tokens = set()
+for acronym, expansion in ENUMERATED:
+    enumerated_tokens.add(acronym)
+    a_pos = first_acronym_pos(acronym)
+    if a_pos is None:
+        continue
+    e_pos = first_expansion_pos(expansion)
+    if e_pos is None:
+        errors.append(f'FAIL  {acronym}  —  missing expansion: "{expansion}"')
+    elif e_pos > a_pos:
+        errors.append(
+            f'FAIL  {acronym}  —  first used at character {a_pos}, but "{expansion}" '
+            f"does not appear until character {e_pos}. Expand it on first use."
+        )
+    else:
+        checked_ok.append(f"OK    {acronym}")
+
+
+# ── Pass 2: generic ──────────────────────────────────────────────────────────
+# Any run of 2+ capitals that is not enumerated and not safe-listed. Considered
+# defined if its first appearance is "(ACRONYM)" — the standard way a preceding
+# expansion introduces one — or if a parenthetical of two or more words follows
+# it directly, as in "ACLU (American Civil Liberties Union)".
+seen = set()
+for m in re.finditer(r"\b[A-Z][A-Z]+\b", text):
+    token = m.group(0)
+    if token in seen or token in enumerated_tokens or token in SAFE or token in CAPS_WORDS:
+        continue
+
+    start, end = m.start(), m.end()
+
+    # A filename (SKILL.md, README.md) is not an acronym use.
+    if re.match(r"\.(md|js|sh|json|docx|pdf|xml|csv)\b", text[end:], re.I):
+        continue
+    # Bill short titles are used bare by convention: the SAVE Act is named
+    # "the SAVE Act", and spelling out the backronym helps nobody.
+    if re.match(r"\s+Act\b", text[end:]):
+        continue
+
+    seen.add(token)
+    defined = False
+
+    if start > 0 and text[start - 1] == "(" and end < len(text) and text[end] == ")":
+        defined = True
+    else:
+        follow = re.match(r"\s*\(([^)]{4,150})\)", text[end:])
+        if follow and len(follow.group(1).split()) >= 2:
+            defined = True
+
+    if defined:
+        checked_ok.append(f"OK    {token}  (generic)")
+    else:
+        errors.append(
+            f"FAIL  {token}  —  used at character {start} with no expansion. "
+            f'Write it out on first use, as "Full Name Here ({token})".'
+        )
+
+
+for line in checked_ok:
+    print(line)
+for line in errors:
+    print(line)
+
+print("")
+if not errors:
+    print("All acronym checks passed.")
+    sys.exit(0)
+
+if path.endswith(".js"):
+    print(f"{len(errors)} acronym problem(s) — fix before running node to build the docx.")
+else:
+    print(f"{len(errors)} acronym problem(s) — fix before distributing.")
+sys.exit(1)
+PYTHON
