@@ -275,6 +275,15 @@ cat <<EOF
 <!-- Member roster sourced from state-context-${STATE_LOWER}.md -->
 <!-- Next full update: January 2027 (120th Congress) -->
 
+> **INCOMPLETE — do not read a blank industries table as a finding.**
+>
+> This file was generated on ${TODAY}. Every **Top industries** table below
+> is an empty placeholder awaiting manual entry from opensecrets.org, not a
+> finding that a member has no industry concentration. The FEC sections
+> (cycle fundraising, top contributing organizations) are complete.
+>
+> Delete this banner once the industry tables are filled in.
+
 ## How to fill in industry data
 
 For each member below:
@@ -286,8 +295,12 @@ For each member below:
 Industry totals are stable per election cycle — fill them in once and
 they hold through the full 119th Congress (through January 2027).
 
-FEC employer names are self-reported by donors and may appear in multiple forms
-(e.g. "Boeing" and "Boeing Co." as separate entries).
+FEC employer names are self-reported by donors. Case and punctuation variants
+are merged automatically ("Boeing", "BOEING" and "Boeing."), and occupation
+placeholders such as RETIRED and HOMEMAKER are excluded from the organization
+tables and reported separately beneath them. Differently-worded names for the
+same employer ("Boeing" vs "Boeing Co.") still appear as separate entries —
+skim each table before citing figures publicly.
 
 ---
 

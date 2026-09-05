@@ -1,48 +1,60 @@
-# Virginia Donor Context — 119th Congress
-<!-- Cycle: 2024 | FEC totals: run script to fill | Industries: fill in manually -->
-<!-- Last FEC update: — | Last industry update: — -->
+# VA Donor Context — 119th Congress
+<!-- Cycle: 2024 | FEC: auto-filled 2026-06-03 | Industries: fill in manually -->
+<!-- Member roster sourced from state-context-va.md -->
 <!-- Next full update: January 2027 (120th Congress) -->
 
-## How to use this file
+> **INCOMPLETE — do not read a blank industries table as a finding.**
+>
+> **Top industries** data has been entered for Rep. Griffith only (June 3,
+> 2026). The other twelve members' industry tables are empty placeholders
+> awaiting manual entry from opensecrets.org, not a finding that those
+> members have no industry concentration.
+>
+> The FEC sections — cycle fundraising totals and top contributing
+> organizations — are complete for all thirteen members.
+>
+> Griffith's table also uses a wider schema than the generated stub
+> (Industry / Total / Indiv. / PACs / Sector versus Industry / Total).
+> Settle which schema is canonical before filling in the remaining twelve,
+> so the file does not end up half in each.
 
-**FEC data (fundraising totals and top organizations):**
-Run `./scripts/fetch-donors.sh VA 2024 > donor-context-va.md` to overwrite with
-auto-filled FEC data. Requires a free FEC API key from api.data.gov.
+## How to fill in industry data
 
-**Industry data — fill in manually from opensecrets.org:**
+For each member below:
 1. Go to opensecrets.org/members-of-congress/
 2. Search by member name (hint in each section)
-3. On their profile, scroll to **Industries**
-4. Enter the top 5 industries by total, largest first
+3. On their profile, scroll to **Industries** — note the top 5 by total
+4. Enter industry name and total in the table, largest first
 
-Industry data is stable per election cycle — fill it in once and it holds
-through the full 119th Congress (through January 2027).
+Industry totals are stable per election cycle — fill them in once and
+they hold through the full 119th Congress (through January 2027).
 
-**When to include in a briefing:** Only for sector-linked bills (energy, pharma,
-financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
+FEC employer names are self-reported by donors and may appear in multiple forms
+(e.g. "Boeing" and "Boeing Co." as separate entries).
 
 ---
 
 ## Senate
 
+
 ### Sen. Mark Warner (D)
 *opensecrets.org/members-of-congress/ — search: Mark Warner*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | — |
+| From PACs | — |
+| From individuals | — |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| HOMEMAKER | $82,000 |
+| RETIRED | $36,087 |
+| ATTORNEY | $22,250 |
+| COLUMBIA CAPITAL | $18,750 |
+| FRIEDMAN BILLINGS | $18,500 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -55,24 +67,25 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 
 ---
 
+
 ### Sen. Tim Kaine (D)
 *opensecrets.org/members-of-congress/ — search: Tim Kaine*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $21,950,099 |
+| From PACs | 12% |
+| From individuals | 33% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| NOT EMPLOYED | $4,923,627 |
+| N/A | $3,675,970 |
+| N/A | $3,281,330 |
+| SELF EMPLOYED | $2,042,565 |
+| SELF EMPLOYED | $1,299,814 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -87,24 +100,25 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 
 ## House
 
+
 ### VA-01 — Rep. Rob Wittman (R)
 *opensecrets.org/members-of-congress/ — search: Rob Wittman*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $2,845,017 |
+| From PACs | 34% |
+| From individuals | 48% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| RETIRED | $274,610 |
+| RETIRED | $225,000 |
+| RETIRED | $222,597 |
+| RETIRED | $183,587 |
+| RETIRED | $122,233 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -116,25 +130,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-02 — Rep. Jen Kiggans (R)
 *opensecrets.org/members-of-congress/ — search: Jen Kiggans*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $6,481,317 |
+| From PACs | 25% |
+| From individuals | 39% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| RETIRED | $1,241,336 |
+| RETIRED | $977,593 |
+| RETIRED | $686,156 |
+| NULL | $169,799 |
+| SELF EMPLOYED | $142,699 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -146,25 +161,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-03 — Rep. Bobby Scott (D)
-*opensecrets.org/members-of-congress/ — search: Bobby Scott Virginia*
+*opensecrets.org/members-of-congress/ — search: Bobby Scott*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | — |
+| From PACs | — |
+| From individuals | — |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| N/A | $187,047 |
+| HOMEMAKER | $153,820 |
+| HOMEMAKER | $111,118 |
+| RETIRED | $107,768 |
+| RETIRED | $99,960 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -176,25 +192,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-04 — Rep. Jennifer McClellan (D)
-*opensecrets.org/members-of-congress/ — search: Jennifer McClellan Virginia*
+*opensecrets.org/members-of-congress/ — search: Jennifer McClellan*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $2,767,794 |
+| From PACs | 28% |
+| From individuals | 47% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| NOT EMPLOYED | $376,294 |
+| NOT EMPLOYED | $125,094 |
+| SELF EMPLOYED | $64,209 |
+| SELF | $49,787 |
+| NULL | $35,670 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -206,25 +223,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-05 — Rep. John McGuire (R)
-*opensecrets.org/members-of-congress/ — search: John McGuire Virginia*
+*opensecrets.org/members-of-congress/ — search: John McGuire*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | — |
+| From PACs | — |
+| From individuals | — |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| RETIRED | $245,903 |
+| SELF EMPLOYED | $42,375 |
+| HOMEMAKER | $22,600 |
+| SPENCER ENTERPRISES | $5,600 |
+| COX ENTERPRISES INC | $5,600 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -236,25 +254,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-06 — Rep. Ben Cline (R)
-*opensecrets.org/members-of-congress/ — search: Ben Cline Virginia*
+*opensecrets.org/members-of-congress/ — search: Ben Cline*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $1,030,467 |
+| From PACs | 48% |
+| From individuals | 45% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| RETIRED | $153,905 |
+| RETIRED | $126,632 |
+| RETIRED | $124,630 |
+| RETIRED | $120,863 |
+| RETIRED | $78,785 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -266,25 +285,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-07 — Rep. Eugene Vindman (D)
 *opensecrets.org/members-of-congress/ — search: Eugene Vindman*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $18,096,189 |
+| From PACs | 2% |
+| From individuals | 35% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| NOT EMPLOYED | $3,192,492 |
+| NOT EMPLOYED | $1,987,201 |
+| SELF | $506,188 |
+| SELF | $262,470 |
+| RETIRED | $206,300 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -296,25 +316,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-08 — Rep. Don Beyer (D)
-*opensecrets.org/members-of-congress/ — search: Don Beyer Virginia*
+*opensecrets.org/members-of-congress/ — search: Don Beyer*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $1,948,344 |
+| From PACs | 41% |
+| From individuals | 52% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| N/A | $384,631 |
+| NOT EMPLOYED | $318,973 |
+| N/A | $314,046 |
+| N/A | $305,423 |
+| N/A | $270,168 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -326,55 +347,58 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-09 — Rep. Morgan Griffith (R)
-*opensecrets.org/members-of-congress/ — search: Morgan Griffith Virginia*
+*opensecrets.org/members-of-congress/ — search: Morgan Griffith*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $1,005,036 |
+| From PACs | 67% |
+| From individuals | 29% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| RETIRED | $120,733 |
+| SELF EMPLOYED | $92,663 |
+| RETIRED | $70,817 |
+| RETIRED | $65,815 |
+| HOMEMAKER | $61,237 |
 
-**Top industries** *(opensecrets.org — fill in manually, top 5)*
-| Industry | Total |
-|---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+**Top industries** *(opensecrets.org — entered manually June 3, 2026)*
+| Industry | Total | Indiv. | PACs | Sector |
+|---|---|---|---|---|
+| Other physician specialists | $85,178 | $20,678 | $64,500 | Health |
+| Pharmacists | $80,646 | $52,346 | $28,300 | Health |
+| Lobbyists & Public Relations | $73,900 | $70,900 | $3,000 | Lawyers & Lobbyists |
+| Cable distributors & service providers | $40,500 | $500 | $40,000 | Communic/Electronics |
+| Biotech products & research | $32,500 | $1,000 | $31,500 | Health |
+| Pharmaceutical manufacturing | $31,000 | $1,000 | $30,000 | Health |
 
 ---
+
 
 ### VA-10 — Rep. Suhas Subramanyam (D)
 *opensecrets.org/members-of-congress/ — search: Suhas Subramanyam*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | $2,929,391 |
+| From PACs | 12% |
+| From individuals | 74% |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| NOT EMPLOYED | $443,460 |
+| SELF | $184,149 |
+| NOT EMPLOYED | $145,330 |
+| NULL | $78,925 |
+| RETIRED | $63,430 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -386,25 +410,26 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 | | |
 
 ---
+
 
 ### VA-11 — Rep. James Walkinshaw (D)
 *opensecrets.org/members-of-congress/ — search: James Walkinshaw*
 
-**2024 cycle fundraising** *(run script to fill)*
+**2024 cycle fundraising** *(FEC — api.open.fec.gov)*
 | Metric | Value |
 |---|---|
-| Total raised | |
-| From PACs | |
-| From individuals | |
+| Total raised | — |
+| From PACs | — |
+| From individuals | — |
 
 **Top contributing organizations** *(FEC — employer self-reported; may contain duplicates)*
 | Organization | Total |
 |---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
+| NOT EMPLOYED | $286,476 |
+| NONE | $85,351 |
+| NULL | $63,650 |
+| RETIRED | $56,925 |
+| SELF | $43,925 |
 
 **Top industries** *(opensecrets.org — fill in manually, top 5)*
 | Industry | Total |
@@ -417,7 +442,6 @@ financial regulation, firearms, healthcare, telecom). See SKILL.md Step 5.
 
 ---
 
-*FEC data: api.open.fec.gov | Cycle: 2024*
-*Industry data: opensecrets.org*
-*Employer names are self-reported by donors — the same organization may appear*
-*in multiple forms. Verify significant figures before citing publicly.*
+*FEC data: api.open.fec.gov | Cycle: 2024 | Retrieved: 2026-06-03*
+*Employer names are self-reported by donors — verify significant figures*
+*before citing publicly. Industry data entered manually from opensecrets.org.*
