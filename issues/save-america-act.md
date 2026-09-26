@@ -2,7 +2,7 @@
 
 **Slug:** `save-america-act`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-02
+**Last touched:** 2026-09-26
 **Status:** active
 
 Documentary proof of citizenship to register and photo identification to vote,
@@ -17,14 +17,17 @@ standalone bill.
 |---|---|---|---|
 | **H.R. 22** | The SAVE Act itself. Sponsor Rep. Chip Roy (R-TX-21), introduced 2025-01-03. House Administration | **Passed House 220–208 on 2025-04-10 (Roll Call 102), received in the Senate the same day. No action in the 17 months since.** 110 cosponsors, 0 withdrawn | 2026-09-02 |
 | **S. 128** | Senate SAVE Act companion. Sponsor Sen. Mike Lee (R-UT), introduced 2025-01-16 | Read twice and referred to Rules and Administration 2025-01-16. **No action since.** 49 cosponsors, 0 withdrawn, none from Virginia | 2026-09-02 |
-| H.R. 8800 | FY2027 National Defense Authorization Act (NDAA) | Passed House 216–212 late July 2026 under a rule merging SAVE America text into the package | 2026-09-02 |
-| S. 4784 | Senate SAVE America companion | Frozen. Cloture on the motion to proceed failed 50–46 on 2026-07-14; motion to reconsider still pending | 2026-09-02 |
+| H.R. 8800 | FY2027 National Defense Authorization Act (NDAA) | Passed House 216–212 on 2026-07-22 (Roll 278). **Engrossed text carries the SAVE America Act as Division E** (confirmed against BILLS-119hr8800eh.htm). Received in the Senate 2026-09-14; no Senate action since | 2026-09-26 |
+| S. 4784 | **Senate FY2027 NDAA** (SASC original bill, reported 2026-06-15). Not a SAVE America companion; see Corrections | Cloture on the motion to proceed failed 50–46 on 2026-07-14 (Record Vote 195); last action a motion to proceed 2026-07-27 | 2026-09-26 |
 | S. 5271 | Senate photo identification bill | Cloture failed 52–46 on 2026-08-08. **The most recent read on where the votes are** | 2026-09-02 |
 
-**Unresolved and load-bearing:** whether the *engrossed* House defense bill
-actually carries the SAVE America text. The September digest flagged this as
-needing confirmation against the engrossed text rather than press coverage of
-the rule. Resolve before any ask built on it goes out.
+**Resolved 2026-09-26:** the engrossed House defense bill carries the SAVE
+America Act as Division E. Source: <https://www.congress.gov/119/bills/hr8800/BILLS-119hr8800eh.htm>.
+
+**Also live (Watch):** the House-adopted FY2027 budget resolution (2026-07-22,
+216–214) plans a $95 billion reconciliation package including a $10 billion
+fund for states adopting SAVE America elements. The Senate has not adopted it.
+Source: <https://www.pbs.org/newshour/politics/house-republicans-adopt-95-billion-package-for-the-iran-war-and-trumps-priorities>.
 
 ---
 
@@ -32,8 +35,8 @@ the rule. Resolve before any ask built on it goes out.
 
 | Member | Tier | Position | Source | verified |
 |---|---|---|---|---|
-| Sen. Tim Kaine | Tier 2 Movable, **Gatekeeper** | Armed Services, Ranking Member on Seapower and Projection Forces. No Senate vote has occurred on H.R. 22. Did not cosponsor S. 128. Position on the election text not found during research | state-context-va.md; congress.gov cosponsors | 2026-09-02 |
-| Sen. Mark Warner | Tier 2 Movable | No Senate vote on H.R. 22. Did not cosponsor S. 128. Position not found during research | congress.gov cosponsors | 2026-09-02 |
+| Sen. Tim Kaine | Tier 1 Aligned, **Gatekeeper** | Joint statement with Warner 2026-03-18 calling the SAVE America Act "a pretext for voter suppression." No stated position on a defense bill that carries it. Armed Services, Seapower Ranking Member | warner.senate.gov/newsroom/press-releases/warner-kaine-slam-save-america-act-as-voter-suppression-measure-that-could-disenfranchise-millions/ | 2026-09-26 |
+| Sen. Mark Warner | Tier 1 Aligned | Same joint statement, 2026-03-18. No stated position on a defense bill that carries it. Rules and Administration | same URL | 2026-09-26 |
 | Rep. Rob Wittman (VA-01) | Tier 3 Locked, **Gatekeeper** | Voted YES, Roll Call 102, 2025-04-10. Vice Chair, House Armed Services | clerk.house.gov/Votes/2025102 | 2026-09-02 |
 | Rep. Morgan Griffith (VA-09) | Tier 3 Locked, **Gatekeeper** | Voted YES, Roll Call 102. House Rules | clerk.house.gov/Votes/2025102 | 2026-09-02 |
 | Rep. Ben Cline (VA-06) | Tier 3 Locked | **Original cosponsor**, signed 2025-01-03. Voted YES, Roll Call 102 | congress.gov; clerk.house.gov | 2026-09-02 |
@@ -63,6 +66,10 @@ Wittman also voted for the ACA premium tax credit extension in January — see
   election provisions specifically.
 - The two Senate cloture failures (50–46, 52–46) are the evidence base. Do not
   describe the Senate as having "passed" or "rejected" the policy outright.
+- **Corrected 2026-09-26: S. 4784 is the Senate FY2027 NDAA, not a Senate SAVE
+  America companion.** The 50–46 cloture failure on 2026-07-14 was on the Senate
+  defense bill itself. Verified against the congress.gov API. The September
+  cache row mislabeled it.
 - **Corrected 2026-09-02: the Senate SAVE Act is S. 128, not S. 1383.**
   S. 1383 in the 119th Congress is the Veterans Accessibility Advisory
   Committee Act, sponsored by Sen. Rick Scott, and is unrelated. The error came
@@ -82,6 +89,7 @@ Wittman also voted for the ACA premium tax credit extension in January — see
 |---|---|---|---|
 | 2026-09-02 | digest | `september-2026-digest.docx` | Drive |
 | 2026-09-02 | full brief | `hr22-brief.docx` | Drive |
+| 2026-09-26 | digest | `october-2026-digest.docx` (ask: Kaine public commitment to vote no on a final NDAA containing Division E) | Drive |
 
 ---
 

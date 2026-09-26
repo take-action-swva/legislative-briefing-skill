@@ -2,7 +2,7 @@
 
 **Slug:** `federal-grants-rule`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-02
+**Last touched:** 2026-09-26
 **Status:** active
 
 An Office of Management and Budget (OMB) rule restructuring how roughly $1.2
@@ -16,14 +16,20 @@ this is a rulemaking, and congress.gov will not show it.
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
 | Docket OMB-2026-0034 | Proposed Regulation for Federal Financial Assistance | Published in the Federal Register 2026-05-29. Comments closed 2026-07-13. OMB has stated it intends the final rule to take effect 2026-10-01 | 2026-09-02 |
-| H.R. 6500 (continuing resolution) | Blocks implementation | Block runs through 2026-12-11 | 2026-09-02 |
+| H.R. 6500 (continuing resolution) | Blocks issuing, finalizing, or implementing the rule | Signed 2026-09-02. Block runs through 2026-12-11 (ASTHO summary, <https://www.astho.org/advocacy/federal-government-affairs/leg-alerts/2026/summary-of-fy27-continuing-resolution/>) | 2026-09-26 |
 
 **Federal Register docket status is never cached.** Re-check the docket and
 whether a final rule has issued, on the day of any distribution.
 
-**Unresolved on 2026-09-02:** whether OMB has sent a final rule to the Office
-of Information and Regulatory Affairs (OIRA). That is the signal the rule is
-imminent.
+**2026-09-26 check (not cacheable, re-run before use):** no final rule on the
+Federal Register public inspection list for filings through 2026-09-25. OIRA
+review status still not confirmed.
+
+Rule text, per the Congressional Research Service (CRS) (IN12697, v4, 2026-09-11,
+<https://www.congress.gov/crs-product/IN12697>): senior appointees review
+applications for consistency with "Federal agency priorities"; termination
+allowed where an award "does not effectuate program goals, Federal agency
+priorities, or the national interest." verified 2026-09-26
 
 ---
 
@@ -67,7 +73,8 @@ which makes this issue unusually actionable.
 
 | Date | Type | File | Where |
 |---|---|---|---|
-| 2026-09-02 | digest | September 2026 digest | NOT YET PUBLISHED to Drive |
+| 2026-09-02 | digest | September 2026 digest | Drive |
+| 2026-09-26 | digest | `october-2026-digest.docx` (asks: Subramanyam letter to OMB plus support for renewing the block; Walkinshaw co-sign) | Drive |
 
 ---
 
