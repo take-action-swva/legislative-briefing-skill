@@ -124,6 +124,20 @@ CAPS_WORDS = {
     "YET","PUBLISHED",
 }
 
+def is_caps_headline(s):
+    """An all-caps headline ("IRAN WAR FUNDING", "## PROOF OF CITIZENSHIP").
+
+    Digest items lead with an all-caps issue name (cta-roundup.md, Digest mode),
+    and the generic pass would read every word of it as an undefined acronym.
+    Headlines are skipped outright rather than safe-listed word by word. That
+    does not excuse an acronym in a headline: the spec requires its expansion
+    in the Status line or body, and with the headline skipped, the body use is
+    the first use this checker sees and must carry the expansion.
+    """
+    letters = re.sub(r"[^A-Za-z]", "", s)
+    return len(letters) >= 2 and letters.isupper()
+
+
 def js_prose(src):
     """Reader-facing text in a .js source.
 
@@ -155,16 +169,23 @@ def js_prose(src):
             i = j + 1
         else:
             i += 1
-    return " ".join(s for s in out if len(s.split()) >= 3)
+    return " ".join(
+        s for s in out if len(s.split()) >= 3 and not is_caps_headline(s)
+    )
 
 
-# Text the acronym rule applies to. Markdown drops fenced code and inline code
-# spans, which are not prose either.
+# Text the acronym rule applies to. Markdown drops fenced code, inline code
+# spans, and all-caps headline lines, none of which are prose. Table rows are
+# kept even when all caps: a row can hold a real acronym use.
 if path.endswith(".js"):
     prose = js_prose(raw)
 else:
     prose = re.sub(r"```.*?```", " ", raw, flags=re.S)
     prose = re.sub(r"`[^`]*`", " ", prose)
+    prose = "\n".join(
+        " " if not line.lstrip().startswith("|") and is_caps_headline(line) else line
+        for line in prose.split("\n")
+    )
 
 # Collapse whitespace so a multi-word expansion wrapped across two lines still
 # reads as one expansion, and so offsets from both searches are comparable.
