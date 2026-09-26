@@ -2,5 +2,6 @@ node_modules/
 *.docx
 *.bak
 .claude/
+.codex/
 .DS_Store
 briefs/
