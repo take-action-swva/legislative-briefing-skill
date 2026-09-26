@@ -220,6 +220,13 @@ Accepts `.js` (docx outputs) or `.md` (markdown outputs: short briefs and CTA
 roundups, which have no `.js` stage). The checks are plain text matching, so
 both formats behave identically. Any other extension is rejected.
 
+All-caps headlines are skipped: a string literal in a `.js` file, or a line in
+a `.md` file, whose letters are all capitals ("IRAN WAR FUNDING", the digest's
+item-headline format). Without this, every word of a headline fails as an
+undefined acronym. An acronym inside a headline is not excused: its first use
+in the body must still carry the expansion. Markdown table rows are never
+skipped, even when all caps.
+
 **When to use:** For docx outputs, before every `node <brief>.js` run. For
 markdown outputs, before the file is copied to Drive or pasted into a channel.
 This is mandatory, not optional — SKILL.md's Shared Pre-Delivery Check
