@@ -2,7 +2,7 @@
 
 **Slug:** `federal-funding-fy2027`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-02
+**Last touched:** 2026-09-26
 **Status:** active
 
 Funding is held at fiscal year 2026 levels by a continuing resolution through
@@ -15,11 +15,10 @@ they land in the four weeks between the election and that date.
 
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
-| H.R. 6500 | Continuing resolution, FY2026 levels through Dec 11 2026 | Passed House 370–48 on 2026-09-01, cleared both chambers, awaiting the President's signature as of the verified date | 2026-09-02 |
+| H.R. 6500 | Continuing Appropriations and Extensions Act, 2027. Funds government through Dec 11 2026 | **Signed into law 2026-09-02** (<https://www.whitehouse.gov/briefings-statements/2026/09/congressional-bill-h-r-6500-signed-into-law/>). Senate 90–6, House 370–48 | 2026-09-26 |
 | FY2027 approps (12 bills) | Full-year appropriations | All twelve reported by House Appropriations by mid-June 2026 | 2026-09-02 |
 
-Bill status caches 7 days. **Signature status on H.R. 6500 was unresolved on
-2026-09-02 and is the first thing to re-check.**
+Bill status caches 7 days. Signature confirmed 2026-09-26.
 
 Cosponsor counts are never cached — run
 `./scripts/fetch-cosponsors.sh <congress> <type> <num> VA` on the day of use.
@@ -56,7 +55,8 @@ forward regardless of any position finding.
 
 | Date | Type | File | Where |
 |---|---|---|---|
-| 2026-09-02 | digest | September 2026 digest | NOT YET PUBLISHED to Drive |
+| 2026-09-02 | digest | September 2026 digest | Drive |
+| 2026-09-26 | digest | October digest: no standalone item. December 11 named as the vehicle in the ACA and grants-rule items | Drive |
 
 ---
 
