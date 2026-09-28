@@ -137,7 +137,7 @@ preventable, not after it is final.
 
 | Source | URL | Best For | Reliability | Access | Last Verified |
 |--------|-----|----------|-------------|--------|---------------|
-| CourtListener | courtlistener.com | Dockets, opinions, docket alerts, API | primary | Firecrawl | 2026-09-28 |
+| CourtListener | courtlistener.com | Dockets, opinions, docket alerts, API | high | Firecrawl | 2026-09-28 |
 | Just Security Litigation Tracker | justsecurity.org/107087/tracker-litigation-legal-challenges-trump-administration/ | Tracked legal challenges to administration executive actions | high | WebFetch | 2026-09-28 |
 
 ---
