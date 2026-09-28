@@ -9,6 +9,7 @@ and 3.7 (Phase 3) — 3.6 had already shipped in its own merged PR by the time
 Phase 3 landed, so folding Phase 3's changes into the same number would have
 left the published version out of sync with shipped behavior. Caught in
 code review of PR #27.
+**Updated:** 2026-09-28, Phase 3 complete and merged (PR #27)
 **Applies to:** SKILL.md v3.7
 **Target version:** 3.7 (Phase 3 bumped separately from Phase 1's 3.6; see above)
 
@@ -246,7 +247,17 @@ Add a citation link-text row for every new source.
 
 ---
 
-## Phase 3: Workflow changes
+## Phase 3: Workflow changes — done, merged 2026-09-28 (PR #27)
+
+All eight items below are done, bumping SKILL.md to 3.7 (see the front
+matter note above). Three logic gaps were caught in review and fixed: Digest
+mode's `cta-ready` gating had no path for a freshly scanned candidate with
+no issue file yet; horizon-90.md's Step 7 required a Prepare line drawn from
+Blocker even when an item reaches `cta-ready` mid-scan and Blocker becomes
+"none" (fixed by dropping such an item from horizon-90's list — it belongs
+in the next digest instead); and the digest Pre-Delivery Check required a
+phone number on every Act entry, which the new public-comment ask category
+can't provide.
 
 1. **horizon-90.md Step 2.** Add the leading-indicator sources as required
    scan inputs. A rule under OIRA review with no publication date is a Watch
