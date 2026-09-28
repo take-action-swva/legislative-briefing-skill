@@ -3,7 +3,8 @@
 **Written:** 2026-09-28
 **Updated:** 2026-09-28, adding the CTA readiness model and member evidence/role fields accepted from an external review
 **Updated:** 2026-09-28, Phase 0 complete and merged (PR #22)
-**Applies to:** SKILL.md v3.5
+**Updated:** 2026-09-28, Phase 1 complete and merged (PR #24)
+**Applies to:** SKILL.md v3.6
 **Target version:** 3.6 (Phases 1 and 3 change the research workflow, which requires a version bump per MAINTENANCE.md)
 
 ## Why
@@ -72,7 +73,16 @@ glob, caught in review.
 
 ---
 
-## Phase 1: Scope and taxonomy
+## Phase 1: Scope and taxonomy — done, merged 2026-09-28 (PR #24)
+
+All seven items below are done, plus two fixes caught in review: a
+contradictory pair of instructions in `issues/_template.md` for the
+no-record-found case (one said leave Position blank, the other said write
+"position not found during research" there — removed the first), and
+`federal-grants-rule.md` being marked `cta-ready` while its own Next decision
+was Certainty: Watch / Date: unknown, which fails readiness condition 1 —
+repointed at the issue's real near-term decision point (the Scheduled
+December 11 CR deadline its block rides on).
 
 1. **Scope statement.** Add the scope decision above to SKILL.md, directly
    under the Audience scope paragraph.
