@@ -91,6 +91,40 @@ This is housekeeping, not a correctness control. The correctness control is
 Accuracy Rule 6, which re-verifies the volatile items live before every
 distribution regardless of what the cache says.
 
+### Coverage audit (quarterly)
+
+Count `brief-index.md` rows and active `issues/` files by Issue area (see
+`issues/_template.md`'s Issue area field: elections, immigration, health,
+education, environment, budget, federal workforce, civil liberties, other).
+
+An area with zero outputs across a full quarter is worth asking about
+directly, not assuming away — either nothing federal happened in that area,
+which is possible but worth confirming, or the skill's sourcing for that
+area isn't surfacing candidates. `horizon-90.md`'s Step 4 coverage check
+should be catching a quiet area in real time and naming it in the closing
+note; a quarterly zero with no such notes on record is a sign that check
+isn't running, not just that the area is quiet.
+
+**As of 2026-09-28,** `brief-index.md` shows no environment or education
+outputs since `issues/` and the Issue area field were introduced. Confirm at
+the next audit whether that has changed.
+
+### Post-election refresh (after November 3, 2026)
+
+Both Warner's Senate seat and all 11 Virginia House seats are on the
+November 3, 2026 ballot. This means two refreshes, not the usual one:
+
+1. **After certification.** Regenerate `state-context-va.md` and
+   `templates/va-members-table.js` to reflect the election results —
+   winners, any new members, any incumbent who lost. Committee assignments
+   are not yet known at this stage; leave them TBD for any new member, the
+   same way a mid-Congress special election result is handled above.
+2. **After committee assignments settle in January**, once the new Congress
+   is seated: run the "Start of each new Congress" checklist below in full.
+
+Run `./scripts/check-delegation-parity.sh VA` after each of the two
+refreshes.
+
 ### Start of each new Congress (January of odd years)
 
 Full regeneration of state-context files. Complete this within the first

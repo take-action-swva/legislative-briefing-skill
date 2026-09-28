@@ -12,29 +12,30 @@ for you — it does not know which issue a file belongs to.
 
 Drive folder: <https://drive.google.com/drive/folders/199yNMBV3HD9pXw4-JiUBpoRF3rWkafvH>
 
-| Date | Type | Title | File | Issue |
-|---|---|---|---|---|
-| 2026-09-26 | digest | October 2026 Legislative Update | `october-2026-digest.docx` | iran-war-powers, save-america-act, aca-premium-tax-credits, federal-grants-rule |
-| 2026-09-02 | full brief | SAVE Act (H.R. 22): Dormant Bill, Live Policy | `hr22-brief.docx` | save-america-act |
-| 2026-09-02 | CTA roundup | Immigrant Justice: Calls to Action for Virginia Groups | `cta-roundup-2026-09-02.md` | immigration-enforcement-oversight |
-| 2026-09-02 | digest | September 2026 Legislative Update | `september-2026-digest.docx` | federal-funding-fy2027, save-america-act, federal-grants-rule, aca-premium-tax-credits, immigration-enforcement-oversight |
-| 2026-07 | full brief | July 2026 Statewide Network Legislative Brief | `July 2026 Virginia Indivisibles Statewide Network Legislative Brief.docx` | — |
-| 2026-06-19 | horizon | 90-Day Outlook | `horizon-90-2026-06-19.docx` | — |
-| 2026-06 | digest | June 2026 newsletter | `old-june-2026-newsletter.docx` | — |
-| — | full brief | USPS mail-ballot rulemaking | `usps-mail-ballot-briefing.docx` | — |
-| — | full brief | Iran war powers | `iran-war-powers-brief.docx` | — |
-| — | full brief | Foreign Intelligence Surveillance Act (FISA) Section 702 | `fisa-702-brief.docx` | — |
-| — | full brief | CLARITY Act | `clarity-act-brief.docx` | — |
-| — | full brief | CORCA | `CORCA Briefing - Virginia Indivisible.gdoc` | — |
-| — | full brief | WIC FY2027 | `wic-fy2027-brief.gdoc` | — |
+| Date | Type | Title | File | Issue | Issue area |
+|---|---|---|---|---|---|
+| 2026-09-26 | digest | October 2026 Legislative Update | `october-2026-digest.docx` | iran-war-powers, save-america-act, aca-premium-tax-credits, federal-grants-rule | other, elections, health, budget |
+| 2026-09-02 | full brief | SAVE Act (H.R. 22): Dormant Bill, Live Policy | `hr22-brief.docx` | save-america-act | elections |
+| 2026-09-02 | CTA roundup | Immigrant Justice: Calls to Action for Virginia Groups | `cta-roundup-2026-09-02.md` | immigration-enforcement-oversight | immigration |
+| 2026-09-02 | digest | September 2026 Legislative Update | `september-2026-digest.docx` | federal-funding-fy2027, save-america-act, federal-grants-rule, aca-premium-tax-credits, immigration-enforcement-oversight | budget, elections, health, immigration |
+| 2026-07 | full brief | July 2026 Statewide Network Legislative Brief | `July 2026 Virginia Indivisibles Statewide Network Legislative Brief.docx` | — | — |
+| 2026-06-19 | horizon | 90-Day Outlook | `horizon-90-2026-06-19.docx` | — | — |
+| 2026-06 | digest | June 2026 newsletter | `old-june-2026-newsletter.docx` | — | — |
+| — | full brief | USPS mail-ballot rulemaking | `usps-mail-ballot-briefing.docx` | — | — |
+| — | full brief | Iran war powers | `iran-war-powers-brief.docx` | — | — |
+| — | full brief | Foreign Intelligence Surveillance Act (FISA) Section 702 | `fisa-702-brief.docx` | — | — |
+| — | full brief | CLARITY Act | `clarity-act-brief.docx` | — | — |
+| — | full brief | CORCA | `CORCA Briefing - Virginia Indivisible.gdoc` | — | — |
+| — | full brief | WIC FY2027 | `wic-fy2027-brief.gdoc` | — | — |
 
 ## Backfill notes
 
 This index was created on 2026-09-02 by listing the Drive folder, so the rows
 above are reconstructed from filenames rather than from the documents. Dates
 marked `—` were not recoverable from the filename and were deliberately left
-blank rather than guessed. The `Issue` column is empty for every backfilled row
-because `issues/` did not exist when they were written.
+blank rather than guessed. The `Issue` and `Issue area` columns are empty for
+every backfilled row because neither `issues/` nor the Issue area field
+existed when they were written.
 
 Fill those in opportunistically when a document is next opened. Do not
 backfill by inference.
