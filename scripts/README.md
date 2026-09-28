@@ -1,9 +1,9 @@
 # Scripts
 
-Nine scripts.
+Ten scripts.
 
 - **Research and setup:** `fetch-bill.sh`, `fetch-state-members.sh`,
-  `fetch-cosponsors.sh`, `fetch-votes.sh`, `fetch-donors.sh`
+  `fetch-cosponsors.sh`, `fetch-votes.sh`, `fetch-donors.sh`, `fetch-signals.sh`
 - **Checks:** `check-acronyms.sh` — mandatory before every output, enforces
   the acronym expansion rule; `check-delegation-parity.sh` — catches drift
   between the two files that both hold delegation data
@@ -24,6 +24,7 @@ Two different keys are involved, from two different places:
 | `fetch-bill.sh`, `fetch-state-members.sh`, `fetch-cosponsors.sh` | `CONGRESS_API_KEY` |
 | `fetch-donors.sh` | `FEC_API_KEY` |
 | `fetch-votes.sh`, `check-acronyms.sh`, `publish.sh`, `build-zip.sh` | none |
+| `fetch-signals.sh` | none (reuses wrangler auth in the civic-signals repo) |
 
 **Get a congress.gov key:**
 1. Go to https://api.congress.gov/sign-up/
@@ -177,6 +178,48 @@ and this is one of the items Shared Accuracy Rule 6 forbids caching.
 
 **Requires:** `CONGRESS_API_KEY`, curl, jq. Pages through in batches of 250
 (the API maximum) so long cosponsor lists are not silently truncated.
+
+---
+
+## fetch-signals.sh
+
+**What it does:** Queries the `signals` table in the civic-signals D1
+database (Phase 5 of `plans/2026-09-leading-edge-coverage.md` — a standalone
+repo, `civic-signals`, whose Federal Register and regulations.gov collectors
+write candidate items on a 6-hourly cron) and outputs a markdown table for a
+horizon-90 or digest-mode scan.
+
+**Why it exists:** horizon-90.md and cta-roundup.md's Digest mode need a way
+to read the signals table without hand-writing a `wrangler d1 execute`
+command each time. This was the "consumer-side query helper" civic-signals'
+README listed as not yet built.
+
+**When to use:** At the start of a horizon-90 scan, or when Digest mode is
+selecting `cta-ready` candidates.
+
+**Usage:**
+```bash
+./scripts/fetch-signals.sh [issue-area] [days]
+
+# Examples:
+./scripts/fetch-signals.sh                    # all issue areas, last 14 days
+./scripts/fetch-signals.sh immigration        # one issue area, last 14 days
+./scripts/fetch-signals.sh immigration 30     # one issue area, last 30 days
+```
+
+**Output:** A markdown table (certainty, deadline, issue area, threat
+vectors, title/link, agency, source, issue slug) sorted by deadline, soonest
+first. Signals are candidates from a filtered feed, not verified facts —
+Shared Accuracy Rule 6 still applies before anything from this table appears
+in an output. A row with an issue slug names an existing `issues/<slug>.md`
+file; check that file's Stage before treating the signal as new.
+
+**Requires:** the `civic-signals` repo checked out locally (defaults to
+`../../../../Workers/civic-signals` relative to this script; override with
+`CIVIC_SIGNALS_DIR`), wrangler authenticated there, and jq.
+
+**No API key needed** — queries through the already-authenticated wrangler
+session in the civic-signals repo rather than a separate credential.
 
 ---
 
