@@ -2,6 +2,7 @@
 
 **Written:** 2026-09-28
 **Updated:** 2026-09-28, adding the CTA readiness model and member evidence/role fields accepted from an external review
+**Updated:** 2026-09-28, Phase 0 complete and merged (PR #22)
 **Applies to:** SKILL.md v3.5
 **Target version:** 3.6 (Phases 1 and 3 change the research workflow, which requires a version bump per MAINTENANCE.md)
 
@@ -28,9 +29,16 @@ line and does not track the state process.
 
 ---
 
-## Phase 0: Correctness fixes (do first)
+## Phase 0: Correctness fixes (do first) — done, merged 2026-09-28 (PR #22)
 
 These are defects in the current skill, independent of the expansion.
+
+All five items below are done. Also landed in the same PR, outside the
+original scope of this phase: consolidated `CLAUDE.md` and `AGENTS.md` into
+one file (Claude Code reads `AGENTS.md` natively when no `CLAUDE.md` is
+present, v2.1.277+), since the two had drifted into duplicated upkeep with no
+benefit; and added a `nullglob` guard to `build-zip.sh`'s new `issues/*.md`
+glob, caught in review.
 
 1. **Cache life mismatch.** `issues/_template.md` says positions and campaign
    asks cache for 30 days (lines 35 and 54). SKILL.md and `issues/README.md`
