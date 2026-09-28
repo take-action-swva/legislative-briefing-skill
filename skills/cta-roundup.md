@@ -99,15 +99,27 @@ Cast a wide net first. Pull 8–10 candidates before narrowing.
 
 ### Step 2 — Assemble the ask inventory
 
-Gather candidate asks across all four categories. A document covering only
+Gather candidate asks across all five categories. A document covering only
 bills is incomplete in either mode.
 
 1. **Legislation.** Cosponsorship, floor votes, discharge petitions.
 2. **Appropriations.** Riders, funding levels, program eliminations, and whatever is live in the current continuing resolution (CR) or full-year bill. Check the House and Senate committee reports, not just the bill text. Program eliminations often appear only in report language.
 3. **Oversight.** Facility inspections, document demands, hearing requests, letters to agency heads. These are available to minority-party members and are frequently the only asks that produce movement.
 4. **Public commitments.** On-record pledges, town hall statements, named staff contacts. These cost an office nothing to give and are therefore the easiest asks to win, which makes them good openers.
+5. **Public comment.** An open comment period on a Federal Register docket.
+   The target is the agency, not a member of Congress — no member tiering
+   applies. Carries the docket number, the comment deadline (tagged
+   Scheduled — a comment deadline is fixed by the notice itself, not by
+   anyone's intent), and the regulations.gov link for that docket.
+   `references/sources-national.md`'s "Leading Indicators" section is the
+   source for open dockets.
 
-**Digest mode — narrow to 5.** Select up to five items, prioritizing by:
+**Digest mode — narrow to 5.** Select from issues at Stage `cta-ready` in
+`issues/` first — see SKILL.md's "CTA Readiness" section for the four
+conditions. An issue that fails a readiness condition does not belong in
+the digest's action list: leave its Stage at `watch` or `prepare` with the
+Blocker recorded, and let `horizon-90.md` carry it as a planning item
+instead. Among `cta-ready` candidates, prioritize by:
 
 1. **Near-term action point.** A vote, markup, or procedural moment expected
    this month or early next. No action point means it is not digest material
@@ -221,9 +233,10 @@ ask carries:
 [What is happening and why this ask, 2–4 sentences with sources]
 
 **Ask:** [The specific action, with bill number or docket where applicable]
-**Target:** [Which tier, or which named members]
+**Target:** [Which tier, or which named members — for a public comment ask,
+the agency name; no member tiering applies]
 **Expectations:** [What a yes actually is — a cosponsorship, a signed
-letter, a recorded statement]
+letter, a recorded statement, a submitted comment]
 ```
 
 The "Expectations" line is mandatory. It is what separates this output
@@ -270,7 +283,9 @@ Status: [one sentence — where it stands right now]
 beyond what a reader needs to understand the current moment.]
 
 Act: [One or two members. For each: name, role, phone, contact URL,
-one-sentence ask.]
+one-sentence ask. For a public comment item, name the agency and the docket
+instead: docket number, comment deadline, and the regulations.gov link — no
+member tiering applies.]
 
 Expectations: [What a yes actually is — a cosponsorship, a signed
 letter, a recorded statement, a scheduled meeting.]
@@ -434,6 +449,12 @@ Digest mode:
   asks in most drafts. They should get the most specific ones.
 - **Pretending Tier 3 is Tier 2.** Writing hopeful asks for locked offices  
   wastes volunteer energy and teaches group leaders to distrust the document.
+- **Tiering a public comment ask.** The target is the agency, not a member —
+  there is no tier to assign. Name the docket and the deadline instead.
+- **Putting a non-cta-ready issue in the digest.** Stage lives in the issue
+  file, not editorial judgment on the day of writing. If it isn't
+  `cta-ready`, it belongs in `horizon-90.md` with its Blocker recorded, not
+  in this month's action list.
 - **Stale cosponsor lists.** The single most common factual error in this  
   output type. Recheck on the day of distribution, not on the day of drafting.
 - **Carrying a national toolkit's ask verbatim.** National asks are written  
