@@ -101,6 +101,7 @@ Wittman also voted for the ACA premium tax credit extension in January — see
 | 2026-09-02 | digest | `september-2026-digest.docx` | Drive |
 | 2026-09-02 | full brief | `hr22-brief.docx` | Drive |
 | 2026-09-26 | digest | `october-2026-digest.docx` (ask: Kaine public commitment to vote no on a final NDAA containing Division E) | Drive |
+| 2026-09-28 | horizon | 90-day outlook, Sep 28 – Dec 27 scan: listed as Watch under "No Confirmed Window," no Senate procedural action since the July 14 cloture failure | Drive |
 
 ---
 

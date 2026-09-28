@@ -129,6 +129,7 @@ Campaign asks cache 45 days. National organizations revise between trainings.
 |---|---|---|---|
 | 2026-09-02 | CTA roundup (campaign mode) | `cta-roundup-2026-09-02.md` | Drive |
 | 2026-09-02 | digest | `september-2026-digest.docx` | Drive |
+| 2026-09-28 | horizon | 90-day outlook, Sep 28 – Dec 27 scan: listed as Watch under "No Confirmed Window," siting decision still unconfirmed; Stage unchanged | Drive |
 | 2026-09-26 | digest | Left out of the October digest: no verified October action point. Siting proposals (Augusta, Hanover) still unverified | — |
 
 ---

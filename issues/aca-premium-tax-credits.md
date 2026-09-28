@@ -90,6 +90,7 @@ arguing about duration, not opposed.
 |---|---|---|---|
 | 2026-09-02 | digest | September 2026 digest | Drive |
 | 2026-09-26 | digest | `october-2026-digest.docx` (asks: Kiggans commit to a three-year extension in the December bill; Warner name the December 11 bill as the vehicle) | Drive |
+| 2026-09-28 | horizon | 90-day outlook, Sep 28 – Dec 27 scan: listed as Watch under "No Confirmed Window," not Scheduled, since December 11 is a likely but unconfirmed vehicle for H.R. 1834 | Drive |
 
 ---
 
