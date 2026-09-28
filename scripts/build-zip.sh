@@ -7,6 +7,7 @@
 # Output: advocacy-legislation-brief-claude-upload.zip at the repo root.
 
 set -euo pipefail
+shopt -s nullglob
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 ZIP="${REPO}/advocacy-legislation-brief-claude-upload.zip"
