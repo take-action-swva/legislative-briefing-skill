@@ -22,7 +22,11 @@ is resolved against a primary source.
 
 The Director of National Intelligence (DNI) has warned Congress that Section
 702 of the Foreign Intelligence Surveillance Act (FISA) will "go dark"
-without a clean reauthorization by November 20, 2026. The Brennan Center for
+without a clean reauthorization by November 20, 2026, per DNI statements
+reported at
+<https://thehill.com/national-security/6096900-fisa-section-702-congress-fisc-national-intelligence/>
+(not a primary DNI source; re-verify against a DNI statement or letter
+before citing the November 20 date as fact). The Brennan Center for
 Justice, an advocacy organization, disputes that framing and states the
 underlying Foreign Intelligence Surveillance Court (FISC) certification does
 not expire until March 2027. Opened from horizon-90.md's 2026-09-28 scan.

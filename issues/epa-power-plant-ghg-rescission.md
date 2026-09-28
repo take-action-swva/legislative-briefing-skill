@@ -20,8 +20,11 @@ The Environmental Protection Agency (EPA) published a proposed rule on
 2026-09-17 to rescind the 2009 endangerment finding as it applies to fossil
 fuel-fired power plants and repeal the associated 2024 Carbon Pollution
 Standards greenhouse gas (GHG) emission limits. This follows EPA's February
-2026 rescission of the parallel endangerment finding for vehicles. Opened
-from horizon-90.md's 2026-09-28 scan.
+2026 rescission of the parallel endangerment finding for vehicles, per
+<https://eelp.law.harvard.edu/tracker/regulating-greenhouse-gases-for-new-and-existing-fossil-fuel-fired-power-plants/>
+(a tracker, not the Federal Register notice itself; re-verify the vehicle
+rule's own Federal Register citation before citing the February 2026 date
+as fact). Opened from horizon-90.md's 2026-09-28 scan.
 
 ---
 
