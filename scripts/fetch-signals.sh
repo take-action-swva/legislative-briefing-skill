@@ -23,8 +23,9 @@
 #
 # Requires:
 #   - The civic-signals repo checked out locally. Defaults to
-#     ../civic-signals relative to this repo's parent directory; override
-#     with CIVIC_SIGNALS_DIR if it lives elsewhere.
+#     ../../../../Workers/civic-signals relative to this script (i.e. a
+#     sibling of this repo's grandparent directory, matching this machine's
+#     layout); override with CIVIC_SIGNALS_DIR if it lives elsewhere.
 #   - wrangler authenticated (`npx wrangler whoami` from that repo)
 #   - jq installed
 #
