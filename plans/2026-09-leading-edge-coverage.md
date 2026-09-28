@@ -14,7 +14,7 @@ also runs only on request, so it cannot surface a threat before someone asks
 about it.
 
 This plan closes both gaps in five phases. Phases 0 through 4 are edits to
-this repo. Phase 5 is a monitoring loop that needs a decision before any build.
+this repo. Phase 5 is a standalone signals collector in its own repo.
 
 ## Scope decision (settled 2026-09-28)
 
@@ -217,7 +217,7 @@ Add a citation link-text row for every new source.
 
 ---
 
-## Phase 5: Watch loop (decision needed before building)
+## Phase 5: Watch loop (signals collector)
 
 Staying ahead of threats requires polling, not better prompts. The loop polls
 these sources on a schedule and writes candidate items for the skill to read:
@@ -230,16 +230,55 @@ these sources on a schedule and writes candidate items for the skill to read:
 | CourtListener API | REST and docket alerts | CourtListener token |
 | Tier-one outlets | RSS | none |
 
-**Open decision:** where it lives.
+### Placement (settled 2026-09-28)
 
-- **Option A:** a Worker in this repo, dedicated to the skill.
-- **Option B (recommended):** phase one of the CTA intelligence pipeline
-  (Cloudflare Workers, D1, daily digest), which is designed but not built.
-  This skill reads its D1 `signals` table through the Cloudflare connector
-  during Horizon-90 and digest runs. One loop feeds both the comms team and
-  the briefings instead of two loops drifting apart.
+This skill is the only implemented system. The CTA intelligence pipeline is
+designed but not built, so there is no existing code to extend in either place.
 
-Do not start Phase 5 until this is settled.
+Build the collectors and the D1 `signals` table as a standalone system with a
+neutral name, in its own repo, owned by neither this skill nor the CTA
+pipeline.
+
+- **First consumer: this skill.** Horizon-90 and digest-mode runs query the
+  `signals` table through the Cloudflare connector.
+- **Later consumer: the CTA pipeline.** Its Slack card, Approve/Dismiss, and
+  Mark sent layers read the same table when that pipeline is built. The
+  collectors do not change.
+
+One collector system feeds both, instead of two pollers with separate keys,
+dedupe logic, and source ratings drifting apart.
+
+### Collector design
+
+1. **One cron Worker per source.** Each normalizes results to a common record:
+   source, URL, published date, agency, docket or bill number, deadline.
+2. **Filter in code before any model call.** Agency list, search terms, and
+   Virginia keywords run in the collector. No AI in the first build.
+3. **Public sources only.** Community reports, rapid-response sightings, and
+   unverified social posts never enter this table. Immigration rapid-response
+   data carries safety risk and belongs in a separate, access-controlled
+   system.
+
+### Decisions to settle in the first build
+
+These are hard to change once two consumers depend on them.
+
+- **`signals` schema.** Version it from the start.
+- **Vocabulary.** Issue areas and threat vectors match `issues/_template.md`
+  exactly (Phase 1, item 3). Each signal carries an `issue_slug` matching
+  `issues/<slug>.md` so signals roll up to the research cache.
+- **Certainty tag.** Scheduled, Expected, or Watch, per Accuracy Rule 7.
+- **One reliability scale.** Use this skill's primary / high / moderate /
+  monitor ratings. Do not introduce a separate numbered tier scheme.
+
+### Smallest first build
+
+1. Federal Register collector (no key) and regulations.gov collector
+   (api.data.gov key), writing to D1. No AI, no Slack.
+2. One Horizon-90 run that reads the table. Judge whether the signals improved
+   the scan before adding anything else.
+3. Then congress.gov, CourtListener, and RSS collectors.
+4. The CTA pipeline's Slack layer comes after, as its own project.
 
 ---
 
@@ -252,7 +291,7 @@ Do not start Phase 5 until this is settled.
 | 2 Sources | nothing | no |
 | 3 Workflow changes | 1, 2 | included in 3.6 |
 | 4 Maintenance | 1 | no |
-| 5 Watch loop | decision, 1 | no (separate system) |
+| 5 Signals collector | 1 (shared vocabulary) | no (separate repo) |
 
 Commit each phase separately. After Phases 0 through 3, run
 `./scripts/build-zip.sh` and re-upload to claude.ai. Confirm the description
