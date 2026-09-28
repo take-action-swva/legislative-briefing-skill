@@ -18,7 +18,7 @@ context files are already included. You only need to:
 ```
 advocacy-legislation-brief/
   SKILL.md                       Core skill — routing, shared rules, member taxonomy
-  CLAUDE.md                      Repo working notes, file map, version history
+  AGENTS.md                      Repo working notes, file map, version history
   README.md                      Project overview and script setup
   INSTALL.md                     This file
   CONTRIBUTING.md                How other state networks adopt and contribute

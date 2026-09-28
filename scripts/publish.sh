@@ -2,7 +2,7 @@
 # publish.sh — Copy a finished deliverable to the Google Drive briefings
 # folder, then move the source files into briefs/.
 #
-# Why this exists: the destination path was restated in CLAUDE.md and three
+# Why this exists: the destination path was restated in AGENTS.md and three
 # sub-skills, and a bare `cp` reports success even when Drive is quit, signed
 # out, or out of quota — leaving the file sitting locally forever while the
 # session claims it published. This puts the path in one place and checks what

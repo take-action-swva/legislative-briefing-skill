@@ -1,8 +1,8 @@
 # Docx Conventions
 
 Shared by every sub-skill that produces a `.docx` deliverable. Moved out of
-`CLAUDE.md` in Phase 0 of the 2026-09 leading-edge coverage plan because
-`build-zip.sh` does not ship `CLAUDE.md` to claude.ai — sub-skills that
+`AGENTS.md` in Phase 0 of the 2026-09 leading-edge coverage plan because
+`build-zip.sh` does not ship `AGENTS.md` to claude.ai — sub-skills that
 pointed there were pointing at nothing in an uploaded session.
 
 ---

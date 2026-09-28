@@ -1,6 +1,6 @@
 # AGENTS.md — advocacy-legislation-brief
 
-This file gives Codex the context needed to work on this project
+This file gives Claude Code the context needed to work on this project
 without relitigating decisions already made. Read it before touching
 any files. The "Do Not" sections are especially important.
 
@@ -8,7 +8,7 @@ any files. The "Do Not" sections are especially important.
 
 ## What This Is
 
-A Codex skill for producing federal legislative briefings for Virginia
+A Claude skill for producing federal legislative briefings for Virginia
 Indivisible statewide network group leaders. Briefings are `.docx` files
 with inline hyperlink citations, Virginia-specific impact data, and ranked
 action recommendations. The skill is designed to be portable to other state
@@ -30,14 +30,14 @@ people who open documents in Google Docs and read on their phones.
 SKILL.md                     Parent skill — state config, lessons_learned, sub-skill
                              routing, Step 0, shared accuracy rules. Lightweight;
                              loads first. Sub-skills are lazy-loaded from skills/.
-AGENTS.md                    This file. Codex context only.
+AGENTS.md                    This file. Claude Code context only.
 INSTALL.md                   Human setup instructions.
 CONTRIBUTING.md              How other state networks adopt the skill.
 MAINTENANCE.md               Update triggers and Congress-transition checklist.
-briefing-qa-checklist.md     Human reviewer checklist (not needed by Codex
+briefing-qa-checklist.md     Human reviewer checklist (not needed by Claude
                              during generation — self-check is in brief-full.md).
 state-context-va.md          Virginia 119th Congress delegation: all 13 members,
-                             committees, contacts. Codex loads this at Step 0
+                             committees, contacts. Claude loads this at Step 0
                              of every session — eliminates fresh member searches.
 references/
   sources-national.md        Universal source hierarchy for all states.
@@ -90,11 +90,11 @@ scripts/
                              gate for full briefings; publish.sh warns but doesn't block.
   publish.sh                 Copy a deliverable to Drive, verify, archive to
                              briefs/. Single source of truth for the Drive path.
-  build-zip.sh               Rebuild advocacy-legislation-brief-Codex-upload.zip from current skill files.
+  build-zip.sh               Rebuild advocacy-legislation-brief-claude-upload.zip from current skill files.
   README.md                  Script setup and usage (human-facing).
 templates/
   brief-base.js              Docx scaffolding: colors, fonts, helpers, header/footer.
-                             Codex fills sections object; this handles structure.
+                             Claude fills sections object; this handles structure.
   va-members-table.js        Virginia delegation reference table (4-column: member,
                              phone, committees, briefing notes). Used in section 6
                              of every full briefing. Caller passes briefingNotes
@@ -120,17 +120,17 @@ templates/
 | 1.4 | 2026-06-01 | Fixed changelog ordering. Fixed example bill number. Added sources (Democracy Docket, Legislative Procedure, dailypress.senate.gov). Added Committee Leverage, Watch List, court challenge monitoring, PageNumberElement note, statewide scope rule. |
 | 1.5 | 2026-06-01 | Removed Virginia hardcoding from skill body. All state-specific references use {{state}} substitution. Skill is now fully portable. |
 | 1.6 | 2026-06-01 | Added Step 0 (load state context file). Added inline Pre-Delivery Self-Check (9-item checklist). Added state-context-va.md for Virginia 119th Congress. |
-| 1.7 | 2026-06-01 | Added docx bug lessons: standalone hyperlink placement error and body() array-argument flattening. Sources split into sources-national.md and sources-va.md. Changelog moved to AGENTS.md. |
+| 1.7 | 2026-06-01 | Added docx bug lessons: standalone hyperlink placement error and body() array-argument flattening. Sources split into sources-national.md and sources-va.md. Changelog moved to CLAUDE.md. |
 | 1.8 | 2026-06-03 | Redesigned output structure: inverted pyramid, 10 sections, two-column Members table with embedded priority labels, shaded TL;DR and Actions boxes, moved Timeline to end. Full visual formatting spec added. Designed for Google Docs on mobile. |
 | 1.9 | 2026-06-10 | Added mandatory humanizer pass (new Step 2) before the pre-delivery self-check. Simplified the vote-fetching workflow to rely solely on `fetch-votes.sh` now that it works reliably, removing the House Clerk web_fetch fallback. Removed superseded lessons_learned entries and pitfalls (roll call fetch fallback, ProPublica deprecation, funding-neutral framing, JS apostrophe quoting, inferred-votes) now that the script and updated workflow handle them. |
 | 2.0 | 2026-06-16 | Restructured to parent + sub-skills. SKILL.md is now a lightweight parent (config, Step 0, shared accuracy rules). Full briefing workflow and output format moved to `skills/brief-full.md`. Added `skills/` directory; `brief-short.md` written in full, stub for `horizon-90.md`. Added `va-members-table.js` to build-zip.sh. Updated `briefing-qa-checklist.md` to v1.9 section structure. |
-| 2.1 | 2026-06-19 | Wrote `skills/horizon-90.md` (90-day forward scan: Scheduled/Expected/Watch certainty tags, no call scripts). Promoted the certainty-tagging discipline to a new Shared Accuracy Rule 7 in SKILL.md. Added `skills/newsletter.md` and `skills/horizon-90.md` to `build-zip.sh`'s `SKILLS_FILES`. Fixed brief-full.md's content-width contradiction (9360→9720 DXA). De-duplicated the file-lifecycle block in `newsletter.md`/`horizon-90.md` to reference AGENTS.md instead of restating it. Added routing disambiguation guidance for overlapping `brief-short.md`/`newsletter.md` requests. |
+| 2.1 | 2026-06-19 | Wrote `skills/horizon-90.md` (90-day forward scan: Scheduled/Expected/Watch certainty tags, no call scripts). Promoted the certainty-tagging discipline to a new Shared Accuracy Rule 7 in SKILL.md. Added `skills/newsletter.md` and `skills/horizon-90.md` to `build-zip.sh`'s `SKILLS_FILES`. Fixed brief-full.md's content-width contradiction (9360→9720 DXA). De-duplicated the file-lifecycle block in `newsletter.md`/`horizon-90.md` to reference CLAUDE.md instead of restating it. Added routing disambiguation guidance for overlapping `brief-short.md`/`newsletter.md` requests. |
 | 2.2 | 2026-09-02 | Added `skills/cta-roundup.md` (campaign-shaped calls-to-action roundup: leverage-based delegation tiering, mandatory "Answer looks like" line per ask, volatile-items pre-publish checklist) and moved it from the repo root into `skills/`. Widened the SKILL.md description to match CTA phrasing and named campaigns, with "CTA brief" as an explicit invocation phrase. `output_format` is now `[docx, markdown]`. Broadened Shared Accuracy Rule 6 beyond congress.gov to cover cosponsor lists, Federal Register dockets, appropriations vehicle, litigation, and delegation composition. Recorded the Virginia redistricting resolution in `lessons_learned` and `state-context-va.md`. Added `skills/cta-roundup.md` to `build-zip.sh`'s `SKILLS_FILES`. |
 | 2.3 | 2026-09-02 | Added a Shared Pre-Delivery Check to SKILL.md and pointed all five sub-skills at it, removing the items they each duplicated. `check-acronyms.sh` now accepts `.md` as well as `.js`, so markdown outputs (short briefs, CTA roundups) are acronym-checked too. Gave `cta-roundup.md` the docx and markdown production paths its "docx on request" line implied but never described. Markdown outputs are now archived to Drive alongside the docx ones. Added the humanizer pass to `newsletter.md` and `horizon-90.md`, which were the two output types missing it. |
 | 3.0 | 2026-09-02 | Absorbed `skills/newsletter.md` into `skills/cta-roundup.md` as Digest mode and deleted it. The two were the vaguest boundary in the set: both multi-item, both current-moment, both ending in a member and an ask, distinguished only by what the request started from. One document now carries both, sharing the research workflow, delegation tiering, ask verification, and volatile-items check, and differing in structure, length, and output format. Digest items gain the mandatory "Answer looks like" line; campaign asks gain the digest's rule about dropping stalled items. Added digest phrasing to the SKILL.md description, which never carried it — "monthly newsletter" and "what's moving this month" could fail to trigger the skill at all. Routing table down to four rows. |
 | 3.1 | 2026-09-02 | Added a Shared Member Taxonomy to SKILL.md and retired the four competing vocabularies. `cta-roundup.md`'s naming won: Tier 1 Aligned / Tier 2 Movable / Tier 3 Locked, with Gatekeeper as an orthogonal flag rather than a peer tier, so an Aligned Gatekeeper is expressible. Resolved the contradiction between sub-skills on confirmed opponents in favor of contacting them: Tier 3 members get a written ask and a logged response, and `brief-full.md`'s "Constituent pressure only" label becomes "Contact and log". Each output keeps channel-appropriate rendering labels, mapped in a table in SKILL.md. Fixed a brief-full example that labeled a member with no found record as an ally, which contradicted Accuracy Rule 3. |
 | 3.2 | 2026-09-02 | Added `scripts/fetch-cosponsors.sh` (current cosponsors with the delegation flagged; separates withdrawn cosponsors, which the congress.gov endpoint returns mixed in with current ones) and `scripts/publish.sh` (single source of truth for the Drive path, refuses to run when Drive for Desktop is down). Added the `issues/` research cache with explicit freshness limits and a hard rule that it never satisfies Accuracy Rule 6, plus `brief-index.md` and the hand-maintained `calendar-119.md`. Established that no machine-readable forward congressional calendar exists, so no fetch script was written for it. |
-| 3.3 | 2026-09-02 | Made feeding the research cache a required, checked step. Writing or updating the issue file and publishing with `publish.sh` are now items in SKILL.md's Shared Pre-Delivery Check, and Digest mode carries its own. The cache was read-only in practice: 3.2 told Codex to read `issues/` but never required writing it, so the September 2026 digest produced no issue files and October would have been full price. Raised the position and campaign-ask cache from 30 to 45 days — a 30-day limit expires exactly on a monthly cadence, so the most expensive research was the one thing the cache never delivered. Backfilled five issue files from the September digest. |
+| 3.3 | 2026-09-02 | Made feeding the research cache a required, checked step. Writing or updating the issue file and publishing with `publish.sh` are now items in SKILL.md's Shared Pre-Delivery Check, and Digest mode carries its own. The cache was read-only in practice: 3.2 told Claude to read `issues/` but never required writing it, so the September 2026 digest produced no issue files and October would have been full price. Raised the position and campaign-ask cache from 30 to 45 days — a 30-day limit expires exactly on a monthly cadence, so the most expensive research was the one thing the cache never delivered. Backfilled five issue files from the September digest. |
 | 3.4 | 2026-09-02 | Renamed the CTA roundup's per-ask field from "Answer looks like" to "Expectations" across both modes. Added a retired-label guard to `build-zip.sh` that fails the build if a renamed label reappears in the skill files, seeded with "Answer looks like" and "Constituent pressure only" — the latter having already survived a rename in the docs while the template kept emitting it. |
 | 3.5 | 2026-09-02 | Added a Shared Style Rule separating writer guardrails from reader content. Cached corrections exist to stop a draft going wrong, not to inform group leaders, and the September CTA roundup published the Virginia redistricting guardrail as a framing fact the network already knew. Rewrote `cta-roundup.md`'s Framing facts instruction, which had told the writer to state logged corrections "rather than relying on readers to already know." |
 
@@ -142,7 +142,7 @@ passed docx npm package validation.
 
 ## How to Generate a Briefing
 
-When asked to produce any output, Codex should:
+When asked to produce any output, Claude should:
 
 1. Load `SKILL.md` (parent) — provides state config, sub-skill routing table,
    Step 0 instructions, and shared accuracy rules
@@ -166,7 +166,7 @@ Pass a `sections` object with arrays of Paragraph objects. See the
 `buildBrief` JSDoc comment in `brief-base.js` for the full sections schema.
 
 **Briefing file lifecycle:** see `references/docx-conventions.md`. That file
-ships in the skill upload zip; this one does not.
+ships in the claude.ai upload zip; this one does not.
 
 ---
 
@@ -237,7 +237,7 @@ A `states/va.yaml` pointer was considered and rejected. The AI loading model
 requires sequential file loads — state config in a separate file means every
 session starts with two required loads before any work begins. Inline front
 matter is immediately available. The current design works better for how
-Codex reads skill files. Revisit when a second state network actually
+Claude reads skill files. Revisit when a second state network actually
 contributes (then the migration is adding one file, not a restructure).
 
 **`lessons_learned` stays in SKILL.md front matter, not a separate file.**
@@ -269,7 +269,7 @@ is Virginia-specific. Other state networks add `sources-[statecode].md`
 without touching the national file — no merge conflicts.
 
 **`state-context-va.md` is the token-saving mechanism.**
-The single highest-leverage optimization in the skill. Without it, Codex
+The single highest-leverage optimization in the skill. Without it, Claude
 searches for committee assignments, contact URLs, and member positions
 fresh every session. With it, Step 3 is eliminated entirely on every
 briefing. Maintain this file carefully. See MAINTENANCE.md for triggers.
@@ -312,10 +312,10 @@ These were explicitly considered and ruled out. Don't reintroduce them.
   cache is a drafting aid, never a substitute for the pre-publish check.
 - **Do not hardcode the Drive path in a sub-skill** — call `publish.sh`. The
   path exists in one place so it can be changed in one place.
-- **Do not grow the SKILL.md description past 1024 characters** — Codex.ai
+- **Do not grow the SKILL.md description past 1024 characters** — claude.ai
   rejects the upload. `build-zip.sh` enforces it. See Skill Upload Constraints.
 - **Do not publish a cached correction as reader content** — most exist to
-  stop Codex making an error, not to inform group leaders. The Virginia
+  stop Claude making an error, not to inform group leaders. The Virginia
   redistricting fact is the standing example. See the Shared Style Rule on
   guardrails.
 - **Do not reintroduce a retired field label** — "Answer looks like" is now
@@ -345,7 +345,7 @@ resolve from front matter.
 
 ## Skill Upload Constraints
 
-Codex.ai enforces limits on the uploaded skill package. These are checked by
+claude.ai enforces limits on the uploaded skill package. These are checked by
 `./scripts/build-zip.sh`, which fails the build rather than letting a bad zip
 reach the upload dialog.
 
@@ -360,12 +360,12 @@ reach the upload dialog.
   front matter.
 - A security scan runs on save.
 
-To install the skill locally for testing in Codex, which uses the same
-description-matching mechanism as Codex.ai:
+To install the skill locally for testing in Claude Code, which uses the same
+description-matching mechanism as claude.ai:
 
 ```bash
 ./scripts/build-zip.sh
-unzip -q -o advocacy-legislation-brief-Codex-upload.zip -d ~/.Codex/skills/
+unzip -q -o advocacy-legislation-brief-claude-upload.zip -d ~/.claude/skills/
 ```
 
 Then start a NEW session — skills are read at session start.
@@ -411,5 +411,5 @@ outside of a `TextRun` will cause XML validation errors in the docx output.
 
 ## Docx Layout Defaults
 
-See `references/docx-conventions.md`. That file ships in the skill upload
+See `references/docx-conventions.md`. That file ships in the claude.ai upload
 zip; this one does not.
