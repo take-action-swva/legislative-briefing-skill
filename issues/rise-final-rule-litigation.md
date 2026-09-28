@@ -15,7 +15,9 @@ litigation, not legislation.
 - **Type:** court ruling
 - **Certainty:** Watch
 - **Date:** unknown (possible any time after 2026-11-06, when briefing
-  closes in the lead case)
+  closes in State of Maryland v. U.S. Department of Education; AANP v.
+  McMahon, the earliest-filed of the three suits, has its own next date of
+  "any time after 2026-12-04")
 - **Source:** https://www.nasfaa.org/litigation
 
 The Department of Education's Reimagining and Improving Student Education
