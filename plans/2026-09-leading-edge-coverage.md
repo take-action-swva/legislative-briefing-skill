@@ -1,6 +1,7 @@
 # Plan: Leading-Edge Coverage for the Legislative Briefing Skill
 
 **Written:** 2026-09-28
+**Updated:** 2026-09-28, adding the CTA readiness model and member evidence/role fields accepted from an external review
 **Applies to:** SKILL.md v3.5
 **Target version:** 3.6 (Phases 1 and 3 change the research workflow, which requires a version bump per MAINTENANCE.md)
 
@@ -85,11 +86,59 @@ These are defects in the current skill, independent of the expansion.
    Rename "Bills and vehicles" to "Vehicles" and allow Federal Register
    dockets, court dockets, and funding actions as rows.
 
-4. **Backfill.** Tag the six existing issue files.
+4. **Backfill.** Tag the six existing issue files, including stage, next
+   decision, blocker, and the member evidence column from items 6 and 7.
 
 5. **Accuracy Rule 6 additions.** Add to the never-cached, verify-on-distribution
    list: apportionment or impoundment status, and grant termination or
    reinstatement status. Both reverse on court orders with no congress.gov trace.
+
+6. **CTA readiness model.** Give each issue an explicit stage so the move from
+   "prepare" to "act" follows written conditions instead of editorial feel.
+   Add to `issues/_template.md`:
+
+   - **Stage:** `watch` | `prepare` | `cta-ready`. Distribution and outcomes
+     stay in the existing "Outputs produced" and "Outcomes" sections, which
+     already cover what happens after an ask goes out.
+   - **Next decision:** type (markup, floor vote, comment deadline, rule
+     effective date, appropriations deadline, court ruling), certainty
+     (Scheduled, Expected, Watch), date or "unknown", and source URL.
+   - **Blocker:** one line naming the unmet condition, e.g. "no confirmed
+     markup notice."
+
+   An issue is `cta-ready` when all four hold:
+   1. An identified decision point with a primary source
+   2. A target with a documented role in that decision
+   3. An ask expressible as a specific yes/no request, verifiable against a
+      primary source
+   4. A response that can be observed afterward
+
+   Deciding whether each condition holds still takes judgment. Writing the
+   conditions down makes that judgment auditable, not automatic.
+
+   The conditions cover agency actions as well as legislation. For a rule, the
+   decision point is a comment deadline or effective date, the target is the
+   agency, and the observable response is a submitted comment or a change in
+   the final rule.
+
+   Add a short "CTA readiness" section to SKILL.md defining the stages and
+   conditions, so every sub-skill uses the same vocabulary.
+
+7. **Member evidence and role.** Keep the three tiers. They tell organizers
+   whether to escalate, persuade, or put a response on record, and that
+   distinction is what the asks are built on. Two additions make the evidence
+   behind a tier explicit:
+
+   - **Evidence column** in the issue file's member table: `record found` or
+     `no record found`. A Tier 2 member with no record then reads differently
+     from one who broke with party on a related vote.
+   - **Role field**, extending the existing Gatekeeper flag: gatekeeper,
+     relevant committee, floor vote, oversight authority, or other. It states
+     the factual reason an office matters to this decision, which readiness
+     condition 2 needs.
+
+   Update the Shared Member Taxonomy in SKILL.md to describe both. Rendering
+   labels in outputs do not change.
 
 ---
 
@@ -199,6 +248,15 @@ Add a citation link-text row for every new source.
    active case. Case status stays uncached per Rule 6; the URL makes the live
    check fast.
 
+7. **Stages in horizon-90.md.** Every horizon item sets or updates its issue's
+   stage (Phase 1, item 6). The item's "Prepare" line comes from the blocker:
+   it names what organizers can do while the unmet condition holds, such as
+   collecting constituent stories or lining up media contacts.
+
+8. **Stages in cta-roundup.md.** Digest mode selects from `cta-ready` issues
+   first. An item that fails a readiness condition stays out of the action
+   list and goes back to Horizon-90 with its blocker recorded.
+
 ---
 
 ## Phase 4: Maintenance
@@ -258,6 +316,11 @@ dedupe logic, and source ratings drifting apart.
    unverified social posts never enter this table. Immigration rapid-response
    data carries safety risk and belongs in a separate, access-controlled
    system.
+4. **Readiness trigger.** A new signal carrying an `issue_slug` (a markup
+   notice, a published comment deadline, a court ruling) flags that issue for
+   a readiness recheck against the Phase 1 conditions. The first build only
+   records the flag; a skill run acts on it. Nothing changes an issue's stage
+   without a human-reviewed run.
 
 ### Decisions to settle in the first build
 
