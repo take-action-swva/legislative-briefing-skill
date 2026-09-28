@@ -66,11 +66,11 @@ authority`, or `other`. Extends the Gatekeeper flag rather than replacing it.
 **Evidence** is `record found` or `no record found`. A Tier 2 member with a
 Role but no position on this issue — a committee seat with nothing said or
 voted yet — reads differently from one who broke with party on a related
-vote. Write "no record found" and leave Position blank rather than guessing.
+vote.
 
-**Never write a position here that was inferred from party.** If no record was
-found, write "position not found during research" in the Position column
-rather than leaving a blank row unexplained.
+**Never write a position here that was inferred from party.** If Evidence is
+"no record found," write "position not found during research" in the
+Position column rather than guessing or leaving it blank.
 
 ---
 

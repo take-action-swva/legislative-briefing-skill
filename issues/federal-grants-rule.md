@@ -10,9 +10,11 @@
 **Blocker:** none
 
 **Next decision:**
-- **Type:** rule effective date
-- **Certainty:** Watch
-- **Date:** unknown (block runs through 2026-12-11; no confirmed date after)
+- **Type:** appropriations deadline
+- **Certainty:** Scheduled
+- **Date:** 2026-12-11 (the block on the rule expires with the CR; whether
+  the block is renewed in the FY2027 vehicle is the decision in scope — the
+  rule's own effective date after that point is separately unconfirmed)
 - **Source:** astho.org/advocacy/federal-government-affairs/leg-alerts/2026/summary-of-fy27-continuing-resolution/
 
 An Office of Management and Budget (OMB) rule restructuring how roughly $1.2
