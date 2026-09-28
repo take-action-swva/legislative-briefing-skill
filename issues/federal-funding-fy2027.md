@@ -2,8 +2,19 @@
 
 **Slug:** `federal-funding-fy2027`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-26
+**Last touched:** 2026-09-28
 **Status:** active
+**Issue area:** budget
+**Threat vectors:** appropriations
+**Stage:** prepare
+**Blocker:** No specific ask formulated yet on the single-bill-vs-omnibus
+question. Cline's Appropriations seat is documented but undirected.
+
+**Next decision:**
+- **Type:** appropriations deadline
+- **Certainty:** Scheduled
+- **Date:** 2026-12-11
+- **Source:** whitehouse.gov/briefings-statements/2026/09/congressional-bill-h-r-6500-signed-into-law/
 
 Funding is held at fiscal year 2026 levels by a continuing resolution through
 December 11, 2026. The twelve fiscal year 2027 bills are the live fight, and
@@ -11,7 +22,7 @@ they land in the four weeks between the election and that date.
 
 ---
 
-## Bills and vehicles
+## Vehicles
 
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
@@ -27,10 +38,10 @@ Cosponsor counts are never cached — run
 
 ## Member positions
 
-| Member | Tier | Position | Source | verified |
-|---|---|---|---|---|
-| Rep. Ben Cline (VA-06) | Gatekeeper | Only Virginian on House Appropriations; Agriculture and FDA subcommittee. No position found on single-bill vs omnibus process | state-context-va.md (assignment); position not researched | 2026-09-02 |
-| Sen. Mark Warner | Tier 2 Movable | Budget and Finance. No position found on the grants-rule rider | not researched | 2026-09-02 |
+| Member | Tier | Role | Evidence | Position | Source | verified |
+|---|---|---|---|---|---|---|
+| Rep. Ben Cline (VA-06) | Tier 2 Movable, **Gatekeeper** | gatekeeper | no record found | Only Virginian on House Appropriations; Agriculture and FDA subcommittee. Position not found during research on single-bill vs omnibus process | state-context-va.md (assignment) | 2026-09-02 |
+| Sen. Mark Warner | Tier 2 Movable | relevant committee | no record found | Budget and Finance. Position not found during research on the grants-rule rider | state-context-va.md (assignment) | 2026-09-02 |
 
 **Cline's Appropriations seat is the structural fact that does not change.**
 He is the delegation's only lever on the twelve bills. That is worth carrying

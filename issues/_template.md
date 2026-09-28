@@ -4,18 +4,40 @@
 **Opened:** [YYYY-MM-DD]
 **Last touched:** [YYYY-MM-DD]
 **Status:** active | dormant | closed
+**Issue area:** elections | immigration | health | education | environment |
+budget | federal workforce | civil liberties | other
+**Threat vectors:** legislation, appropriations, rulemaking, guidance,
+funding action (apportionment, impoundment, rescission), grant action,
+enforcement, litigation — list all that apply
+**Stage:** watch | prepare | cta-ready — see SKILL.md's "CTA Readiness"
+section for the four conditions
+**Blocker:** [one line naming the unmet condition, or "none" if cta-ready]
+
+**Next decision:**
+- **Type:** markup | floor vote | comment deadline | rule effective date |
+  appropriations deadline | court ruling | unknown
+- **Certainty:** Scheduled | Expected | Watch
+- **Date:** [YYYY-MM-DD or "unknown"]
+- **Source:** [URL]
 
 One or two sentences on what this issue is and why the network is working it.
 
 ---
 
-## Bills and vehicles
+## Vehicles
 
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
 | H.R. 0000 | [one phrase] | [status] | [YYYY-MM-DD] |
 
-Bill status caches for 7 days. Re-check congress.gov past that.
+A row can be a bill, a Federal Register docket, a court docket, or a funding
+action (an apportionment footnote, an impoundment, a rescission) — whatever
+the decision point in scope actually is.
+
+Bill status caches for 7 days. Re-check congress.gov past that. Federal
+Register docket status, apportionment or impoundment status, and grant
+termination or reinstatement status are never cached — re-verify live per
+Accuracy Rule 6.
 
 Cosponsor counts are deliberately absent from this table. They are never
 cached — run `./scripts/fetch-cosponsors.sh <congress> <type> <num> VA` on the
@@ -25,19 +47,30 @@ day of distribution.
 
 ## Member positions
 
-One row per member with a found record. Members with no record found are
-Tier 2 Movable by default and do not need a row until a record exists.
+One row per member with a found position record, or who needs a row to
+document Role — a Gatekeeper or a relevant-committee seat — even without a
+stated position. A member with neither stays off the table: Tier 2 Movable by
+default per the Shared Member Taxonomy, and no row needed until one applies.
 
-| Member | Tier | Position | Source | verified |
-|---|---|---|---|---|
-| Sen. Warner | Tier 2 Movable | [what they actually said or did] | [URL] | [YYYY-MM-DD] |
+| Member | Tier | Role | Evidence | Position | Source | verified |
+|---|---|---|---|---|---|---|
+| Sen. Warner | Tier 2 Movable | relevant committee | record found | [what they actually said or did] | [URL] | [YYYY-MM-DD] |
 
 Tiers come from SKILL.md's Shared Member Taxonomy. Positions cache for 45 days
 and are void immediately on any new vote, press release, or floor statement.
 
-**Never write a position here that was inferred from party.** If no record was
-found, the member does not get a row, and the output says "position not found
-during research."
+**Role** states the factual reason this office matters to the decision in
+scope: `gatekeeper`, `relevant committee`, `floor vote`, `oversight
+authority`, or `other`. Extends the Gatekeeper flag rather than replacing it.
+
+**Evidence** is `record found` or `no record found`. A Tier 2 member with a
+Role but no position on this issue — a committee seat with nothing said or
+voted yet — reads differently from one who broke with party on a related
+vote.
+
+**Never write a position here that was inferred from party.** If Evidence is
+"no record found," write "position not found during research" in the
+Position column rather than guessing or leaving it blank.
 
 ---
 

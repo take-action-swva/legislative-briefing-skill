@@ -40,6 +40,11 @@ from, and the freshness table below is not advisory.
 - Current appropriations vehicle
 - Litigation affecting district maps or election procedure
 - Delegation composition
+- Apportionment or impoundment status for any funding action
+- Grant termination or reinstatement status for any grant action
+
+The last two reverse on court orders the same way a struck-down district map
+does, with no trace on congress.gov.
 
 These are the volatile items in Shared Accuracy Rule 6. **A cache entry never
 satisfies that check.** The cache speeds up drafting. The pre-distribution

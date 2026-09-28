@@ -2,8 +2,20 @@
 
 **Slug:** `federal-grants-rule`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-26
+**Last touched:** 2026-09-28
 **Status:** active
+**Issue area:** budget
+**Threat vectors:** rulemaking, grant action
+**Stage:** cta-ready
+**Blocker:** none
+
+**Next decision:**
+- **Type:** appropriations deadline
+- **Certainty:** Scheduled
+- **Date:** 2026-12-11 (the block on the rule expires with the CR; whether
+  the block is renewed in the FY2027 vehicle is the decision in scope — the
+  rule's own effective date after that point is separately unconfirmed)
+- **Source:** astho.org/advocacy/federal-government-affairs/leg-alerts/2026/summary-of-fy27-continuing-resolution/
 
 An Office of Management and Budget (OMB) rule restructuring how roughly $1.2
 trillion a year in federal grants is awarded and terminated. Not legislation —
@@ -11,7 +23,7 @@ this is a rulemaking, and congress.gov will not show it.
 
 ---
 
-## Bills and vehicles
+## Vehicles
 
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
@@ -46,10 +58,10 @@ systems, volunteer fire departments, and small nonprofits.
 
 ## Member positions
 
-| Member | Tier | Position | Source | verified |
-|---|---|---|---|---|
-| Rep. Suhas Subramanyam (VA-10) | Tier 2 Movable | Oversight and Government Reform. Position not found during research | state-context-va.md (assignment) | 2026-09-02 |
-| Rep. James Walkinshaw (VA-11) | Tier 2 Movable | Oversight and Government Reform. Position not found during research | state-context-va.md (assignment) | 2026-09-02 |
+| Member | Tier | Role | Evidence | Position | Source | verified |
+|---|---|---|---|---|---|---|
+| Rep. Suhas Subramanyam (VA-10) | Tier 2 Movable | relevant committee | no record found | Oversight and Government Reform. Position not found during research | state-context-va.md (assignment) | 2026-09-02 |
+| Rep. James Walkinshaw (VA-11) | Tier 2 Movable | relevant committee | no record found | Oversight and Government Reform. Position not found during research | state-context-va.md (assignment) | 2026-09-02 |
 
 Two Virginians on Oversight is the durable fact here. Oversight asks —
 document demands, hearing requests — are available to minority-party members,

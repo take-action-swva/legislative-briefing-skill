@@ -105,7 +105,7 @@ templates/
 
 ## Current State
 
-**Skill version:** 3.5  
+**Skill version:** 3.6  
 **State context:** Virginia, 119th Congress (verified 2026-06-01)  
 **Next required maintenance:** January 2027 (start of 120th Congress)
 
@@ -133,6 +133,7 @@ templates/
 | 3.3 | 2026-09-02 | Made feeding the research cache a required, checked step. Writing or updating the issue file and publishing with `publish.sh` are now items in SKILL.md's Shared Pre-Delivery Check, and Digest mode carries its own. The cache was read-only in practice: 3.2 told Claude to read `issues/` but never required writing it, so the September 2026 digest produced no issue files and October would have been full price. Raised the position and campaign-ask cache from 30 to 45 days — a 30-day limit expires exactly on a monthly cadence, so the most expensive research was the one thing the cache never delivered. Backfilled five issue files from the September digest. |
 | 3.4 | 2026-09-02 | Renamed the CTA roundup's per-ask field from "Answer looks like" to "Expectations" across both modes. Added a retired-label guard to `build-zip.sh` that fails the build if a renamed label reappears in the skill files, seeded with "Answer looks like" and "Constituent pressure only" — the latter having already survived a rename in the docs while the template kept emitting it. |
 | 3.5 | 2026-09-02 | Added a Shared Style Rule separating writer guardrails from reader content. Cached corrections exist to stop a draft going wrong, not to inform group leaders, and the September CTA roundup published the Virginia redistricting guardrail as a framing fact the network already knew. Rewrote `cta-roundup.md`'s Framing facts instruction, which had told the writer to state logged corrections "rather than relying on readers to already know." |
+| 3.6 | 2026-09-28 | Phase 1 of the leading-edge coverage plan (scope and taxonomy): added the federal-actions-only scope decision to SKILL.md's Audience scope paragraph; widened the description with agency-action trigger phrasing (agency rule, comment period, grant cuts, funding freeze, impoundment), trimming overlapping phrases to stay under 1024 characters; added Issue area and Threat vectors fields, renamed "Bills and vehicles" to "Vehicles" (now also holding Federal Register dockets, court dockets, and funding actions), and added the Stage/Next decision/Blocker CTA-readiness fields and the Role/Evidence member-table columns to `issues/_template.md`; added a new "CTA Readiness" section and an Evidence-and-role subsection under Shared Member Taxonomy to SKILL.md; added apportionment/impoundment status and grant termination/reinstatement status to Accuracy Rule 6's and `issues/README.md`'s never-cached lists; backfilled all six active issue files with the new fields. |
 
 All 12 planned items from the build checklist are complete. The skill has
 been tested with a live SAVE Act briefing session. The resulting `.docx`
