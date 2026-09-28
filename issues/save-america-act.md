@@ -2,8 +2,19 @@
 
 **Slug:** `save-america-act`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-26
+**Last touched:** 2026-09-28
 **Status:** active
+**Issue area:** elections
+**Threat vectors:** legislation, appropriations
+**Stage:** prepare
+**Blocker:** No confirmed Senate floor date for NDAA final passage; the ask
+relies on a hypothetical final vote rather than a scheduled one.
+
+**Next decision:**
+- **Type:** floor vote
+- **Certainty:** Watch
+- **Date:** unknown
+- **Source:** congress.gov/119/bills/hr8800/BILLS-119hr8800eh.htm
 
 Documentary proof of citizenship to register and photo identification to vote,
 moving as text merged into the FY2027 defense authorization rather than as a
@@ -11,7 +22,7 @@ standalone bill.
 
 ---
 
-## Bills and vehicles
+## Vehicles
 
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
@@ -33,21 +44,21 @@ Source: <https://www.pbs.org/newshour/politics/house-republicans-adopt-95-billio
 
 ## Member positions
 
-| Member | Tier | Position | Source | verified |
-|---|---|---|---|---|
-| Sen. Tim Kaine | Tier 1 Aligned, **Gatekeeper** | Joint statement with Warner 2026-03-18 calling the SAVE America Act "a pretext for voter suppression." No stated position on a defense bill that carries it. Armed Services, Seapower Ranking Member | warner.senate.gov/newsroom/press-releases/warner-kaine-slam-save-america-act-as-voter-suppression-measure-that-could-disenfranchise-millions/ | 2026-09-26 |
-| Sen. Mark Warner | Tier 1 Aligned | Same joint statement, 2026-03-18. No stated position on a defense bill that carries it. Rules and Administration | same URL | 2026-09-26 |
-| Rep. Rob Wittman (VA-01) | Tier 3 Locked, **Gatekeeper** | Voted YES, Roll Call 102, 2025-04-10. Vice Chair, House Armed Services | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. Morgan Griffith (VA-09) | Tier 3 Locked, **Gatekeeper** | Voted YES, Roll Call 102. House Rules | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. Ben Cline (VA-06) | Tier 3 Locked | **Original cosponsor**, signed 2025-01-03. Voted YES, Roll Call 102 | congress.gov; clerk.house.gov | 2026-09-02 |
-| Rep. John McGuire (VA-05) | Tier 3 Locked | Cosponsor, signed 2025-02-14. Voted YES, Roll Call 102 | congress.gov; clerk.house.gov | 2026-09-02 |
-| Rep. Jen Kiggans (VA-02) | Tier 3 Locked | Voted YES, Roll Call 102. Competitive seat | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. Bobby Scott (VA-03) | Tier 1 Aligned | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. Jennifer McClellan (VA-04) | Tier 1 Aligned | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. Eugene Vindman (VA-07) | Tier 1 Aligned | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. Don Beyer (VA-08) | Tier 1 Aligned | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. Suhas Subramanyam (VA-10) | Tier 1 Aligned | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
-| Rep. James Walkinshaw (VA-11) | Tier 2 Movable | **No vote on H.R. 22.** Seated 2025-09-10, five months after the roll call. Position not found during research | state-context-va.md | 2026-09-02 |
+| Member | Tier | Role | Evidence | Position | Source | verified |
+|---|---|---|---|---|---|---|
+| Sen. Tim Kaine | Tier 1 Aligned, **Gatekeeper** | gatekeeper | record found | Joint statement with Warner 2026-03-18 calling the SAVE America Act "a pretext for voter suppression." No stated position on a defense bill that carries it. Armed Services, Seapower Ranking Member | warner.senate.gov/newsroom/press-releases/warner-kaine-slam-save-america-act-as-voter-suppression-measure-that-could-disenfranchise-millions/ | 2026-09-26 |
+| Sen. Mark Warner | Tier 1 Aligned | relevant committee | record found | Same joint statement, 2026-03-18. No stated position on a defense bill that carries it. Rules and Administration | same URL | 2026-09-26 |
+| Rep. Rob Wittman (VA-01) | Tier 3 Locked, **Gatekeeper** | gatekeeper | record found | Voted YES, Roll Call 102, 2025-04-10. Vice Chair, House Armed Services | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. Morgan Griffith (VA-09) | Tier 3 Locked, **Gatekeeper** | gatekeeper | record found | Voted YES, Roll Call 102. House Rules | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. Ben Cline (VA-06) | Tier 3 Locked | floor vote | record found | **Original cosponsor**, signed 2025-01-03. Voted YES, Roll Call 102 | congress.gov; clerk.house.gov | 2026-09-02 |
+| Rep. John McGuire (VA-05) | Tier 3 Locked | floor vote | record found | Cosponsor, signed 2025-02-14. Voted YES, Roll Call 102 | congress.gov; clerk.house.gov | 2026-09-02 |
+| Rep. Jen Kiggans (VA-02) | Tier 3 Locked | floor vote | record found | Voted YES, Roll Call 102. Competitive seat | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. Bobby Scott (VA-03) | Tier 1 Aligned | floor vote | record found | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. Jennifer McClellan (VA-04) | Tier 1 Aligned | floor vote | record found | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. Eugene Vindman (VA-07) | Tier 1 Aligned | floor vote | record found | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. Don Beyer (VA-08) | Tier 1 Aligned | floor vote | record found | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. Suhas Subramanyam (VA-10) | Tier 1 Aligned | floor vote | record found | Voted NO, Roll Call 102 | clerk.house.gov/Votes/2025102 | 2026-09-02 |
+| Rep. James Walkinshaw (VA-11) | Tier 2 Movable | floor vote | no record found | **No vote on H.R. 22.** Seated 2025-09-10, five months after the roll call. Position not found during research | state-context-va.md | 2026-09-02 |
 
 **Delegation composition trap:** Roll Call 102 records a vote by the previous
 VA-11 member, since succeeded by Walkinshaw. Do not attribute that vote to

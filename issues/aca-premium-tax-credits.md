@@ -2,8 +2,20 @@
 
 **Slug:** `aca-premium-tax-credits`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-26
+**Last touched:** 2026-09-28
 **Status:** active
+**Issue area:** health
+**Threat vectors:** legislation
+**Stage:** prepare
+**Blocker:** No confirmed floor vehicle carrying H.R. 1834 through the
+Senate; asks rely on the December 11 funding deadline as the likely — not
+scheduled — vehicle.
+
+**Next decision:**
+- **Type:** appropriations deadline
+- **Certainty:** Watch
+- **Date:** 2026-12-11
+- **Source:** see [[federal-funding-fy2027]] (H.R. 6500), whitehouse.gov/briefings-statements/2026/09/congressional-bill-h-r-6500-signed-into-law/
 
 The enhanced Affordable Care Act (ACA) premium tax credits expired 2026-01-01.
 A House-passed three-year extension has been sitting in the Senate since
@@ -11,7 +23,7 @@ January.
 
 ---
 
-## Bills and vehicles
+## Vehicles
 
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
@@ -43,15 +55,15 @@ time before Virginians see 2027 prices.
 
 ## Member positions
 
-| Member | Tier | Position | Source | verified |
-|---|---|---|---|---|
-| Sen. Mark Warner | Tier 1 Aligned | Reintroduced the Health Care Affordability Act (permanent enhanced credits) with Kaine, January 2025 | warner.senate.gov/newsroom/press-releases/warner-kaine-colleagues-introduce-bicameral-legislation-to-extend-tax-credits-lower-health-care-costs-for-millions-of-americans/ | 2026-09-26 |
-| Sen. Tim Kaine | Tier 1 Aligned | Same bill | same URL | 2026-09-26 |
-| Rep. Rob Wittman (VA-01) | Tier 1 Aligned | Voted YES on H.R. 1834, Roll 11, 2026-01-08, one of 17 Republicans. "This vote was about responsible governance" (Virginia Mercury) | clerk.house.gov/Votes/202611 | 2026-09-26 |
-| Rep. Jen Kiggans (VA-02) | Tier 2 Movable | Voted NO on H.R. 1834, Roll 11; objected to three years and backed a one-year version (Virginian-Pilot via Virginia Mercury) | clerk.house.gov/Votes/202611 | 2026-09-26 |
-| Rep. Ben Cline (VA-06) | Tier 3 Locked | Voted NO | roll call, 2026-01-08 | 2026-09-02 |
-| Rep. Morgan Griffith (VA-09) | Tier 3 Locked | Voted NO. Energy and Commerce, Health subcommittee | roll call, 2026-01-08 | 2026-09-02 |
-| Rep. John McGuire (VA-05) | Tier 3 Locked | Voted NO | roll call, 2026-01-08 | 2026-09-02 |
+| Member | Tier | Role | Evidence | Position | Source | verified |
+|---|---|---|---|---|---|---|
+| Sen. Mark Warner | Tier 1 Aligned | floor vote | record found | Reintroduced the Health Care Affordability Act (permanent enhanced credits) with Kaine, January 2025 | warner.senate.gov/newsroom/press-releases/warner-kaine-colleagues-introduce-bicameral-legislation-to-extend-tax-credits-lower-health-care-costs-for-millions-of-americans/ | 2026-09-26 |
+| Sen. Tim Kaine | Tier 1 Aligned | floor vote | record found | Same bill | same URL | 2026-09-26 |
+| Rep. Rob Wittman (VA-01) | Tier 1 Aligned | floor vote | record found | Voted YES on H.R. 1834, Roll 11, 2026-01-08, one of 17 Republicans. "This vote was about responsible governance" (Virginia Mercury) | clerk.house.gov/Votes/202611 | 2026-09-26 |
+| Rep. Jen Kiggans (VA-02) | Tier 2 Movable | floor vote | record found | Voted NO on H.R. 1834, Roll 11; objected to three years and backed a one-year version (Virginian-Pilot via Virginia Mercury) | clerk.house.gov/Votes/202611 | 2026-09-26 |
+| Rep. Ben Cline (VA-06) | Tier 3 Locked | floor vote | record found | Voted NO | roll call, 2026-01-08 | 2026-09-02 |
+| Rep. Morgan Griffith (VA-09) | Tier 3 Locked | relevant committee | record found | Voted NO. Energy and Commerce, Health subcommittee | roll call, 2026-01-08 | 2026-09-02 |
+| Rep. John McGuire (VA-05) | Tier 3 Locked | floor vote | record found | Voted NO | roll call, 2026-01-08 | 2026-09-02 |
 
 **This is the best-sourced position set in any current issue file** — an actual
 recorded vote for five members. Wittman's YES is the single most useful fact

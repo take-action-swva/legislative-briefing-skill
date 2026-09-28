@@ -2,20 +2,20 @@
 name: legislative-briefing-skill
 description: >
   Use whenever someone asks you to research, analyze, summarize, or produce a
-  briefing on federal legislation or executive orders for civic advocacy,
-  grassroots organizing, Indivisible groups, or similar audiences. Covers full
-  briefings, short briefs, 90-day legislative outlook scans, monthly digests
-  and newsletters, and calls-to-action roundups that turn a campaign into
-  specific congressional asks. Trigger on "CTA brief", "calls to action",
-  "CTAs", "action asks", "what should we ask our reps", "brief me on this
-  bill", "what should our group do about", "give me a quick summary", "what's
-  the status of", "research this EO for our members", "what's coming up in the
-  next 90 days", "what should we be watching", "monthly newsletter", "the
-  digest", "what's moving this month", or any request combining legislation
-  with advocacy, action, or organizing. Also trigger on named campaigns and
-  training tracks, including Hands Off Our Vote, Immigrant Justice Summer, and
-  Dismantling Detention.
-version: "3.5"
+  briefing on federal legislation, executive orders, or agency action for
+  civic advocacy, grassroots organizing, Indivisible groups, or similar
+  audiences. Covers full briefings, short briefs, 90-day legislative outlook
+  scans, monthly digests and newsletters, and calls-to-action roundups that
+  turn a campaign into specific congressional or agency asks. Trigger on "CTA
+  brief", "calls to action", "CTAs", "what should we ask our reps", "brief me
+  on this bill", "what's the status of", "research this EO for our members",
+  "what's coming up in the next 90 days", "monthly newsletter or digest",
+  "what's moving this month", "agency rule", "comment period", "grant cuts",
+  "funding freeze", "impoundment", or any request combining legislation or
+  agency action with advocacy, action, or organizing. Also trigger on named
+  campaigns and training tracks, including Hands Off Our Vote, Immigrant
+  Justice Summer, and Dismantling Detention.
+version: "3.6"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia
@@ -134,6 +134,13 @@ Cover all relevant state members evenhandedly. Do not weight, emphasize, or
 call out any particular district just because the requester happens to live
 there. If a specific group wants a district-focused version, that is a
 separate, narrower deliverable.
+
+**Subject-matter scope: federal actions only.** `{{state}}`'s state
+legislature and state budget process stay out of scope. State agencies
+appear only as sources of `{{state}}`-specific impact data for a federal
+action, never as a subject to track in their own right. When a federal
+change hands `{{state}}` an implementation choice, note it in one line and do
+not track the state-level process that follows.
 
 ---
 
@@ -262,10 +269,14 @@ scan, and CTA roundup in either mode. No exceptions.
    re-verify, on the day of distribution: cosponsor lists for every bill
    named, Federal Register dockets for any agency rulemaking cited, the
    current appropriations vehicle (continuing resolution or full-year bill),
-   any litigation affecting district maps or election procedure, and the
-   current delegation roster. `skills/cta-roundup.md` applies this as a
-   structural checklist; other output types should work through the same list
-   in whatever form applies to their content.
+   any litigation affecting district maps or election procedure, apportionment
+   or impoundment status for any funding action cited, grant termination or
+   reinstatement status for any grant action cited, and the current delegation
+   roster. Apportionment, impoundment, and grant status all reverse on court
+   orders that leave no trace on congress.gov, the same way a struck-down
+   district map does. `skills/cta-roundup.md` applies this as a structural
+   checklist; other output types should work through the same list in
+   whatever form applies to their content.
 
 7. **Never state a future date as more certain than it is.** When citing a
    markup, floor vote, rule effective date, or any other date that hasn't
@@ -302,11 +313,12 @@ one thing the cache never delivers. The event-based invalidation above is the
 real correctness control; the clock is a backstop.
 
 **The cache never satisfies Accuracy Rule 6.** Cosponsor lists, Federal
-Register docket status, the current appropriations vehicle, litigation, and
-delegation composition are never cached. Re-verify them live on the day of
-distribution, from primary sources, every time. Caching is how both errors in
-`lessons_learned` reached distributed documents — a struck-down map and a stale
-rulemaking, each a fact that had once been true.
+Register docket status, the current appropriations vehicle, litigation,
+delegation composition, apportionment or impoundment status, and grant
+termination or reinstatement status are never cached. Re-verify them live on
+the day of distribution, from primary sources, every time. Caching is how
+both errors in `lessons_learned` reached distributed documents — a
+struck-down map and a stale rulemaking, each a fact that had once been true.
 
 **Record outcomes.** After distribution, write what happened into the issue
 file: who responded, who did not, whether a position moved. Nothing else in
@@ -317,6 +329,47 @@ upload zip carries whatever issue files existed at the last `build-zip.sh`
 run — freshness rules above still apply to it. Any write-back (a new issue
 file, an updated position, a recorded outcome) must be committed to the git
 repo; nothing written in a claude.ai session persists to the next one.
+
+---
+
+## CTA Readiness
+
+Every issue file carries a **Stage**, so the move from watching an issue to
+asking group leaders to act on it follows written conditions instead of
+editorial feel.
+
+**Stage:** `watch` | `prepare` | `cta-ready`. Distribution and outcomes are
+recorded separately, in the issue file's "Outputs produced" and "Outcomes"
+sections — Stage tracks readiness to ask, not what happened afterward.
+
+An issue is `cta-ready` when all four conditions hold:
+
+1. **An identified decision point with a primary source.** A markup notice, a
+   comment deadline, a floor vote, a rule's effective date — something
+   specific enough to schedule against, not "expected to come up sometime."
+2. **A target with a documented role in that decision.** The Shared Member
+   Taxonomy's Role field states the factual reason an office matters here:
+   gatekeeper, relevant committee, floor vote, oversight authority, or other.
+   For an agency action, the target is the agency itself.
+3. **An ask expressible as a specific yes/no request, verifiable against a
+   primary source.** Not "support the bill" — "vote yes on the cloture motion
+   scheduled for [date]."
+4. **A response that can be observed afterward.** A vote, a public statement,
+   a submitted comment, a change in a final rule — something that lands in
+   the issue file's Outcomes section.
+
+Deciding whether each condition holds still takes judgment. Writing the
+conditions down makes that judgment auditable, not automatic — a checklist
+for the researcher, not a formula that decides for them.
+
+The conditions cover agency actions the same way they cover legislation. For
+a rule, the decision point is a comment deadline or an effective date, the
+target is the agency, and the observable response is a submitted comment or a
+change in the final rule.
+
+An issue that fails a condition stays in `watch` or `prepare` and records its
+**Blocker** — the single unmet condition — so the next session knows what to
+check for rather than re-deriving readiness from scratch.
 
 ---
 
@@ -362,6 +415,22 @@ which a scheme that treated "gatekeeper" as a peer tier could not express.
   members reach the page, never in how many get classified.
 - Contact ranking within an output follows leverage: Gatekeepers first
   regardless of tier, then Movable, then Aligned, then Locked.
+
+### Evidence and role
+
+Two fields in the issue file's member table make a tier's basis explicit,
+without changing the three tiers or their rendering labels.
+
+**Evidence:** `record found` or `no record found`. A Tier 2 Movable member
+with no record reads differently from one who broke with party on a related
+vote — the field says which is true at a glance.
+
+**Role:** the factual reason this office matters to the decision in scope —
+`gatekeeper`, `relevant committee`, `floor vote`, `oversight authority`, or
+`other`. This extends the Gatekeeper flag above rather than replacing it: a
+member can carry the Gatekeeper flag and also have Role: gatekeeper naming
+which decision that control applies to. CTA Readiness condition 2 — a target
+with a documented role in the decision — reads this field.
 
 ### Rendering labels by output type
 

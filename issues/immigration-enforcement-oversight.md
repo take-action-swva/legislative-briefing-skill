@@ -2,8 +2,21 @@
 
 **Slug:** `immigration-enforcement-oversight`
 **Opened:** 2026-09-02
-**Last touched:** 2026-09-02
+**Last touched:** 2026-09-28
 **Status:** active
+**Issue area:** immigration
+**Threat vectors:** legislation, appropriations, enforcement
+**Stage:** watch
+**Blocker:** No verified current siting decision point — the Augusta and
+Hanover proposals are unconfirmed. The core Dismantling Detention demands
+target local governments, not Congress, so no congressional ask is
+formulable from the campaign asks alone.
+
+**Next decision:**
+- **Type:** unknown
+- **Certainty:** Watch
+- **Date:** unknown
+- **Source:** none confirmed
 
 Immigration and Customs Enforcement (ICE) is funded through reconciliation
 rather than annual appropriations, which removes the usual lever of
@@ -14,7 +27,7 @@ Campaigns: Dismantling Detention, Immigrant Justice Summer.
 
 ---
 
-## Bills and vehicles
+## Vehicles
 
 | Bill / docket | What it is | Status | verified |
 |---|---|---|---|
@@ -37,21 +50,21 @@ organization**. Usable for context under Accuracy Rule 4, labeled as such.
 
 Tiering is issue-specific. A member's tier here does not carry to other issues.
 
-| Member | Tier | Position | Source | verified |
-|---|---|---|---|---|
-| Sen. Mark Warner | Tier 1 Aligned | Pressed ICE to require agents to identify themselves and limit face coverings; demanded investigation into DHS surveillance technology use | warner.senate.gov press release | 2026-09-02 |
-| Sen. Tim Kaine | Tier 1 Aligned | Same letters | warner.senate.gov press release | 2026-09-02 |
-| Rep. Suhas Subramanyam (VA-10) | Tier 1 Aligned | Oversight visit to Caroline Detention Facility (Aug 2025); introduced the WATCH ICE Act | subramanyam.house.gov press release | 2026-09-02 |
-| Rep. Bobby Scott (VA-03) | Tier 2 Movable | Position not found during research | — | 2026-09-02 |
-| Rep. Jennifer McClellan (VA-04) | Tier 2 Movable | Position not found during research | — | 2026-09-02 |
-| Rep. Eugene Vindman (VA-07) | Tier 2 Movable | Position not found during research | — | 2026-09-02 |
-| Rep. Don Beyer (VA-08) | Tier 2 Movable | Position not found during research | — | 2026-09-02 |
-| Rep. James Walkinshaw (VA-11) | Tier 2 Movable | Position not found during research | — | 2026-09-02 |
-| Rep. Rob Wittman (VA-01) | Tier 3 Locked | Signed the 2026-02-05 letter to Gov. Spanberger opposing her termination of Section 287(g) agreements | wittman.house.gov press release | 2026-09-02 |
-| Rep. Jen Kiggans (VA-02) | Tier 3 Locked | Signed the 287(g) letter; original cosponsor of Cline's 287(g) Cooperation Act | wittman.house.gov, kiggans.house.gov | 2026-09-02 |
-| Rep. John McGuire (VA-05) | Tier 3 Locked | Signed the 287(g) letter | wittman.house.gov press release | 2026-09-02 |
-| Rep. Ben Cline (VA-06) | Tier 3 Locked, **Gatekeeper** | Signed the 287(g) letter; introduced the 287(g) Cooperation Act. **House Appropriations** — writes the FY2027 Homeland Security bill | wittman.house.gov, kiggans.house.gov | 2026-09-02 |
-| Rep. Morgan Griffith (VA-09) | Tier 3 Locked, **Gatekeeper** | Signed the 287(g) letter. **House Rules** — controls what reaches the floor and in what form | wittman.house.gov press release | 2026-09-02 |
+| Member | Tier | Role | Evidence | Position | Source | verified |
+|---|---|---|---|---|---|---|
+| Sen. Mark Warner | Tier 1 Aligned | oversight authority | record found | Pressed ICE to require agents to identify themselves and limit face coverings; demanded investigation into DHS surveillance technology use | warner.senate.gov press release | 2026-09-02 |
+| Sen. Tim Kaine | Tier 1 Aligned | oversight authority | record found | Same letters | warner.senate.gov press release | 2026-09-02 |
+| Rep. Suhas Subramanyam (VA-10) | Tier 1 Aligned | oversight authority | record found | Oversight visit to Caroline Detention Facility (Aug 2025); introduced the WATCH ICE Act | subramanyam.house.gov press release | 2026-09-02 |
+| Rep. Bobby Scott (VA-03) | Tier 2 Movable | other | no record found | Position not found during research | — | 2026-09-02 |
+| Rep. Jennifer McClellan (VA-04) | Tier 2 Movable | other | no record found | Position not found during research | — | 2026-09-02 |
+| Rep. Eugene Vindman (VA-07) | Tier 2 Movable | other | no record found | Position not found during research | — | 2026-09-02 |
+| Rep. Don Beyer (VA-08) | Tier 2 Movable | other | no record found | Position not found during research | — | 2026-09-02 |
+| Rep. James Walkinshaw (VA-11) | Tier 2 Movable | other | no record found | Position not found during research | — | 2026-09-02 |
+| Rep. Rob Wittman (VA-01) | Tier 3 Locked | other | record found | Signed the 2026-02-05 letter to Gov. Spanberger opposing her termination of Section 287(g) agreements | wittman.house.gov press release | 2026-09-02 |
+| Rep. Jen Kiggans (VA-02) | Tier 3 Locked | other | record found | Signed the 287(g) letter; original cosponsor of Cline's 287(g) Cooperation Act | wittman.house.gov, kiggans.house.gov | 2026-09-02 |
+| Rep. John McGuire (VA-05) | Tier 3 Locked | other | record found | Signed the 287(g) letter | wittman.house.gov press release | 2026-09-02 |
+| Rep. Ben Cline (VA-06) | Tier 3 Locked, **Gatekeeper** | gatekeeper | record found | Signed the 287(g) letter; introduced the 287(g) Cooperation Act. **House Appropriations** — writes the FY2027 Homeland Security bill | wittman.house.gov, kiggans.house.gov | 2026-09-02 |
+| Rep. Morgan Griffith (VA-09) | Tier 3 Locked, **Gatekeeper** | gatekeeper | record found | Signed the 287(g) letter. **House Rules** — controls what reaches the floor and in what form | wittman.house.gov press release | 2026-09-02 |
 
 **This is the most complete delegation tiering in the file set** — all 13
 members, with a documented record for eight of them. Positions cache 45 days.
