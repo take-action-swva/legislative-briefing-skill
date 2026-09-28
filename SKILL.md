@@ -206,6 +206,28 @@ one before the next session. See CONTRIBUTING.md for the format.
 
 ---
 
+## Running on claude.ai
+
+`build-zip.sh` deliberately excludes the `fetch-*` scripts (they need API
+keys) and `publish.sh` (it needs Drive for Desktop and a local filesystem).
+A claude.ai session has no `scripts/` directory at all. Use these fallbacks
+instead of citing a script that isn't there:
+
+- **Cosponsors and votes** (`fetch-cosponsors.sh`, `fetch-votes.sh`): read the
+  congress.gov bill page directly — the cosponsors tab and the roll call vote
+  page. Use a browser tool if WebFetch is blocked on that domain.
+- **Donors** (`fetch-donors.sh`): `donor-context-va.md` is not shipped either.
+  Skip donor claims entirely, or verify figures directly at fec.gov and
+  opensecrets.org and cite those pages.
+- **Publish** (`publish.sh`): use the Google Drive connector to upload the
+  deliverable to the same folder `publish.sh` targets on a local checkout —
+  Statewide Coordinating Committee > Legislation Briefings — then update
+  `brief-index.md` in the repo by hand. This loses the byte-verification and
+  archive-to-`briefs/` steps `publish.sh` does automatically — note in the
+  delivery message that publishing was manual.
+
+---
+
 ## Shared Accuracy Rules
 
 These rules apply to all output types — full brief, short brief, horizon
@@ -289,6 +311,12 @@ rulemaking, each a fact that had once been true.
 **Record outcomes.** After distribution, write what happened into the issue
 file: who responded, who did not, whether a position moved. Nothing else in
 this skill records whether the work worked.
+
+**On claude.ai, the shipped `issues/` copy is a read-only snapshot.** The
+upload zip carries whatever issue files existed at the last `build-zip.sh`
+run — freshness rules above still apply to it. Any write-back (a new issue
+file, an updated position, a recorded outcome) must be committed to the git
+repo; nothing written in a claude.ai session persists to the next one.
 
 ---
 

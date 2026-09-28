@@ -20,7 +20,9 @@ Access method ratings (use this to choose the right tool):
   protection, or has a metered/soft paywall that blocks plain HTTP
 
 When `WebFetch` fails (redirect loop, empty body, JS placeholder), fall back to
-`Firecrawl` regardless of the rating below.
+`Firecrawl` regardless of the rating below. When Firecrawl is not connected
+(it is not available on claude.ai), fall back to a browser tool instead —
+navigate to the URL and read the rendered page.
 
 ---
 

@@ -186,7 +186,7 @@ and this is one of the items Shared Accuracy Rule 6 forbids caching.
 folder, verifies the bytes landed by checksum, and moves the source files into
 `briefs/`.
 
-**Why it exists:** the Drive path was restated in CLAUDE.md and three
+**Why it exists:** the Drive path was restated in AGENTS.md and three
 sub-skills, and a bare `cp` reports success even when Drive for Desktop is
 quit or signed out — leaving the file locally forever while the session claims
 it published. The script refuses to run in that state.

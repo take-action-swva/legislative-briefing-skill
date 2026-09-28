@@ -346,19 +346,21 @@ sentence-length rules that apply to all output types.
 
 **Campaign mode, markdown (default).** Write `cta-roundup-[YYYY-MM-DD].md` in
 the project root. Run `./scripts/check-acronyms.sh cta-roundup-[YYYY-MM-DD].md`
-and fix every FAIL. Then follow CLAUDE.md's "Briefing file lifecycle" from the
-copy step onward: `cp` the `.md` to Google Drive, then `mv` it to `briefs/`.
+and fix every FAIL. Then follow `references/docx-conventions.md`'s "Briefing
+file lifecycle" from the copy step onward: `cp` the `.md` to Google Drive,
+then `mv` it to `briefs/`.
 Markdown outputs are archived in Drive alongside the docx ones so the folder
 holds every deliverable, not just the docx subset.
 
 **Campaign mode, docx (on request).** Write `cta-roundup-[YYYY-MM-DD].js`
-using `templates/brief-base.js` and follow CLAUDE.md's "Briefing file
-lifecycle" in full, substituting `cta-roundup-[YYYY-MM-DD]` for
+using `templates/brief-base.js` and follow `references/docx-conventions.md`'s
+"Briefing file lifecycle" in full, substituting `cta-roundup-[YYYY-MM-DD]` for
 `<topic>-brief`.
 
 **Digest mode (always docx).** Write `[month]-[year]-digest.js` using
-`templates/brief-base.js` and follow CLAUDE.md's "Briefing file lifecycle" in
-full, substituting `[month]-[year]-digest` for `<topic>-brief`.
+`templates/brief-base.js` and follow `references/docx-conventions.md`'s
+"Briefing file lifecycle" in full, substituting `[month]-[year]-digest` for
+`<topic>-brief`.
 
 Both docx paths use minimal formatting, not the full brief's: bold for
 headlines and field labels, plain paragraphs for body text. No shaded boxes,

@@ -100,7 +100,7 @@ Shared files: `SKILL.md`, `CONTRIBUTING.md`, `MAINTENANCE.md`,
 For shared file changes:
 1. Open an issue first describing the change and why
 2. Submit a PR referencing the issue
-3. Add a row to the Version History table in CLAUDE.md and bump `version:` in SKILL.md front matter
+3. Add a row to the Version History table in AGENTS.md and bump `version:` in SKILL.md front matter
 
 ### For lessons learned
 Add a new entry to the `lessons_learned` block in SKILL.md front matter.
