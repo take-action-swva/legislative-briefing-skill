@@ -105,8 +105,9 @@ should be catching a quiet area in real time and naming it in the closing
 note; a quarterly zero with no such notes on record is a sign that check
 isn't running, not just that the area is quiet.
 
-**As of 2026-09-28,** `brief-index.md` shows no environment or education
-outputs since `issues/` and the Issue area field were introduced. Confirm at
+**As of 2026-09-28,** `brief-index.md` shows no environment, education,
+federal workforce, or civil liberties outputs since `issues/` and the Issue
+area field were introduced. Confirm at
 the next audit whether that has changed.
 
 ### Post-election refresh (after November 3, 2026)
