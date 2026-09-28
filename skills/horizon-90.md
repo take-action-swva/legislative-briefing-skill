@@ -62,6 +62,11 @@ without a primary source backing it.
 
 Sources:
 
+- `./scripts/fetch-signals.sh` — the civic-signals collector feed (Federal
+  Register, regulations.gov). Run it first: it surfaces candidates the manual
+  sources below might miss, and its Certainty/Reliability columns feed
+  directly into Step 3. Treat every row as a candidate, never a verified fact
+  — Accuracy Rule 6 still applies before anything from it reaches an output.
 - congress.gov — committee markup schedules, scheduled floor votes
 - Committee websites — many publish markup calendars several weeks out
 - `references/sources-national.md`'s "Leading Indicators" section — required,

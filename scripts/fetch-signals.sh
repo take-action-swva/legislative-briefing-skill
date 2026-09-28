@@ -86,7 +86,15 @@ RAW=$(cd "$CIVIC_SIGNALS_DIR" && npx wrangler d1 execute civic-signals --remote 
   exit 1
 }
 
-ROWS=$(echo "$RAW" | jq '.[0].results')
+# wrangler can print a non-JSON update/deprecation banner ahead of the JSON
+# payload even with --json set. Take only the JSON array, which always
+# starts at the first `[`, rather than assuming $RAW is pure JSON.
+JSON=$(echo "$RAW" | sed -n '/^\[/,$p')
+if ! ROWS=$(echo "$JSON" | jq -e '.[0].results' 2>/dev/null); then
+  echo "Error: could not parse wrangler's output as JSON. Raw output:" >&2
+  echo "$RAW" >&2
+  exit 1
+fi
 COUNT=$(echo "$ROWS" | jq 'length')
 
 echo "# Signals$([ -n "$ISSUE_AREA" ] && echo " — ${ISSUE_AREA}")"
@@ -99,6 +107,6 @@ if [ "$COUNT" -eq 0 ]; then
   exit 0
 fi
 
-echo "| Certainty | Deadline | Issue area | Threat vectors | Title | Agency | Source | Issue slug |"
-echo "|---|---|---|---|---|---|---|---|"
-echo "$ROWS" | jq -r '.[] | "| \(.certainty) | \(.deadline // "—") | \(.issue_area // "—") | \(.threat_vectors // "—") | [\(.title | gsub("\\|"; "\\|"))](\(.url)) | \(.agency // "—") | \(.source) | \(.issue_slug // "—") |"'
+echo "| Certainty | Reliability | Deadline | Issue area | Threat vectors | Title | Agency | Source | Issue slug |"
+echo "|---|---|---|---|---|---|---|---|---|"
+echo "$ROWS" | jq -r '.[] | "| \(.certainty) | \(.reliability) | \(.deadline // "—") | \(.issue_area // "—") | \(.threat_vectors // "—") | [\(.title | gsub("\\|"; "\\|"))](\(.url)) | \(.agency // "—") | \(.source) | \(.issue_slug // "—") |"'

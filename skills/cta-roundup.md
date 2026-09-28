@@ -89,6 +89,12 @@ answer. Do not carry the vague version into the output.
 
 **Digest mode.** Scan what is moving this month. Sources:
 
+- `./scripts/fetch-signals.sh` — the civic-signals collector feed (Federal
+  Register, regulations.gov). Run it first, especially for public-comment
+  candidates (category 5 below): its Certainty/Reliability columns and any
+  populated issue slug feed directly into the `cta-ready` check in Step 2.
+  Every row is a candidate, not a verified fact — Accuracy Rule 6 still
+  applies before anything from it reaches the digest.
 - congress.gov — bills with floor votes, markups, or committee action scheduled
 - indivisible.org/get-involved/take-action/ — national campaign priorities
   (one input, not a required list)
