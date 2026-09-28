@@ -34,7 +34,6 @@ navigate to the URL and read the rendered page.
 | Senate.gov | senate.gov | Committee assignments, floor schedule, member pages | primary | WebFetch | 2026-06-01 |
 | House.gov | house.gov | Member info, committee assignments, floor schedule | primary | WebFetch | 2026-06-01 |
 | Federal Register | federalregister.gov | Executive orders, agency rulemaking, comment periods | primary | WebFetch | 2026-06-01 |
-| Regulations.gov | regulations.gov | Open public comment periods | primary | WebFetch | 2026-06-01 |
 | Senate Daily Press | dailypress.senate.gov | Senate floor activity logs, timestamped procedural votes, exact cloture counts | primary | WebFetch | 2026-06-01 |
 | White House | whitehouse.gov | EO text, administration statements | primary | WebFetch | 2026-06-01 |
 | GovTrack | govtrack.us | Bill prognosis, vote history, member scorecards | high | WebFetch | 2026-06-01 |
@@ -45,6 +44,8 @@ navigate to the URL and read the rendered page.
   procedural detail for bills actively on the floor. When a bill has been
   debated in the Senate, check dailypress.senate.gov for the full procedural
   record — it provides timestamped vote logs that congress.gov doesn't surface.
+- Regulations.gov moved to "Leading Indicators" below — open comment periods
+  are a leading-indicator source for agency action, not just a status lookup.
 
 ---
 
@@ -103,6 +104,42 @@ current.
 
 ---
 
+## Leading Indicators (executive and regulatory pipeline)
+
+Agency action moves before it reaches congress.gov. These sources catch a
+rule, a withheld appropriation, or a comment deadline while it is still
+preventable, not after it is final.
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| reginfo.gov | reginfo.gov/public/do/eoAdvancedSearchMain | Rules under Office of Information and Regulatory Affairs (OIRA) review; Unified Agenda search | primary | WebFetch | 2026-09-28 |
+| Federal Register Public Inspection | federalregister.gov/public-inspection | Documents posted the day before official publication | primary | Firecrawl | 2026-09-28 |
+| Regulations.gov | regulations.gov | Open public comment periods and deadlines | primary | Firecrawl | 2026-09-28 |
+| OpenOMB | openomb.org | Apportionment footnotes — earliest sign of withheld funds | high | WebFetch | 2026-09-28 |
+| GAO Impoundment Control Act decisions | gao.gov/legal/appropriations-law/impoundment-control-act | Impoundment Control Act legal decisions | primary | WebFetch | 2026-09-28 |
+
+---
+
+## Budget and Appropriations
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| Congressional Budget Office | cbo.gov | Nonpartisan cost estimates and budget analysis | primary | WebFetch | 2026-09-28 |
+| House Appropriations Committee | appropriations.house.gov | House Appropriations news, markups, bill status | primary | WebFetch | 2026-09-28 |
+| Senate Appropriations Committee | appropriations.senate.gov | Senate Appropriations news, hearings, markups | primary | Firecrawl | 2026-09-28 |
+| Committee for a Responsible Federal Budget | crfb.org | Nonpartisan fiscal analysis, deficit and debt tracking | high | WebFetch | 2026-09-28 |
+| Center on Budget and Policy Priorities | cbpp.org | Budget and safety-net policy analysis | moderate | WebFetch | 2026-09-28 |
+| USAspending.gov | usaspending.gov | Federal spending data by state and county, award-level, for dollars-at-risk figures | primary | Firecrawl | 2026-09-28 |
+
+---
+
+## Litigation Tracking
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| CourtListener | courtlistener.com | Dockets, opinions, docket alerts, API | high | Firecrawl | 2026-09-28 |
+| Just Security Litigation Tracker | justsecurity.org/107087/tracker-litigation-legal-challenges-trump-administration/ | Tracked legal challenges to administration executive actions | high | WebFetch | 2026-09-28 |
+
 ---
 
 ## Nonpartisan Research, Legal & Procedural
@@ -154,6 +191,74 @@ current.
 
 ---
 
+## Elections
+
+Expands the voting-rights coverage above with election-administration and
+enforcement-specific sources.
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| U.S. Election Assistance Commission | eac.gov | Federal election administration guidance and data | primary | WebFetch | 2026-09-28 |
+| Department of Justice Civil Rights Division | justice.gov/crt | Voting rights enforcement press releases | primary | WebFetch | 2026-09-28 |
+| National Conference of State Legislatures | ncsl.org | State election law tracking | high | WebFetch | 2026-09-28 |
+| Election Law Blog | electionlawblog.org | Expert election-law commentary (Rick Hasen) | high | WebFetch | 2026-09-28 |
+| Protect Democracy | protectdemocracy.org | Litigation and analysis on democratic-institution threats | moderate | WebFetch | 2026-09-28 |
+| States United Democracy Center | statesunited.org | Election administration and rule-of-law support | moderate | WebFetch | 2026-09-28 |
+
+---
+
+## Health
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| KFF | kff.org | Health policy research, polling, state data dashboards | high | WebFetch | 2026-09-28 |
+| KFF Health News | kffhealthnews.org | Health policy journalism | high | WebFetch | 2026-09-28 |
+| Georgetown Center for Children and Families | ccf.georgetown.edu | Medicaid and Children's Health Insurance Program (CHIP) research, child health coverage | high | WebFetch | 2026-09-28 |
+| Medicaid.gov Section 1115 Waiver List | medicaid.gov/medicaid/section-1115-demo/demonstration-and-waiver-list | State-by-state Section 1115 waiver status | primary | WebFetch | 2026-09-28 |
+
+---
+
+## Education
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| Education Week | edweek.org | K-12 policy and politics news | high | WebFetch | 2026-09-28 |
+| K-12 Dive | k12dive.com | K-12 policy and legal news | high | WebFetch | 2026-09-28 |
+| The 74 | the74million.org | Education news and policy analysis | high | WebFetch | 2026-09-28 |
+| Chalkbeat | chalkbeat.org | Regional and national K-12 reporting | high | WebFetch | 2026-09-28 |
+| Hechinger Report | hechingerreport.org | Nonprofit investigative education journalism | high | WebFetch | 2026-09-28 |
+| Grant Witness | grantwitness.org | Federal grant terminations and freezes, grant-level data | high | WebFetch | 2026-09-28 |
+
+---
+
+## Environment
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| Sabin Center Climate Backtracker | climate.law.columbia.edu/content/climate-backtracker | Tracks federal climate-policy rollback actions (Columbia Law) | high | WebFetch | 2026-09-28 |
+| Harvard Environmental & Energy Law Program Regulatory Tracker | eelp.law.harvard.edu/tracker-type/regulatory-tracker/ | Environmental and energy regulatory rollback and litigation tracker | high | WebFetch | 2026-09-28 |
+| Inside Climate News | insideclimatenews.org | Climate and environmental journalism | high | WebFetch | 2026-09-28 |
+
+---
+
+## Immigration
+
+Expands the TRAC Immigration row in "Nonpartisan Research, Legal &
+Procedural" above (trac.syr.edu) with sources for detention siting,
+enforcement data, and agreement tracking.
+
+| Source | URL | Best For | Reliability | Access | Last Verified |
+|--------|-----|----------|-------------|--------|---------------|
+| Deportation Data Project | deportationdata.org | Freedom of Information Act (FOIA)'d Immigration and Customs Enforcement (ICE) arrest, detention, and removal data | high | WebFetch | 2026-09-28 |
+| ICE 287(g) Agreements | ice.gov/identify-and-arrest/287g | Current 287(g) agreement list, by jurisdiction | primary | WebFetch | 2026-09-28 |
+| ICE Detention Statistics | ice.gov/detain/detention-management | ICE detention custody data by fiscal year | primary | WebFetch | 2026-09-28 |
+| DHS Office of Inspector General | oig.dhs.gov | ICE and DHS facility inspection reports | primary | WebFetch | 2026-09-28 |
+| American Immigration Council | americanimmigrationcouncil.org | Immigration policy research | moderate | WebFetch | 2026-09-28 |
+| National Immigration Law Center | nilc.org | Immigrant rights litigation and policy advocacy | moderate | Firecrawl | 2026-09-28 |
+| Detention Watch Network | detentionwatchnetwork.org | Detention population data, anti-detention advocacy | moderate | WebFetch | 2026-09-28 |
+
+---
+
 ## News Sources
 
 Use news sources to find recent developments, quotes, and context — but trace
@@ -198,6 +303,44 @@ immediately after the claim. Use the shortest recognizable domain as link text:
 | legislativeprocedure.com | `[legislative procedure]` |
 | vote.org | `[vote.org]` |
 | thelobbynews.com | `[the lobby news]` |
+| reginfo.gov | `[reginfo.gov]` |
+| federalregister.gov/public-inspection | `[federal register public inspection]` |
+| regulations.gov | `[regulations.gov]` |
+| openomb.org | `[openomb.org]` |
+| gao.gov | `[gao.gov]` |
+| cbo.gov | `[cbo.gov]` |
+| appropriations.house.gov | `[house appropriations]` |
+| appropriations.senate.gov | `[senate appropriations]` |
+| crfb.org | `[committee for a responsible federal budget]` |
+| cbpp.org | `[center on budget and policy priorities]` |
+| usaspending.gov | `[usaspending.gov]` |
+| courtlistener.com | `[courtlistener]` |
+| justsecurity.org | `[just security]` |
+| eac.gov | `[election assistance commission]` |
+| justice.gov/crt | `[doj civil rights division]` |
+| ncsl.org | `[ncsl]` |
+| electionlawblog.org | `[election law blog]` |
+| protectdemocracy.org | `[protect democracy]` |
+| statesunited.org | `[states united democracy center]` |
+| kff.org | `[kff]` |
+| kffhealthnews.org | `[kff health news]` |
+| ccf.georgetown.edu | `[georgetown ccf]` |
+| medicaid.gov | `[medicaid.gov]` |
+| edweek.org | `[education week]` |
+| k12dive.com | `[k-12 dive]` |
+| the74million.org | `[the 74]` |
+| chalkbeat.org | `[chalkbeat]` |
+| hechingerreport.org | `[hechinger report]` |
+| grantwitness.org | `[grant witness]` |
+| climate.law.columbia.edu | `[sabin center climate backtracker]` |
+| eelp.law.harvard.edu | `[harvard eelp tracker]` |
+| insideclimatenews.org | `[inside climate news]` |
+| deportationdata.org | `[deportation data project]` |
+| ice.gov | `[ice.gov]` |
+| oig.dhs.gov | `[dhs office of inspector general]` |
+| americanimmigrationcouncil.org | `[american immigration council]` |
+| nilc.org | `[national immigration law center]` |
+| detentionwatchnetwork.org | `[detention watch network]` |
 
 State-specific sources (senator pages, state elections sites, state news
 outlets) belong in `sources-[statecode].md`, not here.
@@ -222,5 +365,5 @@ into briefings. Do not cite them as evidence for factual claims.
 
 ---
 
-*Last full review: 2026-06-16*
+*Last full review: 2026-09-28*
 *Next recommended review: Start of 120th Congress (January 2027)*
