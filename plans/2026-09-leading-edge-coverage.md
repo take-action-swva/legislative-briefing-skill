@@ -4,8 +4,13 @@
 **Updated:** 2026-09-28, adding the CTA readiness model and member evidence/role fields accepted from an external review
 **Updated:** 2026-09-28, Phase 0 complete and merged (PR #22)
 **Updated:** 2026-09-28, Phase 1 complete and merged (PR #24)
-**Applies to:** SKILL.md v3.6
-**Target version:** 3.6 (Phases 1 and 3 change the research workflow, which requires a version bump per MAINTENANCE.md)
+**Updated:** 2026-09-28, split the planned single 3.6 bump into 3.6 (Phase 1)
+and 3.7 (Phase 3) — 3.6 had already shipped in its own merged PR by the time
+Phase 3 landed, so folding Phase 3's changes into the same number would have
+left the published version out of sync with shipped behavior. Caught in
+code review of PR #27.
+**Applies to:** SKILL.md v3.7
+**Target version:** 3.7 (Phase 3 bumped separately from Phase 1's 3.6; see above)
 
 ## Why
 
@@ -370,7 +375,7 @@ These are hard to change once two consumers depend on them.
 | 0 Correctness fixes | nothing | no |
 | 1 Scope and taxonomy | 0 | yes (3.6) |
 | 2 Sources | nothing | no |
-| 3 Workflow changes | 1, 2 | included in 3.6 |
+| 3 Workflow changes | 1, 2 | yes (3.7) |
 | 4 Maintenance | 1 | no |
 | 5 Signals collector | 1 (shared vocabulary) | no (separate repo) |
 
