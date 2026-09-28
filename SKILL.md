@@ -15,7 +15,7 @@ description: >
   agency action with advocacy, action, or organizing. Also trigger on named
   campaigns and training tracks, including Hands Off Our Vote, Immigrant
   Justice Summer, and Dismantling Detention.
-version: "3.6"
+version: "3.7"
 output_format: [docx, markdown]
 citation_style: inline-hyperlink
 state: Virginia

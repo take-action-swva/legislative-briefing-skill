@@ -34,10 +34,17 @@ A row can be a bill, a Federal Register docket, a court docket, or a funding
 action (an apportionment footnote, an impoundment, a rescission) — whatever
 the decision point in scope actually is.
 
+**For any active litigation, record the CourtListener docket URL** (from
+`references/sources-national.md`'s "Litigation Tracking" section) in the
+row's Status or verified column. Case status itself stays uncached per
+Accuracy Rule 6 — the docket URL doesn't cache the status, it just makes the
+live recheck on the day of distribution a single click instead of a new
+search.
+
 Bill status caches for 7 days. Re-check congress.gov past that. Federal
-Register docket status, apportionment or impoundment status, and grant
-termination or reinstatement status are never cached — re-verify live per
-Accuracy Rule 6.
+Register docket status, apportionment or impoundment status, litigation
+status, and grant termination or reinstatement status are never cached —
+re-verify live per Accuracy Rule 6.
 
 Cosponsor counts are deliberately absent from this table. They are never
 cached — run `./scripts/fetch-cosponsors.sh <congress> <type> <num> VA` on the

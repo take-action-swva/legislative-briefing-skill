@@ -58,12 +58,18 @@ during them, and they are often the best window for district-based
 visibility events. Cite a source for every date. Do not estimate a date
 without a primary source backing it.
 
-### Step 2 — Scan for legislative items with timing inside the window
+### Step 2 — Scan for legislative and agency items with timing inside the window
 
 Sources:
 
 - congress.gov — committee markup schedules, scheduled floor votes
 - Committee websites — many publish markup calendars several weeks out
+- `references/sources-national.md`'s "Leading Indicators" section — required,
+  not optional, for agency action: reginfo.gov for rules under Office of
+  Information and Regulatory Affairs (OIRA) review, federalregister.gov's
+  public-inspection list for documents publishing the next day, regulations.gov
+  for open comment deadlines, openomb.org for apportionment footnotes, gao.gov
+  for Impoundment Control Act decisions
 - News sources per `references/sources-national.md`, for "leadership
   intends to move this by [date]" signals
 - indivisible.org national priorities — one input, not a required list
@@ -87,7 +93,24 @@ Do not assign a Scheduled date unless a primary source actually published
 it. An Expected item with no date is more honest than an Expected item with
 a guessed one.
 
-### Step 4 — Select 6–10 items
+**Agency items follow the same three labels.** A rule listed under OIRA
+review with no confirmed publication date is Watch — OIRA review timing is
+not predictable from the listing alone. A published comment deadline or a
+stated rule effective date is Scheduled — the date is fixed by the Federal
+Register notice itself, not by anyone's intent.
+
+### Step 4 — Coverage check across issue areas
+
+Before narrowing to 6–10 items, confirm the 12–15 candidates from Step 2
+touch every issue area from `issues/_template.md`'s Issue area field:
+elections, immigration, health, education, environment, budget, federal
+workforce, civil liberties. An area with nothing worth watching this window
+is a legitimate outcome — name it in the closing note (see Output Format)
+rather than silently dropping it. An area with no candidate because no one
+looked for one is not that outcome; check that area's sources in Step 2
+again before concluding it is quiet.
+
+### Step 5 — Select 6–10 items
 
 Prioritize by:
 
@@ -104,12 +127,33 @@ Prioritize by:
 Drop anything already covered in depth by a current full brief or short
 brief. Link to that document instead of duplicating it.
 
-### Step 5 — Confirm the Virginia angle for each selected item
+### Step 6 — Confirm the Virginia angle for each selected item
 
 Same accuracy rule as every other output type: one sourced sentence on why
 it matters for Virginia specifically. Skip deep donor or impact research —
 this is a planning document, not a persuasion document. If no
 Virginia-specific angle exists, write that plainly rather than forcing one.
+
+### Step 7 — Set or update each item's issue stage
+
+For every selected item, open (or create) its `issues/<slug>.md` file and
+set or update the Stage field per SKILL.md's "CTA Readiness" section. This
+scan is often the first place a `watch` item's decision point firms up
+enough to become `prepare`, or where a `prepare` item's remaining condition
+gets met.
+
+The output's **Prepare:** line (see Output Format) comes from that file's
+**Blocker** field — it names what organizers can do while the unmet
+condition holds, such as collecting constituent stories or lining up media
+contacts, not a generic prep task invented for the write-up.
+
+**If this scan's research moves an item all the way to `cta-ready`,** it no
+longer belongs in this document. Horizon-90 is for items not yet
+actionable; a `cta-ready` item is actionable now, has no Blocker left to
+write a Prepare line from, and belongs in the next digest or CTA roundup
+instead. Drop it from the selected item list, note in the closing note that
+it moved to `cta-ready`, and pull a replacement from the Step 2 candidate
+pool if this drops the count below 6.
 
 ---
 
@@ -157,17 +201,25 @@ floor vote, rule effective date, anticipated ruling.]
 
 Virginia angle: [one sentence, or "No Virginia-specific angle identified."]
 
-Prepare: [one sentence of concrete organizational prep — recruiting,
-scheduling, drafting materials. Not a call script. Once an item enters its
-actual action window, it belongs in the digest or a short brief.]
+Prepare: [one sentence of concrete organizational prep, drawn from the issue
+file's Blocker field per Step 7 — recruiting, scheduling, drafting
+materials, collecting constituent stories. Not a call script. Once an item
+enters its actual action window, it belongs in the digest or a short brief.]
 ```
 
-### Closing note — recess and quiet weeks
+### Closing note — recess weeks and coverage
 
 List the recess/district weeks that fall inside the window explicitly.
 Group leaders use these for district-based visibility events when no floor
 action will compete for member attention. If the back half of the window
 is thin on confirmed items, say so here rather than padding the item list.
+
+Name any issue area from Step 4's coverage check that had nothing worth
+watching this window, so a quiet area reads as checked rather than missed.
+
+Name any item dropped per Step 7 for reaching `cta-ready` during this scan,
+so a reader who expected it here knows to look for it in the next digest or
+CTA roundup instead.
 
 ---
 
@@ -197,6 +249,10 @@ checker, and the humanizer pass. Then verify these horizon-specific items:
 
 - [ ] Every item has a Scheduled / Expected / Watch tag matching Step 3
 - [ ] No invented dates — every Scheduled date traces to a primary source
+- [ ] Step 4's coverage check ran; any issue area with nothing worth
+      watching is named in the closing note
+- [ ] Every selected item's issue file has an updated Stage (Step 7), and
+      each Prepare line is drawn from that file's Blocker field
 - [ ] Recess/district weeks inside the window are listed
 - [ ] 6–10 items, sorted chronologically by month
 - [ ] Glance table is two-column

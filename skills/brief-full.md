@@ -61,6 +61,14 @@ Check these in order. Do not rely on news summaries for status.
 Search web sources for recent news *after* anchoring on primary sources, not
 instead of them.
 
+**For a non-legislative action — a rule, guidance, a funding or grant
+action, an enforcement change — congress.gov does not apply.** The primary
+source is the Federal Register document, the agency's own notice, or the
+court docket for any litigation over the action. Use
+`references/sources-national.md`'s "Leading Indicators" and "Litigation
+Tracking" sections rather than working congress.gov for something it
+doesn't cover.
+
 ### Step 3 — Identify state leverage points
 
 - Look up current committee assignments for `{{state}}` senators at
@@ -88,6 +96,10 @@ ones. A stat like "40% of [state residents] lack a passport" lands harder than
 - State-specific sources listed in `references/sources-va.md`
 - Census Bureau (census.gov) for district demographics
 - Nonpartisan research orgs listed in `references/sources-national.md`
+- **USAspending.gov is the default source for a Virginia dollar-impact
+  figure** — funding at risk, appropriated, or withheld. Pull it by county
+  where the data supports it; a county-level figure lands harder than a
+  statewide one and still traces to a primary federal source.
 
 ### Step 5 — Map the action landscape
 
