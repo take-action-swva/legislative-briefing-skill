@@ -147,6 +147,14 @@ The output's **Prepare:** line (see Output Format) comes from that file's
 condition holds, such as collecting constituent stories or lining up media
 contacts, not a generic prep task invented for the write-up.
 
+**If this scan's research moves an item all the way to `cta-ready`,** it no
+longer belongs in this document. Horizon-90 is for items not yet
+actionable; a `cta-ready` item is actionable now, has no Blocker left to
+write a Prepare line from, and belongs in the next digest or CTA roundup
+instead. Drop it from the selected item list, note in the closing note that
+it moved to `cta-ready`, and pull a replacement from the Step 2 candidate
+pool if this drops the count below 6.
+
 ---
 
 ## Output Format
@@ -208,6 +216,10 @@ is thin on confirmed items, say so here rather than padding the item list.
 
 Name any issue area from Step 4's coverage check that had nothing worth
 watching this window, so a quiet area reads as checked rather than missed.
+
+Name any item dropped per Step 7 for reaching `cta-ready` during this scan,
+so a reader who expected it here knows to look for it in the next digest or
+CTA roundup instead.
 
 ---
 

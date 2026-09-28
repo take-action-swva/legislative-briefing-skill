@@ -116,10 +116,14 @@ bills is incomplete in either mode.
 
 **Digest mode — narrow to 5.** Select from issues at Stage `cta-ready` in
 `issues/` first — see SKILL.md's "CTA Readiness" section for the four
-conditions. An issue that fails a readiness condition does not belong in
-the digest's action list: leave its Stage at `watch` or `prepare` with the
-Blocker recorded, and let `horizon-90.md` carry it as a planning item
-instead. Among `cta-ready` candidates, prioritize by:
+conditions. A freshly scanned candidate with no issue file yet is eligible
+too, if it clearly meets all four conditions: create its issue file (from
+`issues/_template.md`) and set Stage: `cta-ready` as part of this research,
+rather than waiting for a future scan to catch up. An issue that fails a
+readiness condition does not belong in the digest's action list: leave its
+Stage at `watch` or `prepare` with the Blocker recorded, and let
+`horizon-90.md` carry it as a planning item instead. Among `cta-ready`
+candidates, prioritize by:
 
 1. **Near-term action point.** A vote, markup, or procedural moment expected
    this month or early next. No action point means it is not digest material
@@ -432,7 +436,9 @@ Digest mode:
 - [ ] An issue file in `issues/` written or updated for every item in the digest
 - [ ] No more than 5 items
 - [ ] Every item has a confirmed near-term action point
-- [ ] Each Act entry has phone number and contact URL from state context
+- [ ] Each Act entry has phone number and contact URL from state context,
+      except a public comment item, whose Act line names the agency, docket
+      number, and regulations.gov link instead
 - [ ] Docx generated and opens without validation errors
 - [ ] Both .js and .docx moved to briefs/
 
