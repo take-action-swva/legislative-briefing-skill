@@ -32,7 +32,7 @@ Tier 2 Movable by default and do not need a row until a record exists.
 |---|---|---|---|---|
 | Sen. Warner | Tier 2 Movable | [what they actually said or did] | [URL] | [YYYY-MM-DD] |
 
-Tiers come from SKILL.md's Shared Member Taxonomy. Positions cache for 30 days
+Tiers come from SKILL.md's Shared Member Taxonomy. Positions cache for 45 days
 and are void immediately on any new vote, press release, or floor statement.
 
 **Never write a position here that was inferred from party.** If no record was
@@ -51,7 +51,7 @@ campaign's current stated congressional ask.
 - **Source:** [toolkit or training URL]
 - **verified:** [YYYY-MM-DD]
 
-Caches for 30 days. National organizations revise asks between trainings.
+Caches for 45 days. National organizations revise asks between trainings.
 
 ---
 

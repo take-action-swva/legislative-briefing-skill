@@ -17,9 +17,9 @@ digest or a short brief once an item actually enters its action window.
 **Output format: docx.** Use `templates/brief-base.js`. Same minimal
 formatting as the digest: bold for issue headlines and field labels,
 plain paragraphs for body text. One two-column table near the top
-(`Looking Ahead at a Glance`) — see Docx Layout Defaults in CLAUDE.md for
-the two-column constraint that applies to every table except the delegation
-reference table.
+(`Looking Ahead at a Glance`) — see Docx Layout Defaults in
+`references/docx-conventions.md` for the two-column constraint that applies
+to every table except the delegation reference table.
 
 **Audience:** Group leaders and steering committee members planning the
 organizing calendar, not reacting to today's news.
@@ -116,10 +116,10 @@ Virginia-specific angle exists, write that plainly rather than forcing one.
 ## Output Format
 
 Write `horizon-90-[scan-date].js` in the project root (e.g.
-`horizon-90-2026-06-19.js`), then follow CLAUDE.md's "Briefing file
-lifecycle," substituting `horizon-90-[scan-date]` for `<topic>-brief`: run
-`./scripts/check-acronyms.sh`, run `node` to generate the docx, `cp` to
-Google Drive, then `mv` both files to `briefs/`.
+`horizon-90-2026-06-19.js`), then follow `references/docx-conventions.md`'s
+"Briefing file lifecycle," substituting `horizon-90-[scan-date]` for
+`<topic>-brief`: run `./scripts/check-acronyms.sh`, run `node` to generate
+the docx, `cp` to Google Drive, then `mv` both files to `briefs/`.
 
 ### Document header
 
@@ -130,8 +130,8 @@ Scan date: [Month D, Year]  |  Window: [Month D] – [Month D, Year]
 
 ### "Looking Ahead at a Glance" table
 
-Two-column table, per the Docx Layout Defaults rule in CLAUDE.md — never
-add a third column.
+Two-column table, per the Docx Layout Defaults rule in
+`references/docx-conventions.md` — never add a third column.
 
 - **Column 1:** Window (e.g., "Week of June 23," "Expected July," "No
   window yet")
@@ -176,10 +176,11 @@ is thin on confirmed items, say so here rather than padding the item list.
 See SKILL.md "Shared Style Rules" for em dash, concrete nouns, and
 sentence-length rules that apply to all output types.
 
-- **Navy only, never red.** Per the Docx Layout Defaults rule in CLAUDE.md,
-  red is reserved for standalone urgent-threat sections. Every item in this
-  document is future or uncertain by design, even Scheduled ones — that is
-  a different urgency class than "happening now." Use navy throughout.
+- **Navy only, never red.** Per the Docx Layout Defaults rule in
+  `references/docx-conventions.md`, red is reserved for standalone
+  urgent-threat sections. Every item in this document is future or
+  uncertain by design, even Scheduled ones — that is a different urgency
+  class than "happening now." Use navy throughout.
 - **The certainty tag must match Step 3 exactly.** Never describe an
   Expected or Watch item's timing as if it were confirmed.
 - **No member contact details, no call scripts.** This is a calendar, not

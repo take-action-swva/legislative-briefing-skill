@@ -73,9 +73,10 @@ yet; say so rather than linking to something adjacent.
 
 Write `<topic>-short-brief.md` in the project root. Run
 `./scripts/check-acronyms.sh <topic>-short-brief.md` and fix every FAIL. Then
-follow CLAUDE.md's "Briefing file lifecycle" from the copy step onward: `cp`
-the `.md` to Google Drive, then `mv` it to `briefs/`. The message you paste
-into Signal or Gmail is this file's content, but the file itself is archived
+follow `references/docx-conventions.md`'s "Briefing file lifecycle" from the
+copy step onward: `cp` the `.md` to Google Drive, then `mv` it to `briefs/`.
+The message you paste into Signal or Gmail is this file's content, but the
+file itself is archived
 so the Drive folder holds every deliverable.
 
 ---

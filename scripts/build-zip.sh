@@ -20,6 +20,7 @@ SKILL_FILES=(
 REF_FILES=(
   references/sources-national.md
   references/sources-va.md
+  references/docx-conventions.md
 )
 TEMPLATE_FILES=(
   templates/brief-base.js
@@ -33,11 +34,13 @@ SKILLS_FILES=(
 )
 # SKILL.md Step 0 tells every session to check issues/ for the issue in scope.
 # Without these the instruction points at a directory that does not exist on
-# the claude.ai surface, though it works fine in the git repo.
-ISSUES_FILES=(
-  issues/README.md
-  issues/_template.md
-)
+# the claude.ai surface, though it works fine in the git repo. Globbed
+# relative to REPO (not the caller's cwd) so a new issue file is picked up
+# automatically instead of going stale in a hardcoded list.
+ISSUES_FILES=()
+for f in "${REPO}"/issues/*.md; do
+  ISSUES_FILES+=("issues/$(basename "$f")")
+done
 # check-acronyms.sh is a mandatory pre-delivery gate, not a convenience — it
 # ships so the claude.ai surface can run the same gate the repo does. The
 # fetch-* scripts stay out: they need API keys and network access.
