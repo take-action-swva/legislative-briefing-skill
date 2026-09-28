@@ -51,6 +51,25 @@ if ! command -v jq >/dev/null 2>&1; then
   exit 1
 fi
 
+# Both values below reach the SQL string built further down. Validate
+# against a fixed allowlist / shape here rather than trusting a shell
+# variable straight into --command — wrangler d1 execute takes no bind
+# parameters, so this is the substitute for a parameterized query.
+if [ -n "$ISSUE_AREA" ]; then
+  case "$ISSUE_AREA" in
+    elections|immigration|health|education|environment|budget|"federal workforce"|"civil liberties"|other) ;;
+    *)
+      echo "Error: unknown issue area '${ISSUE_AREA}'. Must be one of: elections, immigration, health, education, environment, budget, \"federal workforce\", \"civil liberties\", other" >&2
+      exit 1
+      ;;
+  esac
+fi
+
+if ! [[ "$DAYS" =~ ^[0-9]+$ ]]; then
+  echo "Error: days must be a positive integer, got '${DAYS}'" >&2
+  exit 1
+fi
+
 SINCE=$(date -u -v-"${DAYS}"d +%Y-%m-%d 2>/dev/null || date -u -d "-${DAYS} days" +%Y-%m-%d)
 
 WHERE="collected_at >= '${SINCE}'"
