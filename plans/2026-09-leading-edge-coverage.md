@@ -10,6 +10,9 @@ Phase 3 landed, so folding Phase 3's changes into the same number would have
 left the published version out of sync with shipped behavior. Caught in
 code review of PR #27.
 **Updated:** 2026-09-28, Phase 3 complete and merged (PR #27)
+**Updated:** 2026-09-28, Phase 2 complete and merged (PR #26) — recorded
+late; this was skipped in sequence and caught while marking Phase 4 done
+**Updated:** 2026-09-28, Phase 4 complete and merged (PR #29)
 **Applies to:** SKILL.md v3.7
 **Target version:** 3.7 (Phase 3 bumped separately from Phase 1's 3.6; see above)
 
@@ -166,7 +169,13 @@ December 11 CR deadline its block rides on).
 
 ---
 
-## Phase 2: Sources
+## Phase 2: Sources — done, merged 2026-09-28 (PR #26)
+
+Every source below was verified live before being added; one reliability
+rating was corrected in review (CourtListener from primary to high — it's a
+nonprofit aggregator, not a government source, per the file's own rubric),
+and the plan's "VPM News, Radio IQ" turned out to be two separate outlets,
+added as two rows.
 
 Verify every URL resolves and record a real `Last Verified` date before adding
 a row. Anything that fails verification stays out. Ratings follow the existing
@@ -293,7 +302,9 @@ can't provide.
 
 ---
 
-## Phase 4: Maintenance
+## Phase 4: Maintenance — done, merged 2026-09-28 (PR #29)
+
+All three items below are done. No version bump, per the sequencing table.
 
 1. **Coverage audit.** Add a quarterly step to MAINTENANCE.md: count
    `brief-index.md` rows and active `issues/` files by issue area. As of this
