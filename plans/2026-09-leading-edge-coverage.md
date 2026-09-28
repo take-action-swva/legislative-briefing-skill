@@ -13,6 +13,12 @@ code review of PR #27.
 **Updated:** 2026-09-28, Phase 2 complete and merged (PR #26) — recorded
 late; this was skipped in sequence and caught while marking Phase 4 done
 **Updated:** 2026-09-28, Phase 4 complete and merged (PR #29)
+**Updated:** 2026-09-28, Phase 5 smallest-first-build step 1 (Federal
+Register + regulations.gov collectors) deployed in civic-signals; step 2
+(a horizon-90 run reading the table) judged the raw feed almost entirely
+noise (civic-signals PR #1's collectors had a `Topic.agencies` field never
+wired into either query), fixed and redeployed same day (civic-signals
+PR #3). Step 3 (congress.gov, CourtListener, RSS collectors) not started.
 **Applies to:** SKILL.md v3.7
 **Target version:** 3.7 (Phase 3 bumped separately from Phase 1's 3.6; see above)
 
