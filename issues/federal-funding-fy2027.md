@@ -59,6 +59,10 @@ forward regardless of any position finding.
   and Oct 1. The Senate returns Sep 14 and sits through Oct 2. The September
   2026 digest's framing line said "both chambers leave October 2," which
   understated House floor time by about two weeks. See `calendar-119.md`.
+- OMB backed off an earlier memo that directed agencies to use a shutdown as
+  grounds for RIF notices (fedweek.com, reported 2026-09-28). Do not state
+  that a lapse in funding automatically triggers RIF notices as it did in the
+  2025 shutdown — check current OMB guidance on the day of distribution.
 
 ---
 
@@ -68,6 +72,7 @@ forward regardless of any position finding.
 |---|---|---|---|
 | 2026-09-02 | digest | September 2026 digest | Drive |
 | 2026-09-26 | digest | October digest: no standalone item. December 11 named as the vehicle in the ACA and grants-rule items | Drive |
+| 2026-09-28 | horizon | 90-day outlook, Sep 28 – Dec 27 scan: December 11 item, folding the federal-workforce RIF risk into its Virginia angle | Drive |
 
 ---
 

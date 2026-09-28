@@ -14,6 +14,7 @@ Drive folder: <https://drive.google.com/drive/folders/199yNMBV3HD9pXw4-JiUBpoRF3
 
 | Date | Type | Title | File | Issue | Issue area |
 |---|---|---|---|---|---|
+| 2026-09-28 | horizon | 90-Day Outlook — Virginia Indivisible (Sep 28 – Dec 27, 2026) | `horizon-90-2026-09-28.docx` | federal-funding-fy2027, aca-premium-tax-credits, medicaid-work-requirements, save-america-act, epa-power-plant-ghg-rescission, rise-final-rule-litigation, fisa-section-702-reauthorization, immigration-enforcement-oversight | budget, health, elections, environment, education, civil liberties, immigration |
 | 2026-09-26 | digest | October 2026 Legislative Update | `october-2026-digest.docx` | iran-war-powers, save-america-act, aca-premium-tax-credits, federal-grants-rule | other, elections, health, budget |
 | 2026-09-02 | full brief | SAVE Act (H.R. 22): Dormant Bill, Live Policy | `hr22-brief.docx` | save-america-act | elections |
 | 2026-09-02 | CTA roundup | Immigrant Justice: Calls to Action for Virginia Groups | `cta-roundup-2026-09-02.md` | immigration-enforcement-oversight | immigration |
