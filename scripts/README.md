@@ -185,8 +185,8 @@ and this is one of the items Shared Accuracy Rule 6 forbids caching.
 
 **What it does:** Queries the `signals` table in the civic-signals D1
 database (Phase 5 of `plans/2026-09-leading-edge-coverage.md` — a standalone
-repo, `civic-signals`, whose Federal Register and regulations.gov collectors
-write candidate items on a 6-hourly cron) and outputs a markdown table for a
+repo, `civic-signals`, whose Federal Register, regulations.gov and tier-one
+RSS collectors write candidate items on a 6-hourly cron) and outputs a markdown table for a
 horizon-90 or digest-mode scan.
 
 **Why it exists:** horizon-90.md and cta-roundup.md's Digest mode need a way

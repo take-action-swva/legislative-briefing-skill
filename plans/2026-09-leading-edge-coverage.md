@@ -19,6 +19,10 @@ Register + regulations.gov collectors) deployed in civic-signals; step 2
 noise (civic-signals PR #1's collectors had a `Topic.agencies` field never
 wired into either query), fixed and redeployed same day (civic-signals
 PR #3). Step 3 (congress.gov, CourtListener, RSS collectors) not started.
+**Updated:** 2026-11-20, step 3 partly done in civic-signals: the tier-one RSS
+collector is deployed (PR 15, 2026-11-16; `source` = `rss:<outlet>`). All
+collectors ping an off-box heartbeat Worker and deploy from CI on merge
+(civic-signals PR 20). congress.gov and CourtListener are planned only.
 **Applies to:** SKILL.md v3.7
 **Target version:** 3.7 (Phase 3 bumped separately from Phase 1's 3.6; see above)
 
