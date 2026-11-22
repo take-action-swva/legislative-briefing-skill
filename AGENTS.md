@@ -90,7 +90,7 @@ scripts/
                              gate for full briefings; publish.sh warns but doesn't block.
   publish.sh                 Copy a deliverable to Drive, verify, archive to
                              briefs/. Single source of truth for the Drive path.
-  build-zip.sh               Rebuild advocacy-legislation-brief-claude-upload.zip from current skill files.
+  build-zip.sh               Rebuild legislative-briefing-skill.skill (the claude.ai upload package) from current skill files.
   README.md                  Script setup and usage (human-facing).
 templates/
   brief-base.js              Docx scaffolding: colors, fonts, helpers, header/footer.
@@ -359,7 +359,7 @@ reach the upload dialog.
   output type, budget for its phrases rather than appending indefinitely.
   Remember YAML folds a `>` block by joining lines with single spaces, so the
   character count is the folded length, not the file's line lengths.
-- The zip must contain a `SKILL.md` with `name` and `description` in YAML
+- The package (a zip archive named `.skill`) must contain a `SKILL.md` with `name` and `description` in YAML
   front matter.
 - A security scan runs on save.
 
@@ -368,7 +368,7 @@ description-matching mechanism as claude.ai:
 
 ```bash
 ./scripts/build-zip.sh
-unzip -q -o advocacy-legislation-brief-claude-upload.zip -d ~/.claude/skills/
+unzip -q -o legislative-briefing-skill.skill -d ~/.claude/skills/
 ```
 
 Then start a NEW session — skills are read at session start.
