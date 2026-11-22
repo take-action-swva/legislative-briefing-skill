@@ -63,10 +63,14 @@ without a primary source backing it.
 Sources:
 
 - `./scripts/fetch-signals.sh` — the civic-signals collector feed (Federal
-  Register, regulations.gov). Run it first: it surfaces candidates the manual
-  sources below might miss, and its Certainty/Reliability columns feed
-  directly into Step 3. Treat every row as a candidate, never a verified fact
-  — Accuracy Rule 6 still applies before anything from it reaches an output.
+  Register, regulations.gov, and curated national and Virginia news feeds
+  whose `source` reads `rss:<outlet>`). Run it first: it surfaces candidates
+  the manual sources below might miss, and its Certainty/Reliability columns
+  feed directly into Step 3. Treat every row as a candidate, never a verified
+  fact — Accuracy Rule 6 still applies before anything from it reaches an
+  output. An `rss:` row is news coverage, always tagged Watch: trace it to
+  the primary document (bill, docket, notice, court filing) before it can
+  carry a Scheduled or Expected tag.
 - congress.gov — committee markup schedules, scheduled floor votes
 - Committee websites — many publish markup calendars several weeks out
 - `references/sources-national.md`'s "Leading Indicators" section — required,
