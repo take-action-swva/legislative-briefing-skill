@@ -365,14 +365,20 @@ INCOMPLETE banner until someone fills them in and deletes it.
 
 ## build-zip.sh
 
-Packages the skill into the `.zip` uploaded to claude.ai, which is the second
-deployment surface alongside running the repo directly in Claude Code.
+Packages the skill into the `.skill` file uploaded to claude.ai, which is the
+second deployment surface alongside running the repo directly in Claude Code.
+A `.skill` file is a zip archive with a different extension; claude.ai's
+upload dialog asks for `.skill` (verified 2026-11-22).
 
 ```bash
 ./scripts/build-zip.sh
 ```
 
-**Output:** `advocacy-legislation-brief-claude-upload.zip` in the repo root.
+**Output:** `legislative-briefing-skill.skill` in the repo root.
+
+**Upload:** on claude.ai, open Plugins, open Legislative briefing skill, click
+⋯ then Upload new version, and pick this file. Earlier versions stay in the
+skill's version history.
 
 The file manifest lives in arrays at the top of the script. Anything not
 listed there does not ship, so a new file that a session is told to load must

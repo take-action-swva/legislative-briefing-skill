@@ -1,16 +1,18 @@
 #!/bin/bash
-# build-zip.sh — Rebuild the Claude.ai upload zip from current skill files.
+# build-zip.sh — Rebuild the claude.ai upload package from current skill files.
 #
-# Run this before uploading to claude.ai/customize/skills:
+# Run this before uploading to claude.ai (Plugins > Legislative briefing skill >
+# ⋯ > Upload new version):
 #   ./scripts/build-zip.sh
 #
-# Output: advocacy-legislation-brief-claude-upload.zip at the repo root.
+# Output: legislative-briefing-skill.skill at the repo root. A .skill file is a
+# zip archive; claude.ai's upload dialog asks for the .skill extension.
 
 set -euo pipefail
 shopt -s nullglob
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
-ZIP="${REPO}/advocacy-legislation-brief-claude-upload.zip"
+ZIP="${REPO}/legislative-briefing-skill.skill"
 
 SKILL_FILES=(
   SKILL.md
